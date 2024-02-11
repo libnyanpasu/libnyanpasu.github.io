@@ -14,7 +14,7 @@ hero:
       text: API Examples
       link: /api-examples
   image:
-    src: /assets/logo.png
+    src: /images/logo.png
     alt: Clash Nyanpasu
 features:
   - title: Feature A

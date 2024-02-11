@@ -14,7 +14,7 @@ hero:
       text: API Examples
       link: /api-examples
   image:
-    src: ./.vitepress/assets/logo.png
+    src: /assets/logo.png
     alt: Clash Nyanpasu
 features:
   - title: Feature A

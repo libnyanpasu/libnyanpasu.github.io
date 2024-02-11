@@ -83,7 +83,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: './.vitepress/assets/logo.png', // TODO: change to {light: '', dark: ''}
+    logo: './assets/logo.png', // TODO: change to {light: '', dark: ''}
 
     socialLinks: [
       {

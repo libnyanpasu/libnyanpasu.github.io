@@ -1,0 +1,27 @@
+/* stylelint-disable selector-class-pattern */
+@mixin animated($duration: 1s) {
+  animation-duration: $duration;
+  animation-fill-mode: both;
+}
+
+.VPHome {
+  .VPHero {
+    .main {
+      @include animated(750ms);
+
+      animation-name: backInLeft;
+    }
+
+    .image {
+      @include animated(750ms);
+
+      animation-name: zoomInDown;
+    }
+  }
+
+  .VPFeatures {
+    @include animated(2s);
+
+    animation-name: slideInUp;
+  }
+}

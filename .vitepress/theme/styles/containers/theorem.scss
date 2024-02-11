@@ -1,0 +1,17 @@
+.theorem {
+  padding: 0.1rem 1.5rem;
+  margin: 1rem 0;
+  background-color: #f0f4f8;
+  border-radius: 0.4rem;
+
+  .title {
+    font-weight: bold;
+  }
+}
+
+.dark {
+  .theorem {
+    color: var(--vp-c-text-1);
+    background-color: #373838;
+  }
+}

@@ -7,6 +7,7 @@ const currentYear = new Date().getFullYear()
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/wiki/', // Github Pages
   title: 'Clash Nyanpasu',
   description: 'Clash Nyanpasu! (∠・ω< )⌒☆​',
   lang: 'zh-CN',

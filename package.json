@@ -16,7 +16,7 @@
     "lint:css": "stylelint --allow-empty-input \"**/*.{css,scss,vue}\"",
     "lint:es": "eslint --ignore-path .gitignore .",
     "lint:ts": "tsc --noEmit",
-    "lint:prettier": "prettier --check --ignore-path .gitignore --config .prettierrc.js .",
+    "lint:prettier": "prettier --check --config .prettierrc.js .",
     "fmt": "run-s fmt:*",
     "fmt:css": "stylelint --fix --allow-empty-input \"**/*.{css,scss,vue}\"",
     "fmt:es": "eslint --fix --ignore-path .gitignore .",

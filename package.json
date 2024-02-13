@@ -16,11 +16,11 @@
     "lint:css": "stylelint --allow-empty-input \"**/*.{css,scss,vue}\"",
     "lint:es": "eslint --ignore-path .gitignore .",
     "lint:ts": "tsc --noEmit",
-    "lint:prettier": "prettier --check --config .prettierrc.js .",
+    "lint:prettier": "prettier --check .",
     "fmt": "run-s fmt:*",
     "fmt:css": "stylelint --fix --allow-empty-input \"**/*.{css,scss,vue}\"",
     "fmt:es": "eslint --fix --ignore-path .gitignore .",
-    "fmt:prettier": "prettier --write --ignore-path .gitignore --config .prettierrc.js .",
+    "fmt:prettier": "prettier --write .",
     "prepare": "husky"
   },
   "keywords": [],

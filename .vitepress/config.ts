@@ -20,7 +20,7 @@ export default defineConfig({
         nav: [
           { text: 'Home', link: '/' },
           { text: 'Tutorial', link: '/get-started' },
-          { text: 'FAQ', link: '/others/faq' },
+          { text: 'FAQ', link: '/others/faq' }
         ],
 
         sidebar: [
@@ -37,12 +37,13 @@ export default defineConfig({
           },
           {
             text: 'Others',
-            items: [{ text: 'FAQ', link: '/others/faq' },
-            {
-              text: 'How To Ask',
-              link: '/others/how-to-ask'
-            }
-          ]
+            items: [
+              { text: 'FAQ', link: '/others/faq' },
+              {
+                text: 'How To Ask',
+                link: '/others/how-to-ask'
+              }
+            ]
           }
         ],
 
@@ -76,13 +77,13 @@ export default defineConfig({
           },
           {
             text: '其他',
-            items: [{ text: '常见问题', link: '/zh-CN/others/faq' },
-            {
-              text: '如何提问',
-              link: '/zh-CN/others/how-to-ask'
-            }
-
-          ]
+            items: [
+              { text: '常见问题', link: '/zh-CN/others/faq' },
+              {
+                text: '如何提问',
+                link: '/zh-CN/others/how-to-ask'
+              }
+            ]
           }
         ],
 

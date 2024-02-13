@@ -1,6 +1,6 @@
 # FAQ
 
-This section contains frequently asked questions about *Clash Nyanpasu*.
+This section contains frequently asked questions about _Clash Nyanpasu_.
 If you have any questions, please check here first.
 
 ## Application

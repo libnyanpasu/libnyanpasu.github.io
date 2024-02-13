@@ -7,7 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    BackToTop: (typeof import('./../.vitepress/theme/components/BackToTop.vue'))['default']
-    UnoCSSIndicator: (typeof import('./../.vitepress/theme/components/UnoCSSIndicator.vue'))['default']
+    BackToTop: typeof import('./../.vitepress/theme/components/BackToTop.vue')['default']
+    UnoCSSIndicator: typeof import('./../.vitepress/theme/components/UnoCSSIndicator.vue')['default']
   }
 }

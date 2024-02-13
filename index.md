@@ -8,11 +8,11 @@ hero:
   tagline: A opinionated Clash GUI based on Tauri.
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /get-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: FAQ
+      link: /others/faq
   image:
     src: ./images/logo.png
     alt: Clash Nyanpasu

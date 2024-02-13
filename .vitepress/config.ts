@@ -19,16 +19,30 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'Examples', link: '/markdown-examples' }
+          { text: 'Tutorial', link: '/get-started' },
+          { text: 'FAQ', link: '/others/faq' },
         ],
 
         sidebar: [
           {
-            text: 'Examples',
+            text: 'Tutorial',
             items: [
+              {
+                text: 'Get Started',
+                link: '/get-started'
+              },
               { text: 'Markdown Examples', link: '/markdown-examples' },
               { text: 'Runtime API Examples', link: '/api-examples' }
             ]
+          },
+          {
+            text: 'Others',
+            items: [{ text: 'FAQ', link: '/others/faq' },
+            {
+              text: 'How To Ask',
+              link: '/others/how-to-ask'
+            }
+          ]
           }
         ],
 
@@ -43,23 +57,45 @@ export default defineConfig({
       lang: 'zh-CN',
       themeConfig: {
         nav: [
-          { text: '主页', link: '/' },
-          { text: '例子', link: '/markdown-examples' }
+          { text: '主页', link: '/zh-CN' },
+          { text: '文档', link: '/zh-CN/get-started' },
+          { text: '常见问题', link: '/zh-CN/faq' }
         ],
 
         sidebar: [
           {
-            text: 'Examples',
+            text: '文档',
             items: [
-              { text: 'Markdown Examples', link: '/markdown-examples' },
-              { text: 'Runtime API Examples', link: '/api-examples' }
+              {
+                text: '快速开始',
+                link: '/zh-CN/get-started'
+              },
+              { text: 'Markdown 示例', link: '/zh-CN/markdown-examples' },
+              { text: '运行时 API 示例', link: '/zh-CN/api-examples' }
             ]
+          },
+          {
+            text: '其他',
+            items: [{ text: '常见问题', link: '/zh-CN/others/faq' },
+            {
+              text: '如何提问',
+              link: '/zh-CN/others/how-to-ask'
+            }
+
+          ]
           }
         ],
 
         footer: {
           message: `Clash Nyanpasu! (∠・ω< )⌒☆`,
           copyright: `This site is licensed under CC-BY-NC-SA 4.0. © ${currentYear} LibNyanpasu`
+        },
+
+        outlineTitle: '本页目录',
+        lastUpdatedText: '最后更新',
+        docFooter: {
+          prev: '上一篇',
+          next: '下一篇'
         }
       }
     }
@@ -93,13 +129,6 @@ export default defineConfig({
         link: 'https://t.me/keikolog'
       },
       { icon: 'github', link: 'https://github.com/LibNyanpasu' }
-    ],
-
-    outlineTitle: '本页目录',
-    lastUpdatedText: '最后更新',
-    docFooter: {
-      prev: '上一篇',
-      next: '下一篇'
-    }
+    ]
   }
 })

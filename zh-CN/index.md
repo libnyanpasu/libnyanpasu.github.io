@@ -8,11 +8,11 @@ hero:
   tagline: 基于 Tauri 的偏执 Clash 图形界面。
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 开始
+      link: /get-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 常见问题
+      link: /others/faq
   image:
     src: /images/logo.png
     alt: Clash Nyanpasu

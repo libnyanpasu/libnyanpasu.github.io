@@ -60,7 +60,7 @@ export default defineConfig({
         nav: [
           { text: '主页', link: '/zh-CN' },
           { text: '文档', link: '/zh-CN/get-started' },
-          { text: '常见问题', link: '/zh-CN/faq' }
+          { text: '常见问题', link: '/zh-CN/others/faq' }
         ],
 
         sidebar: [

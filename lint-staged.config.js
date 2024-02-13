@@ -5,5 +5,6 @@ export default {
   ],
   '**/*.{ts,tsx,js,jsx}': ['eslint -c .eslintrc.cjs'],
   '**/*.{ts,tsx,vue}': [() => 'tsc -p tsconfig.json --noEmit'],
-  '**/*.{scss,css,sass}': ['stylelint --config stylelint.config.js']
+  '**/*.{scss,css,sass}': ['stylelint --config stylelint.config.js'],
+  '**/*.{json,md}': ['prettier --write']
 }

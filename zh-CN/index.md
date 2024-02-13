@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /get-started
+      link: /zh-CN/get-started
     - theme: alt
       text: 常见问题
-      link: /others/faq
+      link: /zh-CN/others/faq
   image:
     src: /images/logo.png
     alt: Clash Nyanpasu

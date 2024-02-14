@@ -32,7 +32,7 @@ export default defineConfig({
                 text: 'Introduction',
                 link: '/introduction'
               },
-              { text: "Installation", link: '/tutorial/install' },
+              { text: 'Installation', link: '/tutorial/install' }
             ]
           },
           {
@@ -71,7 +71,7 @@ export default defineConfig({
                 text: '简介',
                 link: '/zh-CN/introduction'
               },
-              { text: "安装", link: '/zh-CN/tutorial/install' },
+              { text: '安装', link: '/zh-CN/tutorial/install' }
             ]
           },
           {
@@ -91,7 +91,6 @@ export default defineConfig({
           copyright: `This site is licensed under CC-BY-NC-SA 4.0. © ${currentYear} LibNyanpasu`
         },
 
-
         // locales
         outlineTitle: '本页导航',
         lastUpdatedText: '最后更新',
@@ -106,8 +105,9 @@ export default defineConfig({
         returnToTopLabel: '返回顶部',
         langMenuLabel: '修改语言',
         editLink: {
-          pattern: 'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path',
-          text: '在 GitHub 上编辑此页',
+          pattern:
+            'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path',
+          text: '在 GitHub 上编辑此页'
         }
       }
     }
@@ -145,7 +145,8 @@ export default defineConfig({
     ],
 
     editLink: {
-      pattern: 'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path'
+      pattern:
+        'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path'
     }
   }
 })

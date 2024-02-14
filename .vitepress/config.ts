@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 import Container from 'markdown-it-container'
+import FootNote from 'markdown-it-footnote'
 import Token from 'markdown-it/lib/token'
 
 const currentYear = new Date().getFullYear()
@@ -19,7 +20,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'Tutorial', link: '/get-started' },
+          { text: 'Tutorial', link: '/introduction' },
           { text: 'FAQ', link: '/others/faq' }
         ],
 
@@ -28,11 +29,10 @@ export default defineConfig({
             text: 'Tutorial',
             items: [
               {
-                text: 'Get Started',
-                link: '/get-started'
+                text: 'Introduction',
+                link: '/introduction'
               },
-              { text: 'Markdown Examples', link: '/markdown-examples' },
-              { text: 'Runtime API Examples', link: '/api-examples' }
+              { text: "Installation", link: '/tutorial/install' },
             ]
           },
           {
@@ -59,7 +59,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '主页', link: '/zh-CN' },
-          { text: '文档', link: '/zh-CN/get-started' },
+          { text: '简介', link: '/zh-CN/introduction' },
           { text: '常见问题', link: '/zh-CN/others/faq' }
         ],
 
@@ -68,11 +68,10 @@ export default defineConfig({
             text: '文档',
             items: [
               {
-                text: '快速开始',
-                link: '/zh-CN/get-started'
+                text: '简介',
+                link: '/zh-CN/introduction'
               },
-              { text: 'Markdown 示例', link: '/zh-CN/markdown-examples' },
-              { text: '运行时 API 示例', link: '/zh-CN/api-examples' }
+              { text: "安装", link: '/zh-CN/tutorial/install' },
             ]
           },
           {
@@ -92,11 +91,23 @@ export default defineConfig({
           copyright: `This site is licensed under CC-BY-NC-SA 4.0. © ${currentYear} LibNyanpasu`
         },
 
-        outlineTitle: '本页目录',
+
+        // locales
+        outlineTitle: '本页导航',
         lastUpdatedText: '最后更新',
         docFooter: {
           prev: '上一篇',
           next: '下一篇'
+        },
+        darkModeSwitchLabel: '外观', // Appearance
+        lightModeSwitchTitle: '切换亮色主题', // Switch to light mode
+        darkModeSwitchTitle: '切换暗色主题', // Switch to dark mode
+        sidebarMenuLabel: '菜单',
+        returnToTopLabel: '返回顶部',
+        langMenuLabel: '修改语言',
+        editLink: {
+          pattern: 'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path',
+          text: '在 GitHub 上编辑此页',
         }
       }
     }
@@ -104,6 +115,7 @@ export default defineConfig({
   markdown: {
     lineNumbers: true,
     config: (md) => {
+      md.use(FootNote)
       md.use(Container, 'theorem', {
         render: (tokens: Token[], idx: number) => {
           const token = tokens[idx]
@@ -130,6 +142,10 @@ export default defineConfig({
         link: 'https://t.me/keikolog'
       },
       { icon: 'github', link: 'https://github.com/LibNyanpasu' }
-    ]
+    ],
+
+    editLink: {
+      pattern: 'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path'
+    }
   }
 })

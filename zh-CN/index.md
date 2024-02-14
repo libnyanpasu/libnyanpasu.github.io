@@ -8,8 +8,8 @@ hero:
   tagline: 基于 Tauri 的偏执 Clash 图形界面。
   actions:
     - theme: brand
-      text: 开始
-      link: /zh-CN/get-started
+      text: 简介
+      link: /zh-CN/introduction
     - theme: alt
       text: 常见问题
       link: /zh-CN/others/faq

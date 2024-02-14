@@ -3,7 +3,7 @@
 本部分包含有关 _Clash Nyanpasu_ 的常见问题。
 如果您有任何问题，请先查看此处。
 
-## Application
+## 应用
 
 ### 1. macOS "Clash Nyanpasu" 已损坏，无法打开
 

@@ -26,6 +26,9 @@ devDependencies:
   '@types/markdown-it-container':
     specifier: 2.0.9
     version: 2.0.9
+  '@types/markdown-it-footnote':
+    specifier: 3.0.4
+    version: 3.0.4
   '@types/node':
     specifier: 20.11.17
     version: 20.11.17
@@ -108,6 +111,9 @@ devDependencies:
     specifier: 14.0.0
     version: 14.0.0
   markdown-it-container:
+    specifier: 4.0.0
+    version: 4.0.0
+  markdown-it-footnote:
     specifier: 4.0.0
     version: 4.0.0
   npm-run-all2:
@@ -1451,6 +1457,12 @@ packages:
 
   /@types/markdown-it-container@2.0.9:
     resolution: {integrity: sha512-pW2W5ibThEXN/wKXTCsORMRJ0zKdFae/v+/n2YV8p6L/1gWQKIaW9KovmckuNV+v9u6yInMV1cXtfmDj+Q52NA==}
+    dependencies:
+      '@types/markdown-it': 13.0.7
+    dev: true
+
+  /@types/markdown-it-footnote@3.0.4:
+    resolution: {integrity: sha512-XJ6n+v+2u+2gmYLSHcxyoNT/YrgrKvHuDJQlykFjuxCQCr86P2/fx1V6/0lcKxv5cSIlCaJ6sUcNS3zDI7I+LA==}
     dependencies:
       '@types/markdown-it': 13.0.7
     dev: true
@@ -5007,6 +5019,10 @@ packages:
 
   /markdown-it-container@4.0.0:
     resolution: {integrity: sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==}
+    dev: true
+
+  /markdown-it-footnote@4.0.0:
+    resolution: {integrity: sha512-WYJ7urf+khJYl3DqofQpYfEYkZKbmXmwxQV8c8mO/hGIhgZ1wOe7R4HLFNwqx7TjILbnC98fuyeSsin19JdFcQ==}
     dev: true
 
   /markdown-it@14.0.0:

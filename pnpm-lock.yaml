@@ -132,8 +132,8 @@ devDependencies:
     specifier: 3.2.5
     version: 3.2.5
   sass:
-    specifier: 1.70.0
-    version: 1.70.0
+    specifier: 1.71.0
+    version: 1.71.0
   stylelint:
     specifier: 16.2.1
     version: 16.2.1(typescript@5.3.3)
@@ -175,10 +175,10 @@ devDependencies:
     version: 0.26.0(vue@3.4.19)
   vite:
     specifier: 5.1.3
-    version: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+    version: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
   vitepress:
     specifier: 1.0.0-rc.42
-    version: 1.0.0-rc.42(@algolia/client-search@4.22.1)(@types/node@20.11.19)(postcss@8.4.35)(sass@1.70.0)(search-insights@2.13.0)(typescript@5.3.3)
+    version: 1.0.0-rc.42(@algolia/client-search@4.22.1)(@types/node@20.11.19)(postcss@8.4.35)(sass@1.71.0)(search-insights@2.13.0)(typescript@5.3.3)
   vue:
     specifier: 3.4.19
     version: 3.4.19(typescript@5.3.3)
@@ -1801,7 +1801,7 @@ packages:
       '@unocss/core': 0.58.5
       '@unocss/reset': 0.58.5
       '@unocss/vite': 0.58.5(vite@5.1.3)
-      vite: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+      vite: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -1999,7 +1999,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.7
-      vite: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+      vite: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -2011,7 +2011,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+      vite: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
       vue: 3.4.19(typescript@5.3.3)
     dev: true
 
@@ -6349,8 +6349,8 @@ packages:
       ret: 0.1.15
     dev: true
 
-  /sass@1.70.0:
-    resolution: {integrity: sha512-uUxNQ3zAHeAx5nRFskBnrWzDUJrrvpCPD5FNAoRvTi0WwremlheES3tg+56PaVtCs5QDRX5CBLxxKMDJMEa1WQ==}
+  /sass@1.71.0:
+    resolution: {integrity: sha512-HKKIKf49Vkxlrav3F/w6qRuPcmImGVbIXJ2I3Kg0VMA+3Bav+8yE9G5XmP5lMj6nl4OlqbPftGAscNaNu28b8w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -7386,7 +7386,7 @@ packages:
       '@unocss/transformer-directives': 0.58.5
       '@unocss/transformer-variant-group': 0.58.5
       '@unocss/vite': 0.58.5(vite@5.1.3)
-      vite: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+      vite: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -7559,7 +7559,7 @@ packages:
       vfile-message: 1.1.1
     dev: true
 
-  /vite@5.1.3(@types/node@20.11.19)(sass@1.70.0):
+  /vite@5.1.3(@types/node@20.11.19)(sass@1.71.0):
     resolution: {integrity: sha512-UfmUD36DKkqhi/F75RrxvPpry+9+tTkrXfMNZD+SboZqBCMsxKtO52XeGzzuh7ioz+Eo/SYDBbdb0Z7vgcDJew==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7591,12 +7591,12 @@ packages:
       esbuild: 0.19.12
       postcss: 8.4.35
       rollup: 4.10.0
-      sass: 1.70.0
+      sass: 1.71.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-rc.42(@algolia/client-search@4.22.1)(@types/node@20.11.19)(postcss@8.4.35)(sass@1.70.0)(search-insights@2.13.0)(typescript@5.3.3):
+  /vitepress@1.0.0-rc.42(@algolia/client-search@4.22.1)(@types/node@20.11.19)(postcss@8.4.35)(sass@1.71.0)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-VeiVVXFblt/sjruFSJBNChMWwlztMrRMe8UXdNpf4e05mKtTYEY38MF5qoP90KxPTCfMQiKqwEGwXAGuOTK8HQ==}
     hasBin: true
     peerDependencies:
@@ -7622,7 +7622,7 @@ packages:
       minisearch: 6.3.0
       postcss: 8.4.35
       shiki: 1.1.1
-      vite: 5.1.3(@types/node@20.11.19)(sass@1.70.0)
+      vite: 5.1.3(@types/node@20.11.19)(sass@1.71.0)
       vue: 3.4.19(typescript@5.3.3)
     transitivePeerDependencies:
       - '@algolia/client-search'

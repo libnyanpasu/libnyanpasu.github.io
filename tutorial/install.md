@@ -78,16 +78,16 @@ Here is an example of installing AUR packages using `paru`:
 
 ::: code-group
 
-```bash [Stable version (compiled)]
-paru -Syy clash-nyanpasu
+```bash [Stable version (requires compiling)]
+paru -Syu clash-nyanpasu
 ```
 
 ```bash [Binary Package]
-paru -Syy clash-nyanpasu-bin
+paru -Syu clash-nyanpasu-bin
 ```
 
-```bash [Development version (compiled)]
-paru -Syy clash-nyanpasu-git
+```bash [Development version (requires compiling)]
+paru -Syu clash-nyanpasu-git
 ```
 
 :::

@@ -76,22 +76,22 @@ sudo apt install -y ./clash-nyanpasu_x.y.z_amd64.deb
 
 ### ArchLinux
 
-目前由爱好者提供了 AUR：[稳定版（编译）](https://aur.archlinux.org/packages/clash-nyanpasu) / [稳定版二进制包](https://aur.archlinux.org/packages/clash-nyanpasu-bin) or [开发版（编译）](https://aur.archlinux.org/packages/clash-nyanpasu-git).
+目前由爱好者提供了 AUR 软件包：[稳定版（编译）](https://aur.archlinux.org/packages/clash-nyanpasu) / [稳定版二进制包](https://aur.archlinux.org/packages/clash-nyanpasu-bin) or [开发版（编译）](https://aur.archlinux.org/packages/clash-nyanpasu-git).
 
 以下是使用 `paru` 安装 AUR 包的示范：
 
 ::: code-group
 
-```bash [稳定版（编译）]
-paru -Syy clash-nyanpasu
+```bash [稳定版 (需要编译) ]
+paru -Syu clash-nyanpasu
 ```
 
-```bash [稳定版二进制包]
-paru -Syy clash-nyanpasu-bin
+```bash [稳定版 (预编译)]
+paru -Syu clash-nyanpasu-bin
 ```
 
-```bash [开发版（编译）]
-paru -Syy clash-nyanpasu-git
+```bash [开发版 (需要编译)]
+paru -Syu clash-nyanpasu-git
 ```
 
 :::

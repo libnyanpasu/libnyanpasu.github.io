@@ -7,7 +7,7 @@ settings:
 devDependencies:
   '@commitlint/cli':
     specifier: 19.0.1
-    version: 19.0.1(@types/node@20.11.20)(typescript@5.3.3)
+    version: 19.0.1(@types/node@20.11.21)(typescript@5.3.3)
   '@commitlint/config-conventional':
     specifier: 19.0.0
     version: 19.0.0
@@ -30,8 +30,8 @@ devDependencies:
     specifier: 3.0.4
     version: 3.0.4
   '@types/node':
-    specifier: 20.11.20
-    version: 20.11.20
+    specifier: 20.11.21
+    version: 20.11.21
   '@typescript-eslint/eslint-plugin':
     specifier: 7.1.0
     version: 7.1.0(@typescript-eslint/parser@7.1.0)(eslint@8.57.0)(typescript@5.3.3)
@@ -175,10 +175,10 @@ devDependencies:
     version: 0.26.0(vue@3.4.20)
   vite:
     specifier: 5.1.4
-    version: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+    version: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
   vitepress:
     specifier: 1.0.0-rc.44
-    version: 1.0.0-rc.44(@algolia/client-search@4.22.1)(@types/node@20.11.20)(postcss@8.4.35)(sass@1.71.1)(search-insights@2.13.0)(typescript@5.3.3)
+    version: 1.0.0-rc.44(@algolia/client-search@4.22.1)(@types/node@20.11.21)(postcss@8.4.35)(sass@1.71.1)(search-insights@2.13.0)(typescript@5.3.3)
   vue:
     specifier: 3.4.20
     version: 3.4.20(typescript@5.3.3)
@@ -662,14 +662,14 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@commitlint/cli@19.0.1(@types/node@20.11.20)(typescript@5.3.3):
+  /@commitlint/cli@19.0.1(@types/node@20.11.21)(typescript@5.3.3):
     resolution: {integrity: sha512-6D+KT/RasFPF92M549I3lABSBWXAdmKvBfxtYWlWO5JdYFSK+B6jY6XyE/hN/DNSYvwwcuNk+CzbqQcy+EbrCw==}
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
       '@commitlint/format': 19.0.0
       '@commitlint/lint': 19.0.0
-      '@commitlint/load': 19.0.1(@types/node@20.11.20)(typescript@5.3.3)
+      '@commitlint/load': 19.0.1(@types/node@20.11.21)(typescript@5.3.3)
       '@commitlint/read': 19.0.0
       '@commitlint/types': 19.0.0
       execa: 8.0.1
@@ -738,7 +738,7 @@ packages:
       '@commitlint/types': 19.0.0
     dev: true
 
-  /@commitlint/load@19.0.1(@types/node@20.11.20)(typescript@5.3.3):
+  /@commitlint/load@19.0.1(@types/node@20.11.21)(typescript@5.3.3):
     resolution: {integrity: sha512-5w5RHhtidRPMRm8ktph+NKypt1Wu5Z2jbU1Lc+1IS9Azy83JWRBQ9xKBbW9gF66R/TwHF0v6Jy8KOqRS8I/GgA==}
     engines: {node: '>=v18'}
     dependencies:
@@ -748,7 +748,7 @@ packages:
       '@commitlint/types': 19.0.0
       chalk: 5.3.0
       cosmiconfig: 8.3.6(typescript@5.3.3)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.20)(cosmiconfig@8.3.6)(typescript@5.3.3)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.21)(cosmiconfig@8.3.6)(typescript@5.3.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -1420,7 +1420,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.11.20
+      '@types/node': 20.11.21
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -1472,8 +1472,8 @@ packages:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
     dev: true
 
-  /@types/node@20.11.20:
-    resolution: {integrity: sha512-7/rR21OS+fq8IyHTgtLkDK949uzsa6n8BkziAKtPVpugIkO6D+/ooXMvzXxDnZrmtXVfjb1bKQafYpb8s89LOg==}
+  /@types/node@20.11.21:
+    resolution: {integrity: sha512-/ySDLGscFPNasfqStUuWWPfL78jompfIoVzLJPVVAHBh6rpG68+pI2Gk+fNLeI8/f1yPYL4s46EleVIc20F1Ow==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -1500,7 +1500,7 @@ packages:
   /@types/vfile@3.0.2:
     resolution: {integrity: sha512-b3nLFGaGkJ9rzOcuXRfHkZMdjsawuDD0ENL9fzTophtBg8FJHSGbH7daXkEpcwy3v7Xol3pAvsmlYyFhR4pqJw==}
     dependencies:
-      '@types/node': 20.11.20
+      '@types/node': 20.11.21
       '@types/unist': 2.0.10
       '@types/vfile-message': 2.0.0
     dev: true
@@ -1788,7 +1788,7 @@ packages:
       '@unocss/core': 0.58.5
       '@unocss/reset': 0.58.5
       '@unocss/vite': 0.58.5(vite@5.1.4)
-      vite: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+      vite: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -1986,7 +1986,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.7
-      vite: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+      vite: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -1998,7 +1998,7 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+      vite: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
       vue: 3.4.20(typescript@5.3.3)
     dev: true
 
@@ -2893,7 +2893,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.20)(cosmiconfig@8.3.6)(typescript@5.3.3):
+  /cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.21)(cosmiconfig@8.3.6)(typescript@5.3.3):
     resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==}
     engines: {node: '>=v16'}
     peerDependencies:
@@ -2901,7 +2901,7 @@ packages:
       cosmiconfig: '>=8.2'
       typescript: '>=4'
     dependencies:
-      '@types/node': 20.11.20
+      '@types/node': 20.11.21
       cosmiconfig: 8.3.6(typescript@5.3.3)
       jiti: 1.21.0
       typescript: 5.3.3
@@ -7252,7 +7252,7 @@ packages:
       '@unocss/transformer-directives': 0.58.5
       '@unocss/transformer-variant-group': 0.58.5
       '@unocss/vite': 0.58.5(vite@5.1.4)
-      vite: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+      vite: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -7425,7 +7425,7 @@ packages:
       vfile-message: 1.1.1
     dev: true
 
-  /vite@5.1.4(@types/node@20.11.20)(sass@1.71.1):
+  /vite@5.1.4(@types/node@20.11.21)(sass@1.71.1):
     resolution: {integrity: sha512-n+MPqzq+d9nMVTKyewqw6kSt+R3CkvF9QAKY8obiQn8g1fwTscKxyfaYnC632HtBXAQGc1Yjomphwn1dtwGAHg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7453,7 +7453,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.11.20
+      '@types/node': 20.11.21
       esbuild: 0.19.12
       postcss: 8.4.35
       rollup: 4.10.0
@@ -7462,7 +7462,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-rc.44(@algolia/client-search@4.22.1)(@types/node@20.11.20)(postcss@8.4.35)(sass@1.71.1)(search-insights@2.13.0)(typescript@5.3.3):
+  /vitepress@1.0.0-rc.44(@algolia/client-search@4.22.1)(@types/node@20.11.21)(postcss@8.4.35)(sass@1.71.1)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-tO5taxGI7fSpBK1D8zrZTyJJERlyU9nnt0jHSt3fywfq3VKn977Hg0wUuTkEmwXlFYwuW26+6+3xorf4nD3XvA==}
     hasBin: true
     peerDependencies:
@@ -7488,7 +7488,7 @@ packages:
       minisearch: 6.3.0
       postcss: 8.4.35
       shiki: 1.1.5
-      vite: 5.1.4(@types/node@20.11.20)(sass@1.71.1)
+      vite: 5.1.4(@types/node@20.11.21)(sass@1.71.1)
       vue: 3.4.20(typescript@5.3.3)
     transitivePeerDependencies:
       - '@algolia/client-search'

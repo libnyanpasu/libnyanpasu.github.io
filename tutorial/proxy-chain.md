@@ -13,7 +13,7 @@
 
 A proxy chain refers to the sequential processing of a `Profile`. A Profile can be processed through `A`, `B`, `C`, or even more processing nodes to generate a final proxy configuration. Thus, the combination of multiple processing nodes forms a proxy chain. You can freely combine these processing nodes to create your own proxy chain.
 
-### Merge Processing
+## Merge Processing
 
 This processing node offers a configuration merging functionality similar to `OpenClash`. It implements rules for overriding configurations as defined below.
 
@@ -31,7 +31,7 @@ When using other fields such as `dns`, `tun`, etc., you must select the correspo
 
 > Future improvements for Merge are planned, such as recursive merging and custom support for `prepend-*` and `append-*`.
 
-### Script Processing
+## Script Processing
 
 ::: info Tip
 

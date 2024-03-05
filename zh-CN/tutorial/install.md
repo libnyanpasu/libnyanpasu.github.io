@@ -12,7 +12,7 @@ Clash Nyanpasu 目前支持 Windows 7 及更高版本、Linux 以及 macOS 10.15
 - `amd64` - x86_64，常规的电脑选这个
 - `aarch64` - armv8/arm64/armv9 使用 ARM CPU 的电脑选这个
 
-目前计划只支持
+目前计划只支持 `amd64` 和 `aarch64` 架构。
 
 :::
 

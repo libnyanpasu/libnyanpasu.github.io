@@ -32,7 +32,8 @@ export default defineConfig({
                 text: 'Introduction',
                 link: '/introduction'
               },
-              { text: 'Installation', link: '/tutorial/install' }
+              { text: 'Installation', link: '/tutorial/install' },
+              { text: 'Proxy Chain', link: '/tutorial/proxy-chain' }
             ]
           },
           {
@@ -71,7 +72,8 @@ export default defineConfig({
                 text: '简介',
                 link: '/zh-CN/introduction'
               },
-              { text: '安装', link: '/zh-CN/tutorial/install' }
+              { text: '安装', link: '/zh-CN/tutorial/install' },
+              { text: '代理链', link: '/zh-CN/tutorial/proxy-chain' }
             ]
           },
           {

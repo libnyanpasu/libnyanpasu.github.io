@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'Clash Nyanpasu'
   text: '(∠・ω< )⌒☆​'
-  tagline: A opinionated Clash GUI based on Tauri.
+  tagline: An opinionated Clash GUI based on Tauri.
   actions:
     - theme: brand
       text: Get Started

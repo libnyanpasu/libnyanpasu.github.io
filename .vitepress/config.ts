@@ -40,6 +40,7 @@ export default defineConfig({
             text: 'Others',
             items: [
               { text: 'FAQ', link: '/others/faq' },
+              { text: 'Q&A Convention ', link: '/others/issues' },
               {
                 text: 'How To Ask',
                 link: '/others/how-to-ask'
@@ -80,6 +81,7 @@ export default defineConfig({
             text: '其他',
             items: [
               { text: '常见问题', link: '/zh-CN/others/faq' },
+              { text: '问答公约', link: '/zh-CN/others/issues' },
               {
                 text: '如何提问',
                 link: '/zh-CN/others/how-to-ask'

@@ -1,4 +1,4 @@
-<! -- thanks https://github.com/Ehviewer-Overhauled/Ehviewer/issues/61 templates. -->
+<!-- thanks https://github.com/Ehviewer-Overhauled/Ehviewer/issues/61 templates. -->
 
 # Q&A Convention
 
@@ -37,5 +37,3 @@ No, I personally (keiko233) hate advertisements.
 ### What is the significance of this project?
 
 If you're careful, you'll notice that this project has been around since before many Clash projects were discontinued, and it was initially intended for my (keiko233) own use, but some of the PRs I submitted to Verge were not accepted (merged) for unknown reasons. So I forked a copy and changed it for my own use, and I have nothing to do with what happened after that.
-
-Translated with DeepL.com (free version)

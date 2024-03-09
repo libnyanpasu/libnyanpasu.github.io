@@ -136,7 +136,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: './images/logo.png', // TODO: change to {light: '', dark: ''}
+    logo: '/images/logo.png', // TODO: change to {light: '', dark: ''}
 
     socialLinks: [
       {

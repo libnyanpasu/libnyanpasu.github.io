@@ -44,3 +44,37 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 - 在 **应用目录** 下找到 `verge.yaml`（之后可能更名为 `nyanpasu.yaml`），找到 `app_log_level` 修改日记等级，保存后需要重启程序。
 
 > 可选的日记级别有：`trace`、`debug`、`info`、`warn`、`error`、留空（不记录日记）。
+
+### 4. 如何开启 TUN 模式？
+
+::: info 提示
+TUN 模式需要一定的权限
+
+- 在 Windows 系统下请以管理员运行 Clash Nyanpasu 才能开启。
+- 在 macOS 下请点击 **设置页** 的 **Clash 内核** 旁边的 **设置图标**，打开内核设置，点击内核一侧的 **小锁图标**，输入密码后授权，重启内核即可。
+- 在 Linux 下同 macOS，当然你也可以以 sudo 运行达到授权效果。
+  :::
+
+- 在 **设置页** 的 **系统设置** 选项中，打开 **TUN 模式**。
+
+#### macOS 手动授权
+
+如果授权不成功可以手输入命令行完成，授权后同样需要重启。
+
+```bash
+# clash core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
+
+# meta core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
+
+# meta alpha core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
+
+# clash rust core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
+```

@@ -44,3 +44,37 @@ Starting from v1.5.1, Clash Nyanpasu supports customizing the application direct
 - Find `verge.yaml` (later may be renamed to `nyanpasu.yaml`) in the **App Dir**, find `app_log_level` to modify the diary level, and restart the program after saving.
 
 > Optional diary levels include: `trace`, `debug`, `info`, `warn`, `error`, or leave blank (no log recording).
+
+### 4. How to Enable TUN Mode?
+
+::: info Note
+TUN mode requires certain permissions.
+
+- On Windows, run Clash Nyanpasu as an administrator to enable TUN mode.
+- On macOS, click the Settings icon next to Clash Kernel on the Settings page, open kernel settings, click the small lock icon on the kernel side, enter the password for authorization, and restart the kernel.
+- On Linux, similar to macOS, you can run with sudo to achieve authorization.
+  :::
+
+- In the Settings page, under System Settings, enable TUN Mode.
+
+#### Manual Authorization on macOS
+
+- If authorization is not successful, you can manually enter the following command lines. After authorization, a restart is still required.
+
+```bash
+# clash core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
+
+# meta core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
+
+# meta alpha core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
+
+# clash rust core
+sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
+sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
+```

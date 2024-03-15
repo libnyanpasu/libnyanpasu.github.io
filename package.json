@@ -27,7 +27,7 @@
   "author": "keiko233 <i@elaina.moe>",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "19.1.0",
+    "@commitlint/cli": "19.2.0",
     "@commitlint/config-conventional": "19.1.0",
     "@iconify/json": "2.2.192",
     "@tsconfig/node20": "20.1.2",

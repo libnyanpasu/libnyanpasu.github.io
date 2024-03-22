@@ -88,5 +88,9 @@
     "vite": "5.2.2",
     "vitepress": "1.0.0",
     "vue": "3.4.21"
+  },
+  "dependencies": {
+    "@octokit/types": "^12.6.0",
+    "octokit": "^3.1.2"
   }
 }

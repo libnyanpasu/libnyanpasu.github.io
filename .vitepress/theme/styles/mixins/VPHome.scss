@@ -19,7 +19,8 @@
     }
   }
 
-  .VPFeatures {
+  .VPFeatures,
+  .mdy-container {
     @include animated(2s);
 
     animation-name: slideInUp;

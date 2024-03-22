@@ -152,5 +152,14 @@ export default defineConfig({
       pattern:
         'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path'
     }
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => {
+          return tag.toLowerCase().indexOf('md-') === 0
+        }
+      }
+    }
   }
 })

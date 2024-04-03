@@ -161,5 +161,15 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+  head: [
+    [
+      'script',
+      {
+        async: '',
+        src: 'https://umami.majokeiko.com/script.js',
+        'data-website-id': '9af35a41-8a82-4cde-84d2-11ebb2e85cdb'
+      }
+    ]
+  ]
 })

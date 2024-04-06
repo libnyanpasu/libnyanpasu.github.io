@@ -90,7 +90,7 @@
     "vue": "3.4.21"
   },
   "dependencies": {
-    "@octokit/types": "^12.6.0",
+    "@octokit/types": "^13.0.0",
     "octokit": "^3.1.2"
   }
 }

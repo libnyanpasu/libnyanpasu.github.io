@@ -35,8 +35,8 @@ devDependencies:
     specifier: 4.17.12
     version: 4.17.12
   '@types/markdown-it':
-    specifier: 13.0.7
-    version: 13.0.7
+    specifier: 14.0.0
+    version: 14.0.0
   '@types/markdown-it-container':
     specifier: 2.0.10
     version: 2.0.10
@@ -1856,17 +1856,24 @@ packages:
   /@types/markdown-it-container@2.0.10:
     resolution: {integrity: sha512-zv+YxrlSYRq51e9kzm3orv4OvF4U79Ll1OyplNXr00o4ZC/8PukJk/jEWH7CnsMtrSWZlyv0czhz42jm9J4uLw==}
     dependencies:
-      '@types/markdown-it': 13.0.7
+      '@types/markdown-it': 14.0.0
     dev: true
 
   /@types/markdown-it-footnote@3.0.4:
     resolution: {integrity: sha512-XJ6n+v+2u+2gmYLSHcxyoNT/YrgrKvHuDJQlykFjuxCQCr86P2/fx1V6/0lcKxv5cSIlCaJ6sUcNS3zDI7I+LA==}
     dependencies:
-      '@types/markdown-it': 13.0.7
+      '@types/markdown-it': 14.0.0
     dev: true
 
   /@types/markdown-it@13.0.7:
     resolution: {integrity: sha512-U/CBi2YUUcTHBt5tjO2r5QV/x0Po6nsYwQU4Y04fBS6vfoImaiZ6f8bi3CjTCxBPQSO1LMyUqkByzi8AidyxfA==}
+    dependencies:
+      '@types/linkify-it': 3.0.5
+      '@types/mdurl': 1.0.5
+    dev: true
+
+  /@types/markdown-it@14.0.0:
+    resolution: {integrity: sha512-2rStaAqMaLQNfo9mg2HNlley75jUTAkZKqlk3pxDSgaFk44zd+CAVpczpoh6/RtOzfUtwpEyD6lsHWUfKbVSDg==}
     dependencies:
       '@types/linkify-it': 3.0.5
       '@types/mdurl': 1.0.5

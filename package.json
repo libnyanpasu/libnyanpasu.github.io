@@ -29,7 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
     "@commitlint/config-conventional": "19.1.0",
-    "@iconify/json": "2.2.198",
+    "@iconify/json": "2.2.199",
     "@material/material-color-utilities": "^0.2.7",
     "@material/web": "^1.4.0",
     "@tsconfig/node20": "20.1.4",
@@ -37,7 +37,7 @@
     "@types/markdown-it": "14.0.0",
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
-    "@types/node": "20.12.5",
+    "@types/node": "20.12.6",
     "@typescript-eslint/eslint-plugin": "7.6.0",
     "@typescript-eslint/parser": "7.6.0",
     "@unocss/preset-attributify": "0.59.0",

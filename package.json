@@ -80,7 +80,7 @@
     "stylelint-declaration-block-no-ignored-properties": "2.8.0",
     "stylelint-order": "6.0.4",
     "stylelint-scss": "6.2.1",
-    "typescript": "5.4.4",
+    "typescript": "5.4.5",
     "unocss": "0.59.0",
     "unplugin-auto-import": "0.17.5",
     "unplugin-icons": "0.18.5",

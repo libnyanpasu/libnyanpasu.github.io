@@ -34,7 +34,7 @@
     "@material/web": "^1.4.0",
     "@tsconfig/node20": "20.1.4",
     "@types/lodash-es": "4.17.12",
-    "@types/markdown-it": "14.0.0",
+    "@types/markdown-it": "14.0.1",
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
     "@types/node": "20.12.7",

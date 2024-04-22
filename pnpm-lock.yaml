@@ -22,8 +22,8 @@ importers:
         specifier: 19.2.2
         version: 19.2.2
       '@iconify/json':
-        specifier: 2.2.202
-        version: 2.2.202
+        specifier: 2.2.203
+        version: 2.2.203
       '@material/material-color-utilities':
         specifier: ^0.2.7
         version: 0.2.7
@@ -732,8 +732,8 @@ packages:
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
 
-  '@iconify/json@2.2.202':
-    resolution: {integrity: sha512-ohR6hsbWPUYscf8FW2HdyN8L07mrhJraruVyMBDWltU2JzY6W0NDB0mIpZ5+3vuhvlecSZyWL95XiH0QFQpoFg==}
+  '@iconify/json@2.2.203':
+    resolution: {integrity: sha512-SjtZP6JGbklux1Nf8nQYDZTYRxdKvXLsRQIRvSgMc2z8z9UHpoRakpe8JGT7w1RjK6MMVIfal7Nrf9w8yjKDcA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -4972,7 +4972,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.2': {}
 
-  '@iconify/json@2.2.202':
+  '@iconify/json@2.2.203':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2

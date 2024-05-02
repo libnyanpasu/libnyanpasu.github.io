@@ -20,7 +20,7 @@ const { theme } = useData()
 <style scoped lang="scss">
 .svg-icon {
   :deep(svg) {
-    fill: rgb(var(--v-theme-on-surface) var(--v-high-emphasis-opacity));
+    fill: rgb(var(--v-theme-on-surface));
   }
 }
 </style>

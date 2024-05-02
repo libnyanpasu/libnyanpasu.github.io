@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col xs="12" sm="12" md="12" lg="12" style="flex-basis: auto">
+    <v-col xs="12" sm="12" md="12" lg="12">
       <MDYHomeHero />
     </v-col>
 
@@ -108,6 +108,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+.v-col {
+  flex-basis: auto;
+}
+
 .banner-card {
   display: flex;
   flex-direction: column;

@@ -107,7 +107,7 @@ onContentUpdated(() => {
 
     .aside-fixed {
       position: fixed;
-      width: fill-available;
+      width: stretch;
       max-width: 240px;
       height: min-content;
       padding: 24px;

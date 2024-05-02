@@ -3,11 +3,22 @@
     <Content class="MDYDoc-Content" />
 
     <div v-if="!(xs || sm)" class="aside">
-      <div class="aside-fixed">
-        <p class="title">{{ resolveTitle(theme) }}</p>
-
-        <p class="item" v-for="item in headers">{{ item.title }}</p>
-      </div>
+      <v-card class="aside-fixed" rounded="xl" :title="resolveTitle(theme)">
+        <v-card-text>
+          <v-list>
+            <v-list-item
+              v-for="item in headers"
+              class="mt-1 mb-1"
+              rounded="xl"
+              density="compact"
+              :variant="hash === item.link ? 'tonal' : 'text'"
+              :href="item.link"
+              :title="item.title"
+              @click="scrollIntoView(item.link)"
+            />
+          </v-list>
+        </v-card-text>
+      </v-card>
     </div>
   </div>
 </template>
@@ -19,12 +30,24 @@ import { useDisplay } from 'vuetify'
 
 const { sm, xs } = useDisplay()
 
-const { frontmatter, theme } = useData()
+const { frontmatter, theme, hash } = useData()
 
 const headers = shallowRef<MenuItem[]>([])
 
+const scrollIntoView = (link: string, options?: ScrollIntoViewOptions) => {
+  const id = link.split('#')[1]
+
+  const heading = document.getElementById(decodeURIComponent(id))
+
+  heading?.scrollIntoView(options)
+}
+
 onContentUpdated(() => {
   headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline)
+
+  if (hash.value) {
+    scrollIntoView(hash.value, { behavior: 'smooth' })
+  }
 })
 </script>
 
@@ -110,19 +133,20 @@ onContentUpdated(() => {
       width: stretch;
       max-width: 240px;
       height: min-content;
-      padding: 24px;
       margin-top: 24px;
       margin-right: 6%;
       background-color: rgb(var(--v-theme-MDYBackground));
-      border-radius: 24px;
 
-      p.title {
-        font-size: 1.25rem;
-        line-height: 2rem;
-      }
+      .v-list {
+        background: transparent;
 
-      p.item {
-        margin: 4px 0;
+        .v-list-item {
+          transition: all 0.3s;
+
+          :deep(.v-list-item-title) {
+            white-space: normal;
+          }
+        }
       }
     }
   }

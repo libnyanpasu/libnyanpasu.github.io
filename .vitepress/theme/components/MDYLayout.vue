@@ -22,7 +22,7 @@
 
     <v-main>
       <div class="base-container">
-        <section>
+        <section id="main-section">
           <v-container>
             <MDYContent />
 

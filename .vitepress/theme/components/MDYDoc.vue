@@ -11,7 +11,7 @@
               class="mt-1 mb-1"
               rounded="xl"
               density="compact"
-              :variant="hash === item.link ? 'tonal' : 'text'"
+              :variant="selected === item.link ? 'tonal' : 'text'"
               :href="item.link"
               :title="item.title"
               @click="scrollIntoView(item.link)"
@@ -24,8 +24,10 @@
 </template>
 
 <script setup lang="ts">
+import { getAbsoluteTop } from '../utils/sidetools'
+import { getMainSection, useMainSectionOnScroll } from '../hooks'
 import { getHeaders, resolveTitle, type MenuItem } from '../utils/docs'
-import { onContentUpdated, useData } from 'vitepress'
+import { getScrollOffset, onContentUpdated, useData } from 'vitepress'
 import { useDisplay } from 'vuetify'
 
 const { sm, xs } = useDisplay()
@@ -33,6 +35,8 @@ const { sm, xs } = useDisplay()
 const { frontmatter, theme, hash } = useData()
 
 const headers = shallowRef<MenuItem[]>([])
+
+const selected = ref<string | null>(hash.value)
 
 const scrollIntoView = (link: string, options?: ScrollIntoViewOptions) => {
   const id = link.split('#')[1]
@@ -42,12 +46,47 @@ const scrollIntoView = (link: string, options?: ScrollIntoViewOptions) => {
   heading?.scrollIntoView(options)
 }
 
+const setSelected = () => {
+  const { y, arrivedState } = useScroll(getMainSection())
+
+  const scrollY = y.value - getMainSection()!.clientHeight / 2 - 96
+  const isBottom = arrivedState.bottom
+
+  const header = headers.value
+    .map(({ element, link }) => ({
+      link,
+      top: getAbsoluteTop(element)
+    }))
+    .filter(({ top }) => !Number.isNaN(top))
+    .sort((a, b) => a.top - b.top)
+
+  if (!header.length || scrollY < 1) {
+    selected.value = null
+  } else if (isBottom) {
+    selected.value = header[header.length - 1].link
+  } else {
+    const activeHeader = header.find(
+      ({ top }) => top > scrollY + getScrollOffset() + 4
+    )
+
+    selected.value = activeHeader ? activeHeader.link : null
+  }
+}
+
 onContentUpdated(() => {
   headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline)
 
   if (hash.value) {
     scrollIntoView(hash.value, { behavior: 'smooth' })
   }
+})
+
+onMounted(() => {
+  useMainSectionOnScroll(
+    useThrottleFn(() => {
+      setSelected()
+    }, 100)
+  )
 })
 </script>
 

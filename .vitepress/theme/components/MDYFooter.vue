@@ -1,5 +1,7 @@
 <template>
-  <div class="footer mt-6 pt-4 pb-2 d-flex align-center flex-column">
+  <div
+    class="footer mt-6 pt-4 pb-2 d-flex align-center flex-column text-center"
+  >
     <p>{{ theme.footer.message }}</p>
 
     <p>{{ theme.footer.copyright }}</p>

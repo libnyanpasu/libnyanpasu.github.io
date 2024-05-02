@@ -10,7 +10,7 @@ import NotFound from './NotFound.vue'
 
 import './styles/main.scss'
 
-import 'virtual:uno.css'
+// import 'virtual:uno.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import { md3 } from 'vuetify/blueprints'

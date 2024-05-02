@@ -1,5 +1,5 @@
 // import { SearchPlugin, type SearchData } from 'vitepress-plugin-search'
-import UnoCSS from 'unocss/vite'
+// import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
@@ -23,7 +23,7 @@ export default defineConfig({
       resolvers: [IconsResolver()]
     }),
     // Ref: https://github.com/unplugin/unplugin-icons
-    Icons(),
-    UnoCSS()
+    Icons()
+    // UnoCSS()
   ]
 })

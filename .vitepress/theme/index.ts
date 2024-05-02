@@ -11,12 +11,22 @@ import NotFound from './NotFound.vue'
 import './styles/main.scss'
 
 import 'virtual:uno.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import { md3 } from 'vuetify/blueprints'
+
+const vuetify = createVuetify({
+  ssr: true,
+  blueprint: md3
+})
 
 const theme: Theme = {
   extends: DefaultTheme,
   Layout: () => h(Layout),
   NotFound,
-  enhanceApp: (_ctx) => {}
+  enhanceApp: ({ app }) => {
+    app.use(vuetify)
+  }
 } satisfies Theme
 
 export default theme

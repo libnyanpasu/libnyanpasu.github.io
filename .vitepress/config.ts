@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import Container from 'markdown-it-container'
 import FootNote from 'markdown-it-footnote'
 import Token from 'markdown-it/lib/token'
+import vuetify from 'vite-plugin-vuetify'
 
 const currentYear = new Date().getFullYear()
 
@@ -170,6 +171,19 @@ export default defineConfig({
         src: 'https://umami.majokeiko.com/script.js',
         'data-website-id': '9af35a41-8a82-4cde-84d2-11ebb2e85cdb'
       }
+    ],
+    [
+      'link',
+      {
+        href: 'https://gcore.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css',
+        rel: 'stylesheet'
+      }
     ]
-  ]
+  ],
+  vite: {
+    plugins: [vuetify()],
+    ssr: {
+      noExternal: ['vuetify']
+    }
+  }
 })

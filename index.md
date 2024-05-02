@@ -7,10 +7,10 @@ hero:
   text: '(∠・ω< )⌒☆​'
   tagline: An opinionated Clash GUI based on Tauri.
   actions:
-    - theme: brand
+    - theme: flat
       text: Get Started
       link: /introduction
-    - theme: alt
+    - theme: tonal
       text: FAQ
       link: /others/faq
   image:

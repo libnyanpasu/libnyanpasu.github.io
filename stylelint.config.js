@@ -22,7 +22,7 @@ export default {
   rules: {
     'selector-pseudo-class-no-unknown': [
       true,
-      { ignorePseudoClasses: ['global'] }
+      { ignorePseudoClasses: ['global', 'deep'] }
     ],
     'font-family-name-quotes': null,
     'font-family-no-missing-generic-family-keyword': null,
@@ -38,7 +38,8 @@ export default {
     'selector-class-pattern': null,
     'value-no-vendor-prefix': [true, { ignoreValues: ['box'] }],
     'at-rule-no-unknown': null,
-    'import-notation': null
+    'import-notation': null,
+    'custom-property-pattern': null
   },
   overrides: [
     {

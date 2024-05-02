@@ -1,15 +1,12 @@
 <script setup lang="ts">
-// https://vitepress.dev/guide/extending-default-theme#layout-slots
 import { useData } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import {
-  argbFromHex,
-  themeFromSourceColor,
-  applyTheme
-} from '@material/material-color-utilities'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
 
 // 切换 夜间 / 日间 模式
 const { isDark } = useData()
+
 function enableTransitions() {
   return (
     'startViewTransition' in document &&
@@ -45,33 +42,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
     }
   )
-})
 
-const injectMDTheme = () => {
-  applyTheme(
-    themeFromSourceColor(argbFromHex('#1867c0'), [
-      {
-        name: 'Default',
-        value: argbFromHex('#1867c0'),
-        blend: true
-      }
-    ]),
-    { target: document.body, dark: isDark.value }
-  )
-}
-
-watch(
-  () => isDark.value,
-  () => injectMDTheme()
-)
-
-onBeforeMount(() => {
-  injectMDTheme()
+  theme.global.name.value = isDark.value ? 'dark' : 'light'
 })
 </script>
 
 <template>
-  <DefaultTheme.Layout>
+  <!-- <DefaultTheme.Layout>
     <template #layout-bottom>
       <BackToTop />
       <UnoCSSIndicator />
@@ -80,7 +57,8 @@ onBeforeMount(() => {
     <template #home-features-after>
       <ListReleases />
     </template>
-  </DefaultTheme.Layout>
+  </DefaultTheme.Layout> -->
+  <MDYLayout />
 </template>
 
 <style lang="scss">

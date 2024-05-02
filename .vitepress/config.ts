@@ -41,6 +41,7 @@ export default defineConfig({
             text: 'Others',
             items: [
               { text: 'FAQ', link: '/others/faq' },
+              { text: 'Clash Field', link: '/others/field' },
               { text: 'Q&A Convention ', link: '/others/issues' },
               {
                 text: 'How To Ask',

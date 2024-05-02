@@ -159,6 +159,10 @@ onMounted(() => {
           padding: 0;
         }
       }
+
+      code {
+        font-family: Consolas !important;
+      }
     }
   }
 

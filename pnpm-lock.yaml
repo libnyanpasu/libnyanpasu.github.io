@@ -178,8 +178,8 @@ importers:
         specifier: 6.0.4
         version: 6.0.4(stylelint@16.5.0(typescript@5.4.5))
       stylelint-scss:
-        specifier: 6.2.1
-        version: 6.2.1(stylelint@16.5.0(typescript@5.4.5))
+        specifier: 6.3.0
+        version: 6.3.0(stylelint@16.5.0(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -2876,9 +2876,6 @@ packages:
   known-css-properties@0.11.0:
     resolution: {integrity: sha512-bEZlJzXo5V/ApNNa5z375mJC6Nrz4vG43UgcSCrg2OHC+yuB6j0iDSrY7RQ/+PRofFB03wNIIt9iXIVLr4wc7w==}
 
-  known-css-properties@0.29.0:
-    resolution: {integrity: sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==}
-
   known-css-properties@0.30.0:
     resolution: {integrity: sha512-VSWXYUnsPu9+WYKkfmJyLKtIvaRJi1kXUqVmBACORXZQxT5oZDsoZ2vQP+bQFDnWtpI/4eq3MLoRMjI2fnLzTQ==}
 
@@ -3475,10 +3472,6 @@ packages:
     resolution: {integrity: sha512-h7fJ/5uWuRVyOtkO45pnt1Ih40CEleeyCHzipqAZO2e5H20g25Y48uYnFUiShvY4rZWNJ/Bib/KVPmanaCtOhA==}
     engines: {node: '>=8'}
 
-  postcss-selector-parser@6.0.15:
-    resolution: {integrity: sha512-rEYkQOMUCEMhsKbK66tbEU9QVIxbhN18YiniAwA7XQYTVBqrBy+P2p5JcdqsHgKM2zWylp8d7J6eszocfds5Sw==}
-    engines: {node: '>=4'}
-
   postcss-selector-parser@6.0.16:
     resolution: {integrity: sha512-A0RVJrX+IUkVZbW3ClroRWurercFhieevHB38sr2+l9eUClMqome3LmEmnhlNy+5Mr2EYN6B2Kaw9wYdd+VHiw==}
     engines: {node: '>=4'}
@@ -3969,8 +3962,8 @@ packages:
     peerDependencies:
       stylelint: ^14.0.0 || ^15.0.0 || ^16.0.1
 
-  stylelint-scss@6.2.1:
-    resolution: {integrity: sha512-ZoGLbVb1keZYRVGQlhB8G6sZOoNqw61whzzzGFWp05N12ErqLFfBv3JPrXiMLZaW98sBS7K/vUQhRnvUj4vwdw==}
+  stylelint-scss@6.3.0:
+    resolution: {integrity: sha512-8OSpiuf1xC7f8kllJsBOFAOYp/mR/C1FXMVeOFjtJPw+AFvEmC93FaklHt7MlOqU4poxuQ1TkYMyfI0V+1SxjA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.0.2
@@ -7436,8 +7429,6 @@ snapshots:
 
   known-css-properties@0.11.0: {}
 
-  known-css-properties@0.29.0: {}
-
   known-css-properties@0.30.0: {}
 
   kolorist@1.8.0: {}
@@ -8062,11 +8053,6 @@ snapshots:
       indexes-of: 1.0.1
       uniq: 1.0.1
 
-  postcss-selector-parser@6.0.15:
-    dependencies:
-      cssesc: 3.0.0
-      util-deprecate: 1.0.2
-
   postcss-selector-parser@6.0.16:
     dependencies:
       cssesc: 3.0.0
@@ -8588,12 +8574,12 @@ snapshots:
       postcss-sorting: 8.0.2(postcss@8.4.38)
       stylelint: 16.5.0(typescript@5.4.5)
 
-  stylelint-scss@6.2.1(stylelint@16.5.0(typescript@5.4.5)):
+  stylelint-scss@6.3.0(stylelint@16.5.0(typescript@5.4.5)):
     dependencies:
-      known-css-properties: 0.29.0
+      known-css-properties: 0.30.0
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.1
-      postcss-selector-parser: 6.0.15
+      postcss-selector-parser: 6.0.16
       postcss-value-parser: 4.2.0
       stylelint: 16.5.0(typescript@5.4.5)
 

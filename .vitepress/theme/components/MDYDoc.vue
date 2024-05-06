@@ -161,7 +161,13 @@ onMounted(() => {
       }
 
       code {
-        font-family: Consolas !important;
+        font-family: Consolas;
+      }
+
+      .vp-code {
+        code {
+          font-family: monospace;
+        }
       }
     }
   }

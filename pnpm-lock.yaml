@@ -154,8 +154,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       sass:
-        specifier: 1.76.0
-        version: 1.76.0
+        specifier: 1.77.0
+        version: 1.77.0
       stylelint:
         specifier: 16.5.0
         version: 16.5.0(typescript@5.4.5)
@@ -185,7 +185,7 @@ importers:
         version: 5.4.5
       unocss:
         specifier: 0.59.4
-        version: 0.59.4(postcss@8.4.38)(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))
+        version: 0.59.4(postcss@8.4.38)(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))
       unplugin-auto-import:
         specifier: 0.17.5
         version: 0.17.5(@vueuse/core@10.9.0(vue@3.4.27(typescript@5.4.5)))(rollup@4.13.0)
@@ -197,13 +197,13 @@ importers:
         version: 0.27.0(@babel/parser@7.24.4)(rollup@4.13.0)(vue@3.4.27(typescript@5.4.5))
       vite:
         specifier: 5.2.11
-        version: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+        version: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
       vite-plugin-vuetify:
         specifier: ^2.0.3
-        version: 2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3)
+        version: 2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3)
       vitepress:
         specifier: 1.1.4
-        version: 1.1.4(@algolia/client-search@4.23.3)(@types/node@20.12.10)(postcss@8.4.38)(sass@1.76.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.4.5)
+        version: 1.1.4(@algolia/client-search@4.23.3)(@types/node@20.12.10)(postcss@8.4.38)(sass@1.77.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.4.5)
       vue:
         specifier: 3.4.27
         version: 3.4.27(typescript@5.4.5)
@@ -3685,8 +3685,8 @@ packages:
   safe-regex@1.1.0:
     resolution: {integrity: sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==}
 
-  sass@1.76.0:
-    resolution: {integrity: sha512-nc3LeqvF2FNW5xGF1zxZifdW3ffIz5aBb7I7tSvOoNu7z1RQ6pFt9MBuiPtjgaI62YWrM/txjWlOCFiGtf2xpw==}
+  sass@1.77.0:
+    resolution: {integrity: sha512-eGj4HNfXqBWtSnvItNkn7B6icqH14i3CiCGbzMKs3BAPTq62pp9NBYsBgyN4cA+qssqo9r26lW4JSvlaUUWbgw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -5520,13 +5520,13 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@unocss/astro@0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))':
+  '@unocss/astro@0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))':
     dependencies:
       '@unocss/core': 0.59.4
       '@unocss/reset': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))
+      '@unocss/vite': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))
     optionalDependencies:
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
     transitivePeerDependencies:
       - rollup
 
@@ -5657,7 +5657,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.59.4
 
-  '@unocss/vite@0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))':
+  '@unocss/vite@0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@rollup/pluginutils': 5.1.0(rollup@4.13.0)
@@ -5669,13 +5669,13 @@ snapshots:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
     transitivePeerDependencies:
       - rollup
 
-  '@vitejs/plugin-vue@5.0.4(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))':
+  '@vitejs/plugin-vue@5.0.4(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))':
     dependencies:
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
       vue: 3.4.27(typescript@5.4.5)
 
   '@vue/compiler-core@3.4.27':
@@ -8281,7 +8281,7 @@ snapshots:
     dependencies:
       ret: 0.1.15
 
-  sass@1.76.0:
+  sass@1.77.0:
     dependencies:
       chokidar: 3.6.0
       immutable: 4.3.5
@@ -8908,9 +8908,9 @@ snapshots:
 
   universal-user-agent@6.0.1: {}
 
-  unocss@0.59.4(postcss@8.4.38)(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)):
+  unocss@0.59.4(postcss@8.4.38)(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)):
     dependencies:
-      '@unocss/astro': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))
+      '@unocss/astro': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))
       '@unocss/cli': 0.59.4(rollup@4.13.0)
       '@unocss/core': 0.59.4
       '@unocss/extractor-arbitrary-variants': 0.59.4
@@ -8929,9 +8929,9 @@ snapshots:
       '@unocss/transformer-compile-class': 0.59.4
       '@unocss/transformer-directives': 0.59.4
       '@unocss/transformer-variant-group': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))
+      '@unocss/vite': 0.59.4(rollup@4.13.0)(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))
     optionalDependencies:
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -9051,18 +9051,18 @@ snapshots:
       unist-util-stringify-position: 1.1.2
       vfile-message: 1.1.1
 
-  vite-plugin-vuetify@2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3):
+  vite-plugin-vuetify@2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3):
     dependencies:
       '@vuetify/loader-shared': 2.0.3(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.4.27(typescript@5.4.5)))
       debug: 4.3.4
       upath: 2.0.1
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
       vue: 3.4.27(typescript@5.4.5)
       vuetify: 3.6.3(typescript@5.4.5)(vite-plugin-vuetify@2.0.3)(vue@3.4.27(typescript@5.4.5))
     transitivePeerDependencies:
       - supports-color
 
-  vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0):
+  vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
@@ -9070,17 +9070,17 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.12.10
       fsevents: 2.3.3
-      sass: 1.76.0
+      sass: 1.77.0
       sugarss: 2.0.0
 
-  vitepress@1.1.4(@algolia/client-search@4.23.3)(@types/node@20.12.10)(postcss@8.4.38)(sass@1.76.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.4.5):
+  vitepress@1.1.4(@algolia/client-search@4.23.3)(@types/node@20.12.10)(postcss@8.4.38)(sass@1.77.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.4.5):
     dependencies:
       '@docsearch/css': 3.6.0
       '@docsearch/js': 3.6.0(@algolia/client-search@4.23.3)(search-insights@2.13.0)
       '@shikijs/core': 1.3.0
       '@shikijs/transformers': 1.3.0
       '@types/markdown-it': 14.1.1
-      '@vitejs/plugin-vue': 5.0.4(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))
+      '@vitejs/plugin-vue': 5.0.4(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))
       '@vue/devtools-api': 7.0.27(vue@3.4.27(typescript@5.4.5))
       '@vueuse/core': 10.9.0(vue@3.4.27(typescript@5.4.5))
       '@vueuse/integrations': 10.9.0(focus-trap@7.5.4)(vue@3.4.27(typescript@5.4.5))
@@ -9088,7 +9088,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 6.3.0
       shiki: 1.3.0
-      vite: 5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0)
+      vite: 5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0)
       vue: 3.4.27(typescript@5.4.5)
     optionalDependencies:
       postcss: 8.4.38
@@ -9151,7 +9151,7 @@ snapshots:
       vue: 3.4.27(typescript@5.4.5)
     optionalDependencies:
       typescript: 5.4.5
-      vite-plugin-vuetify: 2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.76.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3)
+      vite-plugin-vuetify: 2.0.3(vite@5.2.11(@types/node@20.12.10)(sass@1.77.0)(sugarss@2.0.0))(vue@3.4.27(typescript@5.4.5))(vuetify@3.6.3)
 
   webpack-sources@3.2.3: {}
 

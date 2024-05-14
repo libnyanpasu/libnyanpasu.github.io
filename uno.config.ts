@@ -13,6 +13,9 @@ export default defineConfig({
     presetIcons(),
     presetAttributify()
   ],
+  content: {
+    filesystem: ['**/*.{scss,css,html,js,ts,jsx,tsx,vue,svelte,astro}']
+  },
   rules: [
     [
       /^bg-gradient-(\d+)$/,

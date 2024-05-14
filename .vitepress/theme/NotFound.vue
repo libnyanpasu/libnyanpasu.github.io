@@ -21,45 +21,23 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="NotFound">
-    <p class="code">404</p>
-    <h1 class="title">页面不存在</h1>
+  <div class="w-full flex flex-col h-full items-center pt-10">
+    <p class="font-mono font-semibold text-[64px]/[64px]">404</p>
+    <h1 class="pt-3 text-xl font-bold tracking-wider">页面不存在</h1>
     <div class="divider" />
     <blockquote class="quote">
       {{ sentence }}
     </blockquote>
-    <div class="action">
+    <!-- <div class="action">
       <a class="link" :href="site.base" aria-label="返回首页"> 返回首页 </a>
-    </div>
+    </div> -->
+    <VBtn aria-label="返回首页" :href="site.base" class="!no-underline">
+      返回首页
+    </VBtn>
   </div>
 </template>
 
 <style scoped>
-.NotFound {
-  padding: 64px 24px 96px;
-  text-align: center;
-}
-
-@media (width >= 768px) {
-  .NotFound {
-    padding: 96px 32px 168px;
-  }
-}
-
-.code {
-  font-size: 64px;
-  font-weight: 600;
-  line-height: 64px;
-}
-
-.title {
-  padding-top: 12px;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 20px;
-  letter-spacing: 2px;
-}
-
 .divider {
   width: 64px;
   height: 1px;
@@ -68,32 +46,8 @@ onMounted(() => {
 }
 
 .quote {
-  max-width: 256px;
-  margin: 0 auto;
-  font-size: 14px;
-  font-weight: 500;
+  @apply mt-0 mx-auto text-sm font-medium;
+
   color: var(--vp-c-text-2);
-}
-
-.action {
-  padding-top: 20px;
-}
-
-.link {
-  display: inline-block;
-  padding: 3px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--vp-c-brand);
-  border: 1px solid var(--vp-c-brand);
-  border-radius: 16px;
-  transition:
-    border-color 0.25s,
-    color 0.25s;
-}
-
-.link:hover {
-  color: var(--vp-c-brand-dark);
-  border-color: var(--vp-c-brand-dark);
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
   <div class="MDYDoc-container">
     <Content class="MDYDoc-Content" />
-
-    <div v-if="!(xs || sm)" class="aside">
+    <div v-if="!(xs || sm) && !page.isNotFound" class="aside">
       <VCard class="aside-fixed" rounded="xl">
         <VCardTitle class="px-6 pt-4 font-bold text-lg">
           {{ resolveTitle(theme) }}
@@ -38,7 +37,7 @@ import { getAbsoluteTop } from '../utils/sidetools'
 
 const { sm, xs } = useDisplay()
 
-const { frontmatter, theme, hash } = useData()
+const { frontmatter, theme, hash, page } = useData()
 
 const headers = shallowRef<MenuItem[]>([])
 

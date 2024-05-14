@@ -72,13 +72,13 @@ export default defineConfig({
       lang: 'zh-CN',
       themeConfig: {
         nav: [
-          { text: '主页', link: '/zh-CN' },
+          { text: '主页', link: '/zh-CN/' },
           { text: '简介', link: '/zh-CN/introduction' },
           { text: '常见问题', link: '/zh-CN/others/faq' }
         ],
 
         sidebar: [
-          { text: '主页', link: '/zh-CN' },
+          { text: '主页', link: '/zh-CN/' },
           {
             text: '文档',
             items: [

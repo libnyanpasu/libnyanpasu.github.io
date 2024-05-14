@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import 'uno.css'
+// import 'uno.css'
 
 import { inBrowser, useData } from 'vitepress'
 import { useTheme } from 'vuetify'

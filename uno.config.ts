@@ -14,7 +14,11 @@ export default defineConfig({
     presetAttributify()
   ],
   content: {
-    filesystem: ['**/*.{scss,css,html,js,ts,jsx,tsx,vue,svelte,astro}']
+    filesystem: ['**/*.{scss,css,html,js,ts,jsx,tsx,vue,svelte,astro}'],
+    pipeline: {
+      // ignore vuetify
+      exclude: ['**/vuetify/**']
+    }
   },
   rules: [
     [

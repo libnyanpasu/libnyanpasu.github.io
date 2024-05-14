@@ -8,8 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BackToTop: typeof import('./../.vitepress/theme/components/BackToTop.vue')['default']
-    Container: typeof import('./../.vitepress/theme/components/Container.vue')['default']
-    ListReleases: typeof import('./../.vitepress/theme/components/ListReleases.vue')['default']
     MDYAppBarLink: typeof import('./../.vitepress/theme/components/MDYAppBarLink.vue')['default']
     MDYAppearance: typeof import('./../.vitepress/theme/components/MDYAppearance.vue')['default']
     MDYContent: typeof import('./../.vitepress/theme/components/MDYContent.vue')['default']
@@ -23,7 +21,6 @@ declare module 'vue' {
     MDYNavItem: typeof import('./../.vitepress/theme/components/MDYNavItem.vue')['default']
     MDYSocialLinks: typeof import('./../.vitepress/theme/components/MDYSocialLinks.vue')['default']
     MDYThemeProvider: typeof import('./../.vitepress/theme/components/MDYThemeProvider.vue')['default']
-    SVGIcon: typeof import('./../.vitepress/theme/components/SVGIcon.vue')['default']
     UnoCSSIndicator: typeof import('./../.vitepress/theme/components/UnoCSSIndicator.vue')['default']
   }
 }

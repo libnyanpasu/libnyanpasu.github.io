@@ -161,12 +161,12 @@ onMounted(() => {
       }
 
       code {
-        font-family: Consolas;
+        font-family: var(--vp-font-family-mono) !important;
       }
 
       .vp-code {
         code {
-          font-family: monospace;
+          font-family: var(--vp-font-family-mono) !important;
         }
       }
     }

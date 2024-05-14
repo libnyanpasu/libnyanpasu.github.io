@@ -39,9 +39,9 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
 
-const drawer = ref(true)
+const { sm, xs } = useDisplay()
 
-const { xs } = useDisplay()
+const drawer = ref<boolean>(!(sm.value || xs.value))
 </script>
 
 <style scoped lang="scss">

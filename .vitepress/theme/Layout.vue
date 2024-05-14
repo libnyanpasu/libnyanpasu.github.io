@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import 'uno.css'
 
-import { useData } from 'vitepress'
+import { inBrowser, useData } from 'vitepress'
 import { useTheme } from 'vuetify'
 
 const theme = useTheme()
+const { isDark, lang } = useData()
 
 // 切换 夜间 / 日间 模式
-const { isDark } = useData()
-
 function enableTransitions() {
   return (
     'startViewTransition' in document &&
@@ -46,6 +45,29 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   )
 
   theme.global.name.value = isDark.value ? 'dark' : 'light'
+})
+
+// 检测浏览器语言，并持久化默认语言
+watchEffect(() => {
+  if (inBrowser) {
+    document.cookie = `nf_lang=${lang.value}; expires=Mon, 1 Jan 2030 00:00:00 UTC; path=/`
+  }
+})
+onMounted(() => {
+  if (inBrowser) {
+    if (document.cookie.includes('nf_lang=')) {
+      return
+    }
+    const userLanguage = navigator.language
+    switch (userLanguage) {
+      case 'zh-CN':
+        lang.value = 'zh-CN'
+        break
+      default:
+        lang.value = 'en'
+        break
+    }
+  }
 })
 </script>
 

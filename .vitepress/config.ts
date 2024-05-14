@@ -38,6 +38,10 @@ export default defineConfig({
             ]
           },
           {
+            text: 'Development',
+            link: '/zh-CN/development'
+          },
+          {
             text: 'Others',
             items: [
               { text: 'FAQ', link: '/others/faq' },
@@ -78,6 +82,10 @@ export default defineConfig({
               { text: '安装', link: '/zh-CN/tutorial/install' },
               { text: '代理链', link: '/zh-CN/tutorial/proxy-chain' }
             ]
+          },
+          {
+            text: '开发',
+            link: '/zh-CN/development'
           },
           {
             text: '其他',

@@ -3,32 +3,38 @@
     <Content class="MDYDoc-Content" />
 
     <div v-if="!(xs || sm)" class="aside">
-      <v-card class="aside-fixed" rounded="xl" :title="resolveTitle(theme)">
-        <v-card-text>
-          <v-list>
-            <v-list-item
+      <VCard class="aside-fixed" rounded="xl">
+        <VCardTitle class="px-6 pt-4 font-bold text-lg">
+          {{ resolveTitle(theme) }}
+        </VCardTitle>
+        <VCardText>
+          <VList>
+            <VListItem
               v-for="item in headers"
               class="mt-1 mb-1"
               rounded="xl"
               density="compact"
               :variant="selected === item.link ? 'tonal' : 'text'"
               :href="item.link"
-              :title="item.title"
               @click="scrollIntoView(item.link)"
-            />
-          </v-list>
-        </v-card-text>
-      </v-card>
+            >
+              <VListItemTitle class="text-base px-2">
+                {{ item.title }}
+              </VListItemTitle>
+            </VListItem>
+          </VList>
+        </VCardText>
+      </VCard>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getAbsoluteTop } from '../utils/sidetools'
-import { getMainSection, useMainSectionOnScroll } from '../hooks'
-import { getHeaders, resolveTitle, type MenuItem } from '../utils/docs'
 import { getScrollOffset, onContentUpdated, useData } from 'vitepress'
 import { useDisplay } from 'vuetify'
+import { getMainSection, useMainSectionOnScroll } from '../hooks'
+import { getHeaders, resolveTitle, type MenuItem } from '../utils/docs'
+import { getAbsoluteTop } from '../utils/sidetools'
 
 const { sm, xs } = useDisplay()
 
@@ -134,7 +140,11 @@ onMounted(() => {
         line-height: 1.5rem;
       }
 
-      p {
+      p,
+      ul,
+      ol,
+      blockquote,
+      table {
         margin: 16px 0;
         line-height: 28px;
 

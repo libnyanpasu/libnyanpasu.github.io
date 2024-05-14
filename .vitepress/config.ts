@@ -4,7 +4,6 @@ import Token from 'markdown-it/lib/token'
 import vuetify from 'vite-plugin-vuetify'
 import { defineConfig } from 'vitepress'
 // import { SearchPlugin, type SearchData } from 'vitepress-plugin-search'
-import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
@@ -19,6 +18,7 @@ export default defineConfig({
   description: 'Clash Nyanpasu! (∠・ω< )⌒☆​',
   lang: 'zh-CN',
   lastUpdated: true,
+  cleanUrls: true,
   locales: {
     root: {
       label: 'English',
@@ -31,6 +31,7 @@ export default defineConfig({
         ],
 
         sidebar: [
+          { text: 'Home', link: '/' },
           {
             text: 'Tutorial',
             items: [
@@ -77,6 +78,7 @@ export default defineConfig({
         ],
 
         sidebar: [
+          { text: '主页', link: '/zh-CN' },
           {
             text: '文档',
             items: [

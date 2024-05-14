@@ -3,7 +3,7 @@
     <v-img class="logo" :src="theme.logo" />
 
     <v-list v-model:selected="selected" mandatory>
-      <MDYNavItem :item="{ text: 'Home', link: '/' }" />
+      <!-- <MDYNavItem :item="{ text: 'Home', link: '/' }" /> -->
 
       <template v-for="item in sidebar">
         <MDYNavItem :item="item" />

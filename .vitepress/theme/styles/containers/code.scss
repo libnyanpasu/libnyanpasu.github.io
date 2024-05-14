@@ -72,5 +72,9 @@
     padding-left: 16px;
     background-color: rgb(var(--v-theme-MDYBackground));
     border-right: 1px solid rgb(var(--v-theme-onSurface));
+
+    span.line-number {
+      float: right;
+    }
   }
 }

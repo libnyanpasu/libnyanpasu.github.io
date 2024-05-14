@@ -1,5 +1,5 @@
 // import { SearchPlugin, type SearchData } from 'vitepress-plugin-search'
-// import UnoCSS from 'unocss/vite'
+import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
@@ -8,6 +8,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
+    UnoCSS(),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: ['vue', '@vueuse/core'],
@@ -24,6 +25,5 @@ export default defineConfig({
     }),
     // Ref: https://github.com/unplugin/unplugin-icons
     Icons()
-    // UnoCSS()
   ]
 })

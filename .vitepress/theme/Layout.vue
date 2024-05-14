@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import 'uno.css'
+
 import { useData } from 'vitepress'
 import { useTheme } from 'vuetify'
 

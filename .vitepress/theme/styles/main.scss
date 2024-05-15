@@ -13,6 +13,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow: hidden;
+}
+
 html,
 body {
   scroll-behavior: smooth;

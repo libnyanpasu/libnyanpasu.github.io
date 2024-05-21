@@ -40,12 +40,12 @@
     "@types/node": "20.12.12",
     "@typescript-eslint/eslint-plugin": "7.10.0",
     "@typescript-eslint/parser": "7.10.0",
-    "@unocss/preset-attributify": "0.60.2",
-    "@unocss/preset-icons": "0.60.2",
-    "@unocss/preset-uno": "0.60.2",
-    "@unocss/transformer-compile-class": "0.60.2",
-    "@unocss/transformer-directives": "0.60.2",
-    "@unocss/transformer-variant-group": "0.60.2",
+    "@unocss/preset-attributify": "0.60.3",
+    "@unocss/preset-icons": "0.60.3",
+    "@unocss/preset-uno": "0.60.3",
+    "@unocss/transformer-compile-class": "0.60.3",
+    "@unocss/transformer-directives": "0.60.3",
+    "@unocss/transformer-variant-group": "0.60.3",
     "@vue/eslint-config-prettier": "9.0.0",
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/tsconfig": "0.5.1",
@@ -84,7 +84,7 @@
     "stylelint-scss": "6.3.0",
     "tailwindcss": "^3.4.3",
     "typescript": "5.4.5",
-    "unocss": "0.60.2",
+    "unocss": "0.60.3",
     "unplugin-auto-import": "0.17.6",
     "unplugin-icons": "0.19.0",
     "unplugin-vue-components": "0.27.0",
@@ -98,5 +98,5 @@
     "@octokit/types": "^13.0.0",
     "octokit": "^4.0.0"
   },
-  "packageManager": "pnpm@9.1.1"
+  "packageManager": "pnpm@9.1.2"
 }

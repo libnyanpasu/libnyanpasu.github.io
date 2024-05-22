@@ -78,3 +78,12 @@ sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
 sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 ```
+
+### 5. Missing Subscription Node Types
+
+Some subscription types recognize the User Agent (UA) of the request and deliver the corresponding configuration file based on the UA. The default UA for Nyanpasu is `clash-nyanpasu/vx.y.z`, where `x.y.z` represents the software version. If you are unable to retrieve certain types of nodes, it is likely because the subscription system has not added the Nyanpasu UA for recognition.
+
+#### Solutions
+
+1. Contact the subscription provider and request support for the Nyanpasu UA;
+2. Modify the UA to a type supported by the subscription provider, such as `clash-meta`, etc.

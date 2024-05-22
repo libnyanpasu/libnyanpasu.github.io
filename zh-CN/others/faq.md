@@ -78,3 +78,13 @@ sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
 sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 ```
+
+### 5. 缺少订阅获取节点类型
+
+部分订阅类型会根据请求的用户代理 (UA) 来识别并下发相应的配置文件。Nyanpasu 默认的UA为`clash-nyanpasu/vx.y.z`，其中`x.y.z`是软件版本。
+如果你无法获取到某些类型的节点，很可能是因为订阅系统没有将Nyanpasu的UA添加到识别列表中。
+
+#### 解决方案
+
+1. 联系订阅提供者，请求添加对Nyanpasu UA的支持；
+2. 修改UA为订阅提供者支持的类型，例如`clash-meta`等。

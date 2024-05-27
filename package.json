@@ -49,7 +49,7 @@
     "@vue/eslint-config-prettier": "9.0.0",
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/tsconfig": "0.5.1",
-    "@vueuse/core": "10.9.0",
+    "@vueuse/core": "10.10.0",
     "@wojtekmaj/color-utils": "^3.2.1",
     "autoprefixer": "^10.4.19",
     "eslint": "8.57.0",

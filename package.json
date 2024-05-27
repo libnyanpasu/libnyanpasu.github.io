@@ -29,7 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@iconify/json": "2.2.213",
+    "@iconify/json": "2.2.214",
     "@material/material-color-utilities": "^0.2.7",
     "@material/web": "^1.4.0",
     "@tsconfig/node20": "20.1.4",
@@ -98,5 +98,5 @@
     "@octokit/types": "^13.0.0",
     "octokit": "^4.0.0"
   },
-  "packageManager": "pnpm@9.1.2"
+  "packageManager": "pnpm@9.1.3"
 }

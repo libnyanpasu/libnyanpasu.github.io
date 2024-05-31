@@ -139,6 +139,24 @@ onMounted(() => {
         line-height: 1.5rem;
       }
 
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        .header-anchor::before {
+          content: '#';
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        &:hover {
+          .header-anchor::before {
+            opacity: 1;
+          }
+        }
+      }
+
       p,
       ul,
       ol,

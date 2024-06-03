@@ -1,6 +1,26 @@
 <template>
   <div class="d-flex flex-column justify-center">
-    <v-img class="logo" :src="theme.logo" />
+    <!--TODO: Add drag animation-->
+    <v-img
+      class="logo"
+      :src="theme.logo"
+      v-motion
+      :initial="{ scale: 1, rotate: 0 }"
+      :hovered="{
+        scale: 1.05,
+        transition: {
+          delay: 0.5
+        }
+      }"
+      draggable="false"
+      :tapped="{
+        scale: 0.95,
+        rotate: 360,
+        transition: {
+          delay: 0.5
+        }
+      }"
+    />
 
     <v-list v-model:selected="selected" mandatory>
       <!-- <MDYNavItem :item="{ text: 'Home', link: '/' }" /> -->

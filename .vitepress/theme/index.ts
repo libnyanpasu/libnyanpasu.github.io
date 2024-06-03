@@ -11,9 +11,10 @@ import NotFound from './NotFound.vue'
 import './styles/main.scss'
 
 // import 'virtual:uno.css'
-import 'vuetify/styles'
+import { MotionPlugin } from '@vueuse/motion'
 import { createVuetify } from 'vuetify'
 import { md3 } from 'vuetify/blueprints'
+import 'vuetify/styles'
 
 const vuetify = createVuetify({
   ssr: true,
@@ -26,6 +27,7 @@ const theme: Theme = {
   NotFound,
   enhanceApp: ({ app }) => {
     app.use(vuetify)
+    app.use(MotionPlugin)
   }
 } satisfies Theme
 

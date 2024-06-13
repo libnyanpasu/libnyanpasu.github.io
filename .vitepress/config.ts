@@ -8,6 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
+import { generateSidebar } from 'vitepress-sidebar'
 
 const currentYear = new Date().getFullYear()
 
@@ -40,7 +41,16 @@ export default defineConfig({
                 link: '/introduction'
               },
               { text: 'Installation', link: '/tutorial/install' },
-              { text: 'Proxy Chain', link: '/tutorial/proxy-chain' }
+              { text: 'Proxy Chain', link: '/tutorial/proxy-chain' },
+              {
+                text: 'Chians Examples',
+                items: [
+                  {
+                    text: 'Custom Rules',
+                    link: '/tutorial/chians/custom-rules'
+                  }
+                ]
+              }
             ]
           },
           {
@@ -87,7 +97,16 @@ export default defineConfig({
                 link: '/zh-CN/introduction'
               },
               { text: '安装', link: '/zh-CN/tutorial/install' },
-              { text: '代理链', link: '/zh-CN/tutorial/proxy-chain' }
+              { text: '代理链', link: '/zh-CN/tutorial/proxy-chain' },
+              {
+                text: '代理链功能',
+                items: [
+                  {
+                    text: '自定义规则',
+                    link: '/zh-CN/tutorial/chians/custom-rules'
+                  }
+                ]
+              }
             ]
           },
           {

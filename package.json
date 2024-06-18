@@ -37,7 +37,7 @@
     "@types/markdown-it": "14.1.1",
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
-    "@types/node": "20.14.2",
+    "@types/node": "20.14.4",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "@unocss/preset-attributify": "0.61.0",
@@ -74,7 +74,7 @@
     "postcss-html": "1.7.0",
     "postcss-scss": "4.0.9",
     "prettier": "3.2.5",
-    "sass": "1.77.5",
+    "sass": "1.77.6",
     "stylelint": "16.6.1",
     "stylelint-config-html": "1.1.0",
     "stylelint-config-rational-order": "0.1.2",
@@ -99,5 +99,5 @@
     "@octokit/types": "^13.0.0",
     "octokit": "^4.0.0"
   },
-  "packageManager": "pnpm@9.3.0"
+  "packageManager": "pnpm@9.4.0"
 }

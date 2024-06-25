@@ -199,8 +199,8 @@ importers:
         specifier: 0.19.0
         version: 0.19.0(@vue/compiler-sfc@3.4.30)
       unplugin-vue-components:
-        specifier: 0.27.0
-        version: 0.27.0(@babel/parser@7.24.7)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.30(typescript@5.5.2))
+        specifier: 0.27.1
+        version: 0.27.1(@babel/parser@7.24.7)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.30(typescript@5.5.2))
       vite:
         specifier: 5.3.1
         version: 5.3.1(@types/node@20.14.8)(sass@1.77.6)(sugarss@2.0.0)
@@ -3316,6 +3316,9 @@ packages:
   mlly@1.6.1:
     resolution: {integrity: sha512-vLgaHvaeunuOXHSmEbZ9izxPx3USsk8KCQ8iC+aTlp5sKRSoZvwhHh5L9VbKSaVC6sJDqbyohIS76E2VmHIPAA==}
 
+  mlly@1.7.1:
+    resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -3598,6 +3601,9 @@ packages:
 
   pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==}
+
+  pkg-types@1.1.1:
+    resolution: {integrity: sha512-ko14TjmDuQJ14zsotODv7dBlwxKhUKQEhuhmbqo1uCi9BB0Z2alo/wAXg6q1dTR5TyuqYyWhjtfe/Tsh+X28jQ==}
 
   popmotion@11.0.5:
     resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
@@ -4497,8 +4503,8 @@ packages:
       vue-template-es2015-compiler:
         optional: true
 
-  unplugin-vue-components@0.27.0:
-    resolution: {integrity: sha512-77eTEy23sQ0UpzGWnZ9I2mY3cnmXwklz4ITcn3JfxjCoX643ghImkiZ4nFm58sxbdVcc4Fo/o4LIoFnlqEqsSg==}
+  unplugin-vue-components@0.27.1:
+    resolution: {integrity: sha512-ximoYPwT9A5fc0ozy40IZbXR/XMRlTy69u4JfeqBMlsyuKHckQRisRqgzqve6m/ZeOh7eCHjEQP1WnBPW+YI+g==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -6764,8 +6770,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  confbox@0.1.7:
-    optional: true
+  confbox@0.1.7: {}
 
   consola@3.2.3: {}
 
@@ -8284,6 +8289,13 @@ snapshots:
       pkg-types: 1.0.3
       ufo: 1.5.3
 
+  mlly@1.7.1:
+    dependencies:
+      acorn: 8.11.3
+      pathe: 1.1.2
+      pkg-types: 1.1.1
+      ufo: 1.5.3
+
   mri@1.2.0:
     optional: true
 
@@ -8574,6 +8586,12 @@ snapshots:
     dependencies:
       jsonc-parser: 3.2.1
       mlly: 1.6.1
+      pathe: 1.1.2
+
+  pkg-types@1.1.1:
+    dependencies:
+      confbox: 0.1.7
+      mlly: 1.7.1
       pathe: 1.1.2
 
   popmotion@11.0.5:
@@ -9686,9 +9704,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  unplugin-vue-components@0.27.0(@babel/parser@7.24.7)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.30(typescript@5.5.2)):
+  unplugin-vue-components@0.27.1(@babel/parser@7.24.7)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.30(typescript@5.5.2)):
     dependencies:
-      '@antfu/utils': 0.7.7
+      '@antfu/utils': 0.7.8
       '@rollup/pluginutils': 5.1.0(rollup@4.13.0)
       chokidar: 3.6.0
       debug: 4.3.4
@@ -9696,7 +9714,7 @@ snapshots:
       local-pkg: 0.5.0
       magic-string: 0.30.10
       minimatch: 9.0.4
-      resolve: 1.22.8
+      mlly: 1.7.1
       unplugin: 1.10.1
       vue: 3.4.30(typescript@5.5.2)
     optionalDependencies:

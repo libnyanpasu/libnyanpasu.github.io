@@ -22,7 +22,7 @@
       }"
     />
 
-    <v-list v-model:selected="selected" mandatory>
+    <v-list v-model:selected="selected" v-model:opened="opened" mandatory>
       <!-- <MDYNavItem :item="{ text: 'Home', link: '/' }" /> -->
 
       <template v-for="item in sidebar">
@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { useData, useRoute } from 'vitepress'
+import { useData, useRoute, type DefaultTheme } from 'vitepress'
 import { useSidebar } from 'vitepress/theme'
 
 const { site, theme } = useData()
@@ -43,6 +43,26 @@ const { sidebar } = useSidebar()
 const route = useRoute()
 
 const selected = ref([route.path.replace('.html', '')])
+const iterNodes = (items: DefaultTheme.SidebarItem[]) => {
+  return items.reduce<string[]>((acc, item) => {
+    if (item.items) {
+      for (const subItem of item.items) {
+        if (
+          subItem.link == route.path.replace('.html', '') &&
+          !acc.includes(item.text!)
+        ) {
+          acc.push(item.text!)
+        }
+        if (subItem.items) {
+          acc.push(...iterNodes(subItem.items))
+        }
+      }
+    }
+    return acc
+  }, [])
+}
+const opened = ref(iterNodes(sidebar.value))
+console.log(opened.value)
 </script>
 
 <style scoped lang="scss">

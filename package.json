@@ -37,7 +37,7 @@
     "@types/markdown-it": "14.1.2",
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
-    "@types/node": "20.14.13",
+    "@types/node": "20.14.14",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "@unocss/preset-attributify": "0.61.9",

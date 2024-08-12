@@ -199,8 +199,8 @@ importers:
         specifier: 0.19.2
         version: 0.19.2(@vue/compiler-sfc@3.4.37)
       unplugin-vue-components:
-        specifier: 0.27.3
-        version: 0.27.3(@babel/parser@7.25.3)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.37(typescript@5.5.4))
+        specifier: 0.27.4
+        version: 0.27.4(@babel/parser@7.25.3)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.37(typescript@5.5.4))
       vite:
         specifier: 5.4.0
         version: 5.4.0(@types/node@20.14.15)(sass@1.77.8)(sugarss@2.0.0)
@@ -1943,15 +1943,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@4.3.5:
-    resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.3.6:
     resolution: {integrity: sha512-O/09Bd4Z1fBrU4VzkhFqVgpPzaGbw6Sm9FEkBT1A/YBXQFGuuSxa1dN2nxgxS34JmKXqYx8CZAwEVoJFImUXIg==}
     engines: {node: '>=6.0'}
@@ -3619,9 +3610,6 @@ packages:
   pkg-types@1.0.3:
     resolution: {integrity: sha512-nN7pYi0AQqJnoLPC9eHFQ8AcyaixBUOwvqc5TDnIKCMEE6I0y8P7OKA7fPexsXGCGxQDl/cmrLAp26LhcwxZ4A==}
 
-  pkg-types@1.1.1:
-    resolution: {integrity: sha512-ko14TjmDuQJ14zsotODv7dBlwxKhUKQEhuhmbqo1uCi9BB0Z2alo/wAXg6q1dTR5TyuqYyWhjtfe/Tsh+X28jQ==}
-
   pkg-types@1.1.3:
     resolution: {integrity: sha512-+JrgthZG6m3ckicaOB74TwQ+tBWsFl3qVQg7mN8ulwSOElJ7gBhKzj2VkCPnZ4NlF6kEquYU+RIYNVAvzd54UA==}
 
@@ -4545,8 +4533,8 @@ packages:
       vue-template-es2015-compiler:
         optional: true
 
-  unplugin-vue-components@0.27.3:
-    resolution: {integrity: sha512-5wg7lbdg5ZcrAQNzyYK+6gcg/DG8K6rO+f5YeuvqGHs/PhpapBvpA4O/0ex/pFthE5WgRk43iWuRZEMLVsdz4Q==}
+  unplugin-vue-components@0.27.4:
+    resolution: {integrity: sha512-1XVl5iXG7P1UrOMnaj2ogYa5YTq8aoh5jwDPQhemwO/OrXW+lPQKDXd1hMz15qxQPxgb/XXlbgo3HQ2rLEbmXQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -4564,6 +4552,10 @@ packages:
 
   unplugin@1.12.0:
     resolution: {integrity: sha512-KeczzHl2sATPQUx1gzo+EnUkmN4VmGBYRRVOZSGvGITE9rGHRDGqft6ONceP3vgXcyJ2XjX5axG5jMWUwNCYLw==}
+    engines: {node: '>=14.0.0'}
+
+  unplugin@1.12.1:
+    resolution: {integrity: sha512-aXEH9c5qi3uYZHo0niUtxDlT9ylG/luMW/dZslSCkbtC31wCyFkmM0kyoBBh+Grhn7CL+/kvKLfN61/EdxPxMQ==}
     engines: {node: '>=14.0.0'}
 
   unset-value@1.0.0:
@@ -5989,7 +5981,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 7.11.0
       '@typescript-eslint/visitor-keys': 7.11.0
-      debug: 4.3.4
+      debug: 4.3.6
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -6877,10 +6869,6 @@ snapshots:
       ms: 2.1.3
 
   debug@4.3.4:
-    dependencies:
-      ms: 2.1.2
-
-  debug@4.3.5:
     dependencies:
       ms: 2.1.2
 
@@ -8369,9 +8357,9 @@ snapshots:
 
   mlly@1.7.1:
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.1
       pathe: 1.1.2
-      pkg-types: 1.1.1
+      pkg-types: 1.1.3
       ufo: 1.5.3
 
   mri@1.2.0:
@@ -8667,12 +8655,6 @@ snapshots:
       pathe: 1.1.2
     optional: true
 
-  pkg-types@1.1.1:
-    dependencies:
-      confbox: 0.1.7
-      mlly: 1.7.1
-      pathe: 1.1.2
-
   pkg-types@1.1.3:
     dependencies:
       confbox: 0.1.7
@@ -8692,7 +8674,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-html@1.7.0:
     dependencies:
@@ -8717,7 +8699,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.6
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -8735,7 +8717,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -8810,7 +8792,7 @@ snapshots:
     dependencies:
       postcss: 8.4.41
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -9437,7 +9419,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.41))(postcss@8.4.41))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -9834,18 +9816,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  unplugin-vue-components@0.27.3(@babel/parser@7.25.3)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.37(typescript@5.5.4)):
+  unplugin-vue-components@0.27.4(@babel/parser@7.25.3)(@nuxt/kit@3.11.2(rollup@4.13.0))(rollup@4.13.0)(vue@3.4.37(typescript@5.5.4)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.13.0)
       chokidar: 3.6.0
-      debug: 4.3.5
+      debug: 4.3.6
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.10
+      magic-string: 0.30.11
       minimatch: 9.0.5
       mlly: 1.7.1
-      unplugin: 1.11.0
+      unplugin: 1.12.1
       vue: 3.4.37(typescript@5.5.4)
     optionalDependencies:
       '@babel/parser': 7.25.3
@@ -9862,6 +9844,13 @@ snapshots:
       webpack-virtual-modules: 0.6.1
 
   unplugin@1.12.0:
+    dependencies:
+      acorn: 8.12.1
+      chokidar: 3.6.0
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.6.2
+
+  unplugin@1.12.1:
     dependencies:
       acorn: 8.12.1
       chokidar: 3.6.0

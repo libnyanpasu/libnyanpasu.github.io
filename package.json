@@ -29,7 +29,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@iconify/json": "2.2.235",
+    "@iconify/json": "2.2.236",
     "@material/material-color-utilities": "^0.3.0",
     "@material/web": "^1.4.0",
     "@tsconfig/node20": "20.1.4",

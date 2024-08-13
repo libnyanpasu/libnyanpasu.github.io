@@ -31,7 +31,7 @@
     "@commitlint/config-conventional": "19.2.2",
     "@iconify/json": "2.2.236",
     "@material/material-color-utilities": "^0.3.0",
-    "@material/web": "^1.4.0",
+    "@material/web": "^2.0.0",
     "@tsconfig/node20": "20.1.4",
     "@types/lodash-es": "4.17.12",
     "@types/markdown-it": "14.1.2",

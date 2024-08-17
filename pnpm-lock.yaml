@@ -22,8 +22,8 @@ importers:
         specifier: 19.2.2
         version: 19.2.2
       '@iconify/json':
-        specifier: 2.2.237
-        version: 2.2.237
+        specifier: 2.2.238
+        version: 2.2.238
       '@material/material-color-utilities':
         specifier: ^0.3.0
         version: 0.3.0
@@ -772,8 +772,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     deprecated: Use @eslint/object-schema instead
 
-  '@iconify/json@2.2.237':
-    resolution: {integrity: sha512-lMK5I9JX90L2LR18Lz6C5XrivxxAGejdJvFQI7TQkj03WcaxRJlciPbQb6z4nX+DS1T6k591ZQ2/hyRVbjqrgA==}
+  '@iconify/json@2.2.238':
+    resolution: {integrity: sha512-wtsUtPGeHH4Jy0Z+oIKyD9ldrFISAEzfGs1SM+PthhHRywDDiZsP2iVn6d2Vzn03wVTB7b8882zoztWWPl1ZmA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -5432,7 +5432,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.2': {}
 
-  '@iconify/json@2.2.237':
+  '@iconify/json@2.2.238':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2

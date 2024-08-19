@@ -182,7 +182,8 @@ onMounted(() => {
         text-decoration: underline;
         text-underline-offset: 3px;
 
-        &.footnote-backref {
+        &.footnote-backref,
+        &.footnote-ref {
           text-decoration: none;
         }
       }

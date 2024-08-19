@@ -180,9 +180,7 @@ export default function main(config) {
     'RULE-SET,gfw,Proxies',
     'RULE-SET,telegramcidr,Telegram',
     'GEOIP,LAN,DIRECT',
-    'GEOIP,CN
-
-,DIRECT'
+    'GEOIP,CN,DIRECT'
   ]
   extra.rules = [...extra_rules, ...config.rules]
   extra.dns = { ...config.dns, enable: false }

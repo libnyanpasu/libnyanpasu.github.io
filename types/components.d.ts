@@ -12,6 +12,7 @@ declare module 'vue' {
     MDYAppearance: typeof import('./../.vitepress/theme/components/MDYAppearance.vue')['default']
     MDYContent: typeof import('./../.vitepress/theme/components/MDYContent.vue')['default']
     MDYDoc: typeof import('./../.vitepress/theme/components/MDYDoc.vue')['default']
+    MDYDocFooter: typeof import('./../.vitepress/theme/components/MDYDocFooter.vue')['default']
     MDYFooter: typeof import('./../.vitepress/theme/components/MDYFooter.vue')['default']
     MDYHome: typeof import('./../.vitepress/theme/components/MDYHome.vue')['default']
     MDYHomeHero: typeof import('./../.vitepress/theme/components/MDYHomeHero.vue')['default']

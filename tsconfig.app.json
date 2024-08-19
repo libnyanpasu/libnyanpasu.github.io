@@ -11,6 +11,11 @@
       "@/*": ["./.vitepress/theme/*"],
       "~/*": ["./.vitepress/*"],
       "~root/*": ["./*"]
-    }
+    },
+    "types": [
+      "unplugin-auto-import/types",
+      "unplugin-icons/types",
+      "unplugin-vue-components/types"
+    ]
   }
 }

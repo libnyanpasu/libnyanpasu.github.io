@@ -1,6 +1,10 @@
 <template>
   <div class="MDYDoc-container">
-    <Content class="MDYDoc-Content" />
+    <div class="MDYDoc-Content">
+      <Content />
+      <MDYDocFooter />
+    </div>
+
     <div v-if="!(xs || sm) && !page.isNotFound" class="aside">
       <VCard class="aside-fixed" rounded="xl">
         <VCardTitle class="px-6 pt-4 font-bold text-lg">
@@ -34,6 +38,7 @@ import { useDisplay } from 'vuetify'
 import { getMainSection, useMainSectionOnScroll } from '../hooks'
 import { getHeaders, resolveTitle, type MenuItem } from '../utils/docs'
 import { getAbsoluteTop } from '../utils/sidetools'
+import MDYDocFooter from './MDYDocFooter.vue'
 
 const { sm, xs } = useDisplay()
 
@@ -175,6 +180,11 @@ onMounted(() => {
       a {
         color: rgb(var(--v-theme-primary));
         text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &.footnote-backref {
+          text-decoration: none;
+        }
       }
 
       ul {

@@ -34,6 +34,7 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
+import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { getLatestRelease } from '../request/github'
 

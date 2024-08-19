@@ -1,11 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [
-    "types/*.d.ts",
-    ".vitepress/**/*",
-    ".vitepress/**/*.vue",
-    "./node_modules/vuetify/**/*"
-  ],
+  "include": ["./types", ".vitepress/**/*", "./node_modules/vuetify/**/*"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,

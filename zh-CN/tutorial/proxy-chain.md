@@ -4,53 +4,71 @@
 
 ## 什么是代理链？
 
-> 未来，我们会将代理链划分为 基于 Profile、全局 的两种类型。
->
-> - 每个配置拥有自己独自的代理链，这种代理链称为 `Profile` 代理链。
-> - 全局代理链是一个全局的代理链，它会影响所有的配置。
->
-> 目前我们计划在 `1.6.0` 中实现这个功能。
+代理链，即 `Profile` 的后处理链。一个 Profile 可以通过 `A`、`B`、`C` 甚至更多的链处理节点，通过脚本、表达式修改配置，生成出一个最终的代理配置。
+多个节点依次处理构成了一个链式结构，可以按照自己的需求针对不同的 Profile，或者全局启用某些处理节点，实现自己的代理链。
 
-所谓代理链，即 `Profile` 的后处理的链式调用。一个 Profile 可以通过 `A`、`B`、`C` 甚至更多的链处理节点，生成出一个最终的代理配置。
-因此，多个链处理节点的组合，就构成了代理链。您可以按照自己的需求，自由组合链处理节点，实现自己的代理链。
+下图是目前的链式处理结构。
+
+```mermaid
+flowchart TD
+    A(开始)-->B["载入 Profile（远程、本地）"]-->profile_chain-->global_chain-->G[合并保护字段]-->internal_chain-->J{是否启用字段筛选}-->|是|K[筛选字段]-->L[杂事：处理 Tun，排序]
+    J-->|否|L
+    L-->M[生成配置文件]-->N(结束)
+    subgraph profile_chain [Profile 链]
+        C["..."]-->D["处理节点 n"]
+    end
+    subgraph global_chain [全局链]
+        E["..."]-->F["处理节点 n"]
+    end
+    subgraph internal_chain [内部链（用于兼容的脚本）]
+        H["..."]-->I["处理节点 n"]
+    end
+```
 
 ## Merge（合并）处理
+
+::: tip 提示
+自 `1.6.0` 起，我们使自定义关键字支持了 `.` 对象访问操作符，且默认递归合并，不会直接覆盖原有配置。如果需要覆盖，请使用 `override__x.y.z` 执行旧覆盖行为。
+此外，我们正计划引入一个新的 `pipeline`（流水线）节点，用于流水线表达式操作，方便配置 GUI 化。
+
+:::
 
 此处理节点提供了类似 `OpenClash` 的配置合并功能。它通过定义了以下规则，实现了对配置的覆盖。
 
 ::: warning 注意
 需要使用其他字段时，例如 `dns`, `tun` 等，需要在设置页 - **_Clash 字段_** 里勾选对应的字段，不勾选的字段将被忽略。
+此外，Merge 规则执行顺序 **由上至下**。
 :::
 
-- `prepend-rules`：类型和 Clash `rules` 配置一致，内容合并到 `rules` 前
-- `append-rules`：类型和 Clash `rules` 配置一致，内容合并到 `rules` 后
-- `prepend-proxies`：类型和 Clash `proxies` 配置一致，内容合并到 `proxies` 前
-- `append-proxies`：类型和 Clash `proxies` 配置一致，内容合并到 `proxies` 后
-- `prepend-proxy-groups`：类型和 Clash `proxy-groups` 配置一致，内容合并到 `proxy-groups` 前
-- `append-proxy-groups`：类型和 Clash `proxy-groups` 配置一致，内容合并到 `proxy-groups` 后
-- 其他 Clash 的字段：5 个默认使用的字段（`rules`, `proxies`, `proxy-groups`, `proxy-providers`, `rule-providers`）以及其他clash/clash meta支持的字段，直接设置这些字段将直接覆盖profile对应字段的内容。
+### 合并规则
 
-> 我们计划在未来针对 Merge 的改进，譬如提供递归合并的功能，自定义 `prepend-*`、`append-*` 的支持。
+- `append__x.y.z` - 将 `x.y.z` 字段的内容追加到原有配置的 `x.y.z` 字段列表末尾。当 `x.y.z` 不存在，或者不是一个数组时，将会被忽略并触发日记警告。
+- `prepend__x.y.z` - 将 `x.y.z` 字段的内容追加到原有配置的 `x.y.z` 字段列表开头。当 `x.y.z` 不存在，或者不是一个数组时，将会被忽略并触发日记警告。
+- `override__x.y.z` - 直接覆盖 `x.y.z` 字段的内容。当 `x.y.z` 不存在时，将会被忽略并触发日记警告。
+- `filter__x.y.z` - 使用 `Lua` 表达式过滤 `x.y.z` 字段的内容，`item` 作为筛选元素提供。当 `x.y.z` 不存在且不为列表时，将会被忽略并触发日记警告。
+- 其他字段 - 递归合并字段，不会直接覆盖原有配置。
+
+> 更多用例可以参考 Merge 的 [单元测试用例](https://github.com/LibNyanpasu/clash-nyanpasu/blob/006b1c90c8dfe8c8d64cd063c01592bc65d8d151/backend/tauri/src/enhance/merge.rs#L174)。
 
 ## Script（脚本）处理
 
 ::: info 提示
 
-- 目前基于 `JavaScript` 的脚本处理节点，尚不支持 ES Modules、Async/Await、Fetch 等特性。我们计划在未来支持这些特性。
-- 我们计划在未来支持 `Lua` 脚本处理节点，并提供 `Fetch`、`Async` 的支持。
+我们计划在 `1.6.1` 引入 `unstable_get` 方法，用于发起 HTTP Get 请求，以便获得一些远程内容进行处理。
 
+**更多的示例，请参考后一章节**。
 :::
 
-此处理节点目前提供了基于 `QuickJS` 的 `JavaScript` 脚本处理功能，类似于 CFW 提供的 `Mixins` 或 _预处理_ 功能。
+### JavaScript 节点
 
-脚本接受一个方法签名为 `function main(config: ClashConfig): ClashConfig` 的方法，其中 `ClashConfig` 是 Clash 的配置类型。脚本的返回值将作为最终的配置。
+此处理节点目前提供了基于 `BoaJS` 的 `JavaScript` 脚本处理功能，类似于 CFW 提供的 `Mixins` 或 _预处理_ 功能。
+
+脚本接受一个方法签名为 `export default function main(config: ClashConfig): ClashConfig` 的方法，其中 `ClashConfig` 是 Clash 的配置类型。脚本的返回值将作为最终的配置。
 
 以下是一个添加 `proxies-provider` 的脚本示例：
 
 ```javascript
-// Define the `main` function
-
-function main(config) {
+export default function main(config) {
   const extra = {
     'rule-providers': {
       reject: {
@@ -173,6 +191,138 @@ function main(config) {
   extra.dns = { ...config.dns, enable: false }
   return { ...config, ...extra }
 }
+```
+
+### Lua 处理节点
+
+此处理节点提供了基于 `mlua` 提供的 `Lua` 的脚本处理功能，兼容 `Lua 5.4` 的语法，并提供[安全标准库预设](https://docs.rs/mlua/latest/mlua/struct.StdLib.html#associatedconstant.ALL_SAFE)。
+
+该处理模块暴露一个 `config` 变量，里面包含当前的 Clash 配置。用户可以修改 `config` 变量，返回结果将作为最终的配置。
+
+以下是一个添加 `proxies-provider` 的脚本示例：
+
+```lua
+config['rule-providers'] = {
+  reject = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt',
+    path = './ruleset/reject.yaml',
+    interval = 86400
+  },
+  icloud = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt',
+    path = './ruleset/icloud.yaml',
+    interval = 86400
+  },
+  apple = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt',
+    path = './ruleset/apple.yaml',
+    interval = 86400
+  },
+  google = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt',
+    path = './ruleset/google.yaml',
+    interval = 86400
+  },
+  proxy = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt',
+    path = './ruleset/proxy.yaml',
+    interval = 86400
+  },
+  direct = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt',
+    path = './ruleset/direct.yaml',
+    interval = 86400
+  },
+  private = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt',
+    path = './ruleset/private.yaml',
+    interval = 86400
+  },
+  gfw = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt',
+    path = './ruleset/gfw.yaml',
+    interval = 86400
+  },
+  greatfire = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt',
+    path = './ruleset/greatfire.yaml',
+    interval = 86400
+  },
+  ['tld-not-cn'] = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt',
+    path = './ruleset/tld-not-cn.yaml',
+    interval = 86400
+  },
+  telegramcidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt',
+    path = './ruleset/telegramcidr.yaml',
+    interval = 86400
+  },
+  cncidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt',
+    path = './ruleset/cncidr.yaml',
+    interval = 86400
+  },
+  lancidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt',
+    path = './ruleset/lancidr.yaml',
+    interval = 86400
+  },
+  applications = {
+    type = 'http',
+    behavior = 'classical',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt',
+    path = './ruleset/applications.yaml',
+    interval = 86400
+  }
+}
+
+local extra_rules = {
+  -- 规则集合开始
+  'RULE-SET,applications,DIRECT',
+  'DOMAIN,clash.razord.top,DIRECT',
+  'DOMAIN,yacd.haishan.me,DIRECT',
+  'RULE-SET,icloud,DIRECT',
+  'RULE-SET,apple,Apple',
+  'RULE-SET,private,DIRECT',
+  'RULE-SET,reject,REJECT',
+  'RULE-SET,tld-not-cn,Proxies',
+  'RULE-SET,gfw,Proxies',
+  'RULE-SET,telegramcidr,Telegram',
+  'GEOIP,LAN,DIRECT',
+  'GEOIP,CN,DIRECT'
+}
+
+config.rules = {table.unpack(extra_rules), table.unpack(config.rules)}
+config.dns = {enable = false, ...config.dns}
+
+return config
 ```
 
 ## 引用

@@ -1,135 +1,473 @@
-# 自定义规则
+# 代理链示例
 
-## 使用 Merge 完成
+本节主要演示如何通过各种处理节点修改配置，添加规则。
 
-### 新建一个 Merge 代理链
+## 添加 Loyalsoldier 规则集
 
-::: warning 注意
-1.6.0 之前的版本叫做新建配置
-:::
+以下为：默认所有代理规则集走 `Proxies`，所有直连规则集走 `DIRECT`，添加 [Loyalsoldier 规则集](https://github.com/Loyalsoldier/clash-rules) 的示例。
 
-代理链其中有一个字段叫做 `append-rules`，这里就是我们进行自定义规则的入口，它会将规则复写到运行配置的最前面，达到最高优先级规则的效果。
+::: code-group
 
-append-rules 的编写需要参照 Clash 的 rules 字段，你可以参照内核文档了解更多，这里不在赘述。
-
-[Clash Meta Docs](https://wiki.metacubex.one/en/config/rules/)
-
-[Clash Rust Docs](https://watfaq.github.io/clash-rs/clash_doc/struct.ClashConfigDef.html)
-
-### 编写规则
-
-假设已知 proxy-groups 有一个名为 `GitHub` 的组别，那么给这个组别添加规则的方法如下。
-
-```yaml
-append-rules:
-  - DOMAIN-KEYWORD,github,GitHub
-  - DOMAIN-SUFFIX,github.com,GitHub
-  - DOMAIN-SUFFIX,github.io,GitHub
-  - DOMAIN-SUFFIX,githubapp.com,GitHub
-  - DOMAIN-SUFFIX,githubassets.com,GitHub
-  - DOMAIN-SUFFIX,githubusercontent.com,GitHub
+```yaml [Merge]
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+  icloud:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+    path: ./ruleset/icloud.yaml
+    interval: 86400
+  apple:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/private.yaml
+    interval: 86400
+  gfw:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/gfw.yaml
+    interval: 86400
+  tld-not-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/tld-not-cn.yaml
+    interval: 86400
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+  applications:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+append__rules:
+- 'RULE-SET,applications,DIRECT',
+- 'DOMAIN,clash.razord.top,DIRECT',
+- 'DOMAIN,yacd.haishan.me,DIRECT',
+- 'RULE-SET,icloud,DIRECT',
+- 'RULE-SET,apple,Proxies',
+- 'RULE-SET,private,DIRECT',
+- 'RULE-SET,reject,REJECT',
+- 'RULE-SET,tld-not-cn,Proxies',
+- 'RULE-SET,gfw,Proxies',
+- 'RULE-SET,telegramcidr,Proxies',
+- 'GEOIP,LAN,DIRECT',
+- 'GEOIP,CN,DIRECT'
 ```
 
-启用这个代理链，应该可以在 `规则页` 看到你刚刚添加的规则。
-
-## 使用 Script 完成
-
-### 新建一个 Script 代理链
-
-::: warning 注意
-1.6.0 之前的版本叫做新建配置
-:::
-
-Script 拥有完整的配置文件编辑权限，并且拥有更自由的编辑方法，你可以调用 JavaScript/Lua 方法灵活配置，因此这里还可以添加 rule provider 达到从网络拉取规则的方法。这里使用 JavaScript 作为演示。
-
-具体的功能同样请查阅内核文档。
-
-[Clash Meta Docs](https://wiki.metacubex.one/en/config/rule-providers/)
-
-[Clash Rust Docs](https://watfaq.github.io/clash-rs/clash_doc/struct.ClashConfigDef.html)
-
-### 添加 Rule
-
-假设现在我想新建一个 GitHub 的代理组别，且给这个组别分配上一些代理规则，那么代码如下。
-
-```js
-// Define the `main` function
-
-function main(params) {
-  const custom_proxy_groups = [
-    {
-      name: 'GitHub Group',
-      type: 'select',
-      proxies: params.proxies
-    }
-  ]
-
-  const custom_rules = [
-    'DOMAIN-KEYWORD,github,GitHub Group',
-    'DOMAIN-SUFFIX,github.com,GitHub Group',
-    'DOMAIN-SUFFIX,github.io,GitHub Group',
-    'DOMAIN-SUFFIX,githubapp.com,GitHub Group',
-    'DOMAIN-SUFFIX,githubassets.com,GitHub Group',
-    'DOMAIN-SUFFIX,githubusercontent.com,GitHub Group'
-  ]
-
-  console.log('Apply script at: ', new Date())
-
-  return {
-    ...params,
-    'proxy-groups': {
-      ...custom_proxy_groups,
-      ...params['proxy-groups']
-    },
-    rules: {
-      ...custom_rules,
-      ...params.rules
+```js [JavaScript]
+export default function main(config) {
+  const extra = {
+    'rule-providers': {
+      reject: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt',
+        path: './ruleset/reject.yaml',
+        interval: 86400
+      },
+      icloud: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt',
+        path: './ruleset/icloud.yaml',
+        interval: 86400
+      },
+      apple: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt',
+        path: './ruleset/apple.yaml',
+        interval: 86400
+      },
+      google: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt',
+        path: './ruleset/google.yaml',
+        interval: 86400
+      },
+      proxy: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt',
+        path: './ruleset/proxy.yaml',
+        interval: 86400
+      },
+      direct: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt',
+        path: './ruleset/direct.yaml',
+        interval: 86400
+      },
+      private: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt',
+        path: './ruleset/private.yaml',
+        interval: 86400
+      },
+      gfw: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt',
+        path: './ruleset/gfw.yaml',
+        interval: 86400
+      },
+      greatfire: {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt',
+        path: './ruleset/greatfire.yaml',
+        interval: 86400
+      },
+      'tld-not-cn': {
+        type: 'http',
+        behavior: 'domain',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt',
+        path: './ruleset/tld-not-cn.yaml',
+        interval: 86400
+      },
+      telegramcidr: {
+        type: 'http',
+        behavior: 'ipcidr',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt',
+        path: './ruleset/telegramcidr.yaml',
+        interval: 86400
+      },
+      cncidr: {
+        type: 'http',
+        behavior: 'ipcidr',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt',
+        path: './ruleset/cncidr.yaml',
+        interval: 86400
+      },
+      lancidr: {
+        type: 'http',
+        behavior: 'ipcidr',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt',
+        path: './ruleset/lancidr.yaml',
+        interval: 86400
+      },
+      applications: {
+        type: 'http',
+        behavior: 'classical',
+        url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt',
+        path: './ruleset/applications.yaml',
+        interval: 86400
+      }
     }
   }
+
+  const extra_rules = [
+    // 规则集合开始
+    'RULE-SET,applications,DIRECT',
+    'DOMAIN,clash.razord.top,DIRECT',
+    'DOMAIN,yacd.haishan.me,DIRECT',
+    'RULE-SET,icloud,DIRECT',
+    'RULE-SET,apple,Apple',
+    'RULE-SET,private,DIRECT',
+    'RULE-SET,reject,REJECT',
+    'RULE-SET,tld-not-cn,Proxies',
+    'RULE-SET,gfw,Proxies',
+    'RULE-SET,telegramcidr,Telegram',
+    'GEOIP,LAN,DIRECT',
+    'GEOIP,CN,DIRECT'
+  ]
+  extra.rules = [...extra_rules, ...config.rules]
+  extra.dns = { ...config.dns, enable: false }
+  return { ...config, ...extra }
 }
 ```
 
-### 添加 Rule Provider
-
-你也可以使用 Rule Provider 更灵活地添加规则。
-
-```js
-// Define the `main` function
-
-function main(params) {
-  const custom_proxy_groups = [
-    {
-      name: 'GitHub Group',
-      type: 'select',
-      proxies: params.proxies
-    }
-  ]
-
-  const custom_rule_providers = {
-    GitHub: {
-      type: 'http',
-      behavior: 'domain',
-      url: 'https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Github.list',
-      path: './ruleset/GitHub.yaml',
-      interval: 86400
-    }
-  }
-
-  const custom_rules = ['RULE-SET,GitHub,AppGitHub Group']
-
-  console.log('Apply script at: ', new Date())
-
-  return {
-    ...params,
-    'proxy-groups': {
-      ...custom_proxy_groups,
-      ...params['proxy-groups']
-    },
-    'rule-providers': custom_rule_providers,
-    rules: {
-      ...custom_rules,
-      ...params.rules
-    }
+```lua [Lua]
+config['rule-providers'] = {
+  reject = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt',
+    path = './ruleset/reject.yaml',
+    interval = 86400
+  },
+  icloud = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt',
+    path = './ruleset/icloud.yaml',
+    interval = 86400
+  },
+  apple = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt',
+    path = './ruleset/apple.yaml',
+    interval = 86400
+  },
+  google = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt',
+    path = './ruleset/google.yaml',
+    interval = 86400
+  },
+  proxy = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt',
+    path = './ruleset/proxy.yaml',
+    interval = 86400
+  },
+  direct = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt',
+    path = './ruleset/direct.yaml',
+    interval = 86400
+  },
+  private = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt',
+    path = './ruleset/private.yaml',
+    interval = 86400
+  },
+  gfw = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt',
+    path = './ruleset/gfw.yaml',
+    interval = 86400
+  },
+  greatfire = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt',
+    path = './ruleset/greatfire.yaml',
+    interval = 86400
+  },
+  ['tld-not-cn'] = {
+    type = 'http',
+    behavior = 'domain',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt',
+    path = './ruleset/tld-not-cn.yaml',
+    interval = 86400
+  },
+  telegramcidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt',
+    path = './ruleset/telegramcidr.yaml',
+    interval = 86400
+  },
+  cncidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt',
+    path = './ruleset/cncidr.yaml',
+    interval = 86400
+  },
+  lancidr = {
+    type = 'http',
+    behavior = 'ipcidr',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt',
+    path = './ruleset/lancidr.yaml',
+    interval = 86400
+  },
+  applications = {
+    type = 'http',
+    behavior = 'classical',
+    url = 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt',
+    path = './ruleset/applications.yaml',
+    interval = 86400
   }
 }
+
+local extra_rules = {
+  -- 规则集合开始
+  'RULE-SET,applications,DIRECT',
+  'DOMAIN,clash.razord.top,DIRECT',
+  'DOMAIN,yacd.haishan.me,DIRECT',
+  'RULE-SET,icloud,DIRECT',
+  'RULE-SET,apple,Apple',
+  'RULE-SET,private,DIRECT',
+  'RULE-SET,reject,REJECT',
+  'RULE-SET,tld-not-cn,Proxies',
+  'RULE-SET,gfw,Proxies',
+  'RULE-SET,telegramcidr,Telegram',
+  'GEOIP,LAN,DIRECT',
+  'GEOIP,CN,DIRECT'
+}
+
+config.rules = {table.unpack(extra_rules), table.unpack(config.rules)}
+config.dns = {enable = false, ...config.dns}
+
+return config
 ```
+
+:::
+
+## 为代理组添加图标
+
+::: warning 注意
+目前 **图标** 仅支持 `mihomo` 内核，`Clash Rust` 和 `Clash Premium` 不支持。
+:::
+
+由于目前 `Merge` 还不支持针对列表的匹配修改操作，因此我们这里直接使用脚本示范。
+使用图标集为 [Koolson/Qure](https://github.com/Koolson/Qure)，国旗图标为 [HatScripts/circle-flags](https://github.com/HatScripts/circle-flags)。
+
+::: code-group
+
+```js [JavaScript]
+/** @type {config} */
+export default function (profile) {
+  /**
+   * 为代理组添加图标
+   * @param {string} name - 代理组名称
+   * @param {string} [iconset] - 图标名称或链接
+   */
+  const addIcon = (name, iconset) => {
+    for (let group of profile['proxy-groups']) {
+      if (group.name === name) {
+        if (!iconset) {
+          iconset = name
+        }
+        group['icon'] = iconset.startsWith('http')
+          ? iconset
+          : `https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/${iconset}.png`
+      }
+    }
+  }
+
+  // 此处定义你自己的代理组图标
+  addIcon(
+    'HK',
+    'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/hk.svg'
+  )
+  addIcon(
+    'TW',
+    'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/tw.svg'
+  )
+  addIcon(
+    'JP',
+    'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/jp.svg'
+  )
+  addIcon(
+    'SG',
+    'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/sg.svg'
+  )
+  addIcon(
+    'US',
+    'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/us.svg'
+  )
+  addIcon('Apple')
+  addIcon('Netflix')
+  addIcon('YouTube')
+  addIcon('Netflix')
+  addIcon('Disney', 'Disney+')
+  addIcon('Microsoft')
+  addIcon('OpenAI', 'ChatGPT')
+  addIcon('PayPal')
+  addIcon('Spotify')
+  addIcon('Steam')
+  addIcon('Telegram')
+  addIcon('Bilibili', 'bilibili')
+  addIcon('Google')
+  addIcon('Bahamut')
+  addIcon('Proxies', 'Global')
+  addIcon('Final')
+
+  return profile
+}
+```
+
+```lua [Lua]
+-- 为代理组添加图标
+local function addIcon(name, iconset)
+    if config["proxy-groups"] ~= nil then
+        for _, group in ipairs(config["proxy-groups"]) do
+            if group["name"] == name then
+                if iconset == nil then
+                    iconset = name
+                end
+                group["icon"] = iconset:find("^http") and iconset or "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/" .. iconset .. ".png"
+            end
+        end
+    end
+end
+
+-- 此处定义你自己的代理组图标
+addIcon("HK", "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/hk.svg")
+addIcon("TW", "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/tw.svg")
+addIcon("JP", "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/jp.svg")
+addIcon("SG", "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/sg.svg")
+addIcon("US", "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/us.svg")
+addIcon("Apple")
+addIcon("Netflix")
+addIcon("YouTube")
+addIcon("Netflix")
+addIcon("Disney", "Disney+")
+addIcon("Microsoft")
+addIcon("OpenAI", "ChatGPT")
+addIcon("PayPal")
+addIcon("Spotify")
+addIcon("Steam")
+addIcon("Telegram")
+addIcon("Bilibili", "bilibili")
+addIcon("Google")
+addIcon("Bahamut")
+addIcon("Proxies", "Global")
+addIcon("Final")
+
+return config
+```
+
+:::

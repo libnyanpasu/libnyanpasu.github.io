@@ -68,13 +68,19 @@
   .line-numbers-wrapper {
     position: absolute;
     top: 48px;
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-right: 18px;
+    padding-left: 18px;
     background-color: rgb(var(--v-theme-MDYBackground));
-    border-right: 1px solid rgb(var(--v-theme-onSurface));
+    // border-right: 1px solid rgb(var(--v-theme-onSurface));
 
     span.line-number {
+      @apply font-mono;
+
+      display: flex;
+      align-items: center;
       float: right;
+      height: 24px; // line height
+      font-size: 0.9em;
     }
   }
 }

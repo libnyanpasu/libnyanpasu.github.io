@@ -52,13 +52,8 @@ export default withMermaid({
                 { text: 'Installation', link: '/tutorial/install' },
                 { text: 'Proxy Chain', link: '/tutorial/proxy-chain' },
                 {
-                  text: 'Chians Examples',
-                  items: [
-                    {
-                      text: 'Custom Rules',
-                      link: '/tutorial/chians/custom-rules'
-                    }
-                  ]
+                  text: 'Chian Examples',
+                  link: '/tutorial/chians/custom-rules'
                 }
               ]
             },
@@ -108,13 +103,8 @@ export default withMermaid({
                 { text: '安装', link: '/zh-CN/tutorial/install' },
                 { text: '代理链', link: '/zh-CN/tutorial/proxy-chain' },
                 {
-                  text: '代理链功能',
-                  items: [
-                    {
-                      text: '自定义规则',
-                      link: '/zh-CN/tutorial/chians/custom-rules'
-                    }
-                  ]
+                  text: '代理链示例',
+                  link: '/zh-CN/tutorial/chians/custom-rules'
                 }
               ]
             },

@@ -120,4 +120,5 @@ For autostart, you may need to write a `.desktop` file.
 ## References
 
 [^1]: The definition of **Portable** - https://en.wikipedia.org/wiki/Portable
+
 [^2]: The work of **FlatPak** support is still in progress - https://github.com/tauri-apps/tauri/issues/3619

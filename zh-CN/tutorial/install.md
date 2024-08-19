@@ -124,4 +124,5 @@ chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 ## 引用
 
 [^1]: 便携版定义：https://zh.wikipedia.org/wiki/%E7%B6%A0%E8%89%B2%E8%BB%9F%E9%AB%94
+
 [^2]: Flatpak 支持工作还没有完成：https://github.com/tauri-apps/tauri/issues/3619

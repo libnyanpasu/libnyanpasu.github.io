@@ -46,7 +46,7 @@ Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the 
 
 Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash. Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it normally.
 
-If you encounter installation problems, please refer to [Frequently Asked Questions](...). /others/faq).
+If you encounter installation issues, please refer to [FAQ](../others/faq).
 
 ## Linux
 

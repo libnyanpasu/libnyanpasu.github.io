@@ -31,12 +31,12 @@ Clash Nyanpasu 目前支持 Windows 7 及更高版本、Linux 以及 macOS 10.15
 ### 便携版
 
 ::: warning 注意
-请留意，Tauri 官方并 **不支持** 便携版。  
+请留意，Tauri 官方并 **不支持** 便携版。
 由 Clash Nyanpasu 提供的便携版[^1]是通过自动打包流程生成的，且显式忽略了 Webview2 的检测，因此可能会遇到一些问题。我们计划在未来坚持便携版不修改注册表的原则。因此，部分功能可能 **无法** 正常工作：
 
-- **系统服务**：由于 `clash-verge-service` 会进行服务注册和修改注册表，这与便携版的原则相违背，所以我们计划将其从便携版中移除。
+- **系统服务**：由于 `nyanpasu-service` 会进行服务注册和修改注册表，这与便携版的原则相违背，所以我们计划将其从便携版中**移除**。
 - **通知功能**：便携版在 Windows 10 上无法使用系统通知，因此后端一些触发通知的操作将不可见。
-- **快捷导入**（Custom Schema）：鉴于便携版无法修改注册表，该功能将不被支持。
+- **快捷导入**（Custom Schema）：鉴于便携版无法修改注册表，该功能将被**移除**。
 
 :::
 
@@ -52,12 +52,15 @@ Clash Nyanpasu 目前支持 Windows 7 及更高版本、Linux 以及 macOS 10.15
 
 Linux 下由于 AppImage 的限制，我们更建议使用 **包管理器** 安装或者自行编译。
 
-目前 Tauri 2 正在测试阶段，等其正式发布后，我们会引入 RPM 的支持，以及潜在的 FlatPak 支持[^2]。
+目前 Tauri 2 正在测试阶段，等其正式发布后，我们会引入更多包的支持，潜在的 FlatPak 支持[^2]。
 
-::: info 提示
+::: warning 注意
+目前通过包管理安装不支持：
 
-如果使用 **包管理器** 或自行编译的程序，请 **不要** 使用 <u>应用内更新</u> 的功能。
+- 应用内更新
+- 更新内核
 
+注：`AppImage` 支持应用内更新。
 :::
 
 ### Debian/Ubuntu
@@ -98,15 +101,15 @@ paru -Syu clash-nyanpasu-git
 
 ### AppImage
 
-::: danger 警告
+::: warning 提示
+AppImage 存在以下已知缺陷：
 
-由于开发组缺乏 Linux DE 的环境，因此 AppImage 环境中出现的问题无法得到及时修复。
+- 不支持 `TUN` 授权，如果需要使用 TUN 模式，请使用 `sudo` 启动 `AppImage` 包
+- `Clash Rust` 暂不可用，正在 [调查](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448)
+- 暂不支持服务模式
+- 暂不支持内核更新
 
-目前的已知问题：
-
-- 无法更新内核程序
-- 无法检测内核程序版本
-- 可能的无法提权导致 TUN 无法使用
+**如果你在使用时碰到其他问题，欢迎新开问题反馈**。
 
 :::
 
@@ -120,6 +123,50 @@ chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 ```
 
 如果你需要自动启动，可能需要编写 `.desktop` 文件。
+下面是一个 `.desktop` 文件示范，你可以将它放置到 `/usr/share/applications` 或 `~/.local/share/applications/` 目录下。
+首先，我们先下载 `Clash Nyanpasu` 的图标:
+::: code-group
+
+```bash [用户目录]
+mkdir -p ~/.local/share/icons/clash-nyanpasu
+wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
+```bash [系统目录]
+sudo mkdir -p /usr/share/icons/clash-nyanpasu
+sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
+:::
+
+然后，我们编写 `.desktop` 文件：
+
+```ini
+[Desktop Entry]
+Categories=Development;
+Comment=A Clash GUI based on tauri.
+Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # 请换成你的 AppImage 路径
+Icon=/path/to/clash-nyanpasu.png # 请换成上面下载的图标路径
+GenericName=Clash Nyanpasu
+Name=Clash Nyanpasu
+Terminal=false
+Type=Application
+Autostart=true # 是否自动启动
+```
+
+更新一下数据库：
+
+::: code-group
+
+```bash [用户目录]
+update-desktop-database ~/.local/share/applications
+```
+
+```bash [系统目录]
+sudo update-desktop-database /usr/share/applications
+```
+
+:::
 
 ## 引用
 

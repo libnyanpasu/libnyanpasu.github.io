@@ -1,124 +1,178 @@
 # Installation
 
-Clash Nyanpasu currently supports Windows 7 and higher, Linux, and macOS 10.15 and above.
+Clash Nyanpasu currently supports Windows 7 and higher, Linux, and macOS 10.15 and higher.
 
-- Windows ARM64 version is currently not supported, support will be considered following Clash Rust's compatibility.
-- The Linux version does not currently support ARM architecture, support is expected to be considered after the release of version 1.5.0.
+- The Windows ARM64 version is not currently supported and will be considered for support once it is supported by Clash Rust.
+- The Linux version does not currently support the ARM architecture and will be considered for support after the 1.5.0 release.
 
-::: info Tip
-The [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page includes explanations for some terms:
+::: Info Tips
 
-- `amd64` - x86_64, suitable for regular computers
-- `aarch64` - armv8/arm64/armv9, choose this for computers using ARM CPUs
+Some explanations of terms included in the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page:
 
-Plans are in place to support only the above architectures.
+- `amd64` - x86_64, for regular computers this is the one to choose
+- `aarch64` - armv8/arm64/armv9 for computers with ARM CPUs.
+
+The current program only supports the `amd64` and `aarch64` architectures.
+
 :::
 
-## Windows
+## ::::: Windows
 
 ::: warning Note
-Starting from version 1.5.0, **Clash Nyanpasu** will no longer provide `MSI` installer packages.
-:::
+Starting with 1.5.0, **Clash Nyanpasu** no longer provides `MSI` installers.
+::::
 
-First, ensure your system has the Webview2 runtime installed. If not, you can download and install it from the [Microsoft official website](https://developer.microsoft.com/en-us/microsoft-edge/webview2/).
+First, please make sure that the Webview2 runtime is installed on your system. If your system does not have the Webview2 runtime installed, you can download and install it from [Microsoft official site](https://developer.microsoft.com/en-us/microsoft-edge/webview2/).
 
 ### NSIS
 
-Download the latest version of `Clash.Nyanpasu_x.y.z_x64-setup.exe` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page.
+Please download the latest version of `Clash.Nyanpasu_x.y.z_x64-setup.exe` from [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases).
 
-### Portable Version
+### Portable version
 
 ::: warning Note
-Please note that the Tauri official does **not support** portable versions.  
-The portable version provided by Clash Nyanpasu[^1] is generated through an automated packaging process and explicitly ignores the detection of Webview2, which might lead to some issues. We plan to adhere to the principle of not modifying the registry for portable versions in the future. Therefore, some features may **not** work as expected:
+Please note that Tauri does not officially **support** the portable version.
+The portable version[^1] provided by Clash Nyanpasu is generated through an automated packaging process and explicitly ignores Webview2 detection, so some problems may be encountered. We plan to stick to the principle that the portable version does not modify the registry in the future. As a result, some features may **not** work properly:
 
-- **System Services**: Since `clash-verge-service` involves service registration and registry modification, it contradicts the principle of the portable version and will be removed.
-- **Notification Functionality**: Portable versions cannot use system notifications on Windows 10, making some backend notification triggers invisible.
-- **Quick Import** (Custom Schema): Given that the portable version cannot modify the registry, this feature will not be supported.
+- **System services**: Since `nyanpasu-service` registers services and modifies the registry, which is against the principles of the portable version, we plan to **remove it** from the portable version.
+- **Notifications**: The Portable Edition does not have access to system notifications on Windows 10, so some of the back-end actions that trigger notifications will not be visible.
+- **Shortcut Import** (Custom Schema): Given that the Portable Edition cannot modify the registry, this feature will be **Removed**.
 
 :::
 
-Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page, unzip it, and run.
+Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page, unzip it and run it.
 
 ## MacOS
 
-Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (for Intel CPUs) or `Clash.Nyanpasu.aarch64.app.tar.gz` (for M series CPUs) from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page and install as usual.
+Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash. Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it normally.
 
-If you encounter any installation issues, please refer to the [FAQ](../others/faq).
+If you encounter installation problems, please refer to [Frequently Asked Questions](...). /others/faq).
 
 ## Linux
 
-Due to limitations with AppImage, we recommend installation via **package managers** or compiling from source.
+For Linux, due to the limitations of AppImage, we recommend using **Package Manager** to install or compile the program yourself.
 
-With Tauri 2 in its testing phase, we plan to introduce RPM support and potentially FlatPak support[^2] upon its official release.
+Tauri 2 is currently in beta, and when it is released we will introduce more package support, potentially FlatPak support[^2].
 
-::: info Tip
-If using a **package manager** or compiling from source, please **do not** use the <u>in-app update</u> feature.
+::: warning Note
+Installation via package management is currently not supported:
+
+- In-app updates
+- Kernel updates
+
+Note: `AppImage` supports in-app updates.
 :::
 
 ### Debian/Ubuntu
 
-Install using a _third-party PPA source_ or download the latest `deb` package from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page.
+Download the latest version of the `deb` package using a _third-party PPA source_ or from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page.
 
-#### Installing Using a Deb Package
+#### Installation using Deb packages
 
 Download the latest version of `clash-nyanpasu_x.y.z_amd64.deb` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page.
 
-Then execute in the terminal:
+Then execute it in the terminal:
 
-```bash
-sudo apt install -y ./clash-nyanpasu_x.y.z_amd64.deb
-```
+``bash
+sudo apt install -y . /clash-nyanpasu_x.y.z_amd64.deb
+
+````
 
 ### ArchLinux
 
-AUR packages are currently provided by enthusiasts: [Stable version (compiled)](https://aur.archlinux.org/packages/clash-nyanpasu) / [Binary Package](https://aur.archlinux.org/packages/clash-nyanpasu-bin) or [Development version (compiled)](https://aur.archlinux.org/packages/clash-nyanpasu-git).
+AUR packages are currently provided by enthusiasts: [Stable (compiled)](https://aur.archlinux.org/packages/clash-nyanpasu) / [Stable binary package](https://aur.archlinux.org/packages/clash- nyanpasu-bin) or [development version (compiled)](https://aur.archlinux.org/packages/clash-nyanpasu-git).
 
-Here is an example of installing AUR packages using `paru`:
+The following is a demonstration of installing AUR packages using `paru`:
 
 ::: code-group
 
-```bash [Stable version (requires compiling)]
+```bash [Stable (compilation required)]]
 paru -Syu clash-nyanpasu
-```
+````
 
-```bash [Binary Package]
+```bash [Stabilized (pre-compiled)]]
 paru -Syu clash-nyanpasu-bin
 ```
 
-```bash [Development version (requires compiling)]
+```bash [development version (requires compilation)]]
 paru -Syu clash-nyanpasu-git
 ```
 
-:::
+::.
 
 ### AppImage
 
-::: danger Warning
+::: warning Tip
+AppImage has the following known bugs:
 
-Due to the development team's lack of a Linux DE environment, issues arising within the AppImage environment may not be promptly resolved.
+- `TUN` authorization is not supported, if you need to use TUN mode, start the `AppImage` package with `sudo`.
+- `Clash Rust` is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
+- Service mode is not supported at this time
+- Kernel updates are not supported at this time
 
-Known issues include:
-
-- Inability to update the kernel program
-- Inability to detect kernel program version
-- Potential failure to elevate privileges, leading to TUN unusable
+**If you encounter any other problems while using it, feel free to open a new issue feedback**.
 
 :::
 
-Download the latest version of `clash-nyanpasu_x.y.z_amd64.AppImage` from the GitHub Release page, then double-click to run it.
+Download the latest version of `clash-nyanpasu_x.y.z_amd64.AppImage` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page, then double-click to run it.
 
-To run it from the terminal, you can use the following commands:
+If you want to run it in a terminal, you can use the following command:
 
-```bash
-chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
-./clash-nyanpasu_x.y.z_amd64.AppImage
+``bash
+chmod +x . /clash-nyanpasu_x.y.z_amd64.AppImage
+. /clash-nyanpasu_x.y.z_amd64.AppImage
+
 ```
 
-For autostart, you may need to write a `.desktop` file.
+If you need to autostart, you may need to write a `.desktop` file.
+Below is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
+First, let's download the icon for `Clash Nyanpasu`: ::.
+::: code-group
+``bash [user directory]''
+mkdir -p ~/.local/share/icons/clash-nyanpasu
+wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/ frontend/nyanpasu/src/assets/image/logo-box.png
+```
 
-## References
+```bash [system directory]''
+sudo mkdir -p /usr/share/icons/clash-nyanpasu
+sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/ frontend/nyanpasu/src/assets/image/logo-box.png
+```
 
-[^1]: The definition of **Portable** - https://en.wikipedia.org/wiki/Portable
+:::
 
-[^2]: The work of **FlatPak** support is still in progress - https://github.com/tauri-apps/tauri/issues/3619
+Then we write the `.desktop` file:
+
+`ini
+[Desktop Entry]
+Categories=Development.
+Comment=A Clash GUI based on tauri.
+Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # Please change to your AppImage path.
+Icon=/path/to/clash-nyanpasu.png # Please replace with the path of the icon you downloaded above.
+GenericName=Clash Nyanpasu
+Name=Clash Nyanpasu
+Terminal=false
+Type=Application
+Autostart=true # Whether to autostart or not.
+`
+
+Update the database:
+
+::: code-group
+
+````bash [user-directory]
+update-desktop-database ~/.local/share/applications
+```F
+
+```bash [system directory]
+sudo update-desktop-database /usr/share/applications
+````
+
+:::
+
+## Reference
+
+[^1]: Portable definition: https://zh.wikipedia.org/wiki/%E7%B6%A0%E8%89%B2%E8%BB%9F%E9%AB%94
+
+[^2]: Flatpak support is not yet complete: https://github.com/tauri-apps/tauri/issues/3619
+
+Translated with DeepL.com (free version)

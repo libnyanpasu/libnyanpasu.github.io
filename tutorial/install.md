@@ -5,7 +5,7 @@ Clash Nyanpasu currently supports Windows 7 and higher, Linux, and macOS 10.15 a
 - The Windows ARM64 version is not currently supported and will be considered for support once it is supported by Clash Rust.
 - The Linux version does not currently support the ARM architecture and will be considered for support after the 1.5.0 release.
 
-::: Info Tips
+::: info Tips
 
 Some explanations of terms included in the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page:
 
@@ -13,14 +13,13 @@ Some explanations of terms included in the [GitHub Release](https://github.com/L
 - `aarch64` - armv8/arm64/armv9 for computers with ARM CPUs.
 
 The current program only supports the `amd64` and `aarch64` architectures.
-
 :::
 
-## ::::: Windows
+## Windows
 
 ::: warning Note
 Starting with 1.5.0, **Clash Nyanpasu** no longer provides `MSI` installers.
-::::
+:::
 
 First, please make sure that the Webview2 runtime is installed on your system. If your system does not have the Webview2 runtime installed, you can download and install it from [Microsoft official site](https://developer.microsoft.com/en-us/microsoft-edge/webview2/).
 
@@ -44,7 +43,7 @@ Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the 
 
 ## MacOS
 
-Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash. Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it normally.
+Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash.Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it normally.
 
 If you encounter installation issues, please refer to [FAQ](../others/faq).
 
@@ -73,10 +72,10 @@ Download the latest version of `clash-nyanpasu_x.y.z_amd64.deb` from the [GitHub
 
 Then execute it in the terminal:
 
-``bash
-sudo apt install -y . /clash-nyanpasu_x.y.z_amd64.deb
+```bash
+sudo apt install -y ./clash-nyanpasu_x.y.z_amd64.deb
 
-````
+```
 
 ### ArchLinux
 
@@ -88,7 +87,7 @@ The following is a demonstration of installing AUR packages using `paru`:
 
 ```bash [Stable (compilation required)]]
 paru -Syu clash-nyanpasu
-````
+```
 
 ```bash [Stabilized (pre-compiled)]]
 paru -Syu clash-nyanpasu-bin
@@ -98,7 +97,7 @@ paru -Syu clash-nyanpasu-bin
 paru -Syu clash-nyanpasu-git
 ```
 
-::.
+:::
 
 ### AppImage
 
@@ -111,16 +110,15 @@ AppImage has the following known bugs:
 - Kernel updates are not supported at this time
 
 **If you encounter any other problems while using it, feel free to open a new issue feedback**.
-
 :::
 
 Download the latest version of `clash-nyanpasu_x.y.z_amd64.AppImage` from the [GitHub Release](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page, then double-click to run it.
 
 If you want to run it in a terminal, you can use the following command:
 
-``bash
-chmod +x . /clash-nyanpasu_x.y.z_amd64.AppImage
-. /clash-nyanpasu_x.y.z_amd64.AppImage
+```bash
+chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
+./clash-nyanpasu_x.y.z_amd64.AppImage
 
 ```
 
@@ -128,12 +126,13 @@ If you need to autostart, you may need to write a `.desktop` file.
 Below is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
 First, let's download the icon for `Clash Nyanpasu`: ::.
 ::: code-group
-``bash [user directory]''
+
+```bash [user directory]
 mkdir -p ~/.local/share/icons/clash-nyanpasu
 wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/ frontend/nyanpasu/src/assets/image/logo-box.png
 ```
 
-```bash [system directory]''
+```bash [system directory]
 sudo mkdir -p /usr/share/icons/clash-nyanpasu
 sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/ frontend/nyanpasu/src/assets/image/logo-box.png
 ```
@@ -142,7 +141,7 @@ sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.gith
 
 Then we write the `.desktop` file:
 
-`ini
+```ini
 [Desktop Entry]
 Categories=Development.
 Comment=A Clash GUI based on tauri.
@@ -153,19 +152,19 @@ Name=Clash Nyanpasu
 Terminal=false
 Type=Application
 Autostart=true # Whether to autostart or not.
-`
+```
 
 Update the database:
 
 ::: code-group
 
-````bash [user-directory]
+```bash [user-directory]
 update-desktop-database ~/.local/share/applications
-```F
+```
 
 ```bash [system directory]
 sudo update-desktop-database /usr/share/applications
-````
+```
 
 :::
 
@@ -174,5 +173,3 @@ sudo update-desktop-database /usr/share/applications
 [^1]: Portable definition: https://zh.wikipedia.org/wiki/%E7%B6%A0%E8%89%B2%E8%BB%9F%E9%AB%94
 
 [^2]: Flatpak support is not yet complete: https://github.com/tauri-apps/tauri/issues/3619
-
-Translated with DeepL.com (free version)

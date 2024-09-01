@@ -70,7 +70,7 @@
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-vue": "9.27.0",
     "husky": "9.1.5",
-    "lint-staged": "15.2.9",
+    "lint-staged": "15.2.10",
     "lodash-es": "4.17.21",
     "markdown-it": "14.1.0",
     "markdown-it-container": "4.0.0",

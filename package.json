@@ -30,7 +30,7 @@
     "@braintree/sanitize-url": "^7.1.0",
     "@commitlint/cli": "19.4.1",
     "@commitlint/config-conventional": "19.4.1",
-    "@iconify/json": "2.2.244",
+    "@iconify/json": "2.2.245",
     "@material/material-color-utilities": "^0.3.0",
     "@material/web": "^2.0.0",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",

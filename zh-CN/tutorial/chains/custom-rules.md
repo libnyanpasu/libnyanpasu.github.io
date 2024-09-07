@@ -358,13 +358,96 @@ return config
 ## 为代理组添加图标
 
 ::: warning 注意
-目前 **图标** 仅支持 `mihomo` 内核，`Clash Rust` 和 `Clash Premium` 不支持。
+目前 **图标** 仅支持 `mihomo` 和 `Clash Rust` 内核， `Clash Premium` 不支持。
 :::
 
-由于目前 `Merge` 还不支持针对列表的匹配修改操作，因此我们这里直接使用脚本示范。
 使用图标集为 [Koolson/Qure](https://github.com/Koolson/Qure)，国旗图标为 [HatScripts/circle-flags](https://github.com/HatScripts/circle-flags)。
 
 ::: code-group
+
+```yaml [Merge]
+filter__proxy-groups:
+  - when: |
+      item.name == 'HK'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/hk.svg'
+  - when: |
+      item.name == 'TW'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/tw.svg'
+  - when: |
+      item.name == 'JP'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/jp.svg'
+  - when: |
+      item.name == 'SG'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/sg.svg'
+  - when: |
+      item.name == 'US'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/us.svg'
+  - when: |
+      item.name == 'Apple'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+  - when: |
+      item.name == 'Netflix'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+  - when: |
+      item.name == 'YouTube'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+  - when: |
+      item.name == 'Disney'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png
+  - when: |
+      item.name == 'Microsoft'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+  - when: |
+      item.name == 'OpenAI'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+  - when: |
+      item.name == 'PayPal'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+  - when: |
+      item.name == 'Spotify'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+  - when: |
+      item.name == 'Steam'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
+  - when: |
+      item.name == 'Telegram'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  - when: |
+      item.name == 'Bilibili'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili.png
+  - when: |
+      item.name == 'Google'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+  - when: |
+      item.name == 'Bahamut'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
+  - when: |
+      item.name == 'Proxies'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  - when: |
+      item.name == 'Final'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+```
 
 ```js [JavaScript]
 /** @type {config} */

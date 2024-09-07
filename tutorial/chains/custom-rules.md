@@ -360,13 +360,96 @@ return config
 ## Adding Icons to Proxy Groups
 
 ::: warning Note
-Currently, **icons** are only supported by the `mihomo` kernel; `Clash Rust` and `Clash Premium` do not support them.
+Currently, **icon** are only supported by the `mihomo` and `Clash Rust` Core; `Clash Premium` do not support it.
 :::
 
-Since `Merge` does not currently support list-based match modifications, we'll demonstrate using a script.
 The icon set used is [Koolson/Qure](https://github.com/Koolson/Qure), and the flag icons are from [HatScripts/circle-flags](https://github.com/HatScripts/circle-flags).
 
 ::: code-group
+
+```yaml [Merge]
+filter__proxy-groups:
+  - when: |
+      item.name == 'HK'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/hk.svg'
+  - when: |
+      item.name == 'TW'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/tw.svg'
+  - when: |
+      item.name == 'JP'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/jp.svg'
+  - when: |
+      item.name == 'SG'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/sg.svg'
+  - when: |
+      item.name == 'US'
+    merge:
+      icon: 'https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/us.svg'
+  - when: |
+      item.name == 'Apple'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+  - when: |
+      item.name == 'Netflix'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+  - when: |
+      item.name == 'YouTube'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+  - when: |
+      item.name == 'Disney'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney%2B.png
+  - when: |
+      item.name == 'Microsoft'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+  - when: |
+      item.name == 'OpenAI'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png
+  - when: |
+      item.name == 'PayPal'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+  - when: |
+      item.name == 'Spotify'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+  - when: |
+      item.name == 'Steam'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
+  - when: |
+      item.name == 'Telegram'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+  - when: |
+      item.name == 'Bilibili'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili.png
+  - when: |
+      item.name == 'Google'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+  - when: |
+      item.name == 'Bahamut'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
+  - when: |
+      item.name == 'Proxies'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+  - when: |
+      item.name == 'Final'
+    merge:
+      icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+```
 
 ```js [JavaScript]
 /** @type {config} */

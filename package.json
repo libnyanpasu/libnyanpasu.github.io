@@ -91,7 +91,7 @@
     "stylelint-order": "6.0.4",
     "stylelint-scss": "6.5.1",
     "tailwindcss": "^3.4.10",
-    "typescript": "5.5.4",
+    "typescript": "5.6.2",
     "unocss": "0.62.3",
     "unplugin-auto-import": "0.18.2",
     "unplugin-icons": "0.19.3",

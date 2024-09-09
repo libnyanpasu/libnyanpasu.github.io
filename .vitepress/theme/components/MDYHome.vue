@@ -21,7 +21,12 @@
 
           <v-card-text>
             <div class="d-flex flex-column" style="gap: 8px">
-              <v-btn v-for="{ url, label } in item" :href="url" block>
+              <v-btn
+                v-for="{ url, label } in item"
+                :href="url"
+                block
+                variant="flat"
+              >
                 {{ label }}
               </v-btn>
             </div>

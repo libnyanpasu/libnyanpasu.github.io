@@ -214,8 +214,8 @@ importers:
         specifier: 0.62.3
         version: 0.62.3(postcss@8.4.45)(rollup@4.21.0)(vite@5.4.4(@types/node@22.5.4)(sass@1.78.0)(sugarss@2.0.0))
       unplugin-auto-import:
-        specifier: 0.18.2
-        version: 0.18.2(@nuxt/kit@3.13.1(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.0.3(vue@3.5.4(typescript@5.6.2)))(rollup@4.21.0)
+        specifier: 0.18.3
+        version: 0.18.3(@nuxt/kit@3.13.1(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.0.3(vue@3.5.4(typescript@5.6.2)))(rollup@4.21.0)(webpack-sources@3.2.3)
       unplugin-icons:
         specifier: 0.19.3
         version: 0.19.3(@vue/compiler-sfc@3.5.4)
@@ -3494,9 +3494,6 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  magic-string@0.30.10:
-    resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
-
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
 
@@ -4844,8 +4841,8 @@ packages:
   unimport@3.11.1:
     resolution: {integrity: sha512-DuB1Uoq01LrrXTScxnwOoMSlTXxyKcULguFxbLrMDFcE/CO0ZWHpEiyhovN0mycPt7K6luAHe8laqvwvuoeUPg==}
 
-  unimport@3.9.0:
-    resolution: {integrity: sha512-H2ftTISja1BonUVdOKRos6HC6dqYDR40dQTZY3zIDJ/5/z4ihncuL0LqLvtxYqUDMib41eAtunQUhXIWTCZ8rA==}
+  unimport@3.12.0:
+    resolution: {integrity: sha512-5y8dSvNvyevsnw4TBQkIQR1Rjdbb+XjVSwQwxltpnVZrStBvvPkMPcZrh1kg5kY77kpx6+D4Ztd3W6FOBH/y2Q==}
 
   union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
@@ -4893,8 +4890,8 @@ packages:
       vite:
         optional: true
 
-  unplugin-auto-import@0.18.2:
-    resolution: {integrity: sha512-Dwb3rAic75harVBrVjwiq6H24PT+nBq2dpxV5BH8NNI6sDFaTytvP+iyo4xy7prQbR3r5K6nMs4f5Wp9PE4g8A==}
+  unplugin-auto-import@0.18.3:
+    resolution: {integrity: sha512-q3FUtGQjYA2e+kb1WumyiQMjHM27MrTQ05QfVwtLRVhyYe+KF6TblBYaEX9L6Z0EibsqaXAiW+RFfkcQpfaXzg==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -4938,16 +4935,21 @@ packages:
       '@nuxt/kit':
         optional: true
 
-  unplugin@1.11.0:
-    resolution: {integrity: sha512-3r7VWZ/webh0SGgJScpWl2/MRCZK5d3ZYFcNaeci/GQ7Teop7zf0Nl2pUuz7G21BwPd9pcUPOC5KmJ2L3WgC5g==}
-    engines: {node: '>=14.0.0'}
-
   unplugin@1.12.1:
     resolution: {integrity: sha512-aXEH9c5qi3uYZHo0niUtxDlT9ylG/luMW/dZslSCkbtC31wCyFkmM0kyoBBh+Grhn7CL+/kvKLfN61/EdxPxMQ==}
     engines: {node: '>=14.0.0'}
 
   unplugin@1.13.1:
     resolution: {integrity: sha512-6Kq1iSSwg7KyjcThRUks9LuqDAKvtnioxbL9iEtB9ctTyBA5OmrB8gZd/d225VJu1w3UpUsKV7eGrvf59J7+VA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      webpack-sources: ^3
+    peerDependenciesMeta:
+      webpack-sources:
+        optional: true
+
+  unplugin@1.14.1:
+    resolution: {integrity: sha512-lBlHbfSFPToDYp9pjXlUEFVxYLaue9f9T1HC+4OHlmj+HnMDdz9oZY+erXfoCe/5V/7gKUSY2jpXPb9S7f0f/w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       webpack-sources: ^3
@@ -5133,9 +5135,6 @@ packages:
   webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
-
-  webpack-virtual-modules@0.6.1:
-    resolution: {integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==}
 
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
@@ -8939,7 +8938,7 @@ snapshots:
   local-pkg@0.5.0:
     dependencies:
       mlly: 1.7.1
-      pkg-types: 1.1.3
+      pkg-types: 1.2.0
 
   locate-path@2.0.0:
     dependencies:
@@ -9006,10 +9005,6 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
-
-  magic-string@0.30.10:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
 
   magic-string@0.30.11:
     dependencies:
@@ -10621,7 +10616,7 @@ snapshots:
       - webpack-sources
     optional: true
 
-  unimport@3.9.0(rollup@4.21.0):
+  unimport@3.12.0(rollup@4.21.0)(webpack-sources@3.2.3):
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.21.0)
       acorn: 8.12.1
@@ -10629,15 +10624,16 @@ snapshots:
       estree-walker: 3.0.3
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.10
+      magic-string: 0.30.11
       mlly: 1.7.1
       pathe: 1.1.2
-      pkg-types: 1.1.3
+      pkg-types: 1.2.0
       scule: 1.3.0
       strip-literal: 2.1.0
-      unplugin: 1.12.1
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
   union-value@1.0.1:
     dependencies:
@@ -10705,21 +10701,22 @@ snapshots:
       - rollup
       - supports-color
 
-  unplugin-auto-import@0.18.2(@nuxt/kit@3.13.1(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.0.3(vue@3.5.4(typescript@5.6.2)))(rollup@4.21.0):
+  unplugin-auto-import@0.18.3(@nuxt/kit@3.13.1(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.0.3(vue@3.5.4(typescript@5.6.2)))(rollup@4.21.0)(webpack-sources@3.2.3):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.21.0)
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.10
+      magic-string: 0.30.11
       minimatch: 9.0.5
-      unimport: 3.9.0(rollup@4.21.0)
-      unplugin: 1.11.0
+      unimport: 3.12.0(rollup@4.21.0)(webpack-sources@3.2.3)
+      unplugin: 1.14.1(webpack-sources@3.2.3)
     optionalDependencies:
       '@nuxt/kit': 3.13.1(rollup@4.21.0)(webpack-sources@3.2.3)
       '@vueuse/core': 11.0.3(vue@3.5.4(typescript@5.6.2))
     transitivePeerDependencies:
       - rollup
+      - webpack-sources
 
   unplugin-icons@0.19.3(@vue/compiler-sfc@3.5.4):
     dependencies:
@@ -10755,13 +10752,6 @@ snapshots:
       - rollup
       - supports-color
 
-  unplugin@1.11.0:
-    dependencies:
-      acorn: 8.12.1
-      chokidar: 3.6.0
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.6.1
-
   unplugin@1.12.1:
     dependencies:
       acorn: 8.12.1
@@ -10776,6 +10766,13 @@ snapshots:
     optionalDependencies:
       webpack-sources: 3.2.3
     optional: true
+
+  unplugin@1.14.1(webpack-sources@3.2.3):
+    dependencies:
+      acorn: 8.12.1
+      webpack-virtual-modules: 0.6.2
+    optionalDependencies:
+      webpack-sources: 3.2.3
 
   unset-value@1.0.0:
     dependencies:
@@ -10980,8 +10977,6 @@ snapshots:
       vite-plugin-vuetify: 2.0.4(vite@5.4.4(@types/node@22.5.4)(sass@1.78.0)(sugarss@2.0.0))(vue@3.5.4(typescript@5.6.2))(vuetify@3.7.1)
 
   webpack-sources@3.2.3: {}
-
-  webpack-virtual-modules@0.6.1: {}
 
   webpack-virtual-modules@0.6.2: {}
 

@@ -4,11 +4,16 @@ import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import prettierConfig from '@vue/eslint-config-prettier'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import { includeIgnoreFile } from '@eslint/compat'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const gitignorePath = path.join(__dirname, '.gitignore')
 
 export default tseslint.config(
-  {
-    ignores: ['node_modules/', 'dist/', '.vitepress/cache']
-  },
+  includeIgnoreFile(gitignorePath),
   ...neostandard({
     noStyle: true
   }),

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
-// @ts-expect-error
+
 import VPDocFooterLastUpdated from 'vitepress/dist/client/theme-default/components/VPDocFooterLastUpdated.vue'
-// @ts-expect-error
+
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue'
-// @ts-expect-error
+// @ts-expect-error This is a private API
 import { useEditLink } from 'vitepress/dist/client/theme-default/composables/edit-link.js'
-// @ts-expect-error
+// @ts-expect-error This is a private API
 import { usePrevNext } from 'vitepress/dist/client/theme-default/composables/prev-next.js'
 import { computed } from 'vue'
 import IcBaselineChevronLeft from '~icons/ic/baseline-chevron-left'

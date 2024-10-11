@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-for="item in list" :href="item.link">
+  <v-btn v-for="item in list" v-bind:key="item.text" :href="item.link">
     {{ item.text }}
   </v-btn>
 </template>

@@ -14,6 +14,7 @@
         v-for="item in frontmatter.hero.actions"
         class="rounded-pill"
         size="large"
+        :key="item.link"
         :href="item.link"
         :variant="item.theme"
       >

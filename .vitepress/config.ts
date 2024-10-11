@@ -8,7 +8,6 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitepress'
-// @ts-expect-error
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const currentYear = new Date().getFullYear()
@@ -76,7 +75,7 @@ export default withMermaid({
           ],
 
           footer: {
-            message: `Clash Nyanpasu! (∠・ω< )⌒☆`,
+            message: 'Clash Nyanpasu! (∠・ω< )⌒☆',
             copyright: `This site is licensed under CC-BY-NC-SA 4.0. © ${currentYear} LibNyanpasu`
           }
         }
@@ -126,7 +125,7 @@ export default withMermaid({
           ],
 
           footer: {
-            message: `Clash Nyanpasu! (∠・ω< )⌒☆`,
+            message: 'Clash Nyanpasu! (∠・ω< )⌒☆',
             copyright: `This site is licensed under CC-BY-NC-SA 4.0. © ${currentYear} LibNyanpasu`
           },
 
@@ -163,7 +162,7 @@ export default withMermaid({
               const title = md.renderInline(info)
               return `<div class="theorem"><p class="title">${title}</p>\n`
             } else {
-              return `</div>\n`
+              return '</div>\n'
             }
           }
         })

@@ -25,7 +25,7 @@
     <v-list v-model:selected="selected" v-model:opened="opened" mandatory>
       <!-- <MDYNavItem :item="{ text: 'Home', link: '/' }" /> -->
 
-      <template v-for="item in sidebar">
+      <template v-for="item in sidebar" :key="item.text">
         <MDYNavItem :item="item" />
       </template>
     </v-list>
@@ -48,7 +48,7 @@ const iterNodes = (items: DefaultTheme.SidebarItem[]) => {
     if (item.items) {
       for (const subItem of item.items) {
         if (
-          subItem.link == route.path.replace('.html', '') &&
+          subItem.link === route.path.replace('.html', '') &&
           !acc.includes(item.text!)
         ) {
           acc.push(item.text!)

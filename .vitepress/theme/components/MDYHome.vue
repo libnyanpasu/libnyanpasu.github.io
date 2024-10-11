@@ -10,7 +10,11 @@
       </div>
     </v-col>
 
-    <template v-else v-for="[title, item] in Object.entries(items)">
+    <template
+      v-else
+      v-for="[title, item] in Object.entries(items)"
+      :key="title"
+    >
       <v-col xs="12" sm="6" md="4" lg="4">
         <v-card color="MDYBackground" rounded="xl" variant="flat">
           <v-img height="200px" :src="images[title]" cover rounded="xl">
@@ -23,6 +27,7 @@
             <div class="d-flex flex-column" style="gap: 8px">
               <v-btn
                 v-for="{ url, label } in item"
+                :key="label"
                 :href="url"
                 block
                 variant="flat"
@@ -159,7 +164,7 @@ onMounted(() => {
   text-shadow: 0 0 8px #4c4c4c;
 }
 
-@media (width <= 959px) {
+@media (width <=959px) {
   .banner-card {
     height: 420px;
 

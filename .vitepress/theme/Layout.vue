@@ -29,7 +29,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     )}px at ${x}px ${y}px)`
   ]
 
-  // @ts-ignore:ts(2339)
   await document.startViewTransition(async () => {
     isDark.value = !isDark.value
     await nextTick()

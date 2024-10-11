@@ -1,6 +1,6 @@
 <template>
   <v-list-group v-if="item.items" :value="item.text">
-    <template v-slot:activator="{ props, isOpen }">
+    <template v-slot:activator="{ props }">
       <v-list-item
         v-bind="props"
         class="rounded-pill mt-1 mb-1"
@@ -9,7 +9,7 @@
       />
     </template>
 
-    <template v-for="item in item.items">
+    <template v-for="item in item.items" :key="item.text">
       <MDYNavItem :item="item" />
     </template>
   </v-list-group>

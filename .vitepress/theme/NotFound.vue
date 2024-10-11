@@ -2,7 +2,7 @@
 import { useData } from 'vitepress'
 import { onMounted, ref } from 'vue'
 const { site } = useData()
-let sentence = ref('加载中')
+const sentence = ref('加载中')
 
 async function fetchHitokotoSentence() {
   const res = await window.fetch('https://v1.hitokoto.cn')

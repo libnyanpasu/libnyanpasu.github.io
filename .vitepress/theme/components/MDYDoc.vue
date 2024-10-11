@@ -14,6 +14,7 @@
           <VList>
             <VListItem
               v-for="item in headers"
+              :key="item.link"
               class="mt-1 mb-1"
               rounded="xl"
               density="compact"

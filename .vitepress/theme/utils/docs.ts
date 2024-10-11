@@ -85,6 +85,7 @@ export function resolveHeaders(
   }
 
   const ret: MenuItem[] = []
+  // eslint-disable-next-line no-labels
   outer: for (let i = 0; i < headers.length; i++) {
     const cur = headers[i]
     if (i === 0) {
@@ -94,6 +95,7 @@ export function resolveHeaders(
         const prev = headers[j]
         if (prev.level < cur.level) {
           ;(prev.children || (prev.children = [])).push(cur)
+          // eslint-disable-next-line no-labels
           continue outer
         }
       }

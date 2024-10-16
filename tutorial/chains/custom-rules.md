@@ -360,7 +360,7 @@ return config
 ## Adding Icons to Proxy Groups
 
 ::: warning Note
-Currently, **icon** are only supported by the `mihomo` and `Clash Rust` Core; `Clash Premium` do not support it.
+Currently, **icon** are only supported by the `Mihomo` and `Clash Rust` Core; `Clash Premium` do not support it.
 :::
 
 The icon set used is [Koolson/Qure](https://github.com/Koolson/Qure), and the flag icons are from [HatScripts/circle-flags](https://github.com/HatScripts/circle-flags).

@@ -13,34 +13,24 @@ Open **Terminal** and run:
 sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 ```
 
-### 2. Where is the Clash Nyanpasu Config/Data/Logs Directory?
+### 2. Where is the Clash Nyanpasu Config/Logs Directory?
 
 There are currently two ways to directly open it:
 
 - Right-click on the tray icon and choose **Open Dir - Config Dir**. You can then open the config directory.
 - Enter the main app interface, go to the **Settings page**, find the **Open Config Dir** and click the button to open the config directory.
 
-> Clash Core directory, Data directory and Logs directory are also accessible in the same way.
+> Logs directory are also accessible in the same way.
 
-In situations where you cannot access the tray or enter the main interface, you can directly enter the path to open it. (The clash core directory is in the installation directory)
+::: info Tips
+In situations where you cannot access the tray or enter the main interface, you can directly enter the path to open it.
 
-#### Windows
+Starting from v1.6.0, Clash Nyanpasu splits the install directory into a config directory and a data directory, and moves the log directory to the data directory. Windows users can choose to migrate the config directory.
 
-::: info Tip
-Starting from v1.5.1, Clash Nyanpasu supports customizing the app directory on Windows. If you have used this feature, please replace the path accordingly.
-Starting from v1.6.0, Clash Nyanpasu splits the app directory into a config directory and a data directory. You can choose to migrate the config directory on Windows.
+- On Windows, the default config directory is in `%APPDATA%`, data directory is in the `%LOCALAPPDATA%`.
+- On macOS, it should in `~/Library/Application Support` directory of a user.
+- On Linux, it is a temp directory via a AppImage executable. Otherwise, it should be `/usr/bin`.
 :::
-
-- App directory (before v1.6.0): `%USERPROFILE%\.config\clash-nyanpasu`
-
-- Config directory: `%APPDATA%\Clash Nyanpasu\config`
-- Data directory: `%LOCALAPPDATA%\Clash Nyanpasu\data`
-- Logs directory: `%LOCALAPPDATA%\Clash Nyanpasu\data\logs`
-
-#### macOS & Linux
-
-- App directory: `$HOME/.config/clash-nyanpasu`
-- Logs directory: `$HOME/.config/clash-nyanpasu/logs`
 
 ### 3. How to Edit the Log Level?
 

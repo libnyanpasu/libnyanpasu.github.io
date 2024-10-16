@@ -13,34 +13,24 @@
 sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 ```
 
-### 2. Clash Nyanpasu 配置/数据/日志目录在哪里？
+### 2. Clash Nyanpasu 配置/日志目录在哪里？
 
 目前有两种方式可以直接打开：
 
 - 右键托盘图标，选择 **打开目录 - 配置目录**。即可打开配置目录。
 - 进入主程序界面，进入 **设置页**，找到 **配置目录** 并点击按钮，点击即可打开配置目录。
 
-> 数据目录、日志目录也同样可以。
-
-在无法访问托盘、无法进入主界面的情况，我们可以直接输入路径打开。（内核目录在安装目录下）
-
-#### Windows
+> 日志目录也同样可以。
 
 ::: info 提示
-自 v1.5.1 起，Clash Nyanpasu 支持在 Windows 上自定义应用目录，如果您使用了此功能，请自行替换路径。
-自 v1.6.0 起，Clash Nyanpasu 将应用目录拆分为配置目录和数据目录，在 Windows 下可选择修改配置目录。
+在无法访问托盘、无法进入主界面的情况，我们可以直接输入路径打开。
+
+自 v1.6.0 起，Clash Nyanpasu 将安装目录拆分为配置目录和数据目录，日志目录移动至数据目录中，Windows 用户可选择迁移配置目录。
+
+- 对于 Windows，默认配置目录位于 `%APPDATA%`，数据目录位于 `%LOCALAPPDATA`。
+- 对于 macOS，默认目录位于 `~/Library/Application Support`。
+- 对于 Linux，默认目录位于 AppImage 可执行文件创建的临时目录，如果不使用 AppImage，则应位于 `/usr/bin`。
 :::
-
-- 应用目录（v1.6.0 之前）：`%USERPROFILE%\.config\clash-nyanpasu`
-
-- 配置目录：`%APPDATA%\Clash Nyanpasu\config`
-- 数据目录：`%LOCALAPPDATA%\Clash Nyanpasu\data`
-- 日志目录：`%LOCALAPPDATA%\Clash Nyanpasu\data\logs`
-
-#### macOS & Linux
-
-- 应用目录：`$HOME/.config/clash-nyanpasu`
-- 日志目录：`$HOME/.config/clash-nyanpasu/logs`
 
 ### 3. 如何修改日志等级？
 

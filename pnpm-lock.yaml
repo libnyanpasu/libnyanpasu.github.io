@@ -205,8 +205,8 @@ importers:
         specifier: 6.0.4
         version: 6.0.4(stylelint@16.10.0(typescript@5.6.3))
       stylelint-scss:
-        specifier: 6.7.0
-        version: 6.7.0(stylelint@16.10.0(typescript@5.6.3))
+        specifier: 6.8.0
+        version: 6.8.0(stylelint@16.10.0(typescript@5.6.3))
       tailwindcss:
         specifier: ^3.4.10
         version: 3.4.14
@@ -2269,10 +2269,6 @@ packages:
     resolution: {integrity: sha512-IQOkD3hbR5KrN93MtcYuad6YPuTSUhntLHDuLEbFWE+ff2/XSZNdZG+LcbbIW5AXKg/WFIfYItIzVoHngHXZzA==}
     engines: {node: '>=12 || >=16'}
 
-  css-tree@2.3.1:
-    resolution: {integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==}
-    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
-
   css-tree@3.0.0:
     resolution: {integrity: sha512-o88DVQ6GzsABn1+6+zo2ct801dBO5OASVyxbbvA2W20ue2puSh/VOuqUj90eUeMSX/xqGqBmOKiRQN7tJOuBXw==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
@@ -3899,9 +3895,6 @@ packages:
   mdast-util-to-hast@13.2.0:
     resolution: {integrity: sha512-QGYKEuUsYT9ykKBCMOEDLsU5JRObWQusAolFMeko/tYPufNkRffBAQjIE+99jbA87xv6FgmjLtwjh9wBWajwAA==}
 
-  mdn-data@2.0.30:
-    resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
-
   mdn-data@2.10.0:
     resolution: {integrity: sha512-qq7C3EtK3yJXMwz1zAab65pjl+UhohqMOctTgcqjLOWABqmwj+me02LSsCuEUxnst9X1lCBpoE0WArGKgdGDzw==}
 
@@ -5011,8 +5004,8 @@ packages:
     peerDependencies:
       stylelint: ^14.0.0 || ^15.0.0 || ^16.0.1
 
-  stylelint-scss@6.7.0:
-    resolution: {integrity: sha512-RFIa2A+pVWS5wjNT+whtK7wsbZEWazyqesCuSaPbPlZ8lh2TujwVJSnCYJijg6ChZzwI8pZPRZS1L6A9aCbXDg==}
+  stylelint-scss@6.8.0:
+    resolution: {integrity: sha512-6gjsCZ30UUF6ivjZB2Z+1lb6k0+JFa1uR2MgGbYu76xRjEfvNTpSS1nQim1Gom1ijFF9GzauOiq1Kr7zKptQOw==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.0.2
@@ -7958,11 +7951,6 @@ snapshots:
 
   css-functions-list@3.2.3: {}
 
-  css-tree@2.3.1:
-    dependencies:
-      mdn-data: 2.0.30
-      source-map-js: 1.2.1
-
   css-tree@3.0.0:
     dependencies:
       mdn-data: 2.10.0
@@ -9761,8 +9749,6 @@ snapshots:
       unist-util-visit: 5.0.0
       vfile: 6.0.3
 
-  mdn-data@2.0.30: {}
-
   mdn-data@2.10.0: {}
 
   mdurl@2.0.0: {}
@@ -11004,11 +10990,12 @@ snapshots:
       postcss-sorting: 8.0.2(postcss@8.4.47)
       stylelint: 16.10.0(typescript@5.6.3)
 
-  stylelint-scss@6.7.0(stylelint@16.10.0(typescript@5.6.3)):
+  stylelint-scss@6.8.0(stylelint@16.10.0(typescript@5.6.3)):
     dependencies:
-      css-tree: 2.3.1
+      css-tree: 3.0.0
       is-plain-object: 5.0.0
       known-css-properties: 0.34.0
+      mdn-data: 2.10.0
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.6
       postcss-selector-parser: 6.1.2

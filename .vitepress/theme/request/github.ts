@@ -1,7 +1,7 @@
 import { Octokit, App } from 'octokit'
 
 const BASE_OPTIONS = {
-  owner: 'LibNyanpasu',
+  owner: 'libnyanpasu',
   repo: 'clash-nyanpasu'
 }
 

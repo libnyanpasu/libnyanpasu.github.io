@@ -3,18 +3,18 @@
 ## Development Guidelines
 
 - The project uses tools such as ESLint, Prettier, Stylelint, Clippy, Rustfmt, etc. for code style checking. Please make sure the code is styled correctly before committing it.
-  - Please do not use `git -n` to skip code style checks. We will add code style checking to CI/CD later.
-- Please do not commit useless code, files, or folders.
+  - Please do not use `git -n` to skip code style checks. We have added code style checking to CI.
+- Please do not commit useless code, files, or directories.
 - If it involves a big feature refactoring, or a new feature, please raise it in an issue first so that it can be discussed.
 
 ## Environment Requirements
 
 The following dependencies are required regardless of the system used:
 
-- Rust v1.78 or higher stable version.
+- Rust v1.78 or later stable version.
   - Be sure to use the MSVC toolchain on Windows.
 - Node.js v20 LTS or a newer LTS, Latest version.
-- PNPM v9 or higher stable version
+- pnpm v9 or later stable version
 - git
 
 There are also a few additional dependencies we'll need to ensure the project builds properly:

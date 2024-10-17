@@ -46,7 +46,7 @@ Moreover, Merge rules are executed in **top-down order**.
 - `filter__x.y.z` - Filters or modifies the content of the `x.y.z` field. For supported types, refer to [`filter` Supported Operations](#filter-supported-operations).
 - Other fields - Fields are recursively merged and will not directly overwrite the original configuration.
 
-> More examples can be found in the [Merge Unit Test Cases](https://github.com/LibNyanpasu/clash-nyanpasu/blob/main/backend/tauri/src/enhance/merge.rs#L320).
+> More examples can be found in the [Merge Unit Test Cases](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/tauri/src/enhance/merge.rs#L320).
 
 #### `filter` Supported Operations
 

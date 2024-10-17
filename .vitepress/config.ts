@@ -144,7 +144,7 @@ export default withMermaid({
           langMenuLabel: '修改语言',
           editLink: {
             pattern:
-              'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path',
+              'https://github.com/libnyanpasu/libnyanpasu.github.io/edit/main/:path',
             text: '在 GitHub 上编辑此页'
           }
         }
@@ -179,12 +179,12 @@ export default withMermaid({
           },
           link: 'https://t.me/keikolog'
         },
-        { icon: 'github', link: 'https://github.com/LibNyanpasu' }
+        { icon: 'github', link: 'https://github.com/libnyanpasu' }
       ],
 
       editLink: {
         pattern:
-          'https://github.com/LibNyanpasu/LibNyanpasu.github.io/edit/main/:path'
+          'https://github.com/libnyanpasu/libnyanpasu.github.io/edit/main/:path'
       }
     },
     vue: {

@@ -48,7 +48,7 @@ flowchart TD
 - `filter__x.y.z` 过滤或修改 `x.y.z` 字段的内容。具体支持类型请见 [`filter` 支持的操作](#filter-支持的操作)。
 - 其他字段 - 递归合并字段，不会直接覆盖原有配置。
 
-> 更多用例可以参考 Merge 的 [单元测试用例](https://github.com/LibNyanpasu/clash-nyanpasu/blob/main/backend/tauri/src/enhance/merge.rs#L320)。
+> 更多用例可以参考 Merge 的 [单元测试用例](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/tauri/src/enhance/merge.rs#L320)。
 
 #### `filter` 支持的操作
 

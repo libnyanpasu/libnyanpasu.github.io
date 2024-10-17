@@ -6,7 +6,7 @@ Learn about Clash Nyanpasu's introduction, origin, and features here.
 
 `Clash Nyanpasu` is a GUI software for `Clash` based on `Tauri`, leveraging the features of `Tauri` to provide cross-platform support. It offers proxy services on `Windows`, `Linux`, and `macOS` systems, supporting TUN network card mode.
 
-`Clash Nyanpasu` natively supports multiple cores, including `Clash Premium`, `Clash Meta`, and `Clash Rust`, allowing users to choose according to their preferences. Additionally, the software incorporates powerful script handling capabilities, providing users with a more flexible experience. Design-wise, `Clash Nyanpasu` fully embraces the `Google Material You` design philosophy, offering users a visually pleasing experience.
+`Clash Nyanpasu` natively supports multiple cores, including `Clash Premium`, `Mihomo`, and `Clash Rust`, allowing users to choose according to their preferences. Additionally, the software incorporates powerful script handling capabilities, providing users with a more flexible experience. Design-wise, `Clash Nyanpasu` fully embraces the `Google Material You` design philosophy, offering users a visually pleasing experience.
 
 ## Origin of Clash Nyanpasu
 

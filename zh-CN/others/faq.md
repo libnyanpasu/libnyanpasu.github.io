@@ -30,7 +30,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 - 对于 Windows，默认配置目录位于 `%APPDATA%`，数据目录位于 `%LOCALAPPDATA`。
 - 对于 macOS，默认目录位于 `~/Library/Application Support`。
 - 对于 Linux，默认目录位于 AppImage 可执行文件创建的临时目录，如果不使用 AppImage，则应位于 `/usr/bin`。
-:::
+  :::
 
 ### 3. 如何修改日志等级？
 

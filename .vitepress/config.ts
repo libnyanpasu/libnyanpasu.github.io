@@ -58,7 +58,7 @@ export default withMermaid({
             },
             {
               text: 'Development',
-              link: '/zh-CN/development'
+              link: '/development'
             },
             {
               text: 'Others',

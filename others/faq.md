@@ -30,7 +30,7 @@ Starting from v1.6.0, Clash Nyanpasu splits the install directory into a config 
 - On Windows, the default config directory is in `%APPDATA%`, data directory is in the `%LOCALAPPDATA%`.
 - On macOS, it should in `~/Library/Application Support` directory of a user.
 - On Linux, it is a temp directory via a AppImage executable. Otherwise, it should be `/usr/bin`.
-:::
+  :::
 
 ### 3. How to Edit the Log Level?
 

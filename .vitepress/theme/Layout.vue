@@ -18,6 +18,7 @@ function enableTransitions() {
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   if (!enableTransitions()) {
     isDark.value = !isDark.value
+    theme.global.name.value = isDark.value ? 'dark' : 'light'
     return
   }
 

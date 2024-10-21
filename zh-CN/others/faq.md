@@ -27,10 +27,16 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 
 自 v1.6.0 起，Clash Nyanpasu 将安装目录拆分为配置目录和数据目录，日志目录移动至数据目录中，Windows 用户可选择迁移配置目录。
 
-- 对于 Windows，默认配置目录位于 `%APPDATA%`，数据目录位于 `%LOCALAPPDATA`。
-- 对于 macOS，默认目录位于 `~/Library/Application Support`。
-- 对于 Linux，默认目录位于 AppImage 可执行文件创建的临时目录，如果不使用 AppImage，则应位于 `/usr/bin`。
-  :::
+- 对于 Windows，默认配置目录位于 `%APPDATA%/Clash Nyanpasu/config`，数据目录位于 `%LOCALAPPDATA/Clash Nyanpasu/data`。
+  - 如果你自定义了配置目录，那么配置目录以你指定的为准。
+- 对于 macOS，配置目录和数据目录都位于中 `~/Library/Application Support/Clash Nyanpasu`。
+- 对于 Linux：
+  - 数据目录位于`$XDG_CONFIG_HOME/clash-nyanpasu` 或 `$HOME/.config/clash-nyanpasu` 下。
+  - 数据目录位于 `$XDG_DATA_HOME/clash-nyanpasu` 或 `$HOME/.local/share/clash-nyanpasu`
+
+:::
+
+如果需要自行获取日记，可以进入 **数据目录** 后找到 `logs` 文件夹，其中包含了当前主程序的日志文件。
 
 ### 3. 如何修改日志等级？
 
@@ -82,3 +88,8 @@ sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 
 - 联系订阅提供者，请求添加对 Nyanpasu UA 的支持。
 - 修改 UA 为订阅提供者支持的类型，例如 `clash-meta` 等。
+
+### 6. 什么是程序目录、内核目录？其作用是什么？
+
+在目前版本中，我们将程序安装目录，称为 应用目录 或 内核目录，其包含当前所有的内核和内嵌的资源文件。可以通过托盘右键或在设置页面找到对应目录打开。
+当需要手动安装服务模式时，可以通过这种方式找到服务模式二进制文件。

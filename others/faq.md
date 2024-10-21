@@ -15,22 +15,35 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 
 ### 2. Where is the Clash Nyanpasu Config/Logs Directory?
 
-There are currently two ways to directly open it:
+There are currently two ways to open it directly:
 
-- Right-click on the tray icon and choose **Open Dir - Config Dir**. You can then open the config directory.
-- Enter the main app interface, go to the **Settings page**, find the **Open Config Dir** and click the button to open the config directory.
+- Right click on the tray icon and select **Open Dir - Config Dir**. You can open the configuration directory.
 
-> Logs directory are also accessible in the same way.
+- Go to the main program interface, go to the **Settings page**, find the **Config Dir** and click on the button, click on it to open the Configuration Catalog.
+
+> The same can be done for the log directory.
 
 ::: info Tips
-In situations where you cannot access the tray or enter the main interface, you can directly enter the path to open it.
 
-Starting from v1.6.0, Clash Nyanpasu splits the install directory into a config directory and a data directory, and moves the log directory to the data directory. Windows users can choose to migrate the config directory.
+In case you can't access the tray and can't get to the main screen, we can open it by entering the path directly.
 
-- On Windows, the default config directory is in `%APPDATA%`, data directory is in the `%LOCALAPPDATA%`.
-- On macOS, it should in `~/Library/Application Support` directory of a user.
-- On Linux, it is a temp directory via a AppImage executable. Otherwise, it should be `/usr/bin`.
-  :::
+Since v1.6.0, Clash Nyanpasu split the installation directory into configuration and data directories, the log directory was moved to the data directory, and Windows users can choose to migrate the configuration directory.
+
+- For Windows, the default configuration directory is located at `%APPDATA%/Clash Nyanpasu/config` and the data directory is located at `%LOCALAPPDATA/Clash Nyanpasu/data`.
+
+  - If you customize the configuration directory, the configuration directory is whichever you specify.
+
+- For macOS, both the configuration directory and the data directory are located in `~/Library/Application Support/Clash Nyanpasu`.
+
+- For Linux:
+
+  - The data directory is located under `$XDG_CONFIG_HOME/clash-nyanpasu` or `$HOME/.config/clash-nyanpasu`.
+
+  - The data directory is located under `$XDG_DATA_HOME/clash-nyanpasu` or `$HOME/.local/share/clash-nyanpasu`.
+
+:::
+
+If you need to get the journal yourself, you can go to the **data directory** and find the `logs` folder, which contains the log files of the current main program.
 
 ### 3. How to Edit the Log Level?
 
@@ -81,3 +94,9 @@ Some subscription types recognize the User Agent (UA) of the request and deliver
 
 1. Contact the subscription provider and request support for the Nyanpasu UA;
 2. Edit the UA to a type supported by the subscription provider, such as `clash-meta`, etc.
+
+### 6. What are program directories and kernel directories? What are their roles?
+
+In the current version, we call the program installation directory, application directory or kernel directory, which contains all the current kernel and embedded resource files. You can open the directory by right clicking on the tray or find the corresponding directory in the settings page.
+
+When you need to install service mode manually, you can find the service mode binaries in this way.

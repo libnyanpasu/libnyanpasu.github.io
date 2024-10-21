@@ -19,7 +19,7 @@
     "lint:prettier": "prettier --check .",
     "fmt": "run-s fmt:*",
     "fmt:css": "stylelint --fix --allow-empty-input \"**/*.{css,scss,vue}\"",
-    "fmt:es": "eslint --fix --ignore-path .gitignore .",
+    "fmt:es": "eslint --fix --cache .",
     "fmt:prettier": "prettier --write .",
     "prepare": "husky"
   },

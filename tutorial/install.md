@@ -58,7 +58,7 @@ Tauri 2 is currently in beta, and when it is released we will introduce more pac
 Installation via package management is currently not supported:
 
 - In-app updates
-- Kernel updates
+- Core updates
 
 Note: `AppImage` supports in-app updates.
 :::
@@ -107,7 +107,7 @@ AppImage has the following known bugs:
 - `TUN` authorization is not supported, if you need to use TUN mode, start the `AppImage` package with `sudo`.
 - `Clash Rust` is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
 - Service mode is not supported at this time
-- Kernel updates are not supported at this time
+- Core updates are not supported at this time
 
 **If you encounter any other problems while using it, feel free to open a new issue feedback**.
 :::

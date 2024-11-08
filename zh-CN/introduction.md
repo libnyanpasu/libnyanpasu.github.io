@@ -22,7 +22,7 @@ Clash Nyanpasu 最初是从 Clash Verge 1.3.7 分支而来，是在 Clash Verge 
 
 Clash Nyanpasu 的名字和图标都有着特殊的来源和含义。在这个名称中，“Nyanpasu” 来自于 Nyanpasu AOSP。最初，我们采用了 Nyanpasu AOSP 的图标，因此我们将软件命名为 “Clash Nyanpasu”。
 
-需要特别说明的是，我们获得了 Nyanpasu AOSP 所有者的授权，才能够使用其名称和标志。
+_需要特别说明的是，我们获得了 Nyanpasu AOSP 所有者的授权，才能够使用其名称和标志。_
 
 ## 别名和简称
 

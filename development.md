@@ -48,7 +48,7 @@ In addition, we need to download the cores, resource files, etc., for the sideca
 pnpm check
 ```
 
-If you find a missing file or want to force an update of the resource file, you can use the following directive:
+If you find a missing file or want to force an update of the resource file, you can use the following commands:
 
 ```bash
 pnpm check --force

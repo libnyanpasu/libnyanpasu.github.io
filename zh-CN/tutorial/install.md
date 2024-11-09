@@ -20,7 +20,7 @@ Clash Nyanpasu 目前支持 Windows 7 及更高版本、Linux 以及 macOS 10.15
 ## Windows
 
 ::: warning 注意
-1.5.0 开始，**Clash Nyanpasu** 不再提供 `MSI` 安装包。
+1.5.0 开始，**Clash Nyanpasu** 不再提供 MSI 安装包。
 :::
 
 首先，请确保您的系统已安装 WebView2 运行时。如果您的系统未安装 WebView2 运行时，您可以从 [Microsoft 官方网站](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2) 下载并安装。
@@ -61,14 +61,14 @@ Linux 下由于 AppImage 的限制，我们更建议使用 **包管理器** 安�
 - 应用内更新
 - 更新内核
 
-注：`AppImage` 支持应用内更新。
+注：AppImage 支持应用内更新。
 :::
 
 ### Debian/Ubuntu
 
-使用 _第三方 PPA 源_ 或 从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 `deb` 包。
+使用 _第三方 PPA 源_ 或 从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 DEB 包。
 
-#### 使用 deb 包安装
+#### 使用 DEB 包安装
 
 从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 `clash-nyanpasu_x.y.z_amd64.deb`。
 
@@ -105,8 +105,8 @@ paru -Syu clash-nyanpasu-git
 ::: warning 提示
 AppImage 存在以下已知缺陷：
 
-- 不支持 `TUN` 授权，如果需要使用 TUN 模式，请使用 `sudo` 启动 `AppImage` 包
-- `Clash Rust` 暂不可用，正在 [调查](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448)
+- 不支持 TUN 授权，如果需要使用 TUN 模式，请使用 `sudo` 启动 AppImage 包
+- Clash Rust 暂不可用，正在 [调查](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448)
 - 暂不支持服务模式
 - 暂不支持内核更新
 

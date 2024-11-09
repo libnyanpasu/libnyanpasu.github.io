@@ -1,13 +1,13 @@
 # Frequently Asked Questions
 
-This section contains common questions about _Clash Nyanpasu_.
+This post contains frequently asked questions about **Clash Nyanpasu**.
 Please check here first if you have any questions.
 
 ## Application
 
 ### 1. macOS prompts that "Clash Nyanpasu" is damaged and can't be opened
 
-Open **Terminal** and run:
+Open **Terminal** and execute:
 
 ```bash
 sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
@@ -27,7 +27,7 @@ There are currently two ways to open it directly:
 
 In case you cannot access the tray and cannot get to the main program interface, we can open it by entering the path directly.
 
-Since v1.6.0, Clash Nyanpasu split the installation directory into configuration and data directories, the log directory was moved to the data directory, and Windows users can choose to migrate the configuration directory.
+Starting with v1.6.0, Clash Nyanpasu split the installation directory into configuration and data directories, the log directory was moved to the data directory, and Windows users can choose to migrate the configuration directory.
 
 - For Windows, the default configuration directory is located at `%APPDATA%/Clash Nyanpasu/config` and the data directory is located at `%LOCALAPPDATA%/Clash Nyanpasu/data`.
 
@@ -47,9 +47,9 @@ If you need to get the logs yourself, you can navigate to the **data directory**
 ### 3. How to edit the log level?
 
 - In the **Nyanpasu Setting** option on the **Settings page**, you can find **App Log Level** to edit the log level, which takes effect immediately after saving.
-- Find `nyanpasu-config.yaml` in the **Config Dir**, find `app_log_level` to edit the log level, and restart the app after saving.
+- Find `nyanpasu-config.yaml` in the **Config Dir**, find the `app_log_level` field and edit the log level, and restart the app after saving.
 
-> Optional log levels include: `trace`, `debug`, `info`, `warn`, `error`, or `silent` (no log recording).
+> The applicable log levels are `trace`, `debug`, `info`, `warn`, `error`, and `silent`(no logging).
 
 ### 4. How to enable TUN mode?
 
@@ -65,7 +65,7 @@ TUN mode requires certain permissions.
 
 #### Manual authorization on macOS
 
-- If authorization is not successful, you can manually run the following command. After authorization, a restart is still required.
+- If authorization is not successful, you can manually execute the following command. After authorization, a restart is still required.
 
 ```bash
 # clash core
@@ -87,7 +87,7 @@ sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 
 ### 5. Missing subscription node types
 
-Some subscription types recognize the User Agent (UA) of the request and deliver the corresponding configuration file based on the UA. The default UA for Nyanpasu is `clash-nyanpasu/vx.y.z`, where `x.y.z` represents the software version. If you are unable to retrieve certain types of nodes, it is likely because the subscription provider has not added the Nyanpasu UA for recognition.
+Some subscription types recognize the User Agent (UA) of the request and deliver the corresponding configuration file based on the UA. The default UA for Nyanpasu is `clash-nyanpasu/vx.y.z`, where `x.y.z` represents the app version. If you are unable to retrieve certain types of nodes, it is likely because the subscription provider has not added the Nyanpasu UA for recognition.
 
 #### Solutions
 
@@ -98,4 +98,4 @@ Some subscription types recognize the User Agent (UA) of the request and deliver
 
 In the current version, we refer to the program installation directory as the `Application Directory` or the `Core Directory`, which contains all current core and embedded resource files. You can open it by right-clicking the tray or finding the corresponding directory in the settings page.
 
-When you need to install Nyanpasu service manually, you can find the service binaries in this way.
+When you need to manually install Nyanpasu service, you can find the service binaries in this way.

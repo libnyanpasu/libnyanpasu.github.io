@@ -18,7 +18,7 @@ We want to express our gratitude to the open-source community, as the birth of C
 
 The name and icon of Clash Nyanpasu have special origins and meanings. In this name, _Nyanpasu_ comes from Nyanpasu AOSP. Initially, we adopted the icon of Nyanpasu AOSP; hence, we named the software _Clash Nyanpasu_.
 
-_It's worth noting that we obtained authorization from the owner of Nyanpasu AOSP to use its name and logo._
+_It is important to note that we are licensed by the owners of the Nyanpasu AOSP to use its name and logo._
 
 ## Aliases and Abbreviations
 

@@ -3,9 +3,9 @@
 ## 开发守则
 
 - 项目使用 ESLint、Prettier、Stylelint、Clippy、Rustfmt 等工具进行代码风格检查。请在提交代码前确保代码风格正确。
-  - 请不要使用 `git -n` 跳过代码风格检查。我们已在 CI 中加入代码风格检查。
-- 请不要提交无用的代码、文件、文件夹。
-- 如果涉及大的功能重构，或者是新功能，请先在 Issue 中提出，以便讨论。
+  - 请不要使用 `git -n` 跳过代码风格检查。目前我们已在 CI 中加入代码风格检查。
+- 请不要提交无用的代码、文件或文件夹。
+- 如果涉及大的功能重构或新功能，请先在 Issue 中提出，以便讨论。
 
 ## 环境要求
 
@@ -13,7 +13,7 @@
 
 - Rust v1.78 或更高的稳定版本
   - 在 Windows 下务必使用 MSVC 工具链
-- Node.js v20 LTS 或更新的 LTS、Latest 版本
+- Node.js v20 LTS 或更新的 LTS/Latest 版本
 - pnpm v9 或更高的稳定版本
 - git
 
@@ -28,7 +28,7 @@
 在 Windows 下，还需要遵循以下建议：
 
 - 首次开启项目使用管理员权限，`patch` 指令需要管理员权限才能执行。
-- 通过 `scoop`、`choco`、`winget` 安装 `gsudo`（当然 Windows 11 自带的 sudo 也是可以的）——方便进行终端提权操作。
+- 通过 `scoop`、`choco` 或 `winget` 安装 `gsudo`（当然 Windows 11 自带的 sudo 也是可以的）——方便进行终端提权操作。
 
 ## 准备
 

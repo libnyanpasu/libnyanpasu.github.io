@@ -51,7 +51,7 @@
     "@unocss/transformer-variant-group": "0.64.0",
     "@vue/eslint-config-prettier": "10",
     "@vue/eslint-config-typescript": "14",
-    "@vue/tsconfig": "0.5.1",
+    "@vue/tsconfig": "0.6.0",
     "@vueuse/core": "11.2.0",
     "@vueuse/motion": "^2.2.3",
     "@wojtekmaj/color-utils": "^3.2.1",

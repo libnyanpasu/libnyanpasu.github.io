@@ -2,7 +2,7 @@
 
 # Q&A Convention
 
-### I don't want to fill out the issue template, can I just submit a new blank issue?
+### I don't want to fill out the issue template. Can I just submit a new blank issue?
 
 No, you can't. Issues that do not follow the issue template will be closed!
 
@@ -10,11 +10,11 @@ No, you can't. Issues that do not follow the issue template will be closed!
 
 No, you can't. Please feel free to follow the guidelines and go to Discussion to discuss other types of topics!
 
-### Can I discuss topics unrelated to an issue in a single issue?
+### Can I discuss topics in an issue that are unrelated to the issue?
 
-No. As a rule, only a single issue should be discussed in a single issue; if there are issues related to this issue, you can mention other issues.
+No. As a rule, only one related topic is allowed within an issue. If there is another issue associated with the issue, it is allowed to be mentioned.
 
-Also, please don't reply to issues that have nothing to do with the topic of the issue.
+Also, please do not reply in the issue with anything that is not related to the topic of the issue.
 
 ### Can I express my emotions in an issue?
 
@@ -22,11 +22,11 @@ No, you can't. I think this is something you need to think about.
 
 # Other Questions
 
-### This app is great, is there a way to donate?
+### This app is great. Is there a way to donate?
 
 Sorry, this project does not passively accept donations of any kind.
 
-### This app is great, can I share it with social platforms in mainland China?
+### This app is great. Can I share it with SNS in mainland China?
 
 No, please keep a low profile.
 

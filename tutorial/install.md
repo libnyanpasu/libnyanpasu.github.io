@@ -20,7 +20,7 @@ We currently plan to support only `x86`, `amd64` and `aarch64` architectures.
 ## Windows
 
 ::: warning Note
-Starting with 1.5.0, **Clash Nyanpasu** no longer provides `MSI` installers.
+Starting with 1.5.0, **Clash Nyanpasu** no longer provides MSI installers.
 :::
 
 First, please make sure that the WebView2 runtime is installed on your system. If your system does not have the WebView2 runtime installed, you can download and install it from the [Microsoft official site](https://developer.microsoft.com/en-us/microsoft-edge/webview2).
@@ -60,14 +60,14 @@ The following features are currently not supported for installation via package 
 - In-app updates
 - Core updates
 
-Note: `AppImage` supports in-app updates.
+Note: AppImage variant supports in-app updates.
 :::
 
 ### Debian/Ubuntu
 
-Download the latest version of the `deb` package using a _third-party PPA source_ or from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
+Download the latest version of the DEB package using a _third-party PPA source_ or from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
 
-#### Installation via deb package
+#### Installation via DEB package
 
 Download the latest version of `clash-nyanpasu_x.y.z_amd64.deb` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
 
@@ -102,10 +102,10 @@ paru -Syu clash-nyanpasu-git
 ### AppImage
 
 ::: warning Tip
-AppImage has the following known bugs:
+The following known bugs exist with the AppImage variant:
 
-- `TUN` authorization is not supported. If you need to use TUN mode, start the `AppImage` package with `sudo`.
-- `Clash Rust` is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
+- TUN authorization is not supported. If you need to use TUN mode, start the AppImage variant with `sudo`.
+- Clash Rust is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
 - Service mode is not supported at this time.
 - Core updates are not supported at this time.
 
@@ -124,7 +124,7 @@ chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 
 If you need to autostart, you may need to write a `.desktop` file.
 The following is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
-First, let's download the icon for `Clash Nyanpasu`:
+First, let's download the icon for Clash Nyanpasu:
 ::: code-group
 
 ```bash [User Directory]

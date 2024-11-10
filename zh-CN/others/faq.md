@@ -1,6 +1,6 @@
 # 常见问题
 
-本部分包含有关 _Clash Nyanpasu_ 的常见问题。
+本部分包含有关 **Clash Nyanpasu** 的常见问题。
 如果您有任何问题，请先查看此处。
 
 ## 应用
@@ -43,7 +43,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 - 在 **设置页** 的 **Nyanpasu 设置** 选项中，可以找到 **应用程序日志等级** 修改日志等级，保存后立即生效。
 - 在 **配置目录** 下找到 `nyanpasu-config.yaml`，找到 `app_log_level` 修改日志等级，保存后需要重启程序。
 
-> 可选的日志级别有：`trace`、`debug`、`info`、`warn`、`error`、`silent`（不记录日志）。
+> 可选的日志级别有：`trace`、`debug`、`info`、`warn`、`error` 和 `silent`（不记录日志）。
 
 ### 4. 如何开启 TUN 模式？
 
@@ -89,7 +89,7 @@ sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
 - 联系订阅提供者，请求添加对 Nyanpasu UA 的支持。
 - 修改 UA 为订阅提供者支持的类型，例如 `clash-meta` 等。
 
-### 6. 什么是程序目录、内核目录？其作用是什么？
+### 6. 什么是应用目录、内核目录？其作用是什么？
 
 在目前版本中，我们将程序安装目录称为 `应用目录` 或 `内核目录`，其包含当前所有的内核和内嵌的资源文件。可以通过托盘右键或在设置页面找到对应目录打开。
 当需要手动安装服务模式时，可以通过这种方式找到服务模式二进制文件。

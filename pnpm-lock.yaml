@@ -31,8 +31,8 @@ importers:
         specifier: ^9.12.0
         version: 9.14.0
       '@iconify/json':
-        specifier: 2.2.271
-        version: 2.2.271
+        specifier: 2.2.272
+        version: 2.2.272
       '@material/material-color-utilities':
         specifier: ^0.3.0
         version: 0.3.0
@@ -979,8 +979,8 @@ packages:
   '@iconify-json/simple-icons@1.2.10':
     resolution: {integrity: sha512-9OK1dsSjXlH36lhu5n+BlSoXuqFjHUErGLtNdzHpq0vHq4YFBuGYWtZ+vZTHLreRQ8ijPRv/6EsgkV+nf6AReQ==}
 
-  '@iconify/json@2.2.271':
-    resolution: {integrity: sha512-EYp1o5by6iZuWmUUHoipxvRyCpj7Xp8kg5q0bm5Srl4oksYdUhtYb8IHqKTrReSTcpNCXtOpKbT8BnjmvO5WNw==}
+  '@iconify/json@2.2.272':
+    resolution: {integrity: sha512-xoAOfuZHHkNiq3hmyVML3HHw2UnLsQomC9+TDvtLRi6x7mxhOcQuhbNDeUGO+xXXM4AcQddmMTZG4VFi+q8DHg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -6596,7 +6596,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/json@2.2.271':
+  '@iconify/json@2.2.272':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2

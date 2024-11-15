@@ -43,12 +43,12 @@
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
     "@types/node": "22.9.0",
-    "@unocss/preset-attributify": "0.64.0",
-    "@unocss/preset-icons": "0.64.0",
-    "@unocss/preset-uno": "0.64.0",
-    "@unocss/transformer-compile-class": "0.64.0",
-    "@unocss/transformer-directives": "0.64.0",
-    "@unocss/transformer-variant-group": "0.64.0",
+    "@unocss/preset-attributify": "0.64.1",
+    "@unocss/preset-icons": "0.64.1",
+    "@unocss/preset-uno": "0.64.1",
+    "@unocss/transformer-compile-class": "0.64.1",
+    "@unocss/transformer-directives": "0.64.1",
+    "@unocss/transformer-variant-group": "0.64.1",
     "@vue/eslint-config-prettier": "10",
     "@vue/eslint-config-typescript": "14",
     "@vue/tsconfig": "0.6.0",
@@ -82,7 +82,7 @@
     "postcss-html": "1.7.0",
     "postcss-scss": "4.0.9",
     "prettier": "3.3.3",
-    "sass": "1.80.7",
+    "sass": "1.81.0",
     "stylelint": "16.10.0",
     "stylelint-config-html": "1.1.0",
     "stylelint-config-rational-order": "0.1.2",
@@ -94,7 +94,7 @@
     "tailwindcss": "^3.4.10",
     "typescript": "5.6.3",
     "typescript-eslint": "^8.8.1",
-    "unocss": "0.64.0",
+    "unocss": "0.64.1",
     "unplugin-auto-import": "0.18.4",
     "unplugin-icons": "0.20.1",
     "unplugin-vue-components": "0.27.4",
@@ -109,5 +109,5 @@
     "@octokit/types": "^13.5.0",
     "octokit": "^4.0.2"
   },
-  "packageManager": "pnpm@9.13.1"
+  "packageManager": "pnpm@9.13.2"
 }

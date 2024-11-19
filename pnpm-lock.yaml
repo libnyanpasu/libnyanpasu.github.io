@@ -95,7 +95,7 @@ importers:
         version: 11.2.0(vue@3.5.13(typescript@5.6.3))
       '@vueuse/motion':
         specifier: ^2.2.3
-        version: 2.2.6(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))(webpack-sources@3.2.3)
+        version: 2.2.6(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))
       '@wojtekmaj/color-utils':
         specifier: ^3.2.1
         version: 3.2.1
@@ -220,14 +220,14 @@ importers:
         specifier: 0.64.1
         version: 0.64.1(postcss@8.4.49)(rollup@4.21.0)(vite@5.4.11(@types/node@22.9.0)(sass@1.81.0)(sugarss@2.0.0))(vue@3.5.13(typescript@5.6.3))
       unplugin-auto-import:
-        specifier: 0.18.4
-        version: 0.18.4(@nuxt/kit@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.2.0(vue@3.5.13(typescript@5.6.3)))(rollup@4.21.0)
+        specifier: 0.18.5
+        version: 0.18.5(@nuxt/kit@3.13.2(rollup@4.21.0))(@vueuse/core@11.2.0(vue@3.5.13(typescript@5.6.3)))(rollup@4.21.0)
       unplugin-icons:
         specifier: 0.20.1
         version: 0.20.1(@vue/compiler-sfc@3.5.13)(webpack-sources@3.2.3)
       unplugin-vue-components:
         specifier: 0.27.4
-        version: 0.27.4(@babel/parser@7.25.8)(@nuxt/kit@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3))(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))
+        version: 0.27.4(@babel/parser@7.25.8)(@nuxt/kit@3.13.2(rollup@4.21.0))(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))
       vite:
         specifier: 5.4.11
         version: 5.4.11(@types/node@22.9.0)(sass@1.81.0)(sugarss@2.0.0)
@@ -4018,6 +4018,9 @@ packages:
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
 
+  magic-string@0.30.13:
+    resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
+
   map-cache@0.2.2:
     resolution: {integrity: sha512-8y/eV9QQZCiyn1SprXSrCmqJN0yNRATe+PO8ztwqrvrbdRLA3eYJF0yaR0YayLWkMbsQSKWS9N2gPcGEc4UsZg==}
     engines: {node: '>=0.10.0'}
@@ -5503,8 +5506,8 @@ packages:
       vite:
         optional: true
 
-  unplugin-auto-import@0.18.4:
-    resolution: {integrity: sha512-I+QAZPQn5lfH3HYa6HTgpcz30XGY0H1g6QenEB+sgBjgfvgJ33UI907dlNkgOSm/CFHZyNmTKVHf+O2qTnfNKw==}
+  unplugin-auto-import@0.18.5:
+    resolution: {integrity: sha512-ZUnayBRlOwNuN9hrM1PymSZK5qDEI8heDD0E3U8Tq4FS6bUxd9VMfJ8tCwWTG5ir6g1yThe/4SVHbFUZQwplOw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -6686,9 +6689,9 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@nuxt/kit@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)':
+  '@nuxt/kit@3.13.2(rollup@4.21.0)':
     dependencies:
-      '@nuxt/schema': 3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)
+      '@nuxt/schema': 3.13.2(rollup@4.21.0)
       c12: 1.11.2
       consola: 3.2.3
       defu: 6.1.4
@@ -6705,17 +6708,16 @@ snapshots:
       scule: 1.3.0
       semver: 7.6.3
       ufo: 1.5.4
-      unctx: 2.3.1(webpack-sources@3.2.3)
-      unimport: 3.13.1(rollup@4.21.0)(webpack-sources@3.2.3)
+      unctx: 2.3.1
+      unimport: 3.13.1(rollup@4.21.0)
       untyped: 1.5.1
     transitivePeerDependencies:
       - magicast
       - rollup
       - supports-color
-      - webpack-sources
     optional: true
 
-  '@nuxt/schema@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)':
+  '@nuxt/schema@3.13.2(rollup@4.21.0)':
     dependencies:
       compatx: 0.1.8
       consola: 3.2.3
@@ -6727,12 +6729,11 @@ snapshots:
       std-env: 3.7.0
       ufo: 1.5.4
       uncrypto: 0.1.3
-      unimport: 3.13.1(rollup@4.21.0)(webpack-sources@3.2.3)
+      unimport: 3.13.2(rollup@4.21.0)
       untyped: 1.5.1
     transitivePeerDependencies:
       - rollup
       - supports-color
-      - webpack-sources
     optional: true
 
   '@octokit/app@15.0.1':
@@ -7767,7 +7768,7 @@ snapshots:
 
   '@vueuse/metadata@11.2.0': {}
 
-  '@vueuse/motion@2.2.6(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))(webpack-sources@3.2.3)':
+  '@vueuse/motion@2.2.6(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.6.3))
       '@vueuse/shared': 10.11.1(vue@3.5.13(typescript@5.6.3))
@@ -7777,13 +7778,12 @@ snapshots:
       style-value-types: 5.1.2
       vue: 3.5.13(typescript@5.6.3)
     optionalDependencies:
-      '@nuxt/kit': 3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)
+      '@nuxt/kit': 3.13.2(rollup@4.21.0)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - magicast
       - rollup
       - supports-color
-      - webpack-sources
 
   '@vueuse/shared@10.11.1(vue@3.5.13(typescript@5.6.3))':
     dependencies:
@@ -10051,7 +10051,7 @@ snapshots:
 
   local-pkg@0.5.0:
     dependencies:
-      mlly: 1.7.2
+      mlly: 1.7.3
       pkg-types: 1.2.1
 
   locate-path@2.0.0:
@@ -10125,6 +10125,10 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   magic-string@0.30.12:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+
+  magic-string@0.30.13:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -10337,6 +10341,7 @@ snapshots:
       pathe: 1.1.2
       pkg-types: 1.2.1
       ufo: 1.5.4
+    optional: true
 
   mlly@1.7.3:
     dependencies:
@@ -10705,7 +10710,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-html@1.7.0:
     dependencies:
@@ -10730,7 +10735,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.6
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -10748,7 +10753,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -10815,7 +10820,7 @@ snapshots:
     dependencies:
       postcss: 8.4.49
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -11531,7 +11536,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.7.0)(postcss-scss@4.0.9(postcss@8.4.49))(postcss@8.4.49))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -11801,14 +11806,12 @@ snapshots:
   uncrypto@0.1.3:
     optional: true
 
-  unctx@2.3.1(webpack-sources@3.2.3):
+  unctx@2.3.1:
     dependencies:
       acorn: 8.14.0
       estree-walker: 3.0.3
       magic-string: 0.30.12
-      unplugin: 1.14.1(webpack-sources@3.2.3)
-    transitivePeerDependencies:
-      - webpack-sources
+      unplugin: 1.16.0
     optional: true
 
   undici-types@6.19.8: {}
@@ -11831,7 +11834,7 @@ snapshots:
       vfile: 3.0.1
       x-is-string: 0.1.0
 
-  unimport@3.13.1(rollup@4.21.0)(webpack-sources@3.2.3):
+  unimport@3.13.1(rollup@4.21.0):
     dependencies:
       '@rollup/pluginutils': 5.1.3(rollup@4.21.0)
       acorn: 8.14.0
@@ -11845,10 +11848,9 @@ snapshots:
       pkg-types: 1.2.1
       scule: 1.3.0
       strip-literal: 2.1.0
-      unplugin: 1.14.1(webpack-sources@3.2.3)
+      unplugin: 1.16.0
     transitivePeerDependencies:
       - rollup
-      - webpack-sources
     optional: true
 
   unimport@3.13.2(rollup@4.21.0):
@@ -11859,7 +11861,7 @@ snapshots:
       estree-walker: 3.0.3
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       mlly: 1.7.3
       pathe: 1.1.2
       pkg-types: 1.2.1
@@ -11952,18 +11954,18 @@ snapshots:
       - supports-color
       - vue
 
-  unplugin-auto-import@0.18.4(@nuxt/kit@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3))(@vueuse/core@11.2.0(vue@3.5.13(typescript@5.6.3)))(rollup@4.21.0):
+  unplugin-auto-import@0.18.5(@nuxt/kit@3.13.2(rollup@4.21.0))(@vueuse/core@11.2.0(vue@3.5.13(typescript@5.6.3)))(rollup@4.21.0):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.3(rollup@4.21.0)
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       minimatch: 9.0.5
       unimport: 3.13.2(rollup@4.21.0)
       unplugin: 1.16.0
     optionalDependencies:
-      '@nuxt/kit': 3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)
+      '@nuxt/kit': 3.13.2(rollup@4.21.0)
       '@vueuse/core': 11.2.0(vue@3.5.13(typescript@5.6.3))
     transitivePeerDependencies:
       - rollup
@@ -11983,7 +11985,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  unplugin-vue-components@0.27.4(@babel/parser@7.25.8)(@nuxt/kit@3.13.2(rollup@4.21.0)(webpack-sources@3.2.3))(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3)):
+  unplugin-vue-components@0.27.4(@babel/parser@7.25.8)(@nuxt/kit@3.13.2(rollup@4.21.0))(rollup@4.21.0)(vue@3.5.13(typescript@5.6.3)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.21.0)
@@ -11998,7 +12000,7 @@ snapshots:
       vue: 3.5.13(typescript@5.6.3)
     optionalDependencies:
       '@babel/parser': 7.25.8
-      '@nuxt/kit': 3.13.2(rollup@4.21.0)(webpack-sources@3.2.3)
+      '@nuxt/kit': 3.13.2(rollup@4.21.0)
     transitivePeerDependencies:
       - rollup
       - supports-color

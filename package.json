@@ -92,7 +92,7 @@
     "stylelint-order": "6.0.4",
     "stylelint-scss": "6.10.0",
     "tailwindcss": "^3.4.10",
-    "typescript": "5.6.3",
+    "typescript": "5.7.2",
     "typescript-eslint": "^8.8.1",
     "unocss": "0.64.1",
     "unplugin-auto-import": "0.18.5",

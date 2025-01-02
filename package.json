@@ -52,7 +52,7 @@
     "@vue/eslint-config-prettier": "10",
     "@vue/eslint-config-typescript": "14",
     "@vue/tsconfig": "0.7.0",
-    "@vueuse/core": "12.2.0",
+    "@vueuse/core": "12.3.0",
     "@vueuse/motion": "^2.2.3",
     "@wojtekmaj/color-utils": "^3.2.1",
     "autoprefixer": "^10.4.20",

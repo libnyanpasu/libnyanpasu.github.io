@@ -32,7 +32,7 @@
     "@commitlint/config-conventional": "19.6.0",
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.12.0",
-    "@iconify/json": "2.2.294",
+    "@iconify/json": "2.2.295",
     "@material/material-color-utilities": "^0.3.0",
     "@material/web": "^2.0.0",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
@@ -42,7 +42,7 @@
     "@types/markdown-it": "14.1.2",
     "@types/markdown-it-container": "2.0.10",
     "@types/markdown-it-footnote": "3.0.4",
-    "@types/node": "22.10.5",
+    "@types/node": "22.10.6",
     "@unocss/preset-attributify": "0.65.4",
     "@unocss/preset-icons": "0.65.4",
     "@unocss/preset-uno": "0.65.4",
@@ -78,11 +78,11 @@
     "mermaid": "^11.0.0",
     "neostandard": "^0.12.0",
     "npm-run-all2": "7.0.2",
-    "postcss": "8.4.49",
-    "postcss-html": "1.7.0",
+    "postcss": "8.5.1",
+    "postcss-html": "1.8.0",
     "postcss-scss": "4.0.9",
     "prettier": "3.4.2",
-    "sass": "1.83.1",
+    "sass": "1.83.4",
     "stylelint": "16.13.1",
     "stylelint-config-html": "1.1.0",
     "stylelint-config-rational-order": "0.1.2",
@@ -109,5 +109,5 @@
     "@octokit/types": "^13.5.0",
     "octokit": "^4.0.2"
   },
-  "packageManager": "pnpm@9.15.3"
+  "packageManager": "pnpm@9.15.4"
 }

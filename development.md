@@ -36,9 +36,9 @@ Before development, we need to initialize some environments for the project.
 
 First, we need to install the front-end dependencies:
 
-`bash
+```bash
 pnpm i
-`
+```
 
 In addition, we need to download the cores, resource files, etc., for the sidecar and resource binary files.
 

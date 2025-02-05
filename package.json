@@ -98,7 +98,7 @@
     "unplugin-auto-import": "19.0.0",
     "unplugin-icons": "22.0.0",
     "unplugin-vue-components": "28.0.0",
-    "vite": "6.0.11",
+    "vite": "6.1.0",
     "vite-plugin-vuetify": "^2.0.4",
     "vitepress": "1.6.3",
     "vitepress-plugin-mermaid": "^2.0.16",

@@ -25,6 +25,7 @@ jobs:
   # Build job
   build:
     name: Build
+    if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -69,6 +70,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
+    if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     name: Deploy
     steps:

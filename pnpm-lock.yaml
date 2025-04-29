@@ -233,7 +233,7 @@ importers:
         version: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-vuetify:
         specifier: ^2.0.4
-        version: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.2)
+        version: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
       vitepress:
         specifier: 1.6.3
         version: 1.6.3(@algolia/client-search@5.19.0)(@types/node@22.15.3)(postcss@8.5.3)(sass@1.87.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)
@@ -245,7 +245,7 @@ importers:
         version: 3.5.13(typescript@5.8.3)
       vuetify:
         specifier: ^3.7.0
-        version: 3.8.2(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
+        version: 3.8.3(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
 
 packages:
 
@@ -6354,8 +6354,8 @@ packages:
       typescript:
         optional: true
 
-  vuetify@3.8.2:
-    resolution: {integrity: sha512-UJNFP4egmKJTQ3V3MKOq+7vIUKO7/Fko5G6yUsOW2Rm0VNBvAjgO6VY6EnK3DTqEKN6ugVXDEPw37NQSTGLZvw==}
+  vuetify@3.8.3:
+    resolution: {integrity: sha512-hzlYRGY6O+GB2R2Ujg1HBtHjVAgJc3NkeymZl1IahZ+0vEyV0qLCFvTqYhXziB04O5roidBe6sca9TED7VYA/A==}
     engines: {node: ^12.20 || >=14.13}
     peerDependencies:
       typescript: '>=4.7'
@@ -8433,11 +8433,11 @@ snapshots:
       typescript: 5.8.3
       vue: 3.5.13(typescript@5.8.3)
 
-  '@vuetify/loader-shared@2.1.0(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.2)':
+  '@vuetify/loader-shared@2.1.0(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)':
     dependencies:
       upath: 2.0.1
       vue: 3.5.13(typescript@5.8.3)
-      vuetify: 3.8.2(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
+      vuetify: 3.8.3(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
 
   '@vueuse/core@10.11.1(vue@3.5.13(typescript@5.8.3))':
     dependencies:
@@ -11847,7 +11847,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-html@1.8.0:
     dependencies:
@@ -11872,7 +11872,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.6
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -11890,7 +11890,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -11960,7 +11960,7 @@ snapshots:
     dependencies:
       postcss: 8.5.3
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -12776,7 +12776,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.3))(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -13395,14 +13395,14 @@ snapshots:
       '@types/unist': 3.0.2
       vfile-message: 4.0.2
 
-  vite-plugin-vuetify@2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.2):
+  vite-plugin-vuetify@2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3):
     dependencies:
-      '@vuetify/loader-shared': 2.1.0(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.2)
+      '@vuetify/loader-shared': 2.1.0(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
       debug: 4.4.0
       upath: 2.0.1
       vite: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vue: 3.5.13(typescript@5.8.3)
-      vuetify: 3.8.2(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
+      vuetify: 3.8.3(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
     transitivePeerDependencies:
       - supports-color
 
@@ -13538,12 +13538,12 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  vuetify@3.8.2(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3)):
+  vuetify@3.8.3(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3)):
     dependencies:
       vue: 3.5.13(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
-      vite-plugin-vuetify: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.2)
+      vite-plugin-vuetify: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
 
   webpack-virtual-modules@0.6.2: {}
 

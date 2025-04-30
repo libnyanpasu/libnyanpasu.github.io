@@ -218,7 +218,7 @@ importers:
         version: 8.20.0(eslint@9.18.0(jiti@2.4.1))(typescript@5.8.3)
       unocss:
         specifier: 0.65.4
-        version: 0.65.4(postcss@8.5.3)(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
+        version: 0.65.4(postcss@8.5.3)(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
       unplugin-auto-import:
         specifier: 19.1.2
         version: 19.1.2(@nuxt/kit@3.13.2(rollup@4.40.0))(@vueuse/core@12.8.2(typescript@5.8.3))
@@ -229,11 +229,11 @@ importers:
         specifier: 28.5.0
         version: 28.5.0(@babel/parser@7.25.8)(@nuxt/kit@3.13.2(rollup@4.40.0))(vue@3.5.13(typescript@5.8.3))
       vite:
-        specifier: 6.3.3
-        version: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+        specifier: 6.3.4
+        version: 6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-vuetify:
         specifier: ^2.0.4
-        version: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
+        version: 2.1.1(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
       vitepress:
         specifier: 1.6.3
         version: 1.6.3(@algolia/client-search@5.19.0)(@types/node@22.15.3)(postcss@8.5.3)(sass@1.87.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)
@@ -6246,8 +6246,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.3.3:
-    resolution: {integrity: sha512-5nXH+QsELbFKhsEfWLkHrvgRpTdGJzqOZ+utSdmPTvwHmvU6ITTm3xx+mRusihkcI8GeC7lCDyn3kDtiki9scw==}
+  vite@6.3.4:
+    resolution: {integrity: sha512-BiReIiMS2fyFqbqNT/Qqt4CVITDU9M9vE+DKcVAsB+ZV0wvTKd+3hMbkpxz1b+NmEDMegpVbisKiAZOnvO92Sw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -8177,13 +8177,13 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@unocss/astro@0.65.4(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))':
+  '@unocss/astro@0.65.4(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@unocss/core': 0.65.4
       '@unocss/reset': 0.65.4
-      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
+      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
     optionalDependencies:
-      vite: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -8313,7 +8313,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.65.4
 
-  '@unocss/vite@0.65.4(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))':
+  '@unocss/vite@0.65.4(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
@@ -8323,7 +8323,7 @@ snapshots:
       chokidar: 3.6.0
       magic-string: 0.30.17
       tinyglobby: 0.2.12
-      vite: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -13234,9 +13234,9 @@ snapshots:
 
   universal-user-agent@7.0.2: {}
 
-  unocss@0.65.4(postcss@8.5.3)(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3)):
+  unocss@0.65.4(postcss@8.5.3)(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3)):
     dependencies:
-      '@unocss/astro': 0.65.4(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
+      '@unocss/astro': 0.65.4(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
       '@unocss/cli': 0.65.4(rollup@4.40.0)
       '@unocss/core': 0.65.4
       '@unocss/postcss': 0.65.4(postcss@8.5.3)
@@ -13252,9 +13252,9 @@ snapshots:
       '@unocss/transformer-compile-class': 0.65.4
       '@unocss/transformer-directives': 0.65.4
       '@unocss/transformer-variant-group': 0.65.4
-      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
+      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))
     optionalDependencies:
-      vite: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -13395,12 +13395,12 @@ snapshots:
       '@types/unist': 3.0.2
       vfile-message: 4.0.2
 
-  vite-plugin-vuetify@2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3):
+  vite-plugin-vuetify@2.1.1(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3):
     dependencies:
       '@vuetify/loader-shared': 2.1.0(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
       debug: 4.4.0
       upath: 2.0.1
-      vite: 6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vue: 3.5.13(typescript@5.8.3)
       vuetify: 3.8.3(typescript@5.8.3)(vite-plugin-vuetify@2.1.1)(vue@3.5.13(typescript@5.8.3))
     transitivePeerDependencies:
@@ -13417,7 +13417,7 @@ snapshots:
       sass: 1.87.0
       sugarss: 2.0.0
 
-  vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1):
+  vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1):
     dependencies:
       esbuild: 0.25.0
       fdir: 6.4.4(picomatch@4.0.2)
@@ -13543,7 +13543,7 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
-      vite-plugin-vuetify: 2.1.1(vite@6.3.3(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
+      vite-plugin-vuetify: 2.1.1(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.1)(sass@1.87.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.13(typescript@5.8.3))(vuetify@3.8.3)
 
   webpack-virtual-modules@0.6.2: {}
 

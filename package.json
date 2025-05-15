@@ -102,7 +102,7 @@
     "vite-plugin-vuetify": "^2.0.4",
     "vitepress": "1.6.3",
     "vitepress-plugin-mermaid": "^2.0.16",
-    "vue": "3.5.13",
+    "vue": "3.5.14",
     "vuetify": "^3.7.0"
   },
   "dependencies": {

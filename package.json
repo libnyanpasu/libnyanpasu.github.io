@@ -106,7 +106,7 @@
     "vuetify": "^3.7.0"
   },
   "dependencies": {
-    "@octokit/types": "^13.5.0",
+    "@octokit/types": "^14.0.0",
     "octokit": "^4.0.2"
   },
   "packageManager": "pnpm@9.15.9"

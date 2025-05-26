@@ -95,14 +95,14 @@
     "typescript": "5.8.3",
     "typescript-eslint": "^8.8.1",
     "unocss": "0.65.4",
-    "unplugin-auto-import": "19.2.0",
+    "unplugin-auto-import": "19.3.0",
     "unplugin-icons": "22.1.0",
-    "unplugin-vue-components": "28.5.0",
+    "unplugin-vue-components": "28.7.0",
     "vite": "6.3.5",
     "vite-plugin-vuetify": "^2.0.4",
     "vitepress": "1.6.3",
     "vitepress-plugin-mermaid": "^2.0.16",
-    "vue": "3.5.14",
+    "vue": "3.5.15",
     "vuetify": "^3.7.0"
   },
   "dependencies": {

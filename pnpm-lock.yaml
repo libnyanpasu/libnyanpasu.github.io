@@ -43,8 +43,8 @@ importers:
         specifier: ^9.3.0
         version: 9.3.0
       '@tsconfig/node20':
-        specifier: 20.1.5
-        version: 20.1.5
+        specifier: 20.1.6
+        version: 20.1.6
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
@@ -1697,8 +1697,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@tsconfig/node20@20.1.5':
-    resolution: {integrity: sha512-Vm8e3WxDTqMGPU4GATF9keQAIy1Drd7bPwlgzKJnZtoOsTm1tduUTbDjg0W5qERvGuxPI2h9RbMufH0YdfBylA==}
+  '@tsconfig/node20@20.1.6':
+    resolution: {integrity: sha512-sz+Hqx9zwZDpZIV871WSbUzSqNIsXzghZydypnfgzPKLltVJfkINfUeTct31n/tTSa9ZE1ZOfKdRre1uHHquYQ==}
 
   '@types/aws-lambda@8.10.149':
     resolution: {integrity: sha512-NXSZIhfJjnXqJgtS7IwutqIF/SOy1Wz5Px4gUY1RWITp3AYTyuJS4xaXr/bIJY1v15XMzrJ5soGnPM+7uigZjA==}
@@ -7865,7 +7865,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tsconfig/node20@20.1.5': {}
+  '@tsconfig/node20@20.1.6': {}
 
   '@types/aws-lambda@8.10.149': {}
 

@@ -104,10 +104,10 @@ importers:
         version: 10.4.21(postcss@8.5.6)
       cytoscape:
         specifier: ^3.30.2
-        version: 3.32.0
+        version: 3.32.1
       cytoscape-cose-bilkent:
         specifier: ^4.1.0
-        version: 4.1.0(cytoscape@3.32.0)
+        version: 4.1.0(cytoscape@3.32.1)
       dayjs:
         specifier: ^1.11.12
         version: 1.11.13
@@ -161,7 +161,7 @@ importers:
         version: 4.0.0
       mermaid:
         specifier: ^11.0.0
-        version: 11.8.0
+        version: 11.8.1
       neostandard:
         specifier: ^0.12.0
         version: 0.12.2(@typescript-eslint/utils@8.35.1(eslint@9.18.0(jiti@2.4.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.20.0(eslint@9.18.0(jiti@2.4.1))(typescript@5.8.3))(eslint@9.18.0(jiti@2.4.1)))(eslint@9.18.0(jiti@2.4.1))(typescript@5.8.3)
@@ -239,7 +239,7 @@ importers:
         version: 1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)
       vitepress-plugin-mermaid:
         specifier: ^2.0.16
-        version: 2.0.17(mermaid@11.8.0)(vitepress@1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3))
+        version: 2.0.17(mermaid@11.8.1)(vitepress@1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3))
       vue:
         specifier: 3.5.17
         version: 3.5.17(typescript@5.8.3)
@@ -1351,8 +1351,8 @@ packages:
   '@mermaid-js/mermaid-mindmap@9.3.0':
     resolution: {integrity: sha512-IhtYSVBBRYviH1Ehu8gk69pMDF8DSRqXBRDMWrEfHoaMruHeaP2DXA3PBnuwsMaCdPQhlUUcy/7DBLAEIXvCAw==}
 
-  '@mermaid-js/parser@0.6.0':
-    resolution: {integrity: sha512-7DNESgpyZ5WG1SIkrYafVBhWmImtmQuoxOO1lawI3gQYWxBX3v1FW3IyuuRfKJAO06XrZR71W0Kif5VEGGd4VA==}
+  '@mermaid-js/parser@0.6.1':
+    resolution: {integrity: sha512-lCQNpV8R4lgsGcjX5667UiuDLk2micCtjtxR1YKbBXvN5w2v+FeLYoHrTSSrjwXdMcDYvE4ZBPvKT31dfeSmmA==}
 
   '@mrmlnc/readdir-enhanced@2.2.1':
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -2938,8 +2938,8 @@ packages:
     peerDependencies:
       cytoscape: ^3.2.0
 
-  cytoscape@3.32.0:
-    resolution: {integrity: sha512-5JHBC9n75kz5851jeklCPmZWcg3hUe6sjqJvyk3+hVqFaKcHwHgxsjeN1yLmggoUc6STbtm9/NQyabQehfjvWQ==}
+  cytoscape@3.32.1:
+    resolution: {integrity: sha512-dbeqFTLYEwlFg7UGtcZhCCG/2WayX72zK3Sq323CEX29CY81tYfVhw1MIdduCtpstB0cTOhJswWlM/OEB3Xp+Q==}
     engines: {node: '>=0.10'}
 
   d3-array@2.12.1:
@@ -4805,8 +4805,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mermaid@11.8.0:
-    resolution: {integrity: sha512-uAZUwnBiqREZcUrFw3G5iQ5Pj3hTYUP95EZc3ec/nGBzHddJZydzYGE09tGZDBS1VoSoDn0symZ85FmypSTo5g==}
+  mermaid@11.8.1:
+    resolution: {integrity: sha512-VSXJLqP1Sqw5sGr273mhvpPRhXwE6NlmMSqBZQw+yZJoAJkOIPPn/uT3teeCBx60Fkt5zEI3FrH2eVT0jXRDzw==}
 
   micromark-util-character@2.1.0:
     resolution: {integrity: sha512-KvOVV+X1yLBfs9dCBSopq/+G1PcgT3lAK07mC4BzXi5E7ahzMAF8oIupDDJ6mievI6F+lAATkbQQlQixJfT3aQ==}
@@ -7762,14 +7762,14 @@ snapshots:
   '@mermaid-js/mermaid-mindmap@9.3.0':
     dependencies:
       '@braintree/sanitize-url': 6.0.4
-      cytoscape: 3.32.0
-      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.32.0)
-      cytoscape-fcose: 2.2.0(cytoscape@3.32.0)
+      cytoscape: 3.32.1
+      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.32.1)
+      cytoscape-fcose: 2.2.0(cytoscape@3.32.1)
       d3: 7.9.0
       khroma: 2.1.0
       non-layered-tidy-tree-layout: 2.0.2
 
-  '@mermaid-js/parser@0.6.0':
+  '@mermaid-js/parser@0.6.1':
     dependencies:
       langium: 3.3.1
 
@@ -9615,17 +9615,17 @@ snapshots:
     dependencies:
       array-find-index: 1.0.2
 
-  cytoscape-cose-bilkent@4.1.0(cytoscape@3.32.0):
+  cytoscape-cose-bilkent@4.1.0(cytoscape@3.32.1):
     dependencies:
       cose-base: 1.0.3
-      cytoscape: 3.32.0
+      cytoscape: 3.32.1
 
-  cytoscape-fcose@2.2.0(cytoscape@3.32.0):
+  cytoscape-fcose@2.2.0(cytoscape@3.32.1):
     dependencies:
       cose-base: 2.2.0
-      cytoscape: 3.32.0
+      cytoscape: 3.32.1
 
-  cytoscape@3.32.0: {}
+  cytoscape@3.32.1: {}
 
   d3-array@2.12.1:
     dependencies:
@@ -11837,15 +11837,15 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid@11.8.0:
+  mermaid@11.8.1:
     dependencies:
       '@braintree/sanitize-url': 7.1.1
       '@iconify/utils': 2.3.0
-      '@mermaid-js/parser': 0.6.0
+      '@mermaid-js/parser': 0.6.1
       '@types/d3': 7.4.3
-      cytoscape: 3.32.0
-      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.32.0)
-      cytoscape-fcose: 2.2.0(cytoscape@3.32.0)
+      cytoscape: 3.32.1
+      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.32.1)
+      cytoscape-fcose: 2.2.0(cytoscape@3.32.1)
       d3: 7.9.0
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.11
@@ -14021,9 +14021,9 @@ snapshots:
       tsx: 4.19.2
       yaml: 2.6.1
 
-  vitepress-plugin-mermaid@2.0.17(mermaid@11.8.0)(vitepress@1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)):
+  vitepress-plugin-mermaid@2.0.17(mermaid@11.8.1)(vitepress@1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)):
     dependencies:
-      mermaid: 11.8.0
+      mermaid: 11.8.1
       vitepress: 1.6.3(@algolia/client-search@5.19.0)(@types/node@22.16.0)(postcss@8.5.6)(sass@1.89.2)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.8.3)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0

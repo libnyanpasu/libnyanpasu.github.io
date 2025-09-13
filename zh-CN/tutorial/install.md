@@ -129,13 +129,13 @@ chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 ::: code-group
 
 ```bash [用户目录]
-mkdir -p ~/.local/share/icons/clash-nyanpasu
-wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+mkdir -p ~/.local/share/icons/hicolor/256x256/apps/clash-nyanpasu
+wget -O ~/.local/share/icons/hicolor/256x256/apps/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
 ```
 
 ```bash [系统目录]
-sudo mkdir -p /usr/share/icons/clash-nyanpasu
-sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+sudo mkdir -p /usr/share/icons/hicolor/256x256/clash-nyanpasu
+sudo wget -O /usr/share/icons/hicolor/256x256/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
 ```
 
 :::
@@ -144,15 +144,18 @@ sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.gith
 
 ```ini
 [Desktop Entry]
-Categories=Development;
-Comment=A Clash GUI based on Tauri.
-Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # 请换成你的 AppImage 路径
-Icon=/path/to/clash-nyanpasu.png # 请换成上面下载的图标路径
-GenericName=Clash Nyanpasu
-Name=Clash Nyanpasu
-Terminal=false
 Type=Application
-Autostart=true # 是否开机自启
+Name=Clash Nyanpasu
+GenericName=Clash GUI
+Comment=A Clash GUI based on Tauri.
+# 请换成你的 AppImage 路径
+Exec=/your/appimage/path %U
+Icon=clash-nyanpasu
+Terminal=false
+Categories=Development;
+# 是否开机自启
+X-Autostart=true
+
 ```
 
 更新一下数据库：
@@ -160,10 +163,12 @@ Autostart=true # 是否开机自启
 ::: code-group
 
 ```bash [用户目录]
+gtk-update-icon-cache ~/.local/share/icons/hicolor
 update-desktop-database ~/.local/share/applications
 ```
 
 ```bash [系统目录]
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
 sudo update-desktop-database /usr/share/applications
 ```
 

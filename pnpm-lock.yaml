@@ -55,8 +55,8 @@ importers:
         specifier: 14.1.2
         version: 14.1.2
       '@types/markdown-it-container':
-        specifier: 2.0.10
-        version: 2.0.10
+        specifier: 2.0.11
+        version: 2.0.11
       '@types/markdown-it-footnote':
         specifier: 3.0.4
         version: 3.0.4
@@ -1862,6 +1862,9 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
+  '@types/linkify-it@3.0.5':
+    resolution: {integrity: sha512-yg6E+u0/+Zjva+buc3EIb+29XEg4wltq7cSmd4Uc2EE/1nUVmxyzpX6gUXD0V8jIrG0r7YeOGVIbYRkxeooCtw==}
+
   '@types/linkify-it@5.0.0':
     resolution: {integrity: sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==}
 
@@ -1871,17 +1874,23 @@ packages:
   '@types/lodash@4.14.202':
     resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
 
-  '@types/markdown-it-container@2.0.10':
-    resolution: {integrity: sha512-zv+YxrlSYRq51e9kzm3orv4OvF4U79Ll1OyplNXr00o4ZC/8PukJk/jEWH7CnsMtrSWZlyv0czhz42jm9J4uLw==}
+  '@types/markdown-it-container@2.0.11':
+    resolution: {integrity: sha512-tiVQNp2zEHoW7EQa3nNjGRoVk1Uqw9FN7xD39k663lknKZFfByPT3oDyHiaGg+IYu0vSL37PGpDjjMOgtw2GUA==}
 
   '@types/markdown-it-footnote@3.0.4':
     resolution: {integrity: sha512-XJ6n+v+2u+2gmYLSHcxyoNT/YrgrKvHuDJQlykFjuxCQCr86P2/fx1V6/0lcKxv5cSIlCaJ6sUcNS3zDI7I+LA==}
+
+  '@types/markdown-it@13.0.9':
+    resolution: {integrity: sha512-1XPwR0+MgXLWfTn9gCsZ55AHOKW1WN+P9vr0PaQh5aerR9LLQXUbjfEAFhjmEmyoYFWAyuN2Mqkn40MZ4ukjBw==}
 
   '@types/markdown-it@14.1.2':
     resolution: {integrity: sha512-promo4eFwuiW+TfGxhi+0x3czqTYJkG8qB17ZUJiVF10Xm7NLVRSLUsfRTU/6h1e24VvRnXCx+hG7li58lkzog==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
+
+  '@types/mdurl@1.0.5':
+    resolution: {integrity: sha512-6L6VymKTzYSrEf4Nev4Xa1LCHKrlTlYCBMTlQKFuddo1CvQcE52I0mwfOJayueUC7MJuXOeHTcIU683lzd0cUA==}
 
   '@types/mdurl@2.0.0':
     resolution: {integrity: sha512-RGdgjQUZba5p6QEFAVx2OGb8rQDL/cPRG7GiedRzMcJ1tYnUANBncjbSB1NRGwbvjcPeikRABz2nshyPk1bhWg==}
@@ -8340,6 +8349,8 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
+  '@types/linkify-it@3.0.5': {}
+
   '@types/linkify-it@5.0.0': {}
 
   '@types/lodash-es@4.17.12':
@@ -8348,13 +8359,18 @@ snapshots:
 
   '@types/lodash@4.14.202': {}
 
-  '@types/markdown-it-container@2.0.10':
+  '@types/markdown-it-container@2.0.11':
     dependencies:
-      '@types/markdown-it': 14.1.2
+      '@types/markdown-it': 13.0.9
 
   '@types/markdown-it-footnote@3.0.4':
     dependencies:
       '@types/markdown-it': 14.1.2
+
+  '@types/markdown-it@13.0.9':
+    dependencies:
+      '@types/linkify-it': 3.0.5
+      '@types/mdurl': 1.0.5
 
   '@types/markdown-it@14.1.2':
     dependencies:
@@ -8364,6 +8380,8 @@ snapshots:
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.2
+
+  '@types/mdurl@1.0.5': {}
 
   '@types/mdurl@2.0.0': {}
 
@@ -12360,7 +12378,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-html@1.8.0:
     dependencies:
@@ -12385,7 +12403,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.6
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -12405,7 +12423,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -12475,7 +12493,7 @@ snapshots:
     dependencies:
       postcss: 8.5.6
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -13296,7 +13314,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.0)(postcss-scss@4.0.9(postcss@8.5.6))(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7

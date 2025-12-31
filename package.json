@@ -109,5 +109,5 @@
     "@octokit/types": "^13.5.0",
     "octokit": "^4.0.2"
   },
-  "packageManager": "pnpm@10.26.2"
+  "packageManager": "pnpm@10.27.0"
 }

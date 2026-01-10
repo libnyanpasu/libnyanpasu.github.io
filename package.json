@@ -42,7 +42,7 @@
     "@types/markdown-it": "14.1.2",
     "@types/markdown-it-container": "2.0.11",
     "@types/markdown-it-footnote": "3.0.4",
-    "@types/node": "22.19.3",
+    "@types/node": "22.19.5",
     "@unocss/preset-attributify": "0.65.4",
     "@unocss/preset-icons": "0.65.4",
     "@unocss/preset-uno": "0.65.4",
@@ -109,5 +109,5 @@
     "@octokit/types": "^13.5.0",
     "octokit": "^4.0.2"
   },
-  "packageManager": "pnpm@10.27.0"
+  "packageManager": "pnpm@10.28.0"
 }

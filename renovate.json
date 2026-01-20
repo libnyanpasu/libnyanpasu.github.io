@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     "default:automergeMinor",
     "default:disableRateLimiting",
     "default:rebaseStalePrs",
@@ -9,26 +9,26 @@
   "packageRules": [
     {
       "groupName": "Vite & Vue packages",
-      "matchPackagePatterns": ["vite", "vue", "vueuse", "unplugin"]
+      "matchPackageNames": ["/vite/", "/vue/", "/vueuse/", "/unplugin/"]
     },
     {
       "groupName": "TypeScript",
-      "matchPackagePatterns": ["typescript"]
+      "matchPackageNames": ["/typescript/"]
     },
     {
       "groupName": "Lint packages",
-      "matchPackagePatterns": [
-        "eslint",
-        "prettier",
-        "commitlint",
-        "stylelint",
-        "husky",
-        "lint-staged"
+      "matchPackageNames": [
+        "/eslint/",
+        "/prettier/",
+        "/commitlint/",
+        "/stylelint/",
+        "/husky/",
+        "/lint-staged/"
       ]
     },
     {
       "groupName": "Testing packages",
-      "matchPackagePatterns": ["vitest", "cypress"]
+      "matchPackageNames": ["/vitest/", "/cypress/"]
     }
   ]
 }

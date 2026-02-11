@@ -72,7 +72,7 @@
     "husky": "9.1.7",
     "lint-staged": "15.4.1",
     "lodash-es": "4.17.23",
-    "markdown-it": "14.1.0",
+    "markdown-it": "14.1.1",
     "markdown-it-container": "4.0.0",
     "markdown-it-footnote": "4.0.0",
     "mermaid": "^11.0.0",

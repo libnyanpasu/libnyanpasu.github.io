@@ -36,7 +36,7 @@
     "@material/material-color-utilities": "^0.4.0",
     "@material/web": "^2.0.0",
     "@mermaid-js/mermaid-mindmap": "^9.3.0",
-    "@tsconfig/node20": "20.1.9",
+    "@tsconfig/node22": "22.0.0",
     "@types/eslint__js": "^8.42.3",
     "@types/lodash-es": "4.17.12",
     "@types/markdown-it": "14.1.2",

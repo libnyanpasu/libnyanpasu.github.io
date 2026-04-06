@@ -218,7 +218,7 @@ importers:
         version: 8.20.0(eslint@9.18.0(jiti@1.21.7))(typescript@5.9.3)
       unocss:
         specifier: 0.65.4
-        version: 0.65.4(postcss@8.5.8)(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
+        version: 0.65.4(postcss@8.5.8)(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
       unplugin-auto-import:
         specifier: 19.3.0
         version: 19.3.0(@nuxt/kit@3.13.2(rollup@4.40.0))(@vueuse/core@12.8.2(typescript@5.9.3))
@@ -229,11 +229,11 @@ importers:
         specifier: 28.8.0
         version: 28.8.0(@babel/parser@7.29.2)(@nuxt/kit@3.13.2(rollup@4.40.0))(vue@3.5.32(typescript@5.9.3))
       vite:
-        specifier: 6.4.1
-        version: 6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+        specifier: 6.4.2
+        version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-vuetify:
         specifier: ^2.0.4
-        version: 2.1.3(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5)
+        version: 2.1.3(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5)
       vitepress:
         specifier: 1.6.4
         version: 1.6.4(@algolia/client-search@5.19.0)(@types/node@22.19.17)(postcss@8.5.8)(sass@1.99.0)(search-insights@2.13.0)(sugarss@2.0.0)(typescript@5.9.3)
@@ -3604,14 +3604,6 @@ packages:
   fastq@1.19.1:
     resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
 
-  fdir@6.4.4:
-    resolution: {integrity: sha512-1NZP+GK4GfuAv3PqKvxQRDMjdSRZjnkq7KfhlNrCNNlZ0ygQFpebfrnfnq/W7fpUnAv9aGWmY1zKx7FYL3gwhg==}
-    peerDependencies:
-      picomatch: ^3 || ^4
-    peerDependenciesMeta:
-      picomatch:
-        optional: true
-
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
     engines: {node: '>=12.0.0'}
@@ -6033,10 +6025,6 @@ packages:
   tinyexec@1.0.1:
     resolution: {integrity: sha512-5uC6DDlmeqiOwCPmK9jMSdOuZTh8bU39Ys6yidB+UTt5hfZUPGAypSgFRiEp+jbi9qH40BLDvy85jIU88wKSqw==}
 
-  tinyglobby@0.2.13:
-    resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==}
-    engines: {node: '>=12.0.0'}
-
   tinyglobby@0.2.14:
     resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==}
     engines: {node: '>=12.0.0'}
@@ -6464,8 +6452,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.4.1:
-    resolution: {integrity: sha512-+Oxm7q9hDoLMyJOYfUYBuHQo+dkAloi33apOPP56pzj+vsdJDzr+j1NISE5pyaAuKL4A3UD34qd0lx5+kfKp2g==}
+  vite@6.4.2:
+    resolution: {integrity: sha512-2N/55r4JDJ4gdrCvGgINMy+HH3iRpNIz8K6SFwVsA+JbQScLiC+clmAxBgwiSPgcG9U15QmvqCGWzMbqda5zGQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -8528,13 +8516,13 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@unocss/astro@0.65.4(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))':
+  '@unocss/astro@0.65.4(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))':
     dependencies:
       '@unocss/core': 0.65.4
       '@unocss/reset': 0.65.4
-      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
+      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
     optionalDependencies:
-      vite: 6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -8554,7 +8542,7 @@ snapshots:
       magic-string: 0.30.17
       pathe: 1.1.2
       perfect-debounce: 1.0.0
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -8590,7 +8578,7 @@ snapshots:
       '@unocss/rule-utils': 0.65.4
       css-tree: 3.1.0
       postcss: 8.5.8
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
     transitivePeerDependencies:
       - supports-color
 
@@ -8664,7 +8652,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.65.4
 
-  '@unocss/vite@0.65.4(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))':
+  '@unocss/vite@0.65.4(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
@@ -8673,8 +8661,8 @@ snapshots:
       '@unocss/inspector': 0.65.4(vue@3.5.32(typescript@5.9.3))
       chokidar: 3.6.0
       magic-string: 0.30.17
-      tinyglobby: 0.2.14
-      vite: 6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      tinyglobby: 0.2.15
+      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -10553,14 +10541,6 @@ snapshots:
     dependencies:
       reusify: 1.1.0
 
-  fdir@6.4.4(picomatch@4.0.2):
-    optionalDependencies:
-      picomatch: 4.0.2
-
-  fdir@6.4.4(picomatch@4.0.3):
-    optionalDependencies:
-      picomatch: 4.0.3
-
   fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
@@ -12232,7 +12212,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-html@1.8.1:
     dependencies:
@@ -12257,7 +12237,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.6
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -12277,7 +12257,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -12347,7 +12327,7 @@ snapshots:
     dependencies:
       postcss: 8.5.8
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -13166,7 +13146,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-scss@4.0.9(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -13297,15 +13277,10 @@ snapshots:
 
   tinyexec@1.0.1: {}
 
-  tinyglobby@0.2.13:
-    dependencies:
-      fdir: 6.4.4(picomatch@4.0.3)
-      picomatch: 4.0.3
-
   tinyglobby@0.2.14:
     dependencies:
-      fdir: 6.4.4(picomatch@4.0.2)
-      picomatch: 4.0.2
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
 
   tinyglobby@0.2.15:
     dependencies:
@@ -13591,11 +13566,11 @@ snapshots:
       magic-string: 0.30.17
       mlly: 1.7.4
       pathe: 2.0.3
-      picomatch: 4.0.2
+      picomatch: 4.0.3
       pkg-types: 2.1.0
       scule: 1.3.0
       strip-literal: 3.0.0
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.15
       unplugin: 2.3.4
       unplugin-utils: 0.2.4
 
@@ -13655,9 +13630,9 @@ snapshots:
 
   universal-user-agent@7.0.3: {}
 
-  unocss@0.65.4(postcss@8.5.8)(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3)):
+  unocss@0.65.4(postcss@8.5.8)(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3)):
     dependencies:
-      '@unocss/astro': 0.65.4(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
+      '@unocss/astro': 0.65.4(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
       '@unocss/cli': 0.65.4(rollup@4.40.0)
       '@unocss/core': 0.65.4
       '@unocss/postcss': 0.65.4(postcss@8.5.8)
@@ -13673,9 +13648,9 @@ snapshots:
       '@unocss/transformer-compile-class': 0.65.4
       '@unocss/transformer-directives': 0.65.4
       '@unocss/transformer-variant-group': 0.65.4
-      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
+      '@unocss/vite': 0.65.4(rollup@4.40.0)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))
     optionalDependencies:
-      vite: 6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -13709,7 +13684,7 @@ snapshots:
   unplugin-utils@0.2.4:
     dependencies:
       pathe: 2.0.3
-      picomatch: 4.0.2
+      picomatch: 4.0.3
 
   unplugin-vue-components@28.8.0(@babel/parser@7.29.2)(@nuxt/kit@3.13.2(rollup@4.40.0))(vue@3.5.32(typescript@5.9.3)):
     dependencies:
@@ -13744,13 +13719,13 @@ snapshots:
   unplugin@2.3.4:
     dependencies:
       acorn: 8.14.1
-      picomatch: 4.0.2
+      picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
   unplugin@2.3.5:
     dependencies:
       acorn: 8.14.1
-      picomatch: 4.0.2
+      picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
   unset-value@1.0.0:
@@ -13819,12 +13794,12 @@ snapshots:
       '@types/unist': 3.0.2
       vfile-message: 4.0.2
 
-  vite-plugin-vuetify@2.1.3(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5):
+  vite-plugin-vuetify@2.1.3(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5):
     dependencies:
       '@vuetify/loader-shared': 2.1.2(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5)
       debug: 4.4.3
       upath: 2.0.1
-      vite: 6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1)
       vue: 3.5.32(typescript@5.9.3)
       vuetify: 3.12.5(typescript@5.9.3)(vite-plugin-vuetify@2.1.3)(vue@3.5.32(typescript@5.9.3))
     transitivePeerDependencies:
@@ -13841,14 +13816,14 @@ snapshots:
       sass: 1.99.0
       sugarss: 2.0.0
 
-  vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1):
+  vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1):
     dependencies:
       esbuild: 0.25.0
-      fdir: 6.4.4(picomatch@4.0.3)
+      fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.8
       rollup: 4.40.0
-      tinyglobby: 0.2.14
+      tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 22.19.17
       fsevents: 2.3.3
@@ -13967,7 +13942,7 @@ snapshots:
       vue: 3.5.32(typescript@5.9.3)
     optionalDependencies:
       typescript: 5.9.3
-      vite-plugin-vuetify: 2.1.3(vite@6.4.1(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5)
+      vite-plugin-vuetify: 2.1.3(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(sass@1.99.0)(sugarss@2.0.0)(tsx@4.19.2)(yaml@2.6.1))(vue@3.5.32(typescript@5.9.3))(vuetify@3.12.5)
 
   webpack-virtual-modules@0.6.2: {}
 

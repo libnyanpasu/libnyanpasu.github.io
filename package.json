@@ -78,7 +78,7 @@
     "mermaid": "^11.0.0",
     "neostandard": "^0.13.0",
     "npm-run-all2": "7.0.2",
-    "postcss": "8.5.8",
+    "postcss": "8.5.9",
     "postcss-html": "1.8.1",
     "postcss-scss": "4.0.9",
     "prettier": "3.4.2",

@@ -3,7 +3,6 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
 import prettierConfig from '@vue/eslint-config-prettier'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import { includeIgnoreFile } from '@eslint/compat'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -17,7 +16,6 @@ export default tseslint.config(
   ...neostandard({
     noStyle: true
   }),
-  eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   prettierConfig,

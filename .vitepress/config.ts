@@ -218,10 +218,10 @@ export default withMermaid({
         Icons()
       ],
       optimizeDeps: {
-        include: ['vuetify']
+        include: ['vuetify', '@material/material-color-utilities']
       },
       ssr: {
-        noExternal: ['vuetify']
+        noExternal: ['vuetify', '@material/material-color-utilities']
       }
     },
     head: [

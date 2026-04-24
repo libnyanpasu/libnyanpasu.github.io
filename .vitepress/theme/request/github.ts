@@ -1,4 +1,4 @@
-import { Octokit, App } from 'octokit'
+import { Octokit } from 'octokit'
 
 const BASE_OPTIONS = {
   owner: 'libnyanpasu',

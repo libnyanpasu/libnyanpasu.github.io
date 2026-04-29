@@ -136,8 +136,7 @@ Enable hosts configuration field.
 
 ### script
 
-::: warning
-ONLY SUPPORT Premiun kernel.
+:::caution[ONLY SUPPORT Premiun kernel.]
 
 You should prioritize using the Nyanpasu script feature.
 :::
@@ -206,8 +205,7 @@ Capable of proxying both TCP and UDP traffic.
 
 ### external-ui
 
-::: info
-Recommend using the built-in Web UI management feature of Nyanpasu.
+:::note[Recommend using the built-in Web UI management feature of Nyanpasu.]
 :::
 
 Allows running static webpage resources (such as Clash-dashboard) on Clash API, path is API address/ui.

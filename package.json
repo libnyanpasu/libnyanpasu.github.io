@@ -1,10 +1,7 @@
 {
-  "name": "wiki",
+  "name": "@nyanpasu/website",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
   "license": "MIT",
-  "author": "keiko233 <i@elaina.moe>",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -45,11 +42,9 @@
     "postcss": "^8.5.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remark-directive": "^4.0.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.2.4",
-    "typescript": "5.9.3",
-    "unist-util-visit": "^5.0.0"
+    "typescript": "5.9.3"
   },
   "engines": {
     "node": ">=20"

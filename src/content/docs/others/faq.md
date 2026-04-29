@@ -29,7 +29,7 @@ There are currently two ways to open it directly:
 
 > The same can be done for the log directory.
 
-::: info Tips
+:::note[Tips]
 
 In case you cannot access the tray and cannot get to the main program interface, we can open it by entering the path directly.
 
@@ -57,7 +57,7 @@ If you need to get the logs yourself, you can navigate to the **data directory**
 
 ### 4. How to enable TUN mode?
 
-::: info Note
+:::note[Note]
 TUN mode requires certain permissions.
 
 - For Windows, run Clash Nyanpasu as an administrator to enable TUN mode.

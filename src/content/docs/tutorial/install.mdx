@@ -4,6 +4,8 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
 # Installation
 
 Clash Nyanpasu currently supports Windows 7 and later, Linux, and macOS 10.15 and later.
@@ -11,7 +13,7 @@ Clash Nyanpasu currently supports Windows 7 and later, Linux, and macOS 10.15 an
 - The Windows Arm64 variants is not currently supported and will be considered for support once it is supported by Clash Rust.
 - The Linux variants does not currently support the Arm architecture and will be considered for support after the 1.5.0 release.
 
-::: info Tips
+:::note[Tips]
 
 Some explanations of terms included in the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page:
 
@@ -25,7 +27,7 @@ We currently plan to support only `x86`, `amd64` and `aarch64` architectures.
 
 ## Windows
 
-::: warning Note
+:::caution[Note]
 Starting with 1.5.0, **Clash Nyanpasu** no longer provides MSI installers.
 :::
 
@@ -37,7 +39,7 @@ Please download the latest version of `Clash.Nyanpasu_x.y.z_x64-setup.exe` from 
 
 ### Portable
 
-::: warning Note
+:::caution[Note]
 Please note that Tauri does not officially **support** the portable variant. The portable[^1] variant provided by Clash Nyanpasu is generated through an automated packaging process and explicitly ignores WebView2 detection, so some problems may be encountered. We plan to stick to the principle that the portable variant does not modify the registry in the future. As a result, some features may **not** work properly:
 
 - **System Services**: We are planning to **remove** `nyanpasu-service` from the portable variant because it does service registration and modifies the registry, which is against the principles of the portable variant.
@@ -60,7 +62,7 @@ For Linux, due to the limitations of AppImage, we recommend using **Package Mana
 
 Tauri 2 is currently in beta, and when it is released, we will introduce more package support and potentially Flatpak support[^2].
 
-::: warning Note
+:::caution[Note]
 The following features are currently not supported for installation via package manager:
 
 - In-app updates
@@ -89,25 +91,15 @@ AUR packages are currently provided by enthusiasts: [Stable (need to compile)](h
 
 The following is a demonstration of installing AUR packages using `paru`:
 
-::: code-group
-
-```bash [Stable (need to compile)]
-paru -Syu clash-nyanpasu
-```
-
-```bash [Stable (binaries)]
-paru -Syu clash-nyanpasu-bin
-```
-
-```bash [Development (need to compile)]
-paru -Syu clash-nyanpasu-git
-```
-
-:::
+<Tabs>
+  <TabItem label="Stable (need to compile)">```bash paru -Syu clash-nyanpasu ```</TabItem>
+  <TabItem label="Stable (binaries)">```bash paru -Syu clash-nyanpasu-bin ```</TabItem>
+  <TabItem label="Development (need to compile)">```bash paru -Syu clash-nyanpasu-git ```</TabItem>
+</Tabs>
 
 ### AppImage
 
-::: warning Tip
+:::caution[Tip]
 The following known bugs exist with the AppImage variant:
 
 - TUN authorization is not supported. If you need to use TUN mode, start the AppImage variant with `sudo`.
@@ -131,19 +123,21 @@ chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 If you need to autostart, you may need to write a `.desktop` file.
 The following is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
 First, let's download the icon for Clash Nyanpasu:
-::: code-group
 
-```bash [User Directory]
-mkdir -p ~/.local/share/icons/clash-nyanpasu
-wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-```
-
-```bash [System Directory]
-sudo mkdir -p /usr/share/icons/clash-nyanpasu
-sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-```
-
-:::
+<Tabs>
+  <TabItem label="User Directory">
+    ```bash mkdir -p ~/.local/share/icons/clash-nyanpasu wget -O
+    ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png
+    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+    ```
+  </TabItem>
+  <TabItem label="System Directory">
+    ```bash sudo mkdir -p /usr/share/icons/clash-nyanpasu sudo wget -O
+    /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png
+    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+    ```
+  </TabItem>
+</Tabs>
 
 Then we write the `.desktop` file:
 
@@ -162,17 +156,14 @@ Autostart=true # Whether to autostart or not.
 
 Update the database:
 
-::: code-group
-
-```bash [User Directory]
-update-desktop-database ~/.local/share/applications
-```
-
-```bash [System Directory]
-sudo update-desktop-database /usr/share/applications
-```
-
-:::
+<Tabs>
+  <TabItem label="User Directory">
+    ```bash update-desktop-database ~/.local/share/applications ```
+  </TabItem>
+  <TabItem label="System Directory">
+    ```bash sudo update-desktop-database /usr/share/applications ```
+  </TabItem>
+</Tabs>
 
 ## Reference
 

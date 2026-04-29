@@ -32,14 +32,14 @@ flowchart TD
 
 ## Merge Processing
 
-::: tip Note
+:::tip[Note]
 Starting from version `1.6.0`, we have enabled custom keywords to support the `.` object access operator and perform recursive merging by default, avoiding direct overwriting of existing configurations. If you need to override, use `override__x.y.z` to apply the old behavior.
 Additionally, we plan to introduce a new `pipeline` node for pipeline expression operations, simplifying GUI-based configuration.
 :::
 
 This processing node provides configuration merging functionality similar to `OpenClash`. It achieves this by defining the following rules for overwriting configurations.
 
-::: warning Note
+:::caution[Note]
 When using other fields like `dns`, `tun`, etc., you need to select the corresponding fields in the **_Clash Fields_** section on the settings page. Fields that are not selected will be ignored.
 Moreover, Merge rules are executed in **top-down order**.
 :::
@@ -176,7 +176,7 @@ filter__proxy-groups:
 
 ## Script Processing
 
-::: info Note
+:::note[Note]
 
 We plan to introduce the `unstable_get` method in version `1.6.2`, allowing HTTP GET requests to fetch remote content for processing.
 

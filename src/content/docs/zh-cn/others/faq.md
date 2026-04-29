@@ -28,7 +28,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 
 > 日志目录也同样可以。
 
-::: info 提示
+:::note[提示]
 在无法访问托盘、无法进入主界面的情况，我们可以直接输入路径打开。
 
 自 v1.6.0 起，Clash Nyanpasu 将安装目录拆分为配置目录和数据目录，日志目录移动至数据目录中，Windows 用户可选择迁移配置目录。
@@ -53,7 +53,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
 
 ### 4. 如何开启 TUN 模式？
 
-::: info 提示
+:::note[提示]
 TUN 模式需要一定的权限。
 
 - 对于 Windows，请以管理员身份运行 Clash Nyanpasu 才能开启。

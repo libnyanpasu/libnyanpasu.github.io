@@ -9,39 +9,23 @@
   "packageRules": [
     {
       "groupName": "Astro packages",
-      "matchPackageNames": [
-        "/astro/",
-        "/@astrojs//"
-      ]
+      "matchPackageNames": ["/astro/", "/@astrojs//"]
     },
     {
       "groupName": "React packages",
-      "matchPackageNames": [
-        "/react/",
-        "/@types/react/"
-      ]
+      "matchPackageNames": ["/react/", "/@types/react/"]
     },
     {
       "groupName": "TypeScript",
-      "matchPackageNames": [
-        "/typescript/"
-      ]
+      "matchPackageNames": ["/typescript/"]
     },
     {
       "groupName": "Lint & Format packages",
-      "matchPackageNames": [
-        "/oxlint/",
-        "/oxfmt/",
-        "/commitlint/",
-        "/husky/",
-        "/lint-staged/"
-      ]
+      "matchPackageNames": ["/oxlint/", "/oxfmt/", "/commitlint/", "/husky/", "/lint-staged/"]
     },
     {
       "groupName": "Inlang packages",
-      "matchPackageNames": [
-        "/@inlang//"
-      ]
+      "matchPackageNames": ["/@inlang//"]
     }
   ]
 }

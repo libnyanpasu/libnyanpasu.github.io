@@ -1,0 +1,5 @@
+pnpm-lock.yaml
+src/paraglide/
+dist/
+node_modules/
+.astro/

@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: latest
       - uses: pnpm/action-setup@v4
         with:
           run_install: false
@@ -35,3 +35,7 @@ jobs:
         run: pnpm i
       - name: Lint
         run: pnpm lint
+      - name: Format Check
+        run: pnpm fmt:check
+      - name: Type Check
+        run: pnpm check

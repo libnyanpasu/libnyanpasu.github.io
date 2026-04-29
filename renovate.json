@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     "default:automergeMinor",
     "default:disableRateLimiting",
     "default:rebaseStalePrs",
@@ -9,23 +9,39 @@
   "packageRules": [
     {
       "groupName": "Astro packages",
-      "matchPackagePatterns": ["astro", "@astrojs/"]
+      "matchPackageNames": [
+        "/astro/",
+        "/@astrojs//"
+      ]
     },
     {
       "groupName": "React packages",
-      "matchPackagePatterns": ["react", "@types/react"]
+      "matchPackageNames": [
+        "/react/",
+        "/@types/react/"
+      ]
     },
     {
       "groupName": "TypeScript",
-      "matchPackagePatterns": ["typescript"]
+      "matchPackageNames": [
+        "/typescript/"
+      ]
     },
     {
       "groupName": "Lint & Format packages",
-      "matchPackagePatterns": ["oxlint", "oxfmt", "commitlint", "husky", "lint-staged"]
+      "matchPackageNames": [
+        "/oxlint/",
+        "/oxfmt/",
+        "/commitlint/",
+        "/husky/",
+        "/lint-staged/"
+      ]
     },
     {
       "groupName": "Inlang packages",
-      "matchPackagePatterns": ["@inlang/"]
+      "matchPackageNames": [
+        "/@inlang//"
+      ]
     }
   ]
 }

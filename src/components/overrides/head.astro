@@ -9,7 +9,7 @@ import Default from "@astrojs/starlight/components/Head.astro";
 
 <script is:inline>
   // Redirect legacy .html URLs (from old website) to clean URLs
-  const { pathname } = window.location;
+  const { pathname: p } = window.location;
 
   if (p.endsWith(".html")) {
     window.location.replace(

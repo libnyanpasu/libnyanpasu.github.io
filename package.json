@@ -41,7 +41,7 @@
     "@octokit/types": "^13.5.0",
     "@tailwindcss/vite": "^4.2.4",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "22.19.17",
+    "@types/node": "24.12.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "astro": "^6.1.10",

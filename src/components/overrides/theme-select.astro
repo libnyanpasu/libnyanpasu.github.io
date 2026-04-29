@@ -1,8 +1,10 @@
 ---
-import { ExperimentalThemeProvider } from "@/components/theme/theme-context";
+import DefaultThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import { ThemeProvider } from "@/components/theme/theme-context";
 import ThemeToggle from "@/components/ui/theme-toggle";
 ---
 
-<ExperimentalThemeProvider client:load>
+<DefaultThemeSelect />
+<ThemeProvider client:load>
   <ThemeToggle />
-</ExperimentalThemeProvider>
+</ThemeProvider>

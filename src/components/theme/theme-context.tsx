@@ -1,43 +1,17 @@
 import { isEqual, kebabCase } from "lodash-es";
+import { useLocalStorage } from "usehooks-ts";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type { ReactNode } from "react";
 import {
   argbFromHex,
   hexFromArgb,
   themeFromSourceColor,
   type Theme,
 } from "@material/material-color-utilities";
+import { alpha, darken, lighten } from "@/lib/color";
+import { isBrowser } from "@/consts";
+import { insertStyle } from "@/lib/styled";
 
-// ---------------------------------------------------------------------------
-// Color utilities (ported from @nyanpasu/utils)
-// ---------------------------------------------------------------------------
-const alpha = (color: string, value: number) =>
-  `color-mix(in srgb, ${color} ${(value * 100).toFixed(2)}%, transparent ${((1 - value) * 100).toFixed(2)}%)`;
-
-const lighten = (color: string, value: number) =>
-  `color-mix(in lch, ${color} ${((1 - value) * 100).toFixed(2)}%, white ${(value * 100).toFixed(2)}%)`;
-
-const darken = (color: string, value: number) =>
-  `color-mix(in lch, ${color} ${((1 - value) * 100).toFixed(2)}%, black ${(value * 100).toFixed(2)}%)`;
-
-// ---------------------------------------------------------------------------
-// DOM helpers
-// ---------------------------------------------------------------------------
-const isBrowser = typeof window !== "undefined";
-
-function insertStyle(id: string, style: string) {
-  if (!isBrowser) return;
-  const old = document.getElementById(id);
-  if (old) document.head.removeChild(old);
-  const el = document.createElement("style");
-  el.id = id;
-  el.innerHTML = style;
-  document.head.appendChild(el);
-}
-
-// ---------------------------------------------------------------------------
-// Theme mode
-// ---------------------------------------------------------------------------
 export enum ThemeMode {
   LIGHT = "light",
   DARK = "dark",
@@ -52,9 +26,6 @@ const CUSTOM_THEME_KEY = "custom-theme" as const;
 const THEME_PALETTE_KEY = "theme-palette-v1" as const;
 const THEME_CSS_VARS_KEY = "theme-css-vars-v1" as const;
 
-// ---------------------------------------------------------------------------
-// Generate CSS custom properties from a Material theme
-// ---------------------------------------------------------------------------
 const generateThemeCssVars = ({ schemes }: Theme) => {
   let lightCssVars = ":root{";
   let darkCssVars = ":root.dark{";
@@ -78,11 +49,9 @@ const generateThemeCssVars = ({ schemes }: Theme) => {
   return lightCssVars + darkCssVars;
 };
 
-// ---------------------------------------------------------------------------
-// DOM / localStorage helpers (SSR-safe)
-// ---------------------------------------------------------------------------
 const STORAGE_THEME_MODE = "nyanpasu-theme-mode";
 const STORAGE_THEME_COLOR = "nyanpasu-theme-color";
+const STARLIGHT_THEME_STORAGE_KEY = "starlight-theme";
 
 const getSystemThemeMode = (): ResolvedThemeMode =>
   isBrowser && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -90,11 +59,25 @@ const getSystemThemeMode = (): ResolvedThemeMode =>
     : ThemeMode.LIGHT;
 
 const changeHtmlThemeMode = (mode: ResolvedThemeMode) => {
-  if (!isBrowser) return;
+  if (!isBrowser) {
+    return;
+  }
+
   const root = document.documentElement;
   root.classList.toggle("dark", mode === ThemeMode.DARK);
   root.classList.toggle("light", mode === ThemeMode.LIGHT);
 };
+
+const toStarlightTheme = (mode: ThemeMode) =>
+  mode === ThemeMode.LIGHT || mode === ThemeMode.DARK ? mode : "auto";
+
+declare global {
+  interface Window {
+    StarlightThemeProvider?: {
+      updatePickers: (theme?: "auto" | "dark" | "light") => void;
+    };
+  }
+}
 
 const getThemeScheme = (theme: Theme, mode: ResolvedThemeMode) => {
   const scheme = theme.schemes[mode];
@@ -102,7 +85,10 @@ const getThemeScheme = (theme: Theme, mode: ResolvedThemeMode) => {
 };
 
 const applyRootStyleVar = (mode: ResolvedThemeMode, themePalette: Theme) => {
-  if (!isBrowser) return;
+  if (!isBrowser) {
+    return;
+  }
+
   const root = document.documentElement;
   const scheme = getThemeScheme(themePalette, mode);
   const secondaryColor = hexFromArgb(scheme.secondary);
@@ -119,40 +105,6 @@ const applyRootStyleVar = (mode: ResolvedThemeMode, themePalette: Theme) => {
   root.style.setProperty("--background-color-alpha", alpha(primaryColor, 0.1));
 };
 
-// ---------------------------------------------------------------------------
-// SSR-safe localStorage hook (replaces @uidotdev/usehooks client-only hook)
-// ---------------------------------------------------------------------------
-function useSsrSafeLocalStorage<T>(key: string, initialValue: T): [T, Dispatch<SetStateAction<T>>] {
-  if (!isBrowser) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useState<T>(initialValue);
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [value, setValue] = useState<T>(() => {
-    try {
-      const raw = localStorage.getItem(key);
-      return raw !== null ? (JSON.parse(raw) as T) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch {
-      // quota exceeded or private mode — silently ignore
-    }
-  }, [key, value]);
-
-  return [value, setValue];
-}
-
-// ---------------------------------------------------------------------------
-// Context
-// ---------------------------------------------------------------------------
 interface ThemeContextValue {
   themePalette: Theme;
   themeCssVars: string;
@@ -177,37 +129,40 @@ const defaultContextValue: ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue>(defaultContextValue);
 
-export function useExperimentalThemeContext() {
-  return useContext(ThemeContext);
+export function useThemeContext() {
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useThemeContext must be used within a ThemeProvider");
+  }
+
+  return context;
 }
 
-// ---------------------------------------------------------------------------
-// Provider
-// ---------------------------------------------------------------------------
-export function ExperimentalThemeProvider({ children }: { children: ReactNode }) {
-  // Persistent user preferences (replaces useSetting with useSsrSafeLocalStorage)
-  const [themeModeSetting, setThemeModeSetting] = useSsrSafeLocalStorage<ThemeMode>(
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  // Persistent user preferences
+  const [themeModeSetting, setThemeModeSetting] = useLocalStorage<ThemeMode>(
     STORAGE_THEME_MODE,
     ThemeMode.SYSTEM,
   );
-  const [themeColorSetting, setThemeColorSetting] = useSsrSafeLocalStorage<string>(
+  const [themeColorSetting, setThemeColorSetting] = useLocalStorage<string>(
     STORAGE_THEME_COLOR,
     DEFAULT_COLOR,
   );
 
-  // Resolved theme (auto → system preference)
+  // Resolved theme (auto -> system preference)
   const [resolvedThemeMode, setResolvedThemeMode] = useState<ResolvedThemeMode>(
     isBrowser ? getSystemThemeMode() : ThemeMode.LIGHT,
   );
 
   // Material theme palette (cached)
-  const [cachedThemePalette, setCachedThemePalette] = useSsrSafeLocalStorage<Theme>(
+  const [cachedThemePalette, setCachedThemePalette] = useLocalStorage<Theme>(
     THEME_PALETTE_KEY,
     themeFromSourceColor(argbFromHex(themeColorSetting || DEFAULT_COLOR)),
   );
 
   // CSS vars string (cached)
-  const [cachedThemeCssVars, setCachedThemeCssVars] = useSsrSafeLocalStorage<string>(
+  const [cachedThemeCssVars, setCachedThemeCssVars] = useLocalStorage<string>(
     THEME_CSS_VARS_KEY,
     generateThemeCssVars(cachedThemePalette),
   );
@@ -266,6 +221,7 @@ export function ExperimentalThemeProvider({ children }: { children: ReactNode })
   // Initialize theme mode on mount
   useEffect(() => {
     const stored = themeModeSetting;
+
     if (stored === ThemeMode.SYSTEM) {
       applyThemeMode(getSystemThemeMode());
     } else if (stored === ThemeMode.LIGHT || stored === ThemeMode.DARK) {
@@ -275,7 +231,10 @@ export function ExperimentalThemeProvider({ children }: { children: ReactNode })
 
   // Listen for system theme changes when in auto mode
   useEffect(() => {
-    if (!isBrowser) return;
+    if (!isBrowser) {
+      return;
+    }
+
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = () => {
       if (themeModeSetting === ThemeMode.SYSTEM) {
@@ -288,26 +247,34 @@ export function ExperimentalThemeProvider({ children }: { children: ReactNode })
 
   const setThemeMode = useCallback(
     async (mode: ThemeMode) => {
-      if (mode !== ThemeMode.SYSTEM) {
-        applyThemeMode(mode as ResolvedThemeMode);
-      }
+      const nextResolvedMode = mode === ThemeMode.SYSTEM ? getSystemThemeMode() : mode;
+      applyThemeMode(nextResolvedMode);
       if (mode !== themeModeSetting) {
         setThemeModeSetting(mode);
       }
+
       // Sync with Starlight's localStorage key
       if (isBrowser) {
         localStorage.setItem(
-          "starlight-theme",
+          STARLIGHT_THEME_STORAGE_KEY,
           mode === ThemeMode.LIGHT || mode === ThemeMode.DARK ? mode : "",
         );
+
+        window.StarlightThemeProvider?.updatePickers(toStarlightTheme(mode));
       }
     },
     [applyThemeMode, themeModeSetting, setThemeModeSetting],
   );
 
   const currentThemeMode = useMemo<ResolvedThemeMode>(() => {
-    if (themeModeSetting === ThemeMode.DARK) return ThemeMode.DARK;
-    if (themeModeSetting === ThemeMode.LIGHT) return ThemeMode.LIGHT;
+    if (themeModeSetting === ThemeMode.DARK) {
+      return ThemeMode.DARK;
+    }
+
+    if (themeModeSetting === ThemeMode.LIGHT) {
+      return ThemeMode.LIGHT;
+    }
+
     return resolvedThemeMode;
   }, [resolvedThemeMode, themeModeSetting]);
 

@@ -64,7 +64,7 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ["@material/material-color-utilities"],
+      noExternal: ["@material/material-color-utilities", "@uidotdev/usehooks"],
     },
     plugins: [
       tailwindcss(),

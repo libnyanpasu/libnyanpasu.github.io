@@ -1,6 +1,21 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import type { SidebarItem } from "@astrojs/starlight/schemas/sidebar";
+import type { StarlightUserConfig } from "@astrojs/starlight/types";
+
+type StarlightSidebarItem = NonNullable<StarlightUserConfig["sidebar"]>[number];
+
+export interface NavItem {
+  text: string;
+  link: string;
+  items?: never;
+}
+
+export type SidebarEntry =
+  | NavItem
+  | {
+      text: string;
+      items: NavItem[];
+    };
 
 function readDirLabel(dir: string): string | undefined {
   const p = join(process.cwd(), "src/content/docs", dir, "_dir.yaml");
@@ -9,7 +24,7 @@ function readDirLabel(dir: string): string | undefined {
   return raw.match(/^label:\s*["']?(.+?)["']?\s*$/m)?.[1];
 }
 
-export const sidebar: SidebarItem[] = [
+export const sidebar: StarlightSidebarItem[] = [
   "index",
   "introduction",
   {

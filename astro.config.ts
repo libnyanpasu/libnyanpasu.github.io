@@ -4,6 +4,7 @@ import react from "@astrojs/react";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import mermaid from "astro-mermaid";
 import { sidebar } from "./src/config/sidebar";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://libnyanpasu.github.io",
@@ -45,7 +46,8 @@ export default defineConfig({
       },
       sidebar,
       components: {
-        Head: "./src/components/overrides/Head.astro",
+        Head: "./src/components/overrides/head.astro",
+        ThemeSelect: "./src/components/overrides/theme-select.astro",
       },
       lastUpdated: true,
       credits: true,
@@ -56,7 +58,16 @@ export default defineConfig({
     shikiConfig: { theme: "github-dark" },
   },
   vite: {
+    resolve: {
+      alias: {
+        "@/*": "./src/*",
+      },
+    },
+    ssr: {
+      noExternal: ["@material/material-color-utilities"],
+    },
     plugins: [
+      tailwindcss(),
       paraglideVitePlugin({
         project: "./project.inlang",
         outdir: "./src/paraglide",

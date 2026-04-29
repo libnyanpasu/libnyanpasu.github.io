@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import type { SidebarEntry } from "../../config/sidebar";
-import Sidebar from "./Sidebar";
-import TableOfContents from "./TableOfContents";
+import type { SidebarEntry } from "@/config/sidebar";
+import Sidebar from "@/components/layout/sidebar";
+import TableOfContents from "@/components/layout/table-of-contents";
 
 export interface Heading {
   depth: number;

@@ -1,20 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ThemeMode, useExperimentalThemeContext } from "@/components/theme/theme-context";
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+  const { currentThemeMode, setThemeMode } = useExperimentalThemeContext();
+  const dark = currentThemeMode === ThemeMode.DARK;
 
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  function toggle() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  }
+  const toggle = () => {
+    setThemeMode(dark ? ThemeMode.LIGHT : ThemeMode.DARK);
+  };
 
   return (
     <button

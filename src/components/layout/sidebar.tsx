@@ -1,4 +1,4 @@
-import type { SidebarEntry } from "../../config/sidebar";
+import type { SidebarEntry } from "@/config/sidebar";
 
 interface Props {
   items: SidebarEntry[];

@@ -1,4 +1,4 @@
-import type { Heading } from "./DocLayout";
+import type { Heading } from "@/components/layout/doc-layout";
 
 interface Props {
   headings: Heading[];

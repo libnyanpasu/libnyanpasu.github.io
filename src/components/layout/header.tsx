@@ -1,6 +1,6 @@
-import type { NavItem } from "../../config/sidebar";
-import ThemeToggle from "../ui/ThemeToggle";
-import LanguageSwitcher from "../ui/LanguageSwitcher";
+import type { NavItem } from "@/config/sidebar";
+import ThemeToggle from "@/components/ui/theme-toggle";
+import LanguageSwitcher from "@/components/ui/language-switcher";
 
 interface Props {
   nav: NavItem[];
@@ -20,7 +20,7 @@ const socialLinks = [
 export default function Header({ nav, locale, currentPath }: Props) {
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur">
-      <div className="max-w-screen-xl mx-auto flex items-center h-14 px-4 gap-4">
+      <div className="max-w-7xl mx-auto flex items-center h-14 px-4 gap-4">
         <a
           href={locale === "zh-cn" ? "/zh-cn/" : "/"}
           className="flex items-center gap-2 font-semibold text-lg shrink-0"

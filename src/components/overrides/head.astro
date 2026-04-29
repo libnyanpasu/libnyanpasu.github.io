@@ -1,8 +1,19 @@
 ---
 // oxlint-disable-next-line no-unused-vars
-import Default from '@astrojs/starlight/components/Head.astro'
+import Default from "@astrojs/starlight/components/Head.astro";
 ---
 
 <Default {...Astro.props}>
   <slot />
 </Default>
+
+<script is:inline>
+  // Redirect legacy .html URLs (from old website) to clean URLs
+  const { pathname } = window.location;
+
+  if (p.endsWith(".html")) {
+    window.location.replace(
+      p.slice(0, -5) + "/" + window.location.search + window.location.hash,
+    );
+  }
+</script>

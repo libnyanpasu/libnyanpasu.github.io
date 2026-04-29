@@ -1,4 +1,3 @@
 export default {
-  "**/*.{ts,tsx,js,jsx,astro,css,json,md,mdx}": ["oxfmt --write"],
-  "**/*.{ts,tsx,js,jsx}": ["oxlint"],
+  "**/*.{ts,tsx,js,jsx}": ["oxfmt --write", "oxlint"],
 };

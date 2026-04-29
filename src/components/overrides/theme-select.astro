@@ -1,10 +1,7 @@
 ---
 import DefaultThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
-import { ThemeProvider } from "@/components/theme/theme-context";
-import ThemeToggle from "@/components/ui/theme-toggle";
+import ThemeSync from "@/components/theme/theme-sync";
 ---
 
 <DefaultThemeSelect />
-<ThemeProvider client:load>
-  <ThemeToggle />
-</ThemeProvider>
+<ThemeSync client:load />

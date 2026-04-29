@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@material/material-color-utilities@0.4.0':
+    hash: c17819fcbc2fbf79bc99adc4c751bf7f8d40a56e5f2c1d2d6622d65f8abfb8d6
+    path: patches/@material__material-color-utilities@0.4.0.patch
+
 importers:
 
   .:
@@ -65,7 +70,7 @@ importers:
         version: 2.17.0
       '@material/material-color-utilities':
         specifier: ^0.4.0
-        version: 0.4.0
+        version: 0.4.0(patch_hash=c17819fcbc2fbf79bc99adc4c751bf7f8d40a56e5f2c1d2d6622d65f8abfb8d6)
       '@octokit/types':
         specifier: ^13.5.0
         version: 13.10.0
@@ -5716,7 +5721,7 @@ snapshots:
 
   '@lix-js/server-protocol-schema@0.1.1': {}
 
-  '@material/material-color-utilities@0.4.0': {}
+  '@material/material-color-utilities@0.4.0(patch_hash=c17819fcbc2fbf79bc99adc4c751bf7f8d40a56e5f2c1d2d6622d65f8abfb8d6)': {}
 
   '@mdx-js/mdx@3.1.1':
     dependencies:

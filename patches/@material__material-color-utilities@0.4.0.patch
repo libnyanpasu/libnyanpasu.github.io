@@ -1,0 +1,130 @@
+diff --git a/dynamiccolor/color_spec_2025.js b/dynamiccolor/color_spec_2025.js
+index 8bef961c7c6127c028b98ee3305270be5247a0c2..fc1d391880605d3e4504298fa595eb3c8c2cf9c9 100644
+--- a/dynamiccolor/color_spec_2025.js
++++ b/dynamiccolor/color_spec_2025.js
+@@ -18,7 +18,7 @@ import { Hct } from '../hct/hct.js';
+ import * as math from '../utils/math_utils.js';
+ import { ColorSpecDelegateImpl2021 } from './color_spec_2021.js';
+ import { ContrastCurve } from './contrast_curve.js';
+-import { DynamicColor, extendSpecVersion } from './dynamic_color';
++import { DynamicColor, extendSpecVersion } from './dynamic_color.js';
+ import { ToneDeltaPair } from './tone_delta_pair.js';
+ import { Variant } from './variant.js';
+ /**
+diff --git a/scheme/scheme_content.js b/scheme/scheme_content.js
+index e06c67bc68883b4a5210dc4241544ed79dec905c..0b8f5bcd687d09df6f95931aad453829277f7c57 100644
+--- a/scheme/scheme_content.js
++++ b/scheme/scheme_content.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A scheme that places the source color in `Scheme.primaryContainer`.
+diff --git a/scheme/scheme_expressive.js b/scheme/scheme_expressive.js
+index 43d05c6a9989566f2f300e8bf01fa4f1a8e120f0..78bc8b4ff210ee6b43e40c1875c080ad0a785fa5 100644
+--- a/scheme/scheme_expressive.js
++++ b/scheme/scheme_expressive.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A Dynamic Color theme that is intentionally detached from the source color.
+diff --git a/scheme/scheme_fidelity.js b/scheme/scheme_fidelity.js
+index a7461cdd4b49a49e642cd1060fba95ea1b6c7a1e..da51d7b37fd920e14c6f9a66f9173b661f012a1f 100644
+--- a/scheme/scheme_fidelity.js
++++ b/scheme/scheme_fidelity.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A scheme that places the source color in `Scheme.primaryContainer`.
+diff --git a/scheme/scheme_fruit_salad.js b/scheme/scheme_fruit_salad.js
+index 87443afa8bb09d9c6f67be12fde55b7db9b9f37a..bbf93cc30472a18a2a27cd3527a20e9aecf83244 100644
+--- a/scheme/scheme_fruit_salad.js
++++ b/scheme/scheme_fruit_salad.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A playful theme - the source color's hue does not appear in the theme.
+diff --git a/scheme/scheme_monochrome.js b/scheme/scheme_monochrome.js
+index 30ad712ad104e397788ff3d8e11ea28ca00c0533..cc3b7d73de94cf7f2a66bf1ba8cc7a24f426d8a6 100644
+--- a/scheme/scheme_monochrome.js
++++ b/scheme/scheme_monochrome.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /** A Dynamic Color theme that is grayscale. */
+ export class SchemeMonochrome extends DynamicScheme {
+diff --git a/scheme/scheme_neutral.js b/scheme/scheme_neutral.js
+index 0d03a5e0f0200feb471860b48d5243dd5da5429d..6e0291a2158da4d4b704d5aa55ae69035b358c5c 100644
+--- a/scheme/scheme_neutral.js
++++ b/scheme/scheme_neutral.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /** A Dynamic Color theme that is near grayscale. */
+ export class SchemeNeutral extends DynamicScheme {
+diff --git a/scheme/scheme_rainbow.js b/scheme/scheme_rainbow.js
+index 65e6d3fd934ed07a2e6efdf6c552c306873d26e2..74c952cfa16090b55519ad37bae0aa56be5c0298 100644
+--- a/scheme/scheme_rainbow.js
++++ b/scheme/scheme_rainbow.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A playful theme - the source color's hue does not appear in the theme.
+diff --git a/scheme/scheme_tonal_spot.js b/scheme/scheme_tonal_spot.js
+index 6c506c3c23279e5842757b991cd066ef266fceea..90aac5913e624df939b2ef0ad661f8890fdad8fd 100644
+--- a/scheme/scheme_tonal_spot.js
++++ b/scheme/scheme_tonal_spot.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A Dynamic Color theme with low to medium colorfulness and a Tertiary
+diff --git a/scheme/scheme_vibrant.js b/scheme/scheme_vibrant.js
+index cba1172e7d7ccae62d03e635c38063153bc5a61a..9d54ed6d2c544c21df9bfc2b094bb06d7d8e48be 100644
+--- a/scheme/scheme_vibrant.js
++++ b/scheme/scheme_vibrant.js
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-import { DynamicScheme } from '../dynamiccolor/dynamic_scheme';
++import { DynamicScheme } from '../dynamiccolor/dynamic_scheme.js';
+ import { Variant } from '../dynamiccolor/variant.js';
+ /**
+  * A Dynamic Color theme that maxes out colorfulness at each position in the

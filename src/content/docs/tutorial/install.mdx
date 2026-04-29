@@ -92,9 +92,27 @@ AUR packages are currently provided by enthusiasts: [Stable (need to compile)](h
 The following is a demonstration of installing AUR packages using `paru`:
 
 <Tabs>
-  <TabItem label="Stable (need to compile)">```bash paru -Syu clash-nyanpasu ```</TabItem>
-  <TabItem label="Stable (binaries)">```bash paru -Syu clash-nyanpasu-bin ```</TabItem>
-  <TabItem label="Development (need to compile)">```bash paru -Syu clash-nyanpasu-git ```</TabItem>
+  <TabItem label="Stable (need to compile)">
+
+```bash
+paru -Syu clash-nyanpasu
+```
+
+  </TabItem>
+  <TabItem label="Stable (binaries)">
+
+```bash
+paru -Syu clash-nyanpasu-bin
+```
+
+  </TabItem>
+  <TabItem label="Development (need to compile)">
+
+```bash
+paru -Syu clash-nyanpasu-git
+```
+
+  </TabItem>
 </Tabs>
 
 ### AppImage
@@ -126,16 +144,20 @@ First, let's download the icon for Clash Nyanpasu:
 
 <Tabs>
   <TabItem label="User Directory">
-    ```bash mkdir -p ~/.local/share/icons/clash-nyanpasu wget -O
-    ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png
-    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-    ```
+
+```bash
+mkdir -p ~/.local/share/icons/clash-nyanpasu
+wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
   </TabItem>
   <TabItem label="System Directory">
-    ```bash sudo mkdir -p /usr/share/icons/clash-nyanpasu sudo wget -O
-    /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png
-    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-    ```
+
+```bash
+sudo mkdir -p /usr/share/icons/clash-nyanpasu
+sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
   </TabItem>
 </Tabs>
 
@@ -158,10 +180,18 @@ Update the database:
 
 <Tabs>
   <TabItem label="User Directory">
-    ```bash update-desktop-database ~/.local/share/applications ```
+
+```bash
+update-desktop-database ~/.local/share/applications
+```
+
   </TabItem>
   <TabItem label="System Directory">
-    ```bash sudo update-desktop-database /usr/share/applications ```
+
+```bash
+sudo update-desktop-database /usr/share/applications
+```
+
   </TabItem>
 </Tabs>
 

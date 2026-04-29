@@ -30,6 +30,8 @@ flowchart TD
     end
 ```
 
+{/*  */}
+
 ## Merge Processing
 
 :::tip[Note]
@@ -58,7 +60,7 @@ Moreover, Merge rules are executed in **top-down order**.
 
 ##### Filtering Lists
 
-The `filter__x.y.z: string` operation filters a list using a Lua expression where `item` represents the current element. The expression must return a `bool`. If the expression encounters an error, a log warning will be triggered.  
+The `filter__x.y.z: string` operation filters a list using a Lua expression where `item` represents the current element. The expression must return a `bool`. If the expression encounters an error, a log warning will be triggered.
 Here is an example of removing `trojan` proxies:
 
 ```yaml

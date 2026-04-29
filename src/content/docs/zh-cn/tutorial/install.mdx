@@ -1,169 +1,199 @@
 ---
-title: "Installation"
+title: "安装"
 sidebar:
   order: 1
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-# Installation
+# 安装
 
-Clash Nyanpasu currently supports Windows 7 and later, Linux, and macOS 10.15 and later.
+Clash Nyanpasu 目前支持 Windows 7 及更高版本、Linux 和 macOS 10.15 及更高版本。
 
-- The Windows Arm64 variants is not currently supported and will be considered for support once it is supported by Clash Rust.
-- The Linux variants does not currently support the Arm architecture and will be considered for support after the 1.5.0 release.
+- Windows Arm64 版本目前不受支持，将在 Clash Rust 支持后考虑提供。
+- Linux 版本目前不支持 Arm 架构，将在 1.5.0 版本后考虑支持。
 
-:::note[Note]
+:::note[提示]
 
-Some explanations of terms included in the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page:
+[GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面中包含的一些术语说明：
 
-- `x86` - i386/i686, for 32-bit operating system.
-- `amd64` - x64/x86_64, for currently popular devices.
-- `aarch64` - armv8/arm64/armv9, for devices with Arm CPUs.
+- `x86` - i386/i686，用于 32 位操作系统。
+- `amd64` - x64/x86_64，用于目前主流的设备。
+- `aarch64` - armv8/arm64/armv9，用于 Arm CPU 设备。
 
-We currently plan to support only `x86`, `amd64` and `aarch64` architectures.
+目前我们计划仅支持 `x86`、`amd64` 和 `aarch64` 架构。
 
 :::
 
 ## Windows
 
-:::caution[Note]
-Starting with 1.5.0, **Clash Nyanpasu** no longer provides MSI installers.
+:::caution[注意]
+从 1.5.0 版本开始，**Clash Nyanpasu** 不再提供 MSI 安装程序。
 :::
 
-First, please make sure that the WebView2 runtime is installed on your system. If your system does not have the WebView2 runtime installed, you can download and install it from the [Microsoft official site](https://developer.microsoft.com/en-us/microsoft-edge/webview2).
+首先，请确保您的系统已安装 WebView2 运行时。如果您的系统没有安装 WebView2 运行时，您可以从 [微软官方网站](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2) 下载并安装。
 
-### Installer
+### 安装程序
 
-Please download the latest version of `Clash.Nyanpasu_x.y.z_x64-setup.exe` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) and install it.
+请从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 下载最新版本的 `Clash.Nyanpasu_x.y.z_x64-setup.exe` 并安装。
 
-### Portable
+### 便携版
 
-:::caution[Note]
-Please note that Tauri does not officially **support** the portable variant. The portable variant provided by Clash Nyanpasu is generated through an automated packaging process and explicitly ignores WebView2 detection, so some problems may be encountered. We plan to stick to the principle that the portable variant does not modify the registry in the future. As a result, some features may **not** work properly:
+:::caution[注意]
+请注意，Tauri 官方并**不**支持便携版。Clash Nyanpasu 提供的便携版是通过自动化打包流程生成的，并明确忽略 WebView2 检测，因此可能会遇到一些问题。我们计划坚持便携版不修改注册表的原则。因此，某些功能可能**无法**正常工作：
 
-- **System Services**: We are planning to **remove** `nyanpasu-service` from the portable variant because it does service registration and modifies the registry, which is against the principles of the portable variant.
-- **Notifications**: System notifications are not available on Windows 10/11 with the portable variant, so some of the actions that trigger notifications on the backend will not be visible.
-- **Shortcut Import** (Custom Schema): This feature will be **removed** as the portable variant cannot modify the registry.
+- **系统服务**：我们计划从便携版中**移除** `nyanpasu-service`，因为它会进行服务注册并修改注册表，这与便携版的原则相悖。
+- **通知**：在 Windows 10/11 上使用便携版时，系统通知不可用，因此后端触发通知的某些操作将不可见。
+- **快捷方式导入**（自定义协议）：此功能将被**移除**，因为便携版无法修改注册表。
 
 :::
 
-Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page, extract and run it.
+从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 `Clash.Nyanpasu_x.y.z_x64_portable.zip`，解压后运行。
 
 ## macOS
 
-Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash.Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it.
+下载最新版本的 `Clash.Nyanpasu_x64.app.tar.gz`（Intel CPU）或 `Clash.Nyanpasu.aarch64.app.tar.gz`（M 系列 CPU）并安装。
 
-If you encounter any installation problems, please refer to the [FAQ](../others/faq).
+如果遇到任何安装问题，请参阅 [常见问题](../others/faq)。
 
 ## Linux
 
-For Linux, due to the limitations of AppImage, we recommend using **Package Manager** to install or compile the app yourself.
+对于 Linux，由于 AppImage 的限制，我们建议使用**包管理器**安装或自行编译。
 
-Tauri 2 is currently in beta, and when it is released, we will introduce more package support and potentially Flatpak support.
+Tauri 2 目前处于测试阶段，发布后将引入更多包支持，可能还包括 Flatpak 支持。
 
-:::caution[Note]
-The following features are currently not supported for installation via package manager:
+:::caution[注意]
+以下功能目前不支持通过包管理器安装：
 
-- In-app updates
-- Core updates
+- 应用内更新
+- 内核更新
 
-Note: AppImage variant supports in-app updates.
+注意：AppImage 版本支持应用内更新。
 :::
 
 ### Debian/Ubuntu
 
-Download the latest version of the DEB package using a _third-party PPA source_ or from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
+通过*第三方 PPA 源*或从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 DEB 包。
 
-#### Installation via DEB package
+#### 通过 DEB 包安装
 
-Download the latest version of `clash-nyanpasu_x.y.z_amd64.deb` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
+从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 `clash-nyanpasu_x.y.z_amd64.deb`。
 
-Then execute it in the terminal:
+然后在终端中执行：
 
 ```bash
 sudo apt install -y ./clash-nyanpasu_x.y.z_amd64.deb
 ```
 
-### ArchLinux
+### Arch Linux
 
-AUR packages are currently provided by enthusiasts: [Stable (need to compile)](https://aur.archlinux.org/packages/clash-nyanpasu) / [Stable (binaries)](https://aur.archlinux.org/packages/clash-nyanpasu-bin) or [Development (need to compile)](https://aur.archlinux.org/packages/clash-nyanpasu-git).
+目前由爱好者提供 AUR 包：[稳定版（需要编译）](https://aur.archlinux.org/packages/clash-nyanpasu) / [稳定版（二进制）](https://aur.archlinux.org/packages/clash-nyanpasu-bin) 或 [开发版（需要编译）](https://aur.archlinux.org/packages/clash-nyanpasu-git)。
 
-The following is a demonstration of installing AUR packages using `paru`:
+以下是使用 `paru` 安装 AUR 包的演示：
 
 <Tabs>
-  <TabItem label="Stable (need to compile)">```bash paru -Syu clash-nyanpasu ```</TabItem>
-  <TabItem label="Stable (binaries)">```bash paru -Syu clash-nyanpasu-bin ```</TabItem>
-  <TabItem label="Development (need to compile)">```bash paru -Syu clash-nyanpasu-git ```</TabItem>
+  <TabItem label="稳定版（需要编译）">
+
+```bash
+paru -Syu clash-nyanpasu
+```
+
+  </TabItem>
+  <TabItem label="稳定版（二进制）">
+
+```bash
+paru -Syu clash-nyanpasu-bin
+```
+
+  </TabItem>
+  <TabItem label="开发版（需要编译）">
+
+```bash
+paru -Syu clash-nyanpasu-git
+```
+
+  </TabItem>
 </Tabs>
 
 ### AppImage
 
-:::caution[Tip]
-The following known bugs exist with the AppImage variant:
+:::caution[提示]
+AppImage 版本存在以下已知问题：
 
-- TUN authorization is not supported. If you need to use TUN mode, start the AppImage variant with `sudo`.
-- Clash Rust is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
-- Service mode is not supported at this time.
-- Core updates are not supported at this time.
+- TUN 授权不支持。如果您需要使用 TUN 模式，请使用 `sudo` 启动 AppImage 版本。
+- Clash Rust 暂时不可用，正在[调查中](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448)。
+- 服务模式目前不支持。
+- 内核更新目前不支持。
 
-**If you encounter any other problems while using it, feel free to submit a new issue for feedback!**
+**如果您在使用过程中遇到其他问题，欢迎提交新的 issue 反馈！**
 :::
 
-Download the latest version of `clash-nyanpasu_x.y.z_amd64.AppImage` from [the GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page, then double-click to run it.
+从 [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面下载最新版本的 `clash-nyanpasu_x.y.z_amd64.AppImage`，然后双击运行。
 
-If you want to run it in a terminal, you can execute the following command:
+如果您想在终端中运行，可以执行以下命令：
 
 ```bash
 chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
 ./clash-nyanpasu_x.y.z_amd64.AppImage
 ```
 
-If you need to autostart, you may need to write a `.desktop` file.
-The following is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
-First, let's download the icon for Clash Nyanpasu:
+如果您需要开机自启，可能需要编写一个 `.desktop` 文件。
+以下是一个示例 `.desktop` 文件，您可以将其放置在 `/usr/share/applications` 或 `~/.local/share/applications/` 目录中。
+首先，让我们下载 Clash Nyanpasu 的图标：
 
 <Tabs>
-  <TabItem label="User Directory">
-    ```bash mkdir -p ~/.local/share/icons/clash-nyanpasu wget -O
-    ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png
-    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-    ```
+  <TabItem label="用户目录">
+
+```bash
+mkdir -p ~/.local/share/icons/clash-nyanpasu
+wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
   </TabItem>
-  <TabItem label="System Directory">
-    ```bash sudo mkdir -p /usr/share/icons/clash-nyanpasu sudo wget -O
-    /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png
-    https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-    ```
+  <TabItem label="系统目录">
+
+```bash
+sudo mkdir -p /usr/share/icons/clash-nyanpasu
+sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
+```
+
   </TabItem>
 </Tabs>
 
-Then we write the `.desktop` file:
+然后我们编写 `.desktop` 文件：
 
 ```ini
 [Desktop Entry]
 Categories=Development;
 Comment=A Clash GUI based on Tauri.
-Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # Please change to your AppImage path.
-Icon=/path/to/clash-nyanpasu.png # Please replace with the path of the icon you downloaded.
+Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # 请修改为您的 AppImage 路径。
+Icon=/path/to/clash-nyanpasu.png # 请替换为您下载的图标路径。
 GenericName=Clash Nyanpasu
 Name=Clash Nyanpasu
 Terminal=false
 Type=Application
-Autostart=true # Whether to autostart or not.
+Autostart=true # 是否开机自启。
 ```
 
-Update the database:
+更新数据库：
 
 <Tabs>
-  <TabItem label="User Directory">
-    ```bash update-desktop-database ~/.local/share/applications ```
+  <TabItem label="用户目录">
+
+```bash
+update-desktop-database ~/.local/share/applications
+```
+
   </TabItem>
-  <TabItem label="System Directory">
-    ```bash sudo update-desktop-database /usr/share/applications ```
+  <TabItem label="系统目录">
+
+```bash
+sudo update-desktop-database /usr/share/applications
+```
+
   </TabItem>
 </Tabs>
 
-## Reference
+## 参考
 
-[^1]: Portable definition: [Portable application - Wikipedia](https://en.wikipedia.org/wiki/Portable_application)
+[^1]: 便携版定义：[Portable application - Wikipedia](https://en.wikipedia.org/wiki/Portable_application)

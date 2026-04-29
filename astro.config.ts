@@ -2,12 +2,14 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import react from "@astrojs/react";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import mermaid from "astro-mermaid";
 import { sidebar } from "./src/config/sidebar";
 
 export default defineConfig({
   site: "https://libnyanpasu.github.io",
   output: "static",
   integrations: [
+    mermaid(),
     starlight({
       title: "Clash Nyanpasu",
       logo: {

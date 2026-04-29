@@ -8,27 +8,24 @@
   ],
   "packageRules": [
     {
-      "groupName": "Vite & Vue packages",
-      "matchPackagePatterns": ["vite", "vue", "vueuse", "unplugin"]
+      "groupName": "Astro packages",
+      "matchPackagePatterns": ["astro", "@astrojs/"]
+    },
+    {
+      "groupName": "React packages",
+      "matchPackagePatterns": ["react", "@types/react"]
     },
     {
       "groupName": "TypeScript",
       "matchPackagePatterns": ["typescript"]
     },
     {
-      "groupName": "Lint packages",
-      "matchPackagePatterns": [
-        "eslint",
-        "prettier",
-        "commitlint",
-        "stylelint",
-        "husky",
-        "lint-staged"
-      ]
+      "groupName": "Lint & Format packages",
+      "matchPackagePatterns": ["oxlint", "oxfmt", "commitlint", "husky", "lint-staged"]
     },
     {
-      "groupName": "Testing packages",
-      "matchPackagePatterns": ["vitest", "cypress"]
+      "groupName": "Inlang packages",
+      "matchPackagePatterns": ["@inlang/"]
     }
   ]
 }

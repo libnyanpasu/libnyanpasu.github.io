@@ -1,0 +1,8 @@
+/* Tailwind v4 via PostCSS — utilities + theme only, no preflight to avoid conflicts with Starlight */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* Map Starlight's data-theme attribute to Tailwind's dark variant */
+@variant dark (&:where([data-theme=dark], [data-theme=dark] *));

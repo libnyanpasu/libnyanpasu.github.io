@@ -1,0 +1,77 @@
+---
+// oxlint-disable-next-line no-unused-vars
+import Default from '@astrojs/starlight/components/Head.astro'
+---
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+<script>
+  async function renderMermaid() {
+    const codeBlocks = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        'pre[data-language="mermaid"], pre:has(code.language-mermaid), code.language-mermaid'
+      )
+    )
+    if (codeBlocks.length === 0) return
+
+    const { default: mermaid } = await import('mermaid')
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDark ? 'dark' : 'default'
+    })
+
+    const containers = new Set<HTMLElement>()
+    codeBlocks.forEach(block => {
+      const pre = block.tagName === 'PRE' ? block : block.closest<HTMLElement>('pre')
+      if (!pre) return
+      const expressiveCode = pre.closest<HTMLElement>('.expressive-code')
+      containers.add(expressiveCode ?? pre)
+    })
+
+    for (const container of containers) {
+      const pre =
+        container.querySelector<HTMLElement>('pre[data-language="mermaid"]') ??
+        container.querySelector<HTMLElement>('pre:has(code.language-mermaid)') ??
+        (container.tagName === 'PRE' ? container : null)
+      const code = pre?.querySelector('code')
+      if (!code) continue
+
+      const diagram = getMermaidCode(container, code)
+      const id = `mermaid-${Math.random().toString(36).slice(2)}`
+
+      try {
+        const { svg } = await mermaid.render(id, diagram)
+        const wrapper = document.createElement('div')
+        wrapper.className = 'flex justify-center my-4 overflow-x-auto'
+        wrapper.innerHTML = svg
+        container.replaceWith(wrapper)
+      } catch {
+        // leave original code block on render failure
+      }
+    }
+  }
+
+  function getMermaidCode(container: HTMLElement, code: HTMLElement) {
+    const copyButton = container.querySelector<HTMLButtonElement>('[data-code]')
+    const copiedCode = copyButton?.dataset.code
+    if (copiedCode) return copiedCode.replace(/\u007f/g, '\n')
+
+    const lines = Array.from(code.querySelectorAll<HTMLElement>('.ec-line'))
+    if (lines.length > 0) {
+      return lines.map(line => line.textContent ?? '').join('\n')
+    }
+
+    return code.textContent ?? ''
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaid, { once: true })
+  } else {
+    renderMermaid()
+  }
+  document.addEventListener('astro:after-swap', renderMermaid)
+</script>

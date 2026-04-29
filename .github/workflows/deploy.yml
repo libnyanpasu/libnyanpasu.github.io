@@ -1,4 +1,4 @@
-name: Deplay
+name: Deploy
 
 on:
   # Runs on pushes targeting the `main` branch. Change this to `master` if you're
@@ -55,14 +55,14 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: pnpm install
-      - name: Build with VitePress
+      - name: Build with Astro
         run: |
-          pnpm docs:build
-          touch .vitepress/dist/.nojekyll
+          pnpm build
+          touch dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: dist
 
   # Deployment job
   deploy:

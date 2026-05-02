@@ -1,5 +1,6 @@
 ---
 import HomeApp from "@/components/home/home-app";
+import HomeHeaderControls from "@/components/home/home-header-controls.astro";
 import { m } from "@/paraglide/messages.js";
 import "@/styles/tailwind.css";
 ---
@@ -20,6 +21,8 @@ import "@/styles/tailwind.css";
   </head>
 
   <body class="m-0 min-w-80 bg-zinc-50 font-sans dark:bg-zinc-950">
-    <HomeApp locale="zh-cn" client:load />
+    <HomeApp locale="zh-cn" client:load>
+      <HomeHeaderControls locale="zh-cn" />
+    </HomeApp>
   </body>
 </html>

@@ -8,15 +8,11 @@ import { cn } from "@/lib/utils";
 import RotatingText from "../ui/rotating-text";
 import { Button } from "../ui/button";
 import LocalizeLink from "../localize-link";
+import type { ReactNode } from "react";
 
 interface Link {
   label: string;
   href: string;
-}
-
-interface Feature {
-  title: string;
-  text: string;
 }
 
 interface Platform {
@@ -32,7 +28,13 @@ const platforms: Platform[] = [
 
 const githubUrl = "https://github.com/libnyanpasu";
 
-export default function HomePage({ locale }: { locale: Locale }) {
+export default function HomePage({
+  locale,
+  headerControls,
+}: {
+  locale: Locale;
+  headerControls?: ReactNode;
+}) {
   const isZh = locale === "zh-cn";
   const base = isZh ? "/zh-cn" : "";
 
@@ -67,7 +69,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
         />
       </div>
 
-      <HomeHeader />
+      <HomeHeader>{headerControls}</HomeHeader>
 
       <main className="overflow-clip">
         <section

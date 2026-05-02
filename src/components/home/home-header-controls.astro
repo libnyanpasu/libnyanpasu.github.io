@@ -1,0 +1,64 @@
+---
+import ThemeProvider from "@astrojs/starlight/components/ThemeProvider.astro";
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import ThemeSelect from "@/components/overrides/theme-select.astro";
+import type { Locale } from "@/paraglide/runtime";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const labels = {
+  "themeSelect.accessibleLabel": "Select theme",
+  "themeSelect.dark": "Dark",
+  "themeSelect.light": "Light",
+  "themeSelect.auto": "Auto",
+  "languageSelect.accessibleLabel": "Select language",
+};
+
+const locals = Astro.locals as any;
+
+locals.t = locals.t ?? ((key: keyof typeof labels) => labels[key] ?? key);
+locals.starlightRoute = {
+  locale: locale === "zh-cn" ? "zh-cn" : "root",
+};
+---
+
+<ThemeProvider />
+
+<div class="home-header-controls space-x-4">
+  <ThemeSelect />
+  <LanguageSelect />
+</div>
+
+<style>
+  .home-header-controls {
+    display: contents;
+  }
+
+  .home-header-controls :global(label) {
+    color: var(--color-md-on-background);
+  }
+
+  .home-header-controls :global(label:hover) {
+    color: var(--color-md-on-background);
+  }
+
+  .home-header-controls :global(select) {
+    min-height: 2.5rem;
+    border-radius: 9999px;
+    background-color: color-mix(
+      in srgb,
+      var(--color-md-surface) 72%,
+      transparent
+    );
+  }
+
+  @media (max-width: 47.999rem) {
+    .home-header-controls :global(label) {
+      --sl-select-width: 0rem !important;
+    }
+  }
+</style>

@@ -33,6 +33,7 @@ export const sidebar: StarlightSidebarItem[] = [
     items: [
       { slug: "tutorial/install" },
       { slug: "tutorial/proxy-chain" },
+      { slug: "tutorial/custom-css" },
       {
         label: readDirLabel("tutorial/chains") ?? "chains",
         translations: {

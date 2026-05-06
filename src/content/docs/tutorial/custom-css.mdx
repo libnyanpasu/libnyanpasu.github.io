@@ -1,0 +1,118 @@
+---
+title: "Custom CSS"
+sidebar:
+  order: 3
+---
+
+# Custom CSS
+
+Custom CSS lets you write CSS directly inside Clash Nyanpasu to customize the application's appearance. The CSS is saved locally, applied immediately after saving, and restored automatically after restarting the app.
+
+This feature is intended for advanced users who are comfortable with CSS. Clash Nyanpasu does not validate whether your CSS may break the layout, so aggressive rules can make parts of the interface misaligned, hidden, or difficult to click.
+
+## Opening The Editor
+
+1. Open **Settings -> User Interface**.
+2. Find the **Custom CSS** setting.
+3. Click **Edit**.
+4. Enter or modify CSS in the editor window.
+
+The editor uses Monaco's CSS language mode, including basic syntax highlighting, diagnostics, and `data-slot` completion.
+
+## Save, Clear, And Cancel
+
+- **Save**: saves the current CSS and applies it immediately.
+- **Clear**: removes saved CSS and restores the default appearance immediately.
+- **Cancel** or closing the window: discards unsaved changes.
+
+Saved CSS persists across sessions. When Clash Nyanpasu starts again, it automatically loads and applies the last saved CSS.
+
+## Recommended Selectors
+
+Clash Nyanpasu exposes `data-slot` attributes on many UI elements. These attributes are intended as relatively stable styling hooks. Prefer them over internal class names.
+
+Standard CSS:
+
+```css
+[data-slot="app-root"] {
+  font-size: 14px;
+}
+```
+
+You can also use shorthand syntax. Before the CSS is injected into the page, Clash Nyanpasu compiles it to standard `data-slot` selectors:
+
+```css
+app-root {
+  font-size: 14px;
+}
+
+[data-slot=app-root] {
+  font-size: 14px;
+}
+```
+
+Pseudo-classes, selector lists, and media queries are supported:
+
+```css
+app-root {
+  --radius: 6px;
+}
+
+profile-card:hover,
+[data-slot=editor-content] {
+  opacity: 0.96;
+}
+
+@media (max-width: 768px) {
+  app-root {
+    font-size: 13px;
+  }
+}
+```
+
+## Completion
+
+Known `data-slot` values are suggested when you type patterns such as:
+
+```css
+[data-slot="
+[data-slot=
+app-
+```
+
+After selecting a completion item, continue writing normal CSS declarations.
+
+## Examples
+
+Adjust the application root:
+
+```css
+app-root {
+  font-family: "Inter", system-ui, sans-serif;
+}
+```
+
+Reduce opacity for a specific area:
+
+```css
+editor-content {
+  opacity: 0.98;
+}
+```
+
+Use tighter radius on card-like areas:
+
+```css
+card,
+profile-card {
+  border-radius: 6px;
+}
+```
+
+## Notes
+
+- Custom CSS is applied above theme styles. Switching themes does not clear your CSS.
+- Very large CSS content can still be saved, but it may affect performance.
+- If custom CSS breaks the interface, open **Settings -> User Interface -> Custom CSS -> Edit** and click **Clear**.
+- If the main window becomes difficult to use, clear the `custom-css` key from debug KV storage.
+- Avoid depending on framework-generated class names; they may change after updates.

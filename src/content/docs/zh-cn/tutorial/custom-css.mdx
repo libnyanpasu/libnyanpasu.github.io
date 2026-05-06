@@ -1,0 +1,118 @@
+---
+title: "自定义 CSS"
+sidebar:
+  order: 3
+---
+
+# 自定义 CSS
+
+Custom CSS 允许你在 Clash Nyanpasu 内直接编写 CSS，用来自定义应用界面外观。CSS 会保存到本地，保存后立即应用，并在重启应用后自动恢复。
+
+该功能面向熟悉 CSS 的高级用户。Clash Nyanpasu 不会检查你的 CSS 是否会破坏布局，因此过于激进的样式可能导致界面错位、隐藏或难以点击。
+
+## 打开编辑器
+
+1. 打开 **Settings -> User Interface**。
+2. 找到 **Custom CSS** 设置项。
+3. 点击 **Edit**。
+4. 在打开的 CSS 编辑器窗口中输入或修改 CSS。
+
+编辑器使用 Monaco 的 CSS 语言模式，支持基础语法高亮、诊断和 `data-slot` 自动补全。
+
+## 保存、清除和取消
+
+- **Save**：保存当前 CSS，并立即应用到应用界面。
+- **Clear**：清除已保存的 CSS，并立即恢复默认外观。
+- **Cancel** 或直接关闭窗口：放弃本次未保存的修改。
+
+保存后的 CSS 会跨会话保留。下次启动 Clash Nyanpasu 时，应用会自动读取并应用上次保存的内容。
+
+## 推荐选择器
+
+Clash Nyanpasu 会在许多界面元素上提供 `data-slot` 属性，这些属性可作为相对稳定的样式钩子。建议优先使用这些选择器，而不是依赖内部 class name。
+
+标准 CSS 写法：
+
+```css
+[data-slot="app-root"] {
+  font-size: 14px;
+}
+```
+
+也可以使用简写语法。CSS 注入页面前，Clash Nyanpasu 会将其编译为标准的 `data-slot` 选择器：
+
+```css
+app-root {
+  font-size: 14px;
+}
+
+[data-slot=app-root] {
+  font-size: 14px;
+}
+```
+
+伪类、选择器列表和媒体查询也可以使用：
+
+```css
+app-root {
+  --radius: 6px;
+}
+
+profile-card:hover,
+[data-slot=editor-content] {
+  opacity: 0.96;
+}
+
+@media (max-width: 768px) {
+  app-root {
+    font-size: 13px;
+  }
+}
+```
+
+## 自动补全
+
+在编辑器中输入以下内容时，会出现已知 `data-slot` 值的候选项：
+
+```css
+[data-slot="
+[data-slot=
+app-
+```
+
+选择补全项后，可以继续编写普通 CSS 声明。
+
+## 常见示例
+
+调整整个应用根节点：
+
+```css
+app-root {
+  font-family: "Inter", system-ui, sans-serif;
+}
+```
+
+降低某个区域的不透明度：
+
+```css
+editor-content {
+  opacity: 0.98;
+}
+```
+
+为卡片类区域设置更紧凑的圆角：
+
+```css
+card,
+profile-card {
+  border-radius: 6px;
+}
+```
+
+## 注意事项
+
+- Custom CSS 会覆盖在主题样式之上，切换主题不会自动清除你的 CSS。
+- CSS 内容很大时仍允许保存，但可能影响性能。
+- 如果界面被自定义 CSS 破坏，优先从 **Settings -> User Interface -> Custom CSS -> Edit** 打开编辑器并点击 **Clear**。
+- 如果主窗口已经难以操作，可以通过调试 KV 存储清除 `custom-css` 这个 key。
+- 不建议依赖框架生成的 class name，它们可能在版本更新后变化。

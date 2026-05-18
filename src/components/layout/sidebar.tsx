@@ -1,8 +1,12 @@
-import type { SidebarEntry } from "@/config/sidebar";
+import type { SidebarEntry, SidebarGroup } from "@/config/sidebar";
 
 interface Props {
   items: SidebarEntry[];
   currentPath: string;
+}
+
+function isSidebarGroup(item: SidebarEntry): item is SidebarGroup {
+  return "items" in item;
 }
 
 export default function Sidebar({ items, currentPath }: Props) {
@@ -10,7 +14,7 @@ export default function Sidebar({ items, currentPath }: Props) {
     <nav className="hidden md:block w-64 shrink-0 border-r border-neutral-200 dark:border-neutral-800 px-4 py-8">
       <ul className="space-y-1">
         {items.map((item, i) => {
-          if ("items" in item && item.items) {
+          if (isSidebarGroup(item)) {
             return (
               <li key={i}>
                 <span className="block px-3 py-1 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mt-4 mb-1">

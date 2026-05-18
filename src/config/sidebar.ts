@@ -7,10 +7,22 @@ import {
   mkdirSync,
   unlinkSync,
 } from "node:fs";
-import { join, extname, basename } from "node:path";
+import { join, extname } from "node:path";
 import type { StarlightUserConfig } from "@astrojs/starlight/types";
 
 type StarlightSidebarItem = NonNullable<StarlightUserConfig["sidebar"]>[number];
+
+export interface NavItem {
+  text: string;
+  link: string;
+}
+
+export interface SidebarGroup {
+  text: string;
+  items: NavItem[];
+}
+
+export type SidebarEntry = NavItem | SidebarGroup;
 
 const DOCS_ROOT = join(process.cwd(), "src/content/docs");
 const DOC_EXTS = new Set([".md", ".mdx"]);

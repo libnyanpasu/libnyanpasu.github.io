@@ -4,9 +4,7 @@ import { docsSchema } from "@astrojs/starlight/schema";
 
 export const collections = {
   docs: defineCollection({
-    loader: docsLoader({
-      exclude: ["**/custom-css-example/**/readme.md"],
-    }),
+    loader: docsLoader(),
     schema: docsSchema(),
   }),
 };

@@ -233,8 +233,11 @@ function buildDirItems(dir: string): StarlightSidebarItem[] {
           {
             label: enLabel ?? entry,
             ...(zhLabel ? { translations: { "zh-CN": zhLabel } } : {}),
-            collapsed,
-            autogenerate: { directory: relDir },
+            items: [
+              {
+                autogenerate: { directory: relDir, collapsed },
+              },
+            ],
           },
         ];
       } else if (DOC_EXTS.has(extname(entry))) {
@@ -258,6 +261,6 @@ export const sidebar: StarlightSidebarItem[] = [
   {
     label: "Others",
     translations: { "zh-CN": "其他" },
-    autogenerate: { directory: "others" },
+    items: [{ autogenerate: { directory: "others" } }],
   },
 ];

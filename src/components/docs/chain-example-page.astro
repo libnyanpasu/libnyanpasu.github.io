@@ -1,0 +1,164 @@
+---
+import { readFileSync, readdirSync } from "node:fs";
+import { join, extname, basename } from "node:path";
+import { Code, Tabs, TabItem } from "@astrojs/starlight/components";
+
+interface Props {
+  dir: string;
+  lang?: string;
+}
+
+const { dir, lang } = Astro.props;
+const exampleName = basename(dir);
+
+// --- readme via Astro's native .md import ---
+const readmeMods = import.meta.glob(
+  "../../../chains/**/readme*.md",
+  { eager: true },
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ReadmeContent: any = null;
+for (const [path, mod] of Object.entries(readmeMods) as [string, { Content: unknown }][]) {
+  const normal = path.replace(/\\/g, "/");
+  if (!normal.includes(`/chains/${exampleName}/`)) continue;
+
+  if (lang && normal.endsWith(`/readme.${lang}.md`)) {
+    ReadmeContent = mod.Content;
+    break;
+  }
+  if (normal.endsWith("/readme.md") && !ReadmeContent) {
+    ReadmeContent = mod.Content;
+  }
+}
+
+// --- tab label mapping ---
+const tabLabels: Record<string, string> = {
+  yaml: "Merge",
+  js: "JavaScript",
+  lua: "Lua",
+};
+
+// --- discover script.* code files (same basename, different extensions = tab group) ---
+const assetsDir = join(process.cwd(), dir);
+
+// Group files by basename (e.g., "script" → { yaml: path, js: path, lua: path })
+const groups: Record<string, { ext: string; path: string }[]> = {};
+try {
+  for (const f of readdirSync(assetsDir).sort()) {
+    const ext = extname(f).slice(1); // "yaml", "js", "lua"
+    if (!(ext in tabLabels)) continue;
+    // Only match files with script- prefix pattern (script.yaml, script.js, etc.)
+    const base = basename(f, `.${ext}`);
+    if (!groups[base]) groups[base] = [];
+    groups[base].push({ ext, path: join(assetsDir, f) });
+  }
+} catch {
+  // no code files
+}
+
+// Read code content for each file
+interface CodeFile {
+  label: string;
+  lang: string;
+  code: string;
+}
+const tabGroups: { base: string; files: CodeFile[] }[] = [];
+for (const [base, files] of Object.entries(groups)) {
+  if (files.length === 0) continue;
+  tabGroups.push({
+    base,
+    files: files.map((f) => ({
+      label: tabLabels[f.ext] ?? f.ext,
+      lang: f.ext === "yaml" ? "yaml" : f.ext === "js" ? "js" : "lua",
+      code: readFileSync(f.path, "utf-8").trimEnd(),
+    })),
+  });
+}
+
+// --- discover preview images ---
+const allImages = import.meta.glob<{ default: { src: string } }>(
+  "../../../chains/**/*.{png,jpg,jpeg,webp,gif,svg}",
+  { eager: true },
+);
+
+const previewImages: { src: string; alt: string }[] = [];
+for (const [imgPath, mod] of Object.entries(allImages)) {
+  const normal = imgPath.replace(/\\/g, "/");
+  if (normal.includes(`/chains/${exampleName}/`)) {
+    previewImages.push({ src: mod.default.src, alt: basename(imgPath) });
+  }
+}
+---
+
+{
+  !ReadmeContent && tabGroups.length === 0 && previewImages.length === 0 && (
+    <p>No content found.</p>
+  )
+}
+
+{ReadmeContent && (
+  <div class="readme-content">
+    <ReadmeContent />
+  </div>
+)}
+
+{
+  tabGroups.map((group) => (
+    <div class="tab-group">
+      {group.files.length >= 2 ? (
+        <Tabs>
+          {group.files.map((f) => (
+            <TabItem label={f.label}>
+              <Code code={f.code} lang={f.lang} />
+            </TabItem>
+          ))}
+        </Tabs>
+      ) : (
+        <Code code={group.files[0].code} lang={group.files[0].lang} />
+      )}
+    </div>
+  ))
+}
+
+{
+  previewImages.length > 0 && (
+    <div class="preview-gallery">
+      {previewImages.map((img) => (
+        <figure>
+          <img src={img.src} alt={img.alt} loading="lazy" />
+          <figcaption>{img.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .preview-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .preview-gallery figure {
+    margin: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .preview-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .preview-gallery figcaption {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-2);
+    background: var(--sl-color-gray-7);
+  }
+  .tab-group {
+    margin-bottom: 1.5rem;
+  }
+</style>

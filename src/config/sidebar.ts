@@ -15,6 +15,7 @@ type StarlightSidebarItem = NonNullable<StarlightUserConfig["sidebar"]>[number];
 const DOCS_ROOT = join(process.cwd(), "src/content/docs");
 const DOC_EXTS = new Set([".md", ".mdx"]);
 const EXAMPLES_ROOT = join(process.cwd(), "custom-css-example");
+const CHAINS_ROOT = join(process.cwd(), "chains");
 
 function readDirLabel(relDir: string): string | undefined {
   const p = join(DOCS_ROOT, relDir, "_dir.yaml");
@@ -124,8 +125,80 @@ function syncCssExamplePages() {
   }
 }
 
+/**
+ * Synchronize auto-generated .mdx pages for each chain example in `chains/`.
+ */
+function syncChainExamplePages() {
+  const enDir = join(DOCS_ROOT, "tutorial", "chains");
+  const zhDir = join(DOCS_ROOT, "zh-cn", "tutorial", "chains");
+
+  mkdirSync(enDir, { recursive: true });
+  mkdirSync(zhDir, { recursive: true });
+
+  const exampleNames: string[] = [];
+  if (existsSync(CHAINS_ROOT)) {
+    for (const entry of readdirSync(CHAINS_ROOT, { withFileTypes: true })) {
+      if (entry.isDirectory()) exampleNames.push(entry.name);
+    }
+  }
+
+  const generated = new Set<string>();
+
+  for (const name of exampleNames) {
+    const enFile = join(enDir, `${name}.mdx`);
+    const zhFile = join(zhDir, `${name}.mdx`);
+    generated.add(enFile);
+    generated.add(zhFile);
+
+    // English
+    const enTitle = readReadmeTitle(join(CHAINS_ROOT, name, "readme.md")) ?? name;
+    const enContent = [
+      "---",
+      `title: "${enTitle.replace(/"/g, '\\"')}"`,
+      "---",
+      "",
+      'import ChainExamplePage from "@/components/docs/chain-example-page.astro";',
+      "",
+      `<ChainExamplePage dir="chains/${name}" />`,
+      "",
+    ].join("\n");
+    writeFileSync(enFile, enContent);
+
+    // Chinese
+    const zhTitle =
+      readReadmeTitle(join(CHAINS_ROOT, name, "readme.zh-cn.md")) ??
+      readReadmeTitle(join(CHAINS_ROOT, name, "readme.md")) ??
+      name;
+    const zhContent = [
+      "---",
+      `title: "${zhTitle.replace(/"/g, '\\"')}"`,
+      "---",
+      "",
+      'import ChainExamplePage from "@/components/docs/chain-example-page.astro";',
+      "",
+      `<ChainExamplePage dir="chains/${name}" lang="zh-cn" />`,
+      "",
+    ].join("\n");
+    writeFileSync(zhFile, zhContent);
+  }
+
+  // Clean up stale generated files
+  for (const dir of [enDir, zhDir]) {
+    for (const entry of readdirSync(dir)) {
+      if (!DOC_EXTS.has(extname(entry))) continue;
+      const name = entry.replace(/\.mdx?$/, "");
+      if (name === "index") continue;
+      const fullPath = join(dir, entry);
+      if (!generated.has(fullPath)) {
+        unlinkSync(fullPath);
+      }
+    }
+  }
+}
+
 // Generate .mdx stubs before the sidebar is built
 syncCssExamplePages();
+syncChainExamplePages();
 
 /**
  * Dynamically builds sidebar items for a given docs directory.

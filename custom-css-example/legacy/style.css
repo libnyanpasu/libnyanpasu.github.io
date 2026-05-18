@@ -7,11 +7,9 @@ app-header {
 }
 
 app-content-container {
+  padding-top: 8px;
   flex-direction: row;
   align-items: stretch;
-}
-
-app-content-container {
   background-color: color-mix(in oklab, var(--color-surface-variant) 30%, transparent);
 }
 
@@ -30,13 +28,13 @@ app-navbar {
   flex-direction: column;
   flex-shrink: 0;
   gap: 8px;
-  padding: 12px 8px;
+  padding: 0px 12px 8px 12px;
   background-color: transparent;
 }
 
 navbar-button {
-  width: 64px;
-  height: 64px !important;
+  width: 54px;
+  height: 54px !important;
   border-radius: 20px;
 }
 

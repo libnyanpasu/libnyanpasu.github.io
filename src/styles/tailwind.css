@@ -1,4 +1,12 @@
 /* Tailwind v4 via PostCSS — utilities + theme only, no preflight to avoid conflicts with Starlight */
+
+/* Establish Starlight layer cascade order BEFORE any Tailwind layers.
+   ThemeProvider.BvDfnL00.css (which bundles Tailwind + ThemeSelect component CSS) is loaded
+   before common.xD-tZqvw.css on docs pages. Without this declaration, @layer starlight.core and
+   @layer starlight.components get established AFTER @layer utilities, which breaks Starlight's
+   intended internal ordering (starlight.reset ends up overriding starlight.core styles). */
+@layer starlight.base, starlight.reset, starlight.core, starlight.content, starlight.components, starlight.utils;
+
 @layer theme, base, components, utilities;
 
 @import "tailwindcss/theme" layer(theme);

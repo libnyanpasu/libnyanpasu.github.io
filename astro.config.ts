@@ -1,10 +1,13 @@
 import { defineConfig } from "astro/config";
+import type { AstroUserConfig } from "astro";
 import starlight from "@astrojs/starlight";
 import react from "@astrojs/react";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import mermaid from "astro-mermaid";
 import { sidebar } from "./src/config/sidebar";
 import tailwindcss from "@tailwindcss/vite";
+
+type AstroPluginOption = NonNullable<NonNullable<AstroUserConfig["vite"]>["plugins"]>[number];
 
 export default defineConfig({
   site: "https://libnyanpasu.github.io",
@@ -83,7 +86,7 @@ export default defineConfig({
         ],
         emitPrettierIgnore: false,
         includeEslintDisableComment: false,
-      }),
+      }) as AstroPluginOption,
     ],
   },
 });

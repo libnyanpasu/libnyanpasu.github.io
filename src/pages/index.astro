@@ -1,5 +1,5 @@
 ---
-import HomeApp from "@/components/home/home-app";
+import HomePage from "@/components/home/home-page.astro";
 import HomeHeaderControls from "@/components/home/home-header-controls.astro";
 import { m } from "@/paraglide/messages.js";
 import "@/styles/tailwind.css";
@@ -12,17 +12,15 @@ import "@/styles/tailwind.css";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content={m.home_meta_description(undefined, {
-        locale: "en",
-      })}
+      content={m.home_meta_description(undefined, { locale: "en" })}
     />
     <title>Clash Nyanpasu</title>
     <link rel="icon" href="/favicon.ico" />
   </head>
 
   <body class="m-0 min-w-80 bg-zinc-50 font-sans dark:bg-zinc-950">
-    <HomeApp locale="en" client:load>
+    <HomePage locale="en">
       <HomeHeaderControls locale="en" />
-    </HomeApp>
+    </HomePage>
   </body>
 </html>

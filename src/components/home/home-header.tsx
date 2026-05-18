@@ -4,21 +4,27 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useWindowScroll } from "react-use";
-import LocalizeLink from "../localize-link";
 import { Button } from "../ui/button";
 import ShinyText from "../ui/shiny-text";
 
-export default function HomeHeader({ children }: { children?: ReactNode }) {
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+export default function HomeHeader({
+  logoHref,
+  navItems,
+  children,
+}: {
+  logoHref: string;
+  navItems: NavItem[];
+  children?: ReactNode;
+}) {
   const { y } = useWindowScroll();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isTop = y < 10;
-
-  const nav = [
-    { label: m.home_nav_introduction(), href: `/introduction/` },
-    { label: m.home_nav_tutorial(), href: `/tutorial/install/` },
-    { label: m.home_nav_faq(), href: `/others/faq/` },
-  ];
 
   useEffect(() => {
     if (!menuOpen) {
@@ -48,9 +54,9 @@ export default function HomeHeader({ children }: { children?: ReactNode }) {
       )}
       data-top={String(Boolean(isTop))}
     >
-      <LocalizeLink
+      <a
         className="inline-flex min-w-0 flex-1 items-center gap-3 font-semibold text-on-background no-underline md:flex-none"
-        href="/"
+        href={logoHref}
       >
         <img className="block size-8 max-w-full" src="/images/logo.png" alt="Clash Nyanpasu Logo" />
 
@@ -67,12 +73,12 @@ export default function HomeHeader({ children }: { children?: ReactNode }) {
           pauseOnHover={false}
           disabled={false}
         />
-      </LocalizeLink>
+      </a>
 
       <nav className="ml-auto hidden gap-1 md:flex" aria-label="Primary">
-        {nav.map((item) => (
+        {navItems.map((item) => (
           <Button key={item.href} asChild>
-            <LocalizeLink
+            <a
               className={cn(
                 "no-underline grid shrink-0 place-items-center",
                 "hover:bg-primary-container/30 dark:hover:bg-surface-variant/30",
@@ -81,7 +87,7 @@ export default function HomeHeader({ children }: { children?: ReactNode }) {
               href={item.href}
             >
               {item.label}
-            </LocalizeLink>
+            </a>
           </Button>
         ))}
       </nav>
@@ -140,15 +146,15 @@ export default function HomeHeader({ children }: { children?: ReactNode }) {
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              {nav.map((item) => (
+              {navItems.map((item) => (
                 <Button className="h-12 w-full justify-start rounded-none" key={item.href} asChild>
-                  <LocalizeLink
+                  <a
                     className="flex items-center px-4 text-base no-underline"
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
-                  </LocalizeLink>
+                  </a>
                 </Button>
               ))}
             </motion.nav>

@@ -1,0 +1,171 @@
+---
+import { m } from "@/paraglide/messages.js";
+import type { Locale } from "@/paraglide/runtime";
+import { buttonVariants } from "@/components/ui/button";
+import HomeBackground from "./home-background";
+import HomeHeader from "./home-header";
+import HomeHeroLead from "./home-hero-lead";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const base = locale === "zh-cn" ? "/zh-cn" : "";
+const opts = { locale };
+
+const navItems = [
+  { label: m.home_nav_introduction(undefined, opts), href: `${base}/introduction/` },
+  { label: m.home_nav_tutorial(undefined, opts), href: `${base}/tutorial/install/` },
+  { label: m.home_nav_faq(undefined, opts), href: `${base}/others/faq/` },
+];
+
+const stats = [
+  [m.home_stat_tauri_value(undefined, opts), m.home_stat_tauri_label(undefined, opts)],
+  [m.home_stat_md3_value(undefined, opts), m.home_stat_md3_label(undefined, opts)],
+  [m.home_stat_core_value(undefined, opts), m.home_stat_core_label(undefined, opts)],
+];
+
+const platforms = [
+  { name: "macOS", image: "/images/banner/macos.jpg" },
+  { name: "Windows", image: "/images/banner/windows.webp" },
+  { name: "Linux", image: "/images/banner/linux.jpg" },
+];
+
+const githubUrl = "https://github.com/libnyanpasu";
+---
+
+<div class="min-h-screen overflow-x-clip">
+  <HomeBackground client:only="react" />
+
+  <HomeHeader logoHref={base || "/"} navItems={navItems} client:load>
+    <slot />
+  </HomeHeader>
+
+  <main class="overflow-clip">
+    <section
+      class:list={[
+        "min-h-[min(760px,calc(100vh-4rem))] w-[min(1180px,calc(100%-2rem))]",
+        "mx-auto grid",
+        "grid-cols-1 items-center gap-8 py-12",
+        "md:grid-cols-[minmax(0,0.88fr)_minmax(22rem,1.12fr)]",
+        "md:py-16 lg:gap-20 lg:py-24",
+      ]}
+    >
+      <div>
+        <h1 class="mb-5 mt-0 max-w-[12ch] text-[clamp(3.2rem,8vw,6.8rem)] font-semibold leading-[0.94] tracking-normal text-on-background md:max-w-[11ch]">
+          {m.home_title(undefined, opts)}
+        </h1>
+
+        <p class="mt-0 max-w-152 text-[clamp(1.08rem,2vw,1.32rem)] leading-[1.7] text-on-surface-variant">
+          {m.home_lead(undefined, opts)}{" "}
+          <HomeHeroLead locale={locale} client:load />
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            class:list={[
+              buttonVariants({ variant: "flat" }),
+              "no-underline flex items-center text-base h-14 px-12",
+            ]}
+            href={`${base}/introduction/`}
+          >
+            {m.home_primary_action(undefined, opts)}
+          </a>
+
+          <a
+            class:list={[
+              buttonVariants(),
+              "no-underline flex items-center text-base h-14 px-12 backdrop-blur-xl",
+            ]}
+            href={githubUrl}
+            target="_blank"
+            rel="noopener"
+          >
+            {m.home_secondary_action(undefined, opts)}
+          </a>
+        </div>
+
+        <dl class="mt-10 grid max-w-148 grid-cols-1 gap-3 sm:grid-cols-3">
+          {stats.map(([value, label]) => (
+            <div class="border-t border-outline-variant pt-4">
+              <dt class="text-base font-extrabold text-on-surface">{value}</dt>
+              <dd class="m-0 mt-1 text-sm leading-normal text-on-surface-variant">{label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div
+        class:list={[
+          "relative rounded-2xl border border-outline-variant bg-surface overflow-clip",
+          "shadow-[0_24px_80px_rgb(0_0_0/16%)] md:rotate-[-1.5deg]",
+        ]}
+        aria-label="Application preview"
+      >
+        <img
+          class="block aspect-video w-full rounded-2xl object-cover object-top-left dark:hidden"
+          src="/images/screenshot/app-dashboard-light.png"
+          alt="Clash Nyanpasu dashboard"
+        />
+        <img
+          class="hidden aspect-video w-full rounded-2xl object-cover object-top-left dark:block"
+          src="/images/screenshot/app-dashboard-dark.png"
+          alt="Clash Nyanpasu dashboard"
+        />
+      </div>
+    </section>
+
+    <section class="mx-auto w-[min(1180px,calc(100%-2rem))] border-t border-outline-variant py-12 md:py-18">
+      <div class="mb-6 max-w-176">
+        <h2 class="mb-3 mt-0 text-[clamp(1.45rem,3vw,2.1rem)] font-bold leading-[1.12] tracking-normal text-on-surface">
+          {m.home_platforms_title(undefined, opts)}
+        </h2>
+        <p class="m-0 leading-relaxed text-on-surface-variant">
+          {m.home_platforms_lead(undefined, opts)}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {platforms.map((platform) => (
+          <figure class="relative m-0 overflow-hidden rounded-lg bg-surface-variant">
+            <img
+              class="block aspect-4/3 w-full object-cover"
+              src={platform.image}
+              alt={`${platform.name} banner`}
+              loading="lazy"
+            />
+            <figcaption class="absolute bottom-3 left-3 rounded-md bg-black/60 px-3 py-2 text-sm font-[780] text-white">
+              {platform.name}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto w-[min(1180px,calc(100%-2rem))] border-t border-outline-variant py-12 md:py-18 flex items-start justify-between">
+      <div>
+        <h2 class="mb-3 mt-0 text-[clamp(1.45rem,3vw,2.1rem)] font-bold leading-[1.12] tracking-normal text-on-surface">
+          {m.home_docs_title(undefined, opts)}
+        </h2>
+        <p class="m-0 leading-relaxed text-on-surface-variant">
+          {m.home_docs_lead(undefined, opts)}
+        </p>
+      </div>
+
+      <a
+        class:list={[
+          buttonVariants({ variant: "fab" }),
+          "no-underline flex items-center justify-center text-base font-bold",
+        ]}
+        href={`${base}/tutorial/install/`}
+      >
+        {navItems[1].label}
+      </a>
+    </section>
+  </main>
+
+  <footer class="border-t border-outline-variant p-6 text-center text-on-surface-variant">
+    {m.footer_message(undefined, opts)}
+  </footer>
+</div>

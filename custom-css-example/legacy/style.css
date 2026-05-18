@@ -1,0 +1,79 @@
+app-header {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 30%,
+    transparent
+  );
+}
+
+.dark app-header {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
+}
+
+app-content-container {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+app-content-container {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 30%,
+    transparent
+  );
+}
+
+.dark app-content-container {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
+}
+
+app-content {
+  width: calc(100% - 16px);
+  border-top-left-radius: 24px;
+  background-color: var(--color-mixed-background);
+}
+
+app-navbar {
+  height: auto;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 8px;
+  padding: 12px 8px;
+  background-color: transparent;
+}
+
+navbar-button {
+  width: 64px;
+  height: 64px !important;
+  border-radius: 20px;
+}
+
+navbar-button[data-active="true"] {
+  background-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+}
+
+navbar-button:hover {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
+}
+
+navbar-button-icon,
+navbar-button-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+navbar-button-label {
+  display: none;
+}

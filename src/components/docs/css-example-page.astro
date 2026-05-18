@@ -1,0 +1,141 @@
+---
+import { readFileSync, readdirSync } from "node:fs";
+import { join, extname, basename } from "node:path";
+import { Code } from "@astrojs/starlight/components";
+
+interface Props {
+  dir: string;
+  lang?: string;
+}
+
+const { dir, lang } = Astro.props;
+const exampleName = basename(dir);
+
+// --- readme via Astro's native .md import ---
+const readmeMods = import.meta.glob(
+  "../../../custom-css-example/**/readme*.md",
+  { eager: true },
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ReadmeContent: any = null;
+for (const [path, mod] of Object.entries(readmeMods) as [string, { Content: unknown }][]) {
+  const normal = path.replace(/\\/g, "/");
+  if (!normal.includes(`/custom-css-example/${exampleName}/`)) continue;
+
+  if (lang && normal.endsWith(`/readme.${lang}.md`)) {
+    ReadmeContent = mod.Content;
+    break;
+  }
+  if (normal.endsWith("/readme.md") && !ReadmeContent) {
+    ReadmeContent = mod.Content;
+  }
+}
+
+// --- discover preview images ---
+const allImages = import.meta.glob<{ default: { src: string } }>(
+  "../../../custom-css-example/**/*.{png,jpg,jpeg,webp,gif,svg}",
+  { eager: true },
+);
+
+const previewImages: { src: string; alt: string }[] = [];
+for (const [imgPath, mod] of Object.entries(allImages)) {
+  const normal = imgPath.replace(/\\/g, "/");
+  if (normal.includes(`/custom-css-example/${exampleName}/`)) {
+    previewImages.push({ src: mod.default.src, alt: basename(imgPath) });
+  }
+}
+
+// --- discover CSS files (both root and styles/ subdirectory) ---
+const cssFiles: { name: string; content: string }[] = [];
+function collectCss(scanDir: string) {
+  try {
+    for (const f of readdirSync(scanDir).sort()) {
+      if (extname(f) === ".css") {
+        cssFiles.push({
+          name: f,
+          content: readFileSync(join(scanDir, f), "utf-8").trimEnd(),
+        });
+      }
+    }
+  } catch {
+    // directory doesn't exist
+  }
+}
+const assetsDir = join(process.cwd(), dir);
+collectCss(assetsDir);
+collectCss(join(assetsDir, "styles"));
+---
+
+{
+  !ReadmeContent && previewImages.length === 0 && cssFiles.length === 0 && (
+    <p>No content found.</p>
+  )
+}
+
+{
+  ReadmeContent && (
+    <div class="readme-content">
+      <ReadmeContent />
+    </div>
+  )
+}
+
+{
+  previewImages.length > 0 && (
+    <div class="preview-gallery">
+      {previewImages.map((img) => (
+        <figure>
+          <img src={img.src} alt={img.alt} loading="lazy" />
+          <figcaption>{img.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+{
+  cssFiles.length > 0 && (
+    <div class="css-files">
+      <h2>CSS</h2>
+      {cssFiles.map((file) => (
+        <section>
+          <h3><code>{file.name}</code></h3>
+          <Code code={file.content} lang="css" />
+        </section>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .preview-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .preview-gallery figure {
+    margin: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .preview-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .preview-gallery figcaption {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-2);
+    background: var(--sl-color-gray-7);
+  }
+  .css-files section {
+    margin-bottom: 1.5rem;
+  }
+  .css-files h3 {
+    margin-bottom: 0.5rem;
+  }
+</style>

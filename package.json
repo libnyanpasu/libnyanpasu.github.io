@@ -12,8 +12,8 @@
     "docs:build": "astro build && node scripts/restore-case-sensitive-routes.mjs",
     "docs:preview": "astro preview",
     "lint": "oxlint --ignore-path .gitignore --ignore-pattern '.astro/**' .",
-    "fmt": "oxfmt --write .",
-    "fmt:check": "oxfmt --check .",
+    "fmt": "oxfmt --ignore-path .gitignore --ignore-path .oxfmtignore --write .",
+    "fmt:check": "oxfmt --ignore-path .gitignore --ignore-path .oxfmtignore --check .",
     "prepare": "husky"
   },
   "dependencies": {

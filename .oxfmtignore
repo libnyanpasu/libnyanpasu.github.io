@@ -1,5 +1,7 @@
 pnpm-lock.yaml
 src/paraglide/
+src/content/docs/tutorial/custom-css.mdx
+src/content/docs/zh-cn/tutorial/custom-css.mdx
 dist/
 node_modules/
 .astro/

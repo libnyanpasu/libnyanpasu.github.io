@@ -78,15 +78,15 @@ rule-providers:
     path: ./ruleset/applications.yaml
     interval: 86400
 append__rules:
-- 'RULE-SET,applications,DIRECT',
-- 'DOMAIN,clash.razord.top,DIRECT',
-- 'DOMAIN,yacd.haishan.me,DIRECT',
-- 'RULE-SET,icloud,DIRECT',
-- 'RULE-SET,apple,Proxies',
-- 'RULE-SET,private,DIRECT',
-- 'RULE-SET,reject,REJECT',
-- 'RULE-SET,tld-not-cn,Proxies',
-- 'RULE-SET,gfw,Proxies',
-- 'RULE-SET,telegramcidr,Proxies',
-- 'GEOIP,LAN,DIRECT',
-- 'GEOIP,CN,DIRECT'
+  - "RULE-SET,applications,DIRECT"
+  - "DOMAIN,clash.razord.top,DIRECT"
+  - "DOMAIN,yacd.haishan.me,DIRECT"
+  - "RULE-SET,icloud,DIRECT"
+  - "RULE-SET,apple,Proxies"
+  - "RULE-SET,private,DIRECT"
+  - "RULE-SET,reject,REJECT"
+  - "RULE-SET,tld-not-cn,Proxies"
+  - "RULE-SET,gfw,Proxies"
+  - "RULE-SET,telegramcidr,Proxies"
+  - "GEOIP,LAN,DIRECT"
+  - "GEOIP,CN,DIRECT"

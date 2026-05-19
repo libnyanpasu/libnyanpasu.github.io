@@ -6,18 +6,18 @@ sidebar:
 
 # Custom CSS
 
-Custom CSS lets you write CSS directly inside Clash Nyanpasu to customize the application's appearance. The CSS is saved locally, applied immediately after saving, and restored automatically after restarting the app.
+Custom CSS lets you write CSS or Less directly inside Clash Nyanpasu to customize the application's appearance. The styles are saved locally, applied immediately after saving, and restored automatically after restarting the app.
 
-This feature is intended for advanced users who are comfortable with CSS. Clash Nyanpasu does not validate whether your CSS may break the layout, so aggressive rules can make parts of the interface misaligned, hidden, or difficult to click.
+This feature is intended for advanced users who are comfortable with CSS or Less. Clash Nyanpasu does not validate whether your styles may break the layout, so aggressive rules can make parts of the interface misaligned, hidden, or difficult to click.
 
 ## Opening The Editor
 
 1. Open **Settings -> User Interface**.
 2. Find the **Custom CSS** setting.
 3. Click **Edit**.
-4. Enter or modify CSS in the editor window.
+4. Enter or modify CSS or Less in the editor window.
 
-The editor uses Monaco's CSS language mode, including basic syntax highlighting, diagnostics, and `data-slot` completion.
+The editor uses Monaco's CSS language mode, including basic syntax highlighting, diagnostics, and `data-slot` completion. You can write plain CSS directly, or use Less features such as variables and nesting.
 
 ## Save, Clear, And Cancel
 
@@ -46,7 +46,7 @@ app-root {
   font-size: 14px;
 }
 
-[data-slot=app-root] {
+[data-slot="app-root"] {
   font-size: 14px;
 }
 ```
@@ -59,13 +59,27 @@ app-root {
 }
 
 profile-card:hover,
-[data-slot=editor-content] {
+[data-slot="editor-content"] {
   opacity: 0.96;
 }
 
 @media (max-width: 768px) {
   app-root {
     font-size: 13px;
+  }
+}
+```
+
+Less syntax is also supported:
+
+```less
+@card-radius: 6px;
+
+card {
+  border-radius: @card-radius;
+
+  &:hover {
+    opacity: 0.96;
   }
 }
 ```
@@ -80,7 +94,7 @@ Known `data-slot` values are suggested when you type patterns such as:
 app-
 ```
 
-After selecting a completion item, continue writing normal CSS declarations.
+After selecting a completion item, continue writing normal CSS or Less declarations.
 
 ## Examples
 
@@ -112,7 +126,12 @@ profile-card {
 ## Notes
 
 - Custom CSS is applied above theme styles. Switching themes does not clear your CSS.
-- Very large CSS content can still be saved, but it may affect performance.
+- Very large CSS or Less content can still be saved, but it may affect performance.
 - If custom CSS breaks the interface, open **Settings -> User Interface -> Custom CSS -> Edit** and click **Clear**.
 - If the main window becomes difficult to use, clear the `custom-css` key from debug KV storage.
 - Avoid depending on framework-generated class names; they may change after updates.
+
+## References
+
+- For CSS syntax, properties, selectors, and browser behavior, see the [MDN CSS documentation](https://developer.mozilla.org/docs/Web/CSS).
+- For Less variables, nesting, mixins, and other preprocessor features, see the [Less documentation](https://lesscss.org/).

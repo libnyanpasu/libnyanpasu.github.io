@@ -6,18 +6,18 @@ sidebar:
 
 # 自定义 CSS
 
-自定义 CSS 允许你在 Clash Nyanpasu 内直接编写 CSS，用来自定义应用界面外观。CSS 会保存到本地，保存后立即应用，并在重启应用后自动恢复。
+自定义 CSS 允许你在 Clash Nyanpasu 内直接编写 CSS 或 Less，用来自定义应用界面外观。样式会保存到本地，保存后立即应用，并在重启应用后自动恢复。
 
-该功能面向熟悉 CSS 的高级用户。Clash Nyanpasu 不会检查你的 CSS 是否会破坏布局，因此过于激进的样式可能导致界面错位、隐藏或难以点击。
+该功能面向熟悉 CSS 或 Less 的高级用户。Clash Nyanpasu 不会检查你的样式是否会破坏布局，因此过于激进的规则可能导致界面错位、隐藏或难以点击。
 
 ## 打开编辑器
 
 1. 打开 **设置 -> 用户界面**。
 2. 找到 **自定义 CSS** 设置项。
 3. 点击 **编辑**。
-4. 在打开的 CSS 编辑器窗口中输入或修改 CSS。
+4. 在打开的编辑器窗口中输入或修改 CSS / Less。
 
-编辑器使用 Monaco 的 CSS 语言模式，支持基础语法高亮、诊断和 `data-slot` 自动补全。
+编辑器使用 Monaco 的 CSS 语言模式，支持基础语法高亮、诊断和 `data-slot` 自动补全。你既可以直接编写普通 CSS，也可以使用 Less 的变量、嵌套等语法。
 
 ## 保存、清除和取消
 
@@ -46,7 +46,7 @@ app-root {
   font-size: 14px;
 }
 
-[data-slot=app-root] {
+[data-slot="app-root"] {
   font-size: 14px;
 }
 ```
@@ -59,13 +59,27 @@ app-root {
 }
 
 profile-card:hover,
-[data-slot=editor-content] {
+[data-slot="editor-content"] {
   opacity: 0.96;
 }
 
 @media (max-width: 768px) {
   app-root {
     font-size: 13px;
+  }
+}
+```
+
+也支持 Less 语法：
+
+```less
+@card-radius: 6px;
+
+card {
+  border-radius: @card-radius;
+
+  &:hover {
+    opacity: 0.96;
   }
 }
 ```
@@ -80,7 +94,7 @@ profile-card:hover,
 app-
 ```
 
-选择补全项后，可以继续编写普通 CSS 声明。
+选择补全项后，可以继续编写普通 CSS 或 Less 声明。
 
 ## 常见示例
 
@@ -112,7 +126,12 @@ profile-card {
 ## 注意事项
 
 - 自定义 CSS 会覆盖在主题样式之上，切换主题不会自动清除你的 CSS。
-- CSS 内容很大时仍允许保存，但可能影响性能。
+- CSS 或 Less 内容很大时仍允许保存，但可能影响性能。
 - 如果界面被自定义 CSS 破坏，优先从 **设置 -> 用户界面 -> 自定义 CSS -> 编辑** 打开编辑器并点击 **清除**。
 - 如果主窗口已经难以操作，可以通过调试 KV 存储清除 `custom-css` 这个 key。
 - 不建议依赖框架生成的 class name，它们可能在版本更新后变化。
+
+## 参考资料
+
+- CSS 语法、属性、选择器和浏览器行为可以参考 [MDN CSS 文档](https://developer.mozilla.org/docs/Web/CSS)。
+- Less 的变量、嵌套、mixins 等预处理器特性可以参考 [Less 官方文档](https://lesscss.org/)。

@@ -73,7 +73,7 @@ importers:
         version: 21.0.2
       '@inlang/paraglide-js':
         specifier: ^2.0.0
-        version: 2.19.0(typescript@6.0.3)
+        version: 2.20.0(typescript@6.0.3)
       '@material/material-color-utilities':
         specifier: ^0.4.0
         version: 0.4.0(patch_hash=c17819fcbc2fbf79bc99adc4c751bf7f8d40a56e5f2c1d2d6622d65f8abfb8d6)
@@ -923,8 +923,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inlang/paraglide-js@2.19.0':
-    resolution: {integrity: sha512-aZOn6gM+shvWy24fiDUBZXL+rBLZ+IutSnnZd6WxFyJRaqFCgN/vqnDjWUSUZqBTRDhYiM9rGvOhpPV6r+cThA==}
+  '@inlang/paraglide-js@2.20.0':
+    resolution: {integrity: sha512-vI8PdPVZSnpYnpagjvm+nWSa3nMDRJKVM/2eLAtUHFrNcZZadxVdmP79r4W95+dkMLDFGEyzSSY9sFxvjdkkyQ==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6'
@@ -935,8 +935,8 @@ packages:
   '@inlang/recommend-sherlock@0.2.1':
     resolution: {integrity: sha512-ckv8HvHy/iTqaVAEKrr+gnl+p3XFNwe5D2+6w6wJk2ORV2XkcRkKOJ/XsTUJbPSiyi4PI+p+T3bqbmNx/rDUlg==}
 
-  '@inlang/sdk@2.10.0':
-    resolution: {integrity: sha512-xLVRHAI9Jw6L/NrlK6s1mXCvbFwzk5INEL4i3By4jW9yjIMchJ+JGSw4WgFpiLlcoBuR/qIMmSn6te/Jozuybg==}
+  '@inlang/sdk@2.10.2':
+    resolution: {integrity: sha512-O1ki72SNK6LPagaGrvlioBb1mWKvump7cO7P85hfGZjdFTmDdn3icI0A6MvaBsB3P9KQHAjzyubnN1OslGufTw==}
     engines: {node: '>=20.0.0'}
 
   '@jridgewell/gen-mapping@0.3.13':
@@ -2668,6 +2668,11 @@ packages:
 
   acorn@8.16.0:
     resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.17.0:
+    resolution: {integrity: sha512-xRQbDb9BnwDafYNn6Vwl839DYVjqXYb1XVGtWAZ1kcDc6iwAL4hg3B1dZlRiuENFeO2H53gFG3in621AdERVAg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -5861,10 +5866,10 @@ snapshots:
   '@img/sharp-win32-x64@0.35.1':
     optional: true
 
-  '@inlang/paraglide-js@2.19.0(typescript@6.0.3)':
+  '@inlang/paraglide-js@2.20.0(typescript@6.0.3)':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
-      '@inlang/sdk': 2.10.0
+      '@inlang/sdk': 2.10.2
       commander: 11.1.0
       consola: 3.4.0
       json5: 2.2.3
@@ -5879,7 +5884,7 @@ snapshots:
     dependencies:
       comment-json: 4.6.2
 
-  '@inlang/sdk@2.10.0':
+  '@inlang/sdk@2.10.2':
     dependencies:
       '@lix-js/sdk': 0.4.10
       '@sinclair/typebox': 0.31.28
@@ -7544,6 +7549,8 @@ snapshots:
       acorn: 8.16.0
 
   acorn@8.16.0: {}
+
+  acorn@8.17.0: {}
 
   ajv-draft-04@1.0.0(ajv@8.18.0):
     optionalDependencies:
@@ -10270,7 +10277,7 @@ snapshots:
   unplugin@2.3.11:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.16.0
+      acorn: 8.17.0
       picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
 

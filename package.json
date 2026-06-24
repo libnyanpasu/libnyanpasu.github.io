@@ -35,7 +35,7 @@
     "@astrojs/check": "^0.9.9",
     "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.0.0",
-    "@astrojs/starlight": "^0.40.0",
+    "@astrojs/starlight": "^0.41.0",
     "@commitlint/cli": "21.1.0",
     "@commitlint/config-conventional": "21.1.0",
     "@inlang/paraglide-js": "^2.0.0",

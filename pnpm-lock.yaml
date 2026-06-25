@@ -73,7 +73,7 @@ importers:
         version: 21.1.0
       '@inlang/paraglide-js':
         specifier: ^2.0.0
-        version: 2.20.1(typescript@6.0.3)
+        version: 2.20.2(typescript@6.0.3)
       '@material/material-color-utilities':
         specifier: ^0.4.0
         version: 0.4.0(patch_hash=c17819fcbc2fbf79bc99adc4c751bf7f8d40a56e5f2c1d2d6622d65f8abfb8d6)
@@ -978,8 +978,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inlang/paraglide-js@2.20.1':
-    resolution: {integrity: sha512-8mDhvcociFkWZDy3J+ZIIWkl0GTtJjVXS/kcBT2QG2l88y7+bFT45s8I00a7Hp1eFP9y6ScJMmNXWy87Krt7wA==}
+  '@inlang/paraglide-js@2.20.2':
+    resolution: {integrity: sha512-V8iY3uu/vQU94gEag1bdC3glMJSp4Dg3XMwfnabZLBh1Dv0F++DvDYlMeniqv2+nHbnS/twB75AM140OmpHDEg==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6'
@@ -5978,7 +5978,7 @@ snapshots:
   '@img/sharp-win32-x64@0.35.2':
     optional: true
 
-  '@inlang/paraglide-js@2.20.1(typescript@6.0.3)':
+  '@inlang/paraglide-js@2.20.2(typescript@6.0.3)':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
       '@inlang/sdk': 2.10.2

@@ -1,5 +1,3 @@
-# 为代理组添加图标
-
 :::caution[注意]
 目前 **图标** 仅支持 `Mihomo` 和 `Clash Rust` 内核， `Clash Premium` 不支持。
 :::

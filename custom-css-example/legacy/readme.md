@@ -1,5 +1,3 @@
-# Legacy Vertical Navbar
-
 Transforms the default horizontal top navbar into a left-side vertical layout, similar to traditional app sidebar styling.
 
 ## Effects

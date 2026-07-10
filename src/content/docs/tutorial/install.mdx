@@ -9,18 +9,17 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 Clash Nyanpasu currently supports:
 
 - Windows 10 and later
-- macOS 10.15 and later
-- Linux
+- macOS 12.6 and later
+- Linux (`glibc` >= 2.39)
 
 :::note[Tips]
 
 Some explanations of terms included in the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page:
 
-- `x86` - i386/i686, for 32-bit operating system.
-- `amd64` - x64/x86_64, for currently popular devices.
-- `aarch64` - armv8/arm64/armv9, for devices with Arm CPUs.
+- `amd64` / `x86_64` / `x64`: For popular 64-bit Intel/AMD processor devices.
+- `aarch64` / `arm64`: For modern 64-bit Arm architecture devices (e.g., Apple Silicon chips, modern Arm-based Windows or Linux devices).
 
-We currently plan to support only `x86`, `amd64` and `aarch64` architectures.
+Currently, we only support the 64-bit architectures listed above; 32-bit and legacy Arm devices are not supported.
 
 :::
 

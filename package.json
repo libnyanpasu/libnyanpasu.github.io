@@ -46,7 +46,7 @@
     "@types/node": "24.13.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "astro": "^6.1.10",
+    "astro": "^7.0.0",
     "astro-mermaid": "^2.0.1",
     "husky": "9.1.7",
     "lint-staged": "17.0.8",

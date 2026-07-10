@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/react": "^5.0.4",
+    "@astrojs/react": "^6.0.0",
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/starlight": "^0.41.0",
     "@commitlint/cli": "21.2.1",

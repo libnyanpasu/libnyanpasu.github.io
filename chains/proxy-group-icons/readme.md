@@ -1,5 +1,3 @@
-# Add Icons to Proxy Groups
-
 :::caution[Note]
 Icons are only supported by `Mihomo` and `Clash Rust` kernels. `Clash Premium` does not support them.
 :::

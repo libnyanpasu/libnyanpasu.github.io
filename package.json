@@ -61,15 +61,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.34.5",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "sharp"
-    ],
-    "patchedDependencies": {
-      "@material/material-color-utilities@0.4.0": "patches/@material__material-color-utilities@0.4.0.patch"
-    }
-  }
+  "packageManager": "pnpm@10.34.5"
 }

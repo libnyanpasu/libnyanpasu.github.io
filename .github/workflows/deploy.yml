@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: latest
-      - uses: pnpm/action-setup@v6
+      - uses: pnpm/action-setup@v6.0.8 # pin: v6.0.9 self-install crashes on packageManager version switch (pnpm/action-setup#268)
         with:
           run_install: false
       - name: Get pnpm store directory

@@ -42,13 +42,19 @@ function isDirCollapsed(relDir: string): boolean {
 }
 
 /**
- * Read the first `# Heading` from a readme file.
+ * Resolve a readme's title, preferring YAML frontmatter `title:` and
+ * falling back to the first `# Heading` for backwards compatibility.
  */
 function readReadmeTitle(readmePath: string): string | undefined {
   try {
     const md = readFileSync(readmePath, "utf-8");
-    const m = md.match(/^#\s+(.+)/m);
-    return m ? m[1] : undefined;
+    const frontmatter = md.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    if (frontmatter) {
+      const title = frontmatter[1].match(/^title:\s*["']?(.+?)["']?\s*$/m);
+      if (title) return title[1];
+    }
+    const heading = md.match(/^#\s+(.+)/m);
+    return heading ? heading[1].trim() : undefined;
   } catch {
     return undefined;
   }

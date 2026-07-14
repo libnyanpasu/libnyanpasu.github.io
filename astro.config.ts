@@ -4,6 +4,7 @@ import starlight from "@astrojs/starlight";
 import react from "@astrojs/react";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import mermaid from "astro-mermaid";
+import md3Theme from "starlight-theme-md3";
 import { sidebar } from "./src/config/sidebar";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -35,6 +36,11 @@ export default defineConfig({
       editLink: {
         baseUrl: "https://github.com/libnyanpasu/libnyanpasu.github.io/edit/main/",
       },
+      plugins: [
+        md3Theme({
+          seed: "#1867C0",
+        }),
+      ],
       customCss: ["./src/styles/tailwind.css"],
       defaultLocale: "root",
       locales: {
@@ -50,7 +56,6 @@ export default defineConfig({
       sidebar,
       components: {
         Head: "./src/components/overrides/head.astro",
-        ThemeSelect: "./src/components/overrides/theme-select.astro",
       },
       lastUpdated: true,
       credits: true,
@@ -65,9 +70,6 @@ export default defineConfig({
       alias: {
         "@/*": "./src/*",
       },
-    },
-    ssr: {
-      noExternal: ["@material/material-color-utilities"],
     },
     plugins: [
       tailwindcss(),

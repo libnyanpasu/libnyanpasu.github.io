@@ -17,9 +17,4 @@ import Default from "@astrojs/starlight/components/Head.astro";
     );
   }
 
-  // prepare dark mode class on root element before React hydration to avoid FOUC
-  document.documentElement.classList.toggle(
-    "dark",
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-  );
 </script>

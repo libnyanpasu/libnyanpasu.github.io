@@ -1,7 +1,7 @@
 ---
 import ThemeProvider from "@astrojs/starlight/components/ThemeProvider.astro";
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import ThemeSelect from "@/components/overrides/theme-select.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import type { Locale } from "@/paraglide/runtime";
 
 interface Props {
@@ -39,11 +39,11 @@ locals.starlightRoute = {
   }
 
   .home-header-controls :global(label) {
-    color: var(--color-md-on-background);
+    color: var(--md-sys-color-on-background);
   }
 
   .home-header-controls :global(label:hover) {
-    color: var(--color-md-on-background);
+    color: var(--md-sys-color-on-background);
   }
 
   .home-header-controls :global(select) {
@@ -51,7 +51,7 @@ locals.starlightRoute = {
     border-radius: 9999px;
     background-color: color-mix(
       in srgb,
-      var(--color-md-surface) 72%,
+      var(--md-sys-color-surface) 72%,
       transparent
     );
   }

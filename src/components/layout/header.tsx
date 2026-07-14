@@ -1,5 +1,4 @@
 import type { NavItem } from "@/config/sidebar";
-import ThemeToggle from "@/components/ui/theme-toggle";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 
 interface Props {
@@ -61,7 +60,6 @@ export default function Header({ nav, locale, currentPath }: Props) {
             </a>
           ))}
           <LanguageSwitcher locale={locale} currentPath={currentPath} />
-          <ThemeToggle />
         </div>
       </div>
     </header>

@@ -2,6 +2,7 @@
 import { m } from "@/paraglide/messages.js";
 import type { Locale } from "@/paraglide/runtime";
 import { buttonVariants } from "@/components/ui/button";
+import { createMd3ThemeOptionsCss } from "starlight-theme-md3";
 import HomeBackground from "./home-background";
 import HomeHeader from "./home-header";
 import HomeHeroLead from "./home-hero-lead";
@@ -33,7 +34,10 @@ const platforms = [
 ];
 
 const githubUrl = "https://github.com/libnyanpasu";
+const themeCss = createMd3ThemeOptionsCss({ seed: "#1867C0" });
 ---
+
+<style is:global set:html={themeCss} />
 
 <div class="min-h-screen overflow-x-clip">
   <HomeBackground client:only="react" />

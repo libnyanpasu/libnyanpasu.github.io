@@ -1,4 +1,3 @@
 label: "Custom CSS Example"
+order: 5
 collapsed: true
-translations:
-  zh-cn: "自定义 CSS 示例"

@@ -2,7 +2,6 @@ import {
   readFileSync,
   existsSync,
   readdirSync,
-  statSync,
   writeFileSync,
   mkdirSync,
   unlinkSync,
@@ -28,17 +27,39 @@ const DOCS_ROOT = join(process.cwd(), "src/content/docs");
 const DOC_EXTS = new Set([".md", ".mdx"]);
 const EXAMPLES_ROOT = join(process.cwd(), "custom-css-example");
 const CHAINS_ROOT = join(process.cwd(), "chains");
+const DEFAULT_ORDER = Number.MAX_SAFE_INTEGER;
 
-function readDirLabel(relDir: string): string | undefined {
-  const p = join(DOCS_ROOT, relDir, "_dir.yaml");
-  if (!existsSync(p)) return undefined;
-  return readFileSync(p, "utf-8").match(/^label:\s*["']?(.+?)["']?\s*$/m)?.[1];
+interface SidebarMetadata {
+  label?: string;
+  order?: number;
+  collapsed?: boolean;
 }
 
-function isDirCollapsed(relDir: string): boolean {
+function readDirMetadata(relDir: string): SidebarMetadata {
   const p = join(DOCS_ROOT, relDir, "_dir.yaml");
-  if (!existsSync(p)) return false;
-  return /^collapsed:\s*true\s*$/m.test(readFileSync(p, "utf-8"));
+  if (!existsSync(p)) return {};
+
+  const source = readFileSync(p, "utf-8");
+  const order = source.match(/^order:\s*(-?\d+(?:\.\d+)?)\s*$/m)?.[1];
+
+  return {
+    label: source.match(/^label:\s*["']?(.+?)["']?\s*$/m)?.[1],
+    order: order === undefined ? undefined : Number(order),
+    collapsed: /^collapsed:\s*true\s*$/m.test(source),
+  };
+}
+
+function readPageOrder(pagePath: string): number | undefined {
+  const source = readFileSync(pagePath, "utf-8");
+  const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/m)?.[1];
+  const sidebar = frontmatter?.match(/^sidebar:\s*\r?\n((?:[ \t]+.*(?:\r?\n|$))*)/m)?.[1];
+  const order = sidebar?.match(/^\s+order:\s*(-?\d+(?:\.\d+)?)\s*$/m)?.[1];
+  return order === undefined ? undefined : Number(order);
+}
+
+function humanizeDirectoryName(name: string): string {
+  const value = name.replace(/[-_]+/g, " ");
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
 /**
@@ -218,55 +239,55 @@ function syncChainExamplePages() {
 syncCssExamplePages();
 syncChainExamplePages();
 
-/**
- * Dynamically builds sidebar items for a given docs directory.
- * - Files become slug entries (titles auto-translated by Starlight via frontmatter)
- * - Subdirectories become autogenerate groups with labels from _dir.yaml
- *   and zh-cn translations from zh-cn/<dir>/_dir.yaml
- */
+/** Build the complete sidebar recursively from the docs directory. */
 function buildDirItems(dir: string): StarlightSidebarItem[] {
   const absPath = join(DOCS_ROOT, dir);
-  return readdirSync(absPath)
-    .filter((entry) => !entry.startsWith("_") && !entry.startsWith("."))
-    .flatMap((entry): StarlightSidebarItem[] => {
-      const full = join(absPath, entry);
-      if (statSync(full).isDirectory()) {
-        const relDir = `${dir}/${entry}`;
-        const enLabel = readDirLabel(relDir);
-        const zhLabel = readDirLabel(`zh-cn/${relDir}`);
-        const collapsed = isDirCollapsed(relDir) || isDirCollapsed(`zh-cn/${relDir}`);
+  const entries = readdirSync(absPath, { withFileTypes: true })
+    .filter((entry) => !entry.name.startsWith("_") && !entry.name.startsWith("."))
+    .filter((entry) => !(dir === "" && entry.isDirectory() && entry.name === "zh-cn"))
+    .flatMap((entry): { item: StarlightSidebarItem; order: number; key: string }[] => {
+      const fullPath = join(absPath, entry.name);
+
+      if (entry.isDirectory()) {
+        const relDir = dir ? `${dir}/${entry.name}` : entry.name;
+        const items = buildDirItems(relDir);
+        if (items.length === 0) return [];
+
+        const metadata = readDirMetadata(relDir);
+        const localizedMetadata = readDirMetadata(`zh-cn/${relDir}`);
+
         return [
           {
-            label: enLabel ?? entry,
-            ...(zhLabel ? { translations: { "zh-CN": zhLabel } } : {}),
-            items: [
-              {
-                autogenerate: { directory: relDir, collapsed },
-              },
-            ],
+            item: {
+              label: metadata.label ?? humanizeDirectoryName(entry.name),
+              ...(localizedMetadata.label
+                ? { translations: { "zh-CN": localizedMetadata.label } }
+                : {}),
+              collapsed: metadata.collapsed || localizedMetadata.collapsed,
+              items,
+            },
+            order: metadata.order ?? DEFAULT_ORDER,
+            key: relDir,
           },
         ];
-      } else if (DOC_EXTS.has(extname(entry))) {
-        const name = entry.replace(/\.mdx?$/, "");
-        if (name === "index") return [];
-        return [{ slug: `${dir}/${name}` }];
       }
-      return [];
+
+      if (!DOC_EXTS.has(extname(entry.name))) return [];
+
+      const name = entry.name.replace(/\.mdx?$/, "");
+      const slug = dir ? `${dir}/${name}` : name;
+      return [
+        {
+          item: { slug },
+          order: readPageOrder(fullPath) ?? DEFAULT_ORDER,
+          key: slug,
+        },
+      ];
     });
+
+  return entries
+    .sort((a, b) => a.order - b.order || a.key.localeCompare(b.key, "en"))
+    .map(({ item }) => item);
 }
 
-export const sidebar: StarlightSidebarItem[] = [
-  "index",
-  "introduction",
-  {
-    label: "Tutorial",
-    translations: { "zh-CN": "文档" },
-    items: buildDirItems("tutorial"),
-  },
-  "development",
-  {
-    label: "Others",
-    translations: { "zh-CN": "其他" },
-    items: [{ autogenerate: { directory: "others" } }],
-  },
-];
+export const sidebar: StarlightSidebarItem[] = buildDirItems("");

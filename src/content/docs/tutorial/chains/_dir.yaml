@@ -1,4 +1,3 @@
 label: "Proxy Chains (Scripts)"
+order: 4
 collapsed: true
-translations:
-  zh-cn: "代理链 (Scripts)"

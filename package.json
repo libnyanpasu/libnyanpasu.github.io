@@ -43,7 +43,7 @@
     "husky": "9.1.7",
     "lint-staged": "17.0.8",
     "mermaid": "^11.16.0",
-    "oxfmt": "^0.58.0",
+    "oxfmt": "^0.59.0",
     "oxlint": "^1.73.0",
     "sharp": "^0.35.3",
     "starlight-theme-md3": "^0.2.0",

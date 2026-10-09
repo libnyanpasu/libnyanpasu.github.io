@@ -42,7 +42,7 @@
     "astro-mermaid": "^2.1.0",
     "husky": "9.1.7",
     "lint-staged": "17.4.1",
-    "mermaid": "^11.16.0",
+    "mermaid": "^12.0.0",
     "oxfmt": "^0.66.0",
     "oxlint": "^1.73.0",
     "sharp": "^0.35.3",

@@ -326,3 +326,13 @@
     transition: none;
   }
 }
+
+.home-header__link,
+.home-header__mobile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.home-header svg {
+  flex-shrink: 0;
+}

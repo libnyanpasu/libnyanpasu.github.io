@@ -1314,3 +1314,35 @@
 .platform-symbol [data-icon="logos:apple"] path {
   fill: var(--home-ink);
 }
+
+.home-site svg[data-icon] {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.home-site [data-icon="logos:github-icon"] path {
+  fill: currentColor;
+}
+.home-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.source-code-icon {
+  font-size: 18px;
+}
+.pipeline li + li::before {
+  content: none;
+}
+.pipeline-arrow {
+  position: absolute;
+  left: -17px;
+  top: 40%;
+  color: #a9c5f6;
+  font-size: 14px;
+}
+.diff-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

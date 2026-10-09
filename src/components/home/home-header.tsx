@@ -7,6 +7,7 @@ import "./home-header.css";
 interface NavItem {
   label: string;
   href: string;
+  icon?: { body: string; viewBox: string };
 }
 
 export default function HomeHeader({
@@ -112,6 +113,16 @@ export default function HomeHeader({
         key={item.href}
         onClick={closeOnClick ? closeAfterNavigation : undefined}
       >
+        {item.icon && (
+          <svg
+            width="1em"
+            height="1em"
+            viewBox={item.icon.viewBox}
+            aria-hidden="true"
+            focusable="false"
+            dangerouslySetInnerHTML={{ __html: item.icon.body }}
+          />
+        )}
         {item.label}
       </a>
     ));

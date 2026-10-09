@@ -17,6 +17,7 @@ export default defineConfig({
     mermaid(),
     starlight({
       title: "Clash Nyanpasu",
+      favicon: "/favicon.ico",
       logo: {
         src: "./src/assets/logo.png",
         alt: "Clash Nyanpasu",

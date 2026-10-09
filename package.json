@@ -17,6 +17,9 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@iconify-json/flat-color-icons": "^1.2.3",
+    "@iconify-json/logos": "^1.2.15",
+    "@iconify/utils": "^3.1.7",
     "@paper-design/shaders-react": "^0.0.81",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -1,0 +1,18 @@
+---
+import { icons } from "@iconify-json/logos";
+import { icons as flatColorIcons } from "@iconify-json/flat-color-icons";
+import { getIconData, iconToSVG, replaceIDs } from "@iconify/utils";
+
+interface Props {
+  name: `logos:${string}` | `flat-color-icons:${string}`;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const [prefix, iconName] = name.split(":");
+const data = getIconData(prefix === "logos" ? icons : flatColorIcons, iconName);
+if (!data) throw new Error(`Unknown Iconify icon: ${name}`);
+const svg = iconToSVG(data, { height: "1em", width: "1em" });
+const body = replaceIDs(svg.body, `${name.replace(":", "-")}-${crypto.randomUUID()}-`);
+---
+<svg {...svg.attributes} class={className} data-icon={name} aria-hidden="true" focusable="false" set:html={body} />

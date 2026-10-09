@@ -35,6 +35,8 @@
 }
 
 @theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+
   /* --font-mono:
     "Cascadia Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", "等距更纱黑体 SC", monospace,
@@ -87,6 +89,10 @@
     cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
   --animate-linear-progress-secondary: linear-progress-secondary 2.1s
     cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+}
+
+:root {
+  --sl-font: "Inter", system-ui, sans-serif;
 }
 
 /* Custom Mixed Colors (light) */

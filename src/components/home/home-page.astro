@@ -1,175 +1,77 @@
 ---
+import { Image } from "astro:assets";
 import { m } from "@/paraglide/messages.js";
 import type { Locale } from "@/paraglide/runtime";
-import { buttonVariants } from "@/components/ui/button";
 import { createMd3ThemeOptionsCss } from "starlight-theme-md3";
-import HomeBackground from "./home-background";
+import { homeBlogPosts, homeRelease, repositoryUrl } from "@/data/home";
+import dashboardLight from "../../../public/images/screenshot/app-dashboard-light.png";
+import dashboardDark from "../../../public/images/screenshot/app-dashboard-dark.png";
 import HomeHeader from "./home-header";
-import HomeHeroLead from "./home-hero-lead";
-
-interface Props {
-  locale: Locale;
-}
-
+import HomeMotion from "./home-motion";
+import HomeWidgetPreview from "./home-widget-preview";
+import "./home-page.css";
+interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const base = locale === "zh-cn" ? "/zh-cn" : "";
 const opts = { locale };
-
+const posts = homeBlogPosts.filter((post) => post.locale === locale);
 const navItems = [
-  { label: m.home_nav_introduction(undefined, opts), href: `${base}/introduction/` },
-  { label: m.home_nav_tutorial(undefined, opts), href: `${base}/tutorial/install/` },
-  { label: m.home_nav_faq(undefined, opts), href: `${base}/others/faq/` },
+  { label: m.home_nav_features(undefined, opts), href: "#features" },
+  { label: m.home_nav_download(undefined, opts), href: "#download" },
+  { label: m.home_nav_docs(undefined, opts), href: `${base}/introduction/` },
+  ...(posts.length ? [{ label: m.home_nav_blog(undefined, opts), href: `${base}/blog/` }] : []),
+  { label: "GitHub", href: repositoryUrl },
 ];
-
-const stats = [
-  [m.home_stat_tauri_value(undefined, opts), m.home_stat_tauri_label(undefined, opts)],
-  [m.home_stat_md3_value(undefined, opts), m.home_stat_md3_label(undefined, opts)],
-  [m.home_stat_core_value(undefined, opts), m.home_stat_core_label(undefined, opts)],
+const themeCss = createMd3ThemeOptionsCss({ seed: "#3e64a7" });
+const platforms = [{ name: "Windows", anchor: "windows", icon: "⊞" }, { name: "macOS", anchor: "macos", icon: "⌘" }, { name: "Linux", anchor: "linux", icon: "◈" }];
+const details = [
+  { number: "01", title: m.home_material_title(undefined, opts), description: m.home_material_description(undefined, opts), kind: "color" },
+  { number: "02", title: m.home_cores_title(undefined, opts), description: m.home_cores_description(undefined, opts), kind: "core" },
+  { number: "03", title: m.home_logs_title(undefined, opts), description: m.home_logs_description(undefined, opts), kind: "logs" },
 ];
-
-const platforms = [
-  { name: "macOS", image: "/images/banner/macos.jpg" },
-  { name: "Windows", image: "/images/banner/windows.webp" },
-  { name: "Linux", image: "/images/banner/linux.jpg" },
-];
-
-const githubUrl = "https://github.com/libnyanpasu";
-const themeCss = createMd3ThemeOptionsCss({ seed: "#1867C0" });
 ---
-
 <style is:global set:html={themeCss} />
-
-<div class="min-h-screen overflow-x-clip">
-  <HomeBackground client:only="react" />
-
-  <HomeHeader logoHref={base || "/"} navItems={navItems} client:load>
-    <slot />
-  </HomeHeader>
-
-  <main class="overflow-clip">
-    <section
-      class:list={[
-        "min-h-[min(760px,calc(100vh-4rem))] w-[min(1180px,calc(100%-2rem))]",
-        "mx-auto grid",
-        "grid-cols-1 items-center gap-8 py-12",
-        "md:grid-cols-[minmax(0,0.88fr)_minmax(22rem,1.12fr)]",
-        "md:py-16 lg:gap-20 lg:py-24",
-      ]}
-    >
-      <div>
-        <h1 class="mb-5 mt-0 max-w-[12ch] text-[clamp(3.2rem,8vw,6.8rem)] font-semibold leading-[0.94] tracking-normal text-on-background md:max-w-[11ch]">
-          {m.home_title(undefined, opts)}
-        </h1>
-
-        <p class="mt-0 max-w-152 text-[clamp(1.08rem,2vw,1.32rem)] leading-[1.7] text-on-surface-variant">
-          {m.home_lead(undefined, opts)}{" "}
-          <HomeHeroLead locale={locale} client:load />
-        </p>
-
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            class:list={[
-              buttonVariants({ variant: "flat" }),
-              "no-underline flex items-center text-base h-14 px-12",
-            ]}
-            href={`${base}/introduction/`}
-          >
-            {m.home_primary_action(undefined, opts)}
-          </a>
-
-          <a
-            class:list={[
-              buttonVariants(),
-              "no-underline flex items-center text-base h-14 px-12 backdrop-blur-xl",
-            ]}
-            href={githubUrl}
-            target="_blank"
-            rel="noopener"
-          >
-            {m.home_secondary_action(undefined, opts)}
-          </a>
-        </div>
-
-        <dl class="mt-10 grid max-w-148 grid-cols-1 gap-3 sm:grid-cols-3">
-          {stats.map(([value, label]) => (
-            <div class="border-t border-outline-variant pt-4">
-              <dt class="text-base font-extrabold text-on-surface">{value}</dt>
-              <dd class="m-0 mt-1 text-sm leading-normal text-on-surface-variant">{label}</dd>
-            </div>
-          ))}
-        </dl>
+<div class="home-site" data-home-locale={locale}>
+  <a class="home-skip-link" href="#home-content">{m.home_skip_content(undefined, opts)}</a>
+  <HomeHeader logoHref={base || "/"} navItems={navItems} locale={locale} client:load><slot /></HomeHeader>
+  <main id="home-content" tabindex="-1">
+    <section class="home-hero home-container" aria-labelledby="hero-title">
+      <div class="hero-topline"><a href={homeRelease.href} class="release-link"><span class="release-dot" aria-hidden="true"></span>{m.home_release_link({ version: homeRelease.version }, opts)}<span aria-hidden="true">↗</span></a><span class="hero-edition">OPEN SOURCE / DESKTOP</span></div>
+      <div class="hero-heading-row">
+        <h1 id="hero-title"><span>Clash</span><span class="hero-name">Nyanpasu<span class="hero-period">.</span></span></h1>
+        <div class="hero-intro"><p class="hero-positioning">{m.home_positioning(undefined, opts)}</p><p class="hero-description">{m.home_description(undefined, opts)}</p><a class="home-button home-button-primary" href="#download">{m.home_download_action(undefined, opts)}<span aria-hidden="true">↓</span></a><a class="home-text-link hero-docs" href={`${base}/introduction/`}>{m.home_read_docs(undefined, opts)}<span aria-hidden="true">↗</span></a></div>
       </div>
-
-      <div
-        class:list={[
-          "relative rounded-2xl border border-outline-variant bg-surface overflow-clip",
-          "shadow-[0_24px_80px_rgb(0_0_0/16%)] md:rotate-[-1.5deg]",
-        ]}
-        aria-label="Application preview"
-      >
-        <img
-          class="block aspect-video w-full rounded-2xl object-cover object-top-left dark:hidden"
-          src="/images/screenshot/app-dashboard-light.png"
-          alt="Clash Nyanpasu dashboard"
-        />
-        <img
-          class="hidden aspect-video w-full rounded-2xl object-cover object-top-left dark:block"
-          src="/images/screenshot/app-dashboard-dark.png"
-          alt="Clash Nyanpasu dashboard"
-        />
+      <div class="hero-showcase">
+        <svg class="hero-thread" viewBox="0 0 1200 600" fill="none" aria-hidden="true"><path class="thread-wide" d="M1050 -80C1320 120 890 115 970 315S1310 500 130 550"/><path class="thread-fine" d="M1040 -80C1310 120 880 115 960 315S1300 490 120 540"/></svg>
+        <div class="hero-caption"><span>(∠・ω&lt; )⌒☆</span><span>Windows<br/>macOS<br/>Linux</span></div>
+        <figure class="app-preview"><Image src={dashboardLight} widths={[640,960,1440]} sizes="(max-width: 640px) 100vw, 82vw" format="webp" class="app-light" alt={locale === "zh-cn" ? "Clash Nyanpasu 亮色仪表盘：流量、连接与内核状态" : "Clash Nyanpasu light dashboard with traffic, connections and core status"} loading="eager" fetchpriority="high"/><Image src={dashboardDark} widths={[640,960,1440]} sizes="(max-width: 640px) 100vw, 82vw" format="webp" class="app-dark" alt={locale === "zh-cn" ? "Clash Nyanpasu 深色仪表盘：流量、连接与内核状态" : "Clash Nyanpasu dark dashboard with traffic, connections and core status"} loading="eager"/></figure>
+      </div>
+      <a class="hero-scroll home-text-link" href="#features">{m.home_scroll_hint(undefined, opts)}<span aria-hidden="true">↓</span></a>
+    </section>
+    <section tabindex="-1" id="features" class="home-features home-container" aria-labelledby="features-title">
+      <div class="section-heading"><span class="section-index">01 / FEATURES</span><h2 id="features-title">{m.home_rebuild_title(undefined, opts)}</h2><p>{m.home_rebuild_description(undefined, opts)}</p></div>
+      <div class="feature-stack">
+        <article class="stack-card" data-home-stack-card><div class="stack-surface stack-traffic" data-home-stack-surface>
+          <div class="feature-copy"><span class="feature-index">01 / TRAFFIC</span><h3>{m.home_traffic_title(undefined, opts)}</h3><p>{m.home_traffic_description(undefined, opts)}</p><span class="feature-tags">{m.home_traffic_tags(undefined, opts)}</span></div>
+          <figure class="feature-visual traffic-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined, opts)}<span aria-hidden="true">↗</span></figcaption><div class="traffic-visual-heading"><span>{m.home_traffic_history(undefined, opts)}</span><strong>24 <small>h</small></strong></div>
+            <svg class="traffic-chart" viewBox="0 0 520 160" fill="none" aria-hidden="true"><defs><linearGradient id="traffic-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path class="chart-grid" d="M0 40H520M0 80H520M0 120H520"/><path d="M0 130L20 125L40 132L60 113L80 118L100 85L120 94L140 30L160 63L180 45L200 74L220 69L240 99L260 104L280 79L300 91L320 57L340 74L360 36L380 45L400 20L420 54L440 39L460 68L480 47L500 52L520 34V160H0Z" fill="url(#traffic-fill)"/><path class="chart-line" d="M0 130L20 125L40 132L60 113L80 118L100 85L120 94L140 30L160 63L180 45L200 74L220 69L240 99L260 104L280 79L300 91L320 57L340 74L360 36L380 45L400 20L420 54L440 39L460 68L480 47L500 52L520 34"/></svg>
+            <div class="chart-ticks" aria-hidden="true"><span>00:00</span><span>12:00</span><span>24:00</span></div><div class="traffic-bottom"><div class="traffic-ranking"><span class="visual-label">{m.home_traffic_processes(undefined,opts)}</span><div><span>Browser</span><i style="--rank-width:85%"></i></div><div><span>Terminal</span><i style="--rank-width:52%"></i></div><div><span>Others</span><i style="--rank-width:24%"></i></div></div><div class="traffic-orbit" aria-hidden="true"><svg viewBox="0 0 190 190" fill="none"><circle cx="95" cy="95" r="70"/><ellipse cx="95" cy="95" rx="35" ry="70"/><ellipse cx="95" cy="95" rx="70" ry="28"/><path d="M25 95H165M95 25V165"/><path class="orbit-route" d="M45 122Q95 5 148 70"/><circle class="orbit-node" cx="45" cy="122" r="5"/><circle class="orbit-node" cx="148" cy="70" r="5"/></svg></div></div>
+          </figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
+        </div></article>
+        <article class="stack-card" data-home-stack-card><div class="stack-surface stack-profiles" data-home-stack-surface>
+          <div class="feature-copy"><span class="feature-index">02 / PROFILES</span><h3>{m.home_profiles_title(undefined, opts)}</h3><p>{m.home_profiles_description(undefined, opts)}</p><a class="home-text-link" href={`${base}/tutorial/proxy-chain/`}>{m.home_profiles_guide(undefined,opts)}<span aria-hidden="true">↗</span></a><span class="feature-tags">{m.home_profiles_tags(undefined,opts)}</span></div>
+          <figure class="feature-visual profile-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined,opts)}<span aria-hidden="true">↗</span></figcaption><ol class="pipeline"><li><span>01</span>{m.home_profile_input(undefined,opts)}<small>YAML</small></li><li><span>02</span>{m.home_profile_transform(undefined,opts)}<small>JS / Lua</small></li><li><span>03</span>{m.home_profile_runtime(undefined,opts)}<small>Inspect</small></li></ol><div class="profile-diff"><div class="diff-heading"><span>{m.home_profile_diff(undefined,opts)}</span><span aria-hidden="true">− / +</span></div><pre aria-label="YAML"><code><span class="diff-neutral">rules:</span><span class="diff-remove">−  - MATCH,DIRECT</span><span class="diff-add">+  - DOMAIN-SUFFIX,example.org,PROXY</span><span class="diff-add">+  - MATCH,PROXY</span></code></pre><div class="diff-footer"><span>Profile → Transform → Runtime</span><span aria-hidden="true">✓</span></div></div></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
+        </div></article>
+        <article class="stack-card" data-home-stack-card><div class="stack-surface stack-dashboard" data-home-stack-surface>
+          <div class="feature-copy"><span class="feature-index">03 / DASHBOARD</span><h3>{m.home_dashboard_title(undefined, opts)}</h3><p>{m.home_dashboard_description(undefined,opts)}</p><span class="feature-tags">{m.home_dashboard_tags(undefined,opts)}</span></div>
+          <figure class="feature-visual dashboard-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined,opts)}<span aria-hidden="true">↗</span></figcaption><HomeWidgetPreview widgets={[{id:"traffic",label:m.home_widget_traffic(undefined,opts)},{id:"connections",label:m.home_widget_connections(undefined,opts)},{id:"core",label:m.home_widget_core(undefined,opts)}]} hint={m.home_widgets_hint(undefined,opts)} emptyLabel={m.home_demo_empty(undefined,opts)} client:visible/></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
+        </div></article>
       </div>
     </section>
-
-    <section class="mx-auto w-[min(1180px,calc(100%-2rem))] border-t border-outline-variant py-12 md:py-18">
-      <div class="mb-6 max-w-176">
-        <h2 class="mb-3 mt-0 text-[clamp(1.45rem,3vw,2.1rem)] font-bold leading-[1.12] tracking-normal text-on-surface">
-          {m.home_platforms_title(undefined, opts)}
-        </h2>
-        <p class="m-0 leading-relaxed text-on-surface-variant">
-          {m.home_platforms_lead(undefined, opts)}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {platforms.map((platform) => (
-          <figure class="relative m-0 overflow-hidden rounded-lg bg-surface-variant">
-            <img
-              class="block aspect-4/3 w-full object-cover"
-              src={platform.image}
-              alt={`${platform.name} banner`}
-              loading="lazy"
-            />
-            <figcaption class="absolute bottom-3 left-3 rounded-md bg-black/60 px-3 py-2 text-sm font-[780] text-white">
-              {platform.name}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-
-    <section class="mx-auto w-[min(1180px,calc(100%-2rem))] border-t border-outline-variant py-12 md:py-18 flex items-start justify-between">
-      <div>
-        <h2 class="mb-3 mt-0 text-[clamp(1.45rem,3vw,2.1rem)] font-bold leading-[1.12] tracking-normal text-on-surface">
-          {m.home_docs_title(undefined, opts)}
-        </h2>
-        <p class="m-0 leading-relaxed text-on-surface-variant">
-          {m.home_docs_lead(undefined, opts)}
-        </p>
-      </div>
-
-      <a
-        class:list={[
-          buttonVariants({ variant: "fab" }),
-          "no-underline flex items-center justify-center text-base font-bold",
-        ]}
-        href={`${base}/tutorial/install/`}
-      >
-        {navItems[1].label}
-      </a>
-    </section>
+    <section class="home-details home-container" aria-labelledby="details-title"><h2 id="details-title" class="details-heading">{m.home_details_title(undefined,opts)}</h2><div class="detail-list">{details.map((item)=>(<article class="detail-item"><div class={`detail-art detail-art-${item.kind}`} aria-hidden="true">{item.kind === "color" ? <><i></i><i></i><i></i></> : item.kind === "core" ? <span>✳</span> : <span>⌘</span>}</div><span class="detail-number">{item.number}</span><h3>{item.title}</h3><p>{item.description}</p></article>))}</div></section>
+    <section tabindex="-1" id="download" class="home-download" aria-labelledby="download-title"><div class="home-container"><div class="download-heading"><div><span class="section-index">02 / DOWNLOAD</span><h2 id="download-title">{m.home_download_title(undefined,opts)}</h2><p>{m.home_download_description(undefined,opts)}</p></div><span class="download-version">{homeRelease.version}<small>{m.home_release_note(undefined,opts)}</small></span></div><div class="platform-list">{platforms.map((platform)=>(<article class="platform-item"><span class="platform-symbol" aria-hidden="true">{platform.icon}</span><h3>{platform.name}</h3><a class="home-text-link platform-action" href={homeRelease.href}>{m.home_platform_download({platform:platform.name},opts)}<span aria-hidden="true">↗</span></a><a class="platform-guide" href={`${base}/tutorial/install/#${platform.anchor}`}>{m.home_install_guide(undefined,opts)}<span aria-hidden="true">→</span></a></article>))}</div><div class="download-notes"><p>{m.home_platform_assets(undefined,opts)}</p><a href={`${repositoryUrl}/releases`} class="home-text-link">{m.home_other_versions(undefined,opts)}<span aria-hidden="true">↗</span></a></div></div></section>
+    {posts.length > 0 && <section class="home-blog home-container" aria-labelledby="blog-title"><span class="section-index">03 / JOURNAL</span><div class="blog-heading"><div><h2 id="blog-title">{m.home_nav_blog(undefined,opts)}</h2><p>{m.home_blog_description(undefined,opts)}</p></div><a class="home-text-link" href={`${base}/blog/`}>{m.home_blog_all(undefined,opts)}<span aria-hidden="true">↗</span></a></div><div class="blog-list">{posts.slice(0,3).map((post)=>(<article><a href={post.href}>{post.cover && <img src={post.cover} alt={post.coverAlt || ""} loading="lazy" width="640" height="360"/>}<time datetime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString(locale === "zh-cn" ? "zh-CN":"en",{year:"numeric",month:"short",day:"numeric",timeZone:"UTC"})}</time><h3>{post.title}</h3><p>{post.description}</p></a></article>))}</div></section>}
   </main>
-
-  <footer class="border-t border-outline-variant p-6 text-center text-on-surface-variant">
-    {m.footer_message(undefined, opts)}
-  </footer>
+  <footer class="home-footer home-container"><div><a class="footer-brand" href={base || "/"}><img src="/images/logo.png" width="28" height="28" alt=""/>Clash Nyanpasu</a><p>{m.home_footer_description(undefined,opts)}</p></div><nav aria-label={locale === "zh-cn" ? "页脚导航":"Footer"}><a href="#download">{m.home_nav_download(undefined,opts)}</a><a href={`${base}/introduction/`}>{m.home_nav_docs(undefined,opts)}</a><a href={`${base}/others/faq/`}>{m.home_nav_faq(undefined,opts)}</a>{posts.length > 0 && <a href={`${base}/blog/`}>{m.home_nav_blog(undefined,opts)}</a>}<a href={repositoryUrl}>{m.home_source_code(undefined,opts)}<span aria-hidden="true">↗</span></a></nav><div class="footer-bottom"><span>© {new Date().getFullYear()} LibNyanpasu</span><span>(∠・ω&lt; )⌒☆</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></footer>
+  <HomeMotion client:load/>
 </div>

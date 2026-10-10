@@ -1,16 +1,17 @@
 ---
-import { Image } from "astro:assets";
 import { m } from "@/paraglide/messages.js";
 import type { Locale } from "@/paraglide/runtime";
 import { createMd3ThemeOptionsCss } from "starlight-theme-md3";
 import { homeBlogPosts, homeRelease, repositoryUrl } from "@/data/home";
-import dashboardLight from "../../../public/images/screenshot/app-dashboard-light.png";
-import dashboardDark from "../../../public/images/screenshot/app-dashboard-dark.png";
 import HomeHeader from "./home-header";
 import IconifyIcon from "../iconify-icon.astro";
 import { icons as logoIcons } from "@iconify-json/logos";
+import { icons as materialIcons } from "@iconify-json/material-symbols";
+import { icons as lucideIcons } from "@iconify-json/lucide";
+import { getIconData, iconToSVG } from "@iconify/utils";
 import HomeMotion from "./home-motion";
 import HomeWidgetPreview from "./home-widget-preview";
+import ClientPreview from "./client-preview";
 import "./home-page.css";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -25,6 +26,51 @@ const navItems = [
   ...(posts.length ? [{ label: m.home_nav_blog(undefined, opts), href: `${base}/blog/` }] : []),
   { label: "GitHub", href: repositoryUrl, icon: githubIcon },
 ];
+const appIconNames: Record<string, string> = { "layout-dashboard":"dashboard-rounded", globe:"public", "layout-grid":"grid-view-outline-rounded", unplug:"settings-ethernet-rounded", wrench:"design-services-rounded", "square-terminal":"terminal-rounded", settings:"settings-rounded", grip:"apps", "arrow-down":"arrow-downward-rounded", "arrow-up":"arrow-upward-rounded", cpu:"memory-outline-rounded", network:"network-ping-rounded", traffic:"schema-rounded", mode:"route-rounded", rule:"route-rounded", global:"public-rounded", direct:"north-east-rounded", check:"check-rounded", chevron:"chevron-right-rounded", service:"desktop-windows-rounded", "system-proxy":"install-desktop-rounded" };
+const previewIcons = Object.fromEntries(["layout-dashboard","globe","layout-grid","unplug","wrench","square-terminal","settings","grip","pin","minus","square","x","arrow-down","arrow-up","cpu","network","traffic","mode","rule","global","direct","check","chevron","service","system-proxy"].map(name => { const svg = iconToSVG(getIconData(appIconNames[name] ? materialIcons : lucideIcons,appIconNames[name] || name)!); return [name, {body:svg.body,viewBox:svg.attributes.viewBox}]; }));
+const previewLabels = {
+  runningByService: m.client_preview_running_by_service(undefined,opts),
+  runningByChildProcess: m.client_preview_running_by_child_process(undefined,opts),
+  dashboard: m.client_preview_dashboard(undefined,opts),
+  proxies: m.client_preview_proxies(undefined,opts),
+  profiles: m.client_preview_profiles(undefined,opts),
+  connections: m.client_preview_connections(undefined,opts),
+  activeConnections: m.client_preview_active_connections(undefined,opts),
+  rules: m.client_preview_rules(undefined,opts),
+  logs: m.client_preview_logs(undefined,opts),
+  settings: m.client_preview_settings(undefined,opts),
+  providers: m.client_preview_providers(undefined,opts),
+  download: m.client_preview_download(undefined,opts),
+  upload: m.client_preview_upload(undefined,opts),
+  memory: m.client_preview_memory(undefined,opts),
+  proxyStatus: m.client_preview_proxy_status(undefined,opts),
+  systemProxy: m.client_preview_system_proxy(undefined,opts),
+  tunMode: m.client_preview_tun_mode(undefined,opts),
+  proxyDisabled: m.client_preview_proxy_disabled(undefined,opts),
+  proxyOccupied: m.client_preview_proxy_occupied(undefined,opts),
+  proxyMode: m.client_preview_proxy_mode(undefined,opts),
+  rule: m.client_preview_rule(undefined,opts),
+  global: m.client_preview_global(undefined,opts),
+  direct: m.client_preview_direct(undefined,opts),
+  coreStatus: m.client_preview_core_status(undefined,opts),
+  checkingCore: m.client_preview_checking_core(undefined,opts),
+  running: m.client_preview_running(undefined,opts),
+  stopped: m.client_preview_stopped(undefined,opts),
+  serviceRunning: m.client_preview_service_running(undefined,opts),
+  serviceStopped: m.client_preview_service_stopped(undefined,opts),
+  serviceNotInstalled: m.client_preview_service_not_installed(undefined,opts),
+  coreStoppedUnknown: m.client_preview_core_stopped_unknown(undefined,opts),
+  controlChannel: m.client_preview_control_channel(undefined,opts),
+  file: m.client_preview_file(undefined,opts),
+  help: m.client_preview_help(undefined,opts),
+  update: m.client_preview_update(undefined,opts),
+  traffic: m.client_preview_traffic(undefined,opts),
+  total: m.client_preview_total(undefined,opts),
+  version: m.client_preview_version(undefined,opts),
+  clientLabel: m.client_preview_client_label(undefined,opts),
+  navLabel: m.client_preview_nav_label(undefined,opts),
+  comingSoon: m.client_preview_coming_soon(undefined,opts),
+};
 const themeCss = createMd3ThemeOptionsCss({ seed: "#3e64a7" });
 const platforms = [{ name: "Windows", anchor: "windows", icon: "logos:microsoft-windows-icon" as const }, { name: "macOS", anchor: "macos", icon: "logos:apple" as const }, { name: "Linux", anchor: "linux", icon: "flat-color-icons:linux" as const }];
 const details = [
@@ -44,7 +90,7 @@ const details = [
         <div class="hero-intro"><p class="hero-positioning">{m.home_positioning(undefined, opts)}</p><p class="hero-description">{m.home_description(undefined, opts)}</p><div class="hero-actions"><a class="home-button home-button-primary" href="#download">{m.home_download_action(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a><a class="home-button home-button-secondary hero-docs" href={`${base}/introduction/`}>{m.home_read_docs(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></div></div>
       </div>
       <div class="hero-showcase">
-        <figure class="app-preview"><Image src={dashboardLight} widths={[640,960,1440]} sizes="(max-width: 959px) 100vw, 56vw" format="webp" class="app-light" alt={locale === "zh-cn" ? "Clash Nyanpasu 亮色仪表盘：流量、连接与内核状态" : "Clash Nyanpasu light dashboard with traffic, connections and core status"} loading="eager" fetchpriority="high"/><Image src={dashboardDark} widths={[640,960,1440]} sizes="(max-width: 959px) 100vw, 56vw" format="webp" class="app-dark" alt={locale === "zh-cn" ? "Clash Nyanpasu 深色仪表盘：流量、连接与内核状态" : "Clash Nyanpasu dark dashboard with traffic, connections and core status"} loading="eager"/></figure>
+        <ClientPreview labels={previewLabels} icons={previewIcons} client:load />
       </div>
       <a class="hero-scroll home-text-link" href="#features">{m.home_scroll_hint(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a>
     </section>
@@ -53,18 +99,18 @@ const details = [
       <div class="feature-stack">
         <article class="stack-card" data-home-stack-card><div class="stack-surface stack-traffic" data-home-stack-surface>
           <div class="feature-copy"><h3>{m.home_traffic_title(undefined, opts)}</h3><p>{m.home_traffic_description(undefined, opts)}</p><span class="feature-tags">{m.home_traffic_tags(undefined, opts)}</span></div>
-          <figure class="feature-visual traffic-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></figcaption><div class="traffic-visual-heading"><span>{m.home_traffic_history(undefined, opts)}</span><strong>24 <small>h</small></strong></div>
+          <figure class="feature-visual traffic-visual"><div class="traffic-visual-heading"><span>{m.home_traffic_history(undefined, opts)}</span><strong>24 <small>h</small></strong></div>
             <svg class="traffic-chart" viewBox="0 0 520 160" fill="none" aria-hidden="true"><defs><linearGradient id="traffic-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path class="chart-grid" d="M0 40H520M0 80H520M0 120H520"/><path d="M0 130L20 125L40 132L60 113L80 118L100 85L120 94L140 30L160 63L180 45L200 74L220 69L240 99L260 104L280 79L300 91L320 57L340 74L360 36L380 45L400 20L420 54L440 39L460 68L480 47L500 52L520 34V160H0Z" fill="url(#traffic-fill)"/><path class="chart-line" d="M0 130L20 125L40 132L60 113L80 118L100 85L120 94L140 30L160 63L180 45L200 74L220 69L240 99L260 104L280 79L300 91L320 57L340 74L360 36L380 45L400 20L420 54L440 39L460 68L480 47L500 52L520 34"/></svg>
             <div class="chart-ticks" aria-hidden="true"><span>00:00</span><span>12:00</span><span>24:00</span></div><div class="traffic-bottom"><div class="traffic-ranking"><span class="visual-label">{m.home_traffic_processes(undefined,opts)}</span><div><span>Browser</span><i style="--rank-width:85%"></i></div><div><span>Terminal</span><i style="--rank-width:52%"></i></div><div><span>Others</span><i style="--rank-width:24%"></i></div></div><div class="traffic-orbit" aria-hidden="true"><svg viewBox="0 0 190 190" fill="none"><circle cx="95" cy="95" r="70"/><ellipse cx="95" cy="95" rx="35" ry="70"/><ellipse cx="95" cy="95" rx="70" ry="28"/><path d="M25 95H165M95 25V165"/><path class="orbit-route" d="M45 122Q95 5 148 70"/><circle class="orbit-node" cx="45" cy="122" r="5"/><circle class="orbit-node" cx="148" cy="70" r="5"/></svg></div></div>
           </figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
         </div></article>
         <article class="stack-card" data-home-stack-card><div class="stack-surface stack-profiles" data-home-stack-surface>
           <div class="feature-copy"><h3>{m.home_profiles_title(undefined, opts)}</h3><p>{m.home_profiles_description(undefined, opts)}</p><a class="home-text-link" href={`${base}/tutorial/proxy-chain/`}>{m.home_profiles_guide(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a><span class="feature-tags">{m.home_profiles_tags(undefined,opts)}</span></div>
-          <figure class="feature-visual profile-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></figcaption><ol class="pipeline"><li><span>01</span>{m.home_profile_input(undefined,opts)}<small>YAML</small></li><li><IconifyIcon name="lucide:arrow-right" class="pipeline-arrow" /><span>02</span>{m.home_profile_transform(undefined,opts)}<small>JS / Lua</small></li><li><IconifyIcon name="lucide:arrow-right" class="pipeline-arrow" /><span>03</span>{m.home_profile_runtime(undefined,opts)}<small>Inspect</small></li></ol><div class="profile-diff"><div class="diff-heading"><span>{m.home_profile_diff(undefined,opts)}</span><span aria-hidden="true">− / +</span></div><pre aria-label="YAML"><code><span class="diff-neutral">rules:</span><span class="diff-remove">−  - MATCH,DIRECT</span><span class="diff-add">+  - DOMAIN-SUFFIX,example.org,PROXY</span><span class="diff-add">+  - MATCH,PROXY</span></code></pre><div class="diff-footer"><span class="diff-route">Profile <IconifyIcon name="lucide:arrow-right" /> Transform <IconifyIcon name="lucide:arrow-right" /> Runtime</span><span aria-hidden="true"><IconifyIcon name="lucide:check" /></span></div></div></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
+          <figure class="feature-visual profile-visual"><ol class="pipeline"><li><span>01</span>{m.home_profile_input(undefined,opts)}<small>YAML</small></li><li><IconifyIcon name="lucide:arrow-right" class="pipeline-arrow" /><span>02</span>{m.home_profile_transform(undefined,opts)}<small>JS / Lua</small></li><li><IconifyIcon name="lucide:arrow-right" class="pipeline-arrow" /><span>03</span>{m.home_profile_runtime(undefined,opts)}<small>Inspect</small></li></ol><div class="profile-diff"><div class="diff-heading"><span>{m.home_profile_diff(undefined,opts)}</span><span aria-hidden="true">− / +</span></div><pre aria-label="YAML"><code><span class="diff-neutral">rules:</span><span class="diff-remove">−  - MATCH,DIRECT</span><span class="diff-add">+  - DOMAIN-SUFFIX,example.org,PROXY</span><span class="diff-add">+  - MATCH,PROXY</span></code></pre><div class="diff-footer"><span class="diff-route">Profile <IconifyIcon name="lucide:arrow-right" /> Transform <IconifyIcon name="lucide:arrow-right" /> Runtime</span><span aria-hidden="true"><IconifyIcon name="lucide:check" /></span></div></div></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
         </div></article>
         <article class="stack-card" data-home-stack-card><div class="stack-surface stack-dashboard" data-home-stack-surface>
           <div class="feature-copy"><h3>{m.home_dashboard_title(undefined, opts)}</h3><p>{m.home_dashboard_description(undefined,opts)}</p><span class="feature-tags">{m.home_dashboard_tags(undefined,opts)}</span></div>
-          <figure class="feature-visual dashboard-visual"><figcaption class="visual-caption">{m.home_demo_label(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></figcaption><HomeWidgetPreview widgets={[{id:"traffic",label:m.home_widget_traffic(undefined,opts)},{id:"connections",label:m.home_widget_connections(undefined,opts)},{id:"core",label:m.home_widget_core(undefined,opts)}]} hint={m.home_widgets_hint(undefined,opts)} emptyLabel={m.home_demo_empty(undefined,opts)} client:visible/></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
+          <figure class="feature-visual dashboard-visual"><HomeWidgetPreview widgets={[{id:"traffic",label:m.home_widget_traffic(undefined,opts)},{id:"connections",label:m.home_widget_connections(undefined,opts)},{id:"core",label:m.home_widget_core(undefined,opts)}]} hint={m.home_widgets_hint(undefined,opts)} emptyLabel={m.home_demo_empty(undefined,opts)} client:visible/></figure><div class="stack-shade" data-home-stack-shade aria-hidden="true"></div>
         </div></article>
       </div>
     </section>

@@ -129,33 +129,6 @@
   color: var(--home-ink);
 }
 
-.app-preview {
-  width: 85%;
-  margin-left: auto !important;
-  aspect-ratio: 1.94;
-  border-radius: 14px;
-  overflow: hidden;
-  position: relative;
-  background: var(--home-panel);
-  box-shadow:
-    0 28px 70px -30px rgb(21 35 60 / 30%),
-    0 0 0 1px rgb(100 120 150 / 14%);
-}
-.app-preview img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.app-dark {
-  display: none !important;
-}
-:root[data-theme="dark"] .app-light {
-  display: none;
-}
-:root[data-theme="dark"] .app-dark {
-  display: block !important;
-}
-
 .home-features {
   padding-top: 120px;
 }
@@ -840,9 +813,6 @@
     gap: 20px;
   }
 
-  .app-preview {
-    width: 100%;
-  }
   .home-features {
     padding-top: 60px;
   }
@@ -884,11 +854,6 @@
 @media (max-width: 639px) {
   .home-container {
     width: calc(100% - 40px);
-  }
-
-  .app-preview {
-    border-radius: 8px;
-    aspect-ratio: 1.65;
   }
 
   .home-features {
@@ -1183,9 +1148,6 @@
   .hero-heading-row {
     animation: home-arrive 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
-  .app-preview {
-    animation: home-arrive 0.9s 0.08s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
 }
 
 /* Keep the hero copy together, with the product preview alongside it. */
@@ -1245,10 +1207,7 @@
   padding: 0;
   min-width: 0;
 }
-.app-preview {
-  width: 100%;
-  margin: 0 !important;
-}
+
 .hero-scroll {
   grid-column: 1 / -1;
   margin-top: 16px;

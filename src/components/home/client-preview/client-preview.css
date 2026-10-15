@@ -76,7 +76,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  aspect-ratio: 5 / 3;
+  aspect-ratio: 9 / 4;
   overflow: hidden;
   border: 1px solid var(--cp-window-border);
   border-radius: 2.5cqw;
@@ -340,7 +340,7 @@
 }
 
 .cp-proxy-card {
-  grid-column: span 3;
+  grid-column: span 4;
 }
 
 .cp-mode-card {
@@ -348,7 +348,7 @@
 }
 
 .cp-core-card {
-  grid-column: span 5;
+  grid-column: span 4;
 }
 
 .cp-feature-heading {
@@ -363,6 +363,9 @@
 .cp-feature-heading h2 {
   display: flex;
   min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
   align-items: center;
   gap: 0.8cqw;
   margin: 0;
@@ -378,13 +381,14 @@
 }
 
 .cp-status-chip {
-  display: inline-flex;
+  display: block;
   min-width: 0;
+  flex: 0 1 auto;
   height: 2.1cqw;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   padding-inline: 0.85cqw;
+  line-height: 2.1cqw;
+  text-align: center;
   border-radius: 1.1cqw;
   background: var(--cp-active);
   color: var(--cp-on-active);

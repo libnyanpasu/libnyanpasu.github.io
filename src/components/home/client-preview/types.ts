@@ -23,6 +23,7 @@ export type PreviewLabels = Record<string, string> & {
   total: string;
   proxyStatus: string;
   systemProxy: string;
+  systemProxyShort: string;
   tunMode: string;
   proxyDisabled: string;
   proxyOccupied: string;
@@ -36,6 +37,8 @@ export type PreviewLabels = Record<string, string> & {
   stopped: string;
   runningByService: string;
   runningByChildProcess: string;
+  childProcessShort: string;
+  serviceShort: string;
   serviceRunning: string;
   serviceStopped: string;
   serviceNotInstalled: string;

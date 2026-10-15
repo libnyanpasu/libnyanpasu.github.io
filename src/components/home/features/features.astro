@@ -1,0 +1,161 @@
+---
+import { icons as materialIcons } from "@iconify-json/material-symbols";
+import { getIconData, iconToSVG } from "@iconify/utils";
+import { m } from "@/paraglide/messages.js";
+import type { Locale } from "@/paraglide/runtime";
+import FeatureSection, { type FeatureLabels } from "./feature-section";
+import { buildSchemes } from "./material-schemes";
+import "./features.css";
+
+interface Props {
+  locale: Locale;
+  base: string;
+}
+
+const { locale, base } = Astro.props;
+const opts = { locale };
+const intl = locale === "zh-cn" ? "zh-CN" : "en";
+
+const glyph = (name: string) => {
+  const svg = iconToSVG(getIconData(materialIcons, name)!);
+  return { body: svg.body, viewBox: svg.attributes.viewBox };
+};
+const icons = {
+  check: glyph("check-rounded"),
+  language: glyph("language"),
+  arrow: glyph("arrow-forward-rounded"),
+  outward: glyph("arrow-outward-rounded"),
+  up: glyph("arrow-upward-rounded"),
+  down: glyph("arrow-downward-rounded"),
+  bolt: glyph("bolt-rounded"),
+  dashboard: glyph("dashboard-rounded"),
+  proxies: glyph("public-rounded"),
+  settings: glyph("settings-rounded"),
+  sync: glyph("sync-rounded"),
+  search: glyph("search-rounded"),
+  close: glyph("close-rounded"),
+  traffic: glyph("bar-chart-4-bars-rounded"),
+  profiles: glyph("account-tree-rounded"),
+  widgets: glyph("dashboard-customize-rounded"),
+  palette: glyph("palette-rounded"),
+  memory: glyph("memory-rounded"),
+  terminal: glyph("terminal-rounded"),
+  sparkle: glyph("auto-awesome-rounded"),
+};
+
+const tags = (value: string) =>
+  value
+    .split("·")
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+const running = m.client_preview_running(undefined, opts);
+
+const labels: FeatureLabels = {
+  heading: {
+    title: m.home_rebuild_title(undefined, opts),
+    description: m.home_rebuild_description(undefined, opts),
+  },
+  traffic: {
+    title: m.home_traffic_title(undefined, opts),
+    description: m.home_traffic_description(undefined, opts),
+    tags: tags(m.home_traffic_tags(undefined, opts)),
+    demo: {
+      locale: intl,
+      rangeLabel: m.home_traffic_range_label(undefined, opts),
+      ranges: [
+        m.home_traffic_range_24h(undefined, opts),
+        m.home_traffic_range_7d(undefined, opts),
+        m.home_traffic_range_30d(undefined, opts),
+      ],
+      history: m.home_traffic_history(undefined, opts),
+      peak: m.home_traffic_peak(undefined, opts),
+      processes: m.home_traffic_processes(undefined, opts),
+      destinations: m.home_traffic_destinations(undefined, opts),
+      process: [
+        m.home_traffic_browser(undefined, opts),
+        m.home_traffic_terminal(undefined, opts),
+        m.home_traffic_others(undefined, opts),
+      ],
+      regions: [
+        m.home_region_jp(undefined, opts),
+        m.home_region_us(undefined, opts),
+        m.home_region_hk(undefined, opts),
+      ],
+    },
+  },
+  profiles: {
+    title: m.home_profiles_title(undefined, opts),
+    description: m.home_profiles_description(undefined, opts),
+    guide: m.home_profiles_guide(undefined, opts),
+    demo: {
+      steps: m.home_profile_steps_label(undefined, opts),
+      input: m.home_profile_input(undefined, opts),
+      transform: m.home_profile_transform(undefined, opts),
+      runtime: m.home_profile_runtime(undefined, opts),
+      diff: m.home_profile_diff(undefined, opts),
+      result: m.home_profile_result(undefined, opts),
+    },
+  },
+  dashboard: {
+    title: m.home_dashboard_title(undefined, opts),
+    description: m.home_dashboard_description(undefined, opts),
+    demo: {
+      hint: m.home_widgets_hint(undefined, opts),
+      empty: m.home_demo_empty(undefined, opts),
+      traffic: m.home_widget_traffic(undefined, opts),
+      connections: m.home_widget_connections(undefined, opts),
+      core: m.home_widget_core(undefined, opts),
+      running,
+      upload: m.client_preview_upload(undefined, opts),
+      download: m.client_preview_download(undefined, opts),
+    },
+  },
+  material: {
+    title: m.home_material_title(undefined, opts),
+    description: m.home_material_description(undefined, opts),
+    pick: m.home_material_pick(undefined, opts),
+    mode: m.home_material_mode(undefined, opts),
+    light: m.home_material_light(undefined, opts),
+    dark: m.home_material_dark(undefined, opts),
+    appName: "Nyanpasu",
+    running,
+    traffic: m.home_widget_traffic(undefined, opts),
+    proxies: m.client_preview_proxies(undefined, opts),
+    settings: m.client_preview_settings(undefined, opts),
+  },
+  cores: {
+    title: m.home_cores_title(undefined, opts),
+    description: m.home_cores_description(undefined, opts),
+    demo: {
+      label: m.home_cores_label(undefined, opts),
+      autoUpdate: m.home_cores_auto_update(undefined, opts),
+      use: m.home_cores_use(undefined, opts),
+      current: m.home_cores_current(undefined, opts),
+      running,
+      update: m.client_preview_update(undefined, opts),
+    },
+  },
+  logs: {
+    title: m.home_logs_title(undefined, opts),
+    description: m.home_logs_description(undefined, opts),
+    demo: {
+      search: m.home_logs_search(undefined, opts),
+      all: m.home_logs_filter_all(undefined, opts),
+      info: m.home_logs_filter_info(undefined, opts),
+      warn: m.home_logs_filter_warn(undefined, opts),
+      error: m.home_logs_filter_error(undefined, opts),
+      empty: m.home_logs_empty(undefined, opts),
+    },
+  },
+};
+---
+<FeatureSection client:visible labels={labels} icons={icons} schemes={buildSchemes()} base={base} />
+<noscript>
+  <style>
+    .m3f [style*="opacity"] {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  </style>
+</noscript>

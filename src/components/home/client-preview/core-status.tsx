@@ -31,7 +31,7 @@ export function CoreStatus({
   core?: CorePreviewData;
 }) {
   const executionLabel =
-    core.execution === "service" ? labels.runningByService : labels.runningByChildProcess;
+    core.execution === "service" ? labels.serviceShort : labels.childProcessShort;
   return (
     <section className="cp-card cp-feature-card cp-core-card">
       <div className="cp-feature-heading">

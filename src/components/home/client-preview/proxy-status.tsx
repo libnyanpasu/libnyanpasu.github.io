@@ -20,7 +20,11 @@ export function ProxyStatus({
   onTunModeChange: (enabled: boolean) => void;
   reduceMotion?: boolean;
 }) {
-  const status = tunMode ? labels.tunMode : systemProxy ? labels.systemProxy : labels.proxyDisabled;
+  const status = tunMode
+    ? labels.tunMode
+    : systemProxy
+      ? labels.systemProxyShort
+      : labels.proxyDisabled;
   const toggles = [
     {
       key: "system",

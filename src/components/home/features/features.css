@@ -1,0 +1,1569 @@
+/* Features: Material 3 Expressive bento. Filled cards on one surface tone, accent colour only in
+   the expressive shapes, emphasized easing. Reveal and shape morphs are driven by motion/react;
+   the wide cards sit their demo on a `shaders` stage. */
+.m3f {
+  --m3f-ease: cubic-bezier(0.2, 0, 0, 1);
+  --m3f-ease-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --m3f-shape-xl: 28px;
+  --m3f-shape-l: 16px;
+  --m3f-shape-m: 12px;
+  --m3f-shape-s: 8px;
+  --m3f-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --m3f-elevation-2:
+    0 1px 2px color-mix(in oklab, var(--md-sys-color-shadow, #000) 30%, transparent),
+    0 2px 6px 2px color-mix(in oklab, var(--md-sys-color-shadow, #000) 15%, transparent);
+  --m3f-elevation-3:
+    0 1px 3px color-mix(in oklab, var(--md-sys-color-shadow, #000) 30%, transparent),
+    0 4px 8px 3px color-mix(in oklab, var(--md-sys-color-shadow, #000) 15%, transparent);
+  position: relative;
+  z-index: 1;
+  padding-block: 56px 32px;
+  scroll-margin-top: 96px;
+}
+
+/* ── Section heading: display / body-large, split across two columns ─────── */
+.m3f-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 20px 64px;
+  margin-bottom: 48px;
+}
+.m3f-heading h2 {
+  font-size: clamp(40px, 4.8vw, 64px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.m3f-word {
+  display: inline-block;
+  will-change: transform;
+}
+/* Morphing sticker that closes the heading. */
+.m3f-morph {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 0.92em;
+  block-size: 0.92em;
+  margin-inline-start: 0.12em;
+  vertical-align: -0.1em;
+  color: var(--md-sys-color-on-primary);
+}
+.m3f-morph svg:first-child {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  fill: var(--md-sys-color-primary);
+}
+.m3f-morph .m3f-svg {
+  position: relative;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+}
+.m3f-heading p {
+  justify-self: end;
+  max-width: 44ch;
+  padding-bottom: 6px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-wrap: pretty;
+}
+
+/* ── Bento grid: wide, two halves, wide, two halves ───────────────────────── */
+.m3f-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* ── Card (M3 filled card) ────────────────────────────────────────────────── */
+.m3f-card {
+  --tone: var(--md-sys-color-primary);
+  --tone-container: var(--md-sys-color-primary-container);
+  --on-tone-container: var(--md-sys-color-on-primary-container);
+  --on-tone: var(--md-sys-color-on-primary);
+  position: relative;
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-inline-size: 0;
+  padding: 32px;
+  border-radius: var(--m3f-shape-xl);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  isolation: isolate;
+  transition:
+    background-color 0.6s var(--m3f-ease),
+    color 0.6s var(--m3f-ease);
+}
+.m3f-card[data-tone="secondary"] {
+  --tone: var(--md-sys-color-secondary);
+  --tone-container: var(--md-sys-color-secondary-container);
+  --on-tone-container: var(--md-sys-color-on-secondary-container);
+  --on-tone: var(--md-sys-color-on-secondary);
+}
+.m3f-card[data-tone="tertiary"] {
+  --tone: var(--md-sys-color-tertiary);
+  --tone-container: var(--md-sys-color-tertiary-container);
+  --on-tone-container: var(--md-sys-color-on-tertiary-container);
+  --on-tone: var(--md-sys-color-on-tertiary);
+}
+.m3f-card[data-wide] {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 48px;
+  padding: 40px;
+}
+
+.m3f-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-inline-size: 0;
+}
+.m3f-copy h3 {
+  margin-top: 12px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+.m3f-copy p {
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-wrap: pretty;
+}
+.m3f-card[data-wide] .m3f-copy {
+  justify-content: center;
+  padding-block: 8px;
+}
+.m3f-card[data-wide] .m3f-copy h3 {
+  margin-top: 20px;
+  font-size: clamp(28px, 2.6vw, 36px);
+  line-height: 1.2;
+}
+.m3f-card[data-wide] .m3f-copy p {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+.m3f-card[data-wide] .m3f-extra {
+  inline-size: 100%;
+  padding-top: 20px;
+}
+.m3f-card:not([data-wide]) .m3f-extra {
+  margin-top: -12px;
+  margin-inline-start: -12px;
+}
+
+.m3f-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Expressive shape badge: the path morphs, the svg turns, the glyph stays upright. */
+.m3f-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 56px;
+  block-size: 56px;
+  color: var(--on-tone);
+}
+.m3f-card[data-wide] .m3f-badge {
+  inline-size: 72px;
+  block-size: 72px;
+}
+.m3f-badge-shape {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.m3f-badge-shape path {
+  fill: var(--tone);
+  transition: fill 0.6s var(--m3f-ease);
+}
+.m3f-badge-icon {
+  position: relative;
+  display: grid;
+}
+.m3f-badge .m3f-svg {
+  inline-size: 26px;
+  block-size: 26px;
+}
+.m3f-card[data-wide] .m3f-badge .m3f-svg {
+  inline-size: 32px;
+  block-size: 32px;
+}
+
+/* Stage: plain on regular cards, a shader-lit field holding a raised demo on wide ones. */
+.m3f-stage {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+  border-radius: 24px;
+  isolation: isolate;
+}
+.m3f-stage[data-shader] {
+  justify-content: center;
+  perspective: 1400px;
+  padding: clamp(20px, 3.4vw, 48px);
+  overflow: hidden;
+  background:
+    radial-gradient(60% 70% at 85% 15%, var(--md-sys-color-primary-container) 0%, transparent 70%),
+    radial-gradient(55% 65% at 10% 90%, var(--md-sys-color-tertiary-container) 0%, transparent 70%),
+    var(--md-sys-color-surface-container-high);
+  transition: background-color 0.6s var(--m3f-ease);
+}
+.m3f-demo {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  container: m3f-demo / inline-size;
+  min-inline-size: 0;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--md-sys-color-surface-container-lowest);
+  color: var(--md-sys-color-on-surface);
+  transition:
+    background-color 0.6s var(--m3f-ease),
+    color 0.6s var(--m3f-ease);
+}
+.m3f-stage[data-shader] .m3f-demo {
+  flex: none;
+  box-shadow: var(--m3f-elevation-3);
+}
+
+/* Bullet points on the wide traffic card. */
+.m3f-points {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.m3f-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.m3f-points .m3f-svg {
+  inline-size: 24px;
+  block-size: 24px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--tone-container);
+  color: var(--on-tone-container);
+}
+
+.m3f-svg {
+  inline-size: 18px;
+  block-size: 18px;
+  flex: none;
+}
+.m3f-label {
+  display: block;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-group {
+  display: grid;
+  gap: 12px;
+}
+
+/* ── Chips ────────────────────────────────────────────────────────────────── */
+.m3f-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.m3f-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  block-size: 32px;
+  padding-inline: 12px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--m3f-shape-s);
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  cursor: default;
+}
+.m3f-chip b {
+  font-weight: 500;
+  color: var(--md-sys-color-primary);
+}
+.m3f-chip-filter {
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--m3f-ease),
+    color 0.25s var(--m3f-ease),
+    border-color 0.25s var(--m3f-ease),
+    padding 0.25s var(--m3f-ease);
+}
+.m3f-chip-filter .m3f-chip-check {
+  inline-size: 0;
+  margin-inline-end: -8px;
+  opacity: 0;
+  transition:
+    inline-size 0.25s var(--m3f-ease),
+    margin 0.25s var(--m3f-ease),
+    opacity 0.2s var(--m3f-ease);
+}
+.m3f-chip-filter[aria-pressed="true"] {
+  border-color: transparent;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-chip-filter[aria-pressed="true"] .m3f-chip-check {
+  inline-size: 18px;
+  margin-inline-end: 0;
+  opacity: 1;
+}
+.m3f-chip-status {
+  border-color: transparent;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.m3f-chip-status i {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: m3f-pulse 2s var(--m3f-ease) infinite;
+}
+
+/* State layer shared by every interactive control (hover 8%, focus 10%, press 10%). */
+.m3f-chip-filter::before,
+.m3f-segmented button::before,
+.m3f-button::before,
+.m3f-icon-button::before,
+.m3f-core-list li::before,
+.m3f-steps button::before,
+.m3f-swatches button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--m3f-ease);
+}
+.m3f-chip-filter:hover::before,
+.m3f-segmented button:hover::before,
+.m3f-button:hover::before,
+.m3f-icon-button:hover::before,
+.m3f-core-list li:hover::before,
+.m3f-steps button:hover::before {
+  opacity: 0.08;
+}
+.m3f-chip-filter:focus-visible::before,
+.m3f-segmented button:focus-visible::before,
+.m3f-button:focus-visible::before,
+.m3f-icon-button:focus-visible::before,
+.m3f-core-list li:focus-visible::before,
+.m3f-steps button:focus-visible::before,
+.m3f-chip-filter:active::before,
+.m3f-segmented button:active::before,
+.m3f-button:active::before,
+.m3f-icon-button:active::before,
+.m3f-core-list li:active::before,
+.m3f-steps button:active::before {
+  opacity: 0.1;
+}
+.m3f button:focus-visible,
+.m3f [role="radio"]:focus-visible,
+.m3f a:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.m3f-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  block-size: 40px;
+  padding-inline: 24px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.m3f-button-tonal {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-button-text {
+  padding-inline: 12px;
+  background: transparent;
+  color: var(--md-sys-color-primary);
+}
+.m3f-icon-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  overflow: hidden;
+}
+.m3f-icon-button .m3f-svg {
+  inline-size: 24px;
+  block-size: 24px;
+}
+/* ── Segmented button ─────────────────────────────────────────────────────── */
+.m3f-segmented {
+  display: inline-flex;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 999px;
+  overflow: hidden;
+  flex: none;
+}
+.m3f-segmented button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  block-size: 40px;
+  padding-inline: 16px;
+  border: 0;
+  border-inline-start: 1px solid var(--md-sys-color-outline);
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s var(--m3f-ease);
+}
+.m3f-segmented button:first-child {
+  border-inline-start: 0;
+}
+.m3f-segmented button[aria-checked="true"] {
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-segmented-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--md-sys-color-secondary-container);
+}
+.m3f-segmented-label,
+.m3f-segmented .m3f-svg {
+  position: relative;
+}
+.m3f-segmented-check {
+  inline-size: 0 !important;
+  margin-inline-end: -8px;
+  opacity: 0;
+  transition:
+    inline-size 0.25s var(--m3f-ease),
+    margin 0.25s var(--m3f-ease),
+    opacity 0.2s var(--m3f-ease);
+}
+.m3f-segmented button[aria-checked="true"] .m3f-segmented-check {
+  inline-size: 18px !important;
+  margin-inline-end: 0;
+  opacity: 1;
+}
+
+/* ── Linear progress ──────────────────────────────────────────────────────── */
+.m3f-linear {
+  position: relative;
+  display: block;
+  block-size: 4px;
+  border-radius: 2px;
+  background: var(--md-sys-color-secondary-container);
+  overflow: hidden;
+}
+.m3f-linear > i {
+  display: block;
+  block-size: 100%;
+  border-radius: 2px;
+  background: var(--md-sys-color-primary);
+  transition: inline-size 0.7s var(--m3f-ease);
+}
+.m3f-progress-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.m3f-progress-list li {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 2.75rem;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.m3f-progress-value {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ── Traffic ──────────────────────────────────────────────────────────────── */
+.m3f-traffic-body {
+  display: grid;
+  gap: 24px;
+}
+.m3f-traffic-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.m3f-stat strong {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.m3f-stat small {
+  font-size: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-chart {
+  position: relative;
+  block-size: 180px;
+  border-radius: var(--m3f-shape-l);
+  color: var(--md-sys-color-primary);
+  touch-action: pan-y;
+}
+.m3f-chart svg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.m3f-chart-grid {
+  fill: none;
+  stroke: var(--md-sys-color-outline-variant);
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+}
+.m3f-chart-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.m3f-chart-marker {
+  position: absolute;
+  inline-size: 0;
+  block-size: 0;
+  pointer-events: none;
+}
+.m3f-chart-dot {
+  position: absolute;
+  inset: -7px;
+  border: 3px solid var(--md-sys-color-surface);
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in oklab, currentColor 24%, transparent);
+}
+.m3f-chart-tip {
+  position: absolute;
+  inset-block-end: 16px;
+  inset-inline-start: 0;
+  display: inline-flex;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--m3f-shape-s);
+  background: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  font-variant-numeric: tabular-nums;
+}
+.m3f-chart-tip b {
+  color: inherit;
+  opacity: 0.72;
+  font-weight: 500;
+}
+.m3f-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-traffic-side {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+@container m3f-demo (min-width: 560px) {
+  .m3f-traffic-body {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+
+/* ── Profiles ─────────────────────────────────────────────────────────────── */
+.m3f-profiles-body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  block-size: 100%;
+}
+.m3f-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.m3f-step-slot {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  min-inline-size: 0;
+}
+.m3f-step-slot:first-child {
+  flex: 1 1 0;
+}
+.m3f-step-arrow {
+  flex: none;
+  margin-inline: 4px;
+  color: var(--md-sys-color-outline);
+}
+.m3f-steps button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: 8px 12px 8px 8px;
+  border: 0;
+  border-radius: var(--m3f-shape-l);
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    color 0.3s var(--m3f-ease),
+    background-color 0.3s var(--m3f-ease);
+}
+.m3f-steps button[data-changed] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-steps button[aria-selected="true"] {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.m3f-step-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--md-sys-color-primary);
+}
+.m3f-step-index,
+.m3f-step-text {
+  position: relative;
+}
+.m3f-step-index {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 50%;
+  background: color-mix(in oklab, currentColor 16%, transparent);
+  font-size: 13px;
+  font-weight: 500;
+}
+.m3f-step-text {
+  display: grid;
+  min-inline-size: 0;
+}
+.m3f-step-text b {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.m3f-step-text small {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+.m3f-code {
+  border-radius: var(--m3f-shape-l);
+  background: var(--md-sys-color-surface-container);
+  overflow: hidden;
+}
+.m3f-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-block-end: 1px solid var(--md-sys-color-outline-variant);
+}
+.m3f-code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px 2px 6px;
+  border-radius: 999px;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+.m3f-code-badge .m3f-svg {
+  inline-size: 14px;
+  block-size: 14px;
+}
+.m3f-code pre {
+  margin: 0;
+  padding: 12px 0;
+  overflow-x: auto;
+  font-family: var(--m3f-mono);
+  font-size: 12.5px;
+  line-height: 22px;
+}
+.m3f-code code {
+  display: grid;
+  min-inline-size: max-content;
+  font-family: inherit;
+}
+.m3f-code-line {
+  display: block;
+  padding-inline: 14px 16px;
+  white-space: pre;
+  border-inline-start: 3px solid transparent;
+}
+.m3f-code-sign {
+  display: inline-block;
+  inline-size: 1.4ch;
+  margin-inline-start: -0.4ch;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-code-line[data-mark="add"] {
+  background: color-mix(in oklab, var(--md-sys-color-primary) 14%, transparent);
+  border-inline-start-color: var(--md-sys-color-primary);
+}
+.m3f-code-line[data-mark="add"] .m3f-code-sign {
+  color: var(--md-sys-color-primary);
+}
+.m3f-code-line[data-mark="del"] {
+  background: color-mix(in oklab, var(--md-sys-color-error) 14%, transparent);
+  border-inline-start-color: var(--md-sys-color-error);
+}
+.m3f-code-line[data-mark="del"] .m3f-code-sign {
+  color: var(--md-sys-color-error);
+}
+.m3f-tok-c {
+  color: var(--md-sys-color-outline);
+  font-style: italic;
+}
+.m3f-tok-k {
+  color: var(--md-sys-color-primary);
+}
+.m3f-tok-s {
+  color: var(--md-sys-color-tertiary);
+}
+.m3f-tok-n {
+  color: var(--md-sys-color-secondary);
+}
+.m3f-tok-p {
+  color: var(--md-sys-color-on-surface);
+}
+
+/* ── Dashboard ────────────────────────────────────────────────────────────── */
+.m3f-dash-body {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.m3f-dash-canvas {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-block-size: 216px;
+  padding: 12px;
+  border-radius: var(--m3f-shape-l);
+  background: var(--md-sys-color-surface-container);
+}
+.m3f-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-inline-size: 0;
+  padding: 14px 16px;
+  border-radius: var(--m3f-shape-l);
+  background: var(--md-sys-color-surface-container-high);
+  overflow: hidden;
+}
+.m3f-tile-traffic {
+  grid-column: 1 / -1;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.m3f-tile-connections {
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+.m3f-tile-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+.m3f-tile-rates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-size: 22px;
+  line-height: 28px;
+  font-variant-numeric: tabular-nums;
+}
+.m3f-tile-rates span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.m3f-tile-rates small {
+  font-size: 12px;
+  opacity: 0.75;
+}
+.m3f-spark {
+  inline-size: 100%;
+  block-size: 40px;
+  color: var(--md-sys-color-primary);
+}
+.m3f-spark-fill {
+  fill: color-mix(in oklab, currentColor 20%, transparent);
+}
+.m3f-spark-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.m3f-tile-value {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 400;
+}
+.m3f-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  block-size: 28px;
+}
+.m3f-bars i {
+  flex: 1;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.m3f-bars i:nth-child(6) {
+  opacity: 1;
+}
+.m3f-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.m3f-status i {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--md-sys-color-primary);
+  animation: m3f-pulse 2s var(--m3f-ease) infinite;
+}
+.m3f-empty {
+  grid-column: 1 / -1;
+  align-self: center;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ── Material You ─────────────────────────────────────────────────────────── */
+.m3f-material-controls {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+}
+.m3f-material .m3f-stage[data-shader] .m3f-demo {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.m3f-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.m3f-swatches button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--swatch);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    border-radius 0.3s var(--m3f-ease),
+    transform 0.3s var(--m3f-ease);
+}
+.m3f-swatches button .m3f-svg {
+  inline-size: 0;
+  opacity: 0;
+  transition:
+    inline-size 0.25s var(--m3f-ease),
+    opacity 0.25s var(--m3f-ease);
+}
+.m3f-swatches button[aria-checked="true"] {
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 3px var(--md-sys-color-surface),
+    0 0 0 5px var(--swatch);
+}
+.m3f-swatches button[aria-checked="true"] .m3f-svg {
+  inline-size: 22px;
+  opacity: 1;
+}
+.m3f-swatches button:hover {
+  transform: scale(1.08);
+}
+.m3f-shader {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+.m3f-shader-canvas {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+.m3f-stage-shader {
+  z-index: 0;
+}
+.m3f-mini {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  max-inline-size: 520px;
+  margin-inline: auto;
+  border-radius: 20px;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  box-shadow: var(--m3f-elevation-3);
+  overflow: hidden;
+  transition:
+    background-color 0.5s var(--m3f-ease),
+    color 0.5s var(--m3f-ease);
+}
+.m3f-mini * {
+  transition:
+    background-color 0.5s var(--m3f-ease),
+    color 0.5s var(--m3f-ease),
+    border-color 0.5s var(--m3f-ease);
+}
+.m3f-mini-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  background: var(--md-sys-color-surface-container);
+}
+.m3f-mini-rail span {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 28px;
+  border-radius: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-mini-rail span[data-active] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-mini-rail .m3f-mini-fab {
+  inline-size: 40px;
+  block-size: 40px;
+  margin-bottom: 6px;
+  border-radius: 14px;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.m3f-mini-rail .m3f-svg {
+  inline-size: 20px;
+  block-size: 20px;
+}
+.m3f-mini-main {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+.m3f-mini-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+}
+.m3f-mini-bar b {
+  font-weight: 500;
+}
+.m3f-mini-switch {
+  position: relative;
+  inline-size: 44px;
+  block-size: 24px;
+  border-radius: 12px;
+  background: var(--md-sys-color-primary);
+}
+.m3f-mini-switch i {
+  position: absolute;
+  inset: 4px 4px 4px auto;
+  inline-size: 16px;
+  border-radius: 50%;
+  background: var(--md-sys-color-on-primary);
+}
+.m3f-mini-hero {
+  display: grid;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.m3f-mini-hero span {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.m3f-mini-hero strong {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+}
+.m3f-mini-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.m3f-mini-tile {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+}
+.m3f-mini-tile small {
+  font-size: 11px;
+  font-weight: 500;
+}
+.m3f-mini-tile i {
+  block-size: 6px;
+  inline-size: 64%;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.m3f-mini-secondary {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3f-mini-tertiary {
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+.m3f-mini-actions {
+  display: flex;
+  gap: 8px;
+}
+.m3f-mini-btn {
+  display: inline-grid;
+  place-items: center;
+  block-size: 32px;
+  padding-inline: 18px;
+  border-radius: 16px;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  font-size: 12px;
+  font-weight: 500;
+}
+.m3f-mini-btn-tonal {
+  inline-size: 56px;
+  padding: 0;
+  background: var(--md-sys-color-secondary-container);
+}
+
+/* ── Cores ────────────────────────────────────────────────────────────────── */
+.m3f-cores .m3f-demo {
+  padding: 8px;
+}
+ul.m3f-core-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.m3f-core-list li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  outline-offset: -3px;
+  transition: background-color 0.3s var(--m3f-ease);
+}
+ul.m3f-core-list li[data-selected] {
+  background: var(--md-sys-color-surface-container);
+}
+.m3f-core-avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 14px;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+  font-size: 18px;
+  font-weight: 500;
+  overflow: hidden;
+  transition: border-radius 0.4s var(--m3f-ease);
+}
+li[data-selected] .m3f-core-avatar {
+  border-radius: 50%;
+}
+.m3f-core-avatar img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.m3f-core-text {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+}
+.m3f-core-text b {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+.m3f-core-text small {
+  font-size: 12px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+  color: var(--md-sys-color-on-surface-variant);
+}
+ul.m3f-core-list li > .m3f-linear {
+  position: absolute;
+  inset: auto 16px 4px;
+  opacity: 0;
+}
+ul.m3f-core-list li[data-busy] > .m3f-linear {
+  opacity: 1;
+}
+.m3f-linear-indeterminate > i {
+  inline-size: 40%;
+  animation: m3f-indeterminate 1.2s var(--m3f-ease) infinite;
+}
+.m3f-spin {
+  animation: m3f-rotate 0.9s linear infinite;
+}
+
+/* ── Logs ─────────────────────────────────────────────────────────────────── */
+.m3f-logs-body {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.m3f-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  block-size: 48px;
+  padding-inline: 16px 4px;
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+  transition: box-shadow 0.25s var(--m3f-ease);
+}
+.m3f-field:focus-within {
+  box-shadow: inset 0 0 0 2px var(--md-sys-color-primary);
+}
+.m3f-field .m3f-svg {
+  inline-size: 22px;
+  block-size: 22px;
+}
+.m3f-field input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+.m3f-field input::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+}
+.m3f-log-list {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  block-size: 300px;
+  overflow: hidden;
+  border-radius: var(--m3f-shape-l);
+  background: var(--md-sys-color-surface-container);
+  padding: 8px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+}
+.m3f-log-row {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px 8px;
+  border-radius: var(--m3f-shape-s);
+  font-size: 12px;
+  line-height: 18px;
+}
+.m3f-log-row time {
+  font-family: var(--m3f-mono);
+  color: var(--md-sys-color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.m3f-log-row code {
+  min-inline-size: 0;
+  font-family: var(--m3f-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.m3f-log-target {
+  color: var(--md-sys-color-primary);
+}
+.m3f-log-row mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+.m3f-level {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--md-sys-color-surface-variant) 50%, transparent);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+/* Same mapping as the app's LogLevelBadge. */
+.m3f-level[data-level="info"] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.m3f-level[data-level="warn"] {
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+.m3f-level[data-level="error"] {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────────── */
+@keyframes m3f-pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+@keyframes m3f-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes m3f-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .m3f *,
+  .m3f *::before {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 1079px) {
+  .m3f-card[data-wide] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding: 32px;
+  }
+  .m3f-card[data-wide] .m3f-extra {
+    padding-top: 8px;
+  }
+  .m3f-heading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .m3f-heading p {
+    justify-self: start;
+  }
+}
+@media (max-width: 959px) {
+  .m3f-card {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 639px) {
+  .m3f {
+    padding-top: 32px;
+  }
+  .m3f-grid {
+    gap: 12px;
+  }
+  .m3f-card,
+  .m3f-card[data-wide] {
+    gap: 24px;
+    padding: 20px;
+    border-radius: 24px;
+  }
+  .m3f-demo {
+    padding: 14px;
+    border-radius: 20px;
+  }
+  .m3f-stage[data-shader] {
+    margin-inline: -8px;
+    padding: 16px;
+  }
+  .m3f-steps {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .m3f-step-slot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .m3f-step-arrow {
+    display: none;
+  }
+  .m3f-mini {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+  .m3f-dash-canvas {
+    grid-template-columns: 1fr;
+  }
+  .m3f-chart {
+    block-size: 150px;
+  }
+  .m3f-heading {
+    margin-bottom: 32px;
+  }
+  .m3f-heading p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@container m3f-demo (max-width: 520px) {
+  .m3f-step-index {
+    display: none;
+  }
+  .m3f-steps button {
+    padding-inline: 12px;
+  }
+}
+
+/* ── Switch ───────────────────────────────────────────────────────────────── */
+.m3f-cores-body {
+  display: grid;
+  gap: 8px;
+}
+.m3f-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+  padding: 12px 12px 4px 16px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+.m3f-switch {
+  position: relative;
+  flex: none;
+  inline-size: 52px;
+  block-size: 32px;
+  padding: 0;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 16px;
+  background: var(--md-sys-color-surface-container-highest);
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--m3f-ease),
+    border-color 0.25s var(--m3f-ease);
+}
+.m3f-switch-handle {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 6px;
+  display: grid;
+  place-items: center;
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius: 50%;
+  background: var(--md-sys-color-outline);
+  color: var(--md-sys-color-on-primary-container);
+  transform: translateY(-50%);
+  transition:
+    inline-size 0.3s var(--m3f-ease),
+    block-size 0.3s var(--m3f-ease),
+    inset-inline-start 0.3s var(--m3f-ease),
+    background-color 0.25s var(--m3f-ease);
+}
+.m3f-switch:active .m3f-switch-handle {
+  inline-size: 28px;
+  block-size: 28px;
+}
+.m3f-switch .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s var(--m3f-ease);
+}
+.m3f-switch[aria-checked="true"] {
+  border-color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary);
+}
+.m3f-switch[aria-checked="true"] .m3f-switch-handle {
+  inline-size: 24px;
+  block-size: 24px;
+  inset-inline-start: 24px;
+  background: var(--md-sys-color-on-primary);
+}
+.m3f-switch[aria-checked="true"]:active .m3f-switch-handle {
+  inline-size: 28px;
+  block-size: 28px;
+  inset-inline-start: 20px;
+}
+.m3f-switch[aria-checked="true"] .m3f-svg {
+  opacity: 1;
+  color: var(--md-sys-color-primary);
+}
+.m3f-log-list {
+  block-size: 264px;
+}
+
+.m3f-chart {
+  margin-top: 32px;
+}

@@ -39,3 +39,5 @@ jobs:
         run: pnpm fmt:check
       - name: Type Check
         run: pnpm check
+      - name: Test release selection
+        run: pnpm test:release

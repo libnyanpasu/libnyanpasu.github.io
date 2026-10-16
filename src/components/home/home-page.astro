@@ -18,6 +18,12 @@ interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const base = locale === "zh-cn" ? "/zh-cn" : "";
 const opts = { locale };
+const releaseNotes: Record<string, string> = {
+  stable: m.home_release_stable(undefined, opts),
+  rc: m.home_release_note(undefined, opts),
+  beta: m.home_release_beta(undefined, opts),
+  alpha: m.home_release_alpha(undefined, opts),
+};
 const posts = homeBlogPosts.filter((post) => post.locale === locale);
 const githubIcon = { body: logoIcons.icons["github-icon"].body.replace(/#161614/g, "currentColor"), viewBox: `0 0 ${logoIcons.icons["github-icon"].width || logoIcons.width || 16} ${logoIcons.icons["github-icon"].height || logoIcons.height || 16}` };
 const navItems = [
@@ -106,7 +112,7 @@ const platforms = [
       <div class="home-container">
         <div class="download-heading">
           <div><h2 id="download-title">{m.home_download_title(undefined,opts)}</h2><p>{m.home_download_description(undefined,opts)}</p></div>
-          <span class="download-version"><i aria-hidden="true"></i>{homeRelease.version}<small>{m.home_release_note(undefined,opts)}</small></span>
+          <span class="download-version"><i aria-hidden="true"></i>{homeRelease.version}<small>{releaseNotes[homeRelease.channel]}</small></span>
         </div>
         <div class="platform-list">
           {platforms.map((platform, index) => (

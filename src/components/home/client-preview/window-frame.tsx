@@ -58,9 +58,6 @@ export function WindowFrame({
         ))}
       </nav>
       {children}
-      <span className="cp-drawer-tab" aria-hidden="true">
-        <PreviewIcon icons={icons} name="chevron" />
-      </span>
     </section>
   );
 }

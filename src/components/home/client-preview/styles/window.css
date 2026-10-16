@@ -23,8 +23,6 @@
   --cp-shape-ink: #4a5162;
   --cp-shape-active-ink: #f4f7ff;
   --cp-mark-bg: #fbf9ff;
-  --cp-drawer: #0b0b0d;
-  --cp-drawer-ink: #fff;
   --cp-window-border: rgb(24 25 29 / 10%);
   --cp-window-shadow: 0 3cqw 6cqw -1.5cqw rgb(21 35 60 / 35%);
   --cp-outline: rgb(24 25 29 / 10%);
@@ -54,8 +52,6 @@
   --cp-shape-ink: #e8edf8;
   --cp-shape-active-ink: #17315f;
   --cp-mark-bg: #17181c;
-  --cp-drawer: #09090a;
-  --cp-drawer-ink: #f2f3f7;
   --cp-window-border: rgb(255 255 255 / 12%);
   --cp-window-shadow: 0 3cqw 6cqw -1.5cqw rgb(0 0 0 / 45%);
   --cp-outline: rgb(255 255 255 / 7%);
@@ -92,8 +88,6 @@
   --cp-shape-ink: var(--md-sys-color-on-surface-variant);
   --cp-shape-active-ink: var(--md-sys-color-on-primary-container);
   --cp-mark-bg: var(--md-sys-color-surface-container-lowest);
-  --cp-drawer: var(--md-sys-color-surface-container-lowest);
-  --cp-drawer-ink: var(--md-sys-color-on-surface);
   --cp-window-border: var(--md-sys-color-outline-variant);
   --cp-outline: var(--md-sys-color-outline-variant);
   --cp-chart: var(--md-sys-color-surface-container-high);
@@ -235,25 +229,6 @@
   width: 1.6cqw;
   height: 1.6cqw;
   flex: 0 0 auto;
-}
-
-.cp-drawer-tab {
-  position: absolute;
-  right: 0;
-  bottom: 2.3cqw;
-  display: grid;
-  width: 1.8cqw;
-  height: 4.5cqw;
-  place-items: center;
-  border-radius: 1cqw 0 0 1cqw;
-  background: var(--cp-drawer);
-  color: var(--cp-drawer-ink);
-}
-
-.cp-drawer-tab svg {
-  width: 1.2cqw;
-  height: 1.2cqw;
-  transform: rotate(180deg);
 }
 
 .cp-dashboard {

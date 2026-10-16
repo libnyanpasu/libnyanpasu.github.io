@@ -115,7 +115,7 @@ const platforms = [
               <h3>{platform.name}</h3>
               <div class="platform-actions">
                 <a class="home-button home-button-tonal platform-action" href={homeRelease.href}>{m.home_platform_download({platform:platform.name},opts)}<span aria-hidden="true"><IconifyIcon name="lucide:download" /></span></a>
-                <a class="platform-guide" href={`${base}/tutorial/install/#${platform.anchor}`}>{m.home_install_guide(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-right" /></span></a>
+                <a class="home-button platform-guide" href={`${base}/tutorial/install/#${platform.anchor}`}>{m.home_install_guide(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-right" /></span></a>
               </div>
             </article>
           ))}

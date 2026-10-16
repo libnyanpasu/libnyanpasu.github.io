@@ -102,30 +102,59 @@
   letter-spacing: -0.01em;
 }
 .platform-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 20px;
+  display: grid;
+  gap: 8px;
   width: 100%;
   margin-top: auto;
   padding-top: 32px;
 }
-.platform-action {
-  min-height: 48px;
-  padding: 0 20px;
-  font-size: 15px;
+/* Both actions share one anatomy: label on the left, an icon chip on the right edge. */
+.platform-action,
+.platform-guide {
+  justify-content: space-between;
+  min-height: 56px;
+  gap: 12px;
+  padding: 0 8px 0 20px;
+  font-size: 14px;
+}
+.platform-actions .home-button > span {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  transition:
+    border-radius 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.25s,
+    color 0.25s;
+}
+.platform-actions .home-button > span svg {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* The chip squares off like the pill does while pressed; glyphs only turn in place so they stay centred. */
+.platform-actions .home-button:hover > span,
+.platform-actions .home-button:focus-visible > span {
+  border-radius: 14px;
+}
+.platform-guide:hover > span svg,
+.platform-guide:focus-visible > span svg {
+  transform: rotate(-45deg);
 }
 .platform-item[data-current] .platform-action {
   background: var(--home-accent);
   color: var(--home-accent-ink) !important;
 }
+/* Outlined sibling of the download button: same height and width, lighter weight. */
 .platform-guide {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  padding-right: 7px; /* 1px border: keeps the chip's inset equal on all sides */
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
   color: var(--home-muted) !important;
+}
+.platform-guide:hover > span {
+  background: var(--home-accent);
+  color: var(--home-accent-ink);
 }
 .platform-item[data-current] .platform-guide {
   color: inherit !important;

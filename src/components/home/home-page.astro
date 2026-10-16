@@ -11,7 +11,7 @@ import { icons as lucideIcons } from "@iconify-json/lucide";
 import { getIconData, iconToSVG } from "@iconify/utils";
 import ShaderBackdrop from "./shader-backdrop";
 import Features from "./features/features.astro";
-import ClientPreview from "./client-preview";
+import HeroPreview from "./features/hero-preview";
 import { shapePath } from "./features/m3-shape";
 import "./home-page.css";
 interface Props { locale: Locale; }
@@ -96,7 +96,7 @@ const platforms = [
         <div class="hero-intro"><p class="hero-positioning">{m.home_positioning(undefined, opts)}</p><p class="hero-description">{m.home_description(undefined, opts)}</p><div class="hero-actions"><a class="home-button home-button-primary" href="#download">{m.home_download_action(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a><a class="home-button home-button-secondary hero-docs" href={`${base}/introduction/`}>{m.home_read_docs(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></div></div>
       </div>
       <div class="hero-showcase">
-        <ClientPreview labels={previewLabels} icons={previewIcons} client:load />
+        <HeroPreview labels={previewLabels} icons={previewIcons} client:load />
       </div>
       <a class="hero-scroll home-text-link" href="#features">{m.home_scroll_hint(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a>
     </section>

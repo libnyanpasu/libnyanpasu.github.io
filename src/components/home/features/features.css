@@ -425,7 +425,9 @@
   --frame-h: 440px;
 }
 .m3f-material .m3f-frame,
-.m3f-material .m3f-frame-inner {
+.m3f-material .m3f-frame-inner,
+.hero-showcase .m3f-frame,
+.hero-showcase .m3f-frame-inner {
   position: relative;
   inset: auto;
   flex: none;

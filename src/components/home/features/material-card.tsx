@@ -1,9 +1,8 @@
 import { motion } from "motion/react";
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
-import ClientPreview from "../client-preview";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import type { PreviewIcons, PreviewLabels } from "../client-preview/types";
-import { Autoplay, useFramePlaying, type Cue } from "./frame";
 import FeatureCard from "./feature-card";
+import PlayingPreview from "./playing-preview";
 import type { SchemePair } from "./material-schemes";
 import { Icon, arrowNav, type Icons } from "./ui";
 
@@ -156,55 +155,11 @@ export default function MaterialCard({
         themed ? ({ ...scheme, colorScheme: dark ? "dark" : "light" } as CSSProperties) : undefined
       }
     >
-      <MaterialWindow
+      <PlayingPreview
         preview={preview}
+        scheme="material"
         onCycle={picked ? undefined : () => setSeed((index) => (index + 1) % seeds.length)}
       />
     </FeatureCard>
-  );
-}
-
-/**
- * The hero's client preview in whatever scheme the card is wearing. While it plays itself the
- * pretend mouse uses the proxy and routing tiles, and `onCycle` moves the card to the next preset
- * seed every few seconds.
- */
-function MaterialWindow({
-  preview,
-  onCycle,
-}: {
-  preview: { labels: PreviewLabels; icons: PreviewIcons };
-  onCycle?: () => void;
-}) {
-  const root = useRef<HTMLDivElement>(null);
-  const playing = useFramePlaying();
-  const cycle = useRef(onCycle);
-  cycle.current = onCycle;
-
-  const cycling = !!onCycle;
-  useEffect(() => {
-    if (!playing || !cycling) return;
-    const timer = window.setInterval(() => cycle.current?.(), 3400);
-    return () => window.clearInterval(timer);
-  }, [playing, cycling]);
-
-  // The tiles are the preview's own buttons, so a cue just presses them.
-  const press = (selector: string) => () =>
-    root.current?.querySelector<HTMLElement>(selector)?.click();
-  const mode = (index: number) => `.cp-mode-card .cp-tile:nth-child(${index})`;
-  const toggle = (index: number) => `.cp-proxy-card .cp-tile:nth-child(${index})`;
-  const script: Cue[] = [
-    { at: mode(2), run: press(mode(2)), hold: 2000 },
-    { at: toggle(2), run: press(toggle(2)), hold: 1800 },
-    { at: mode(3), run: press(mode(3)), hold: 2000 },
-    { at: toggle(2), run: press(toggle(2)), hold: 1400 },
-    { at: mode(1), run: press(mode(1)), hold: 2200 },
-  ];
-
-  return (
-    <div ref={root}>
-      <ClientPreview labels={preview.labels} icons={preview.icons} scheme="material" />
-      <Autoplay script={script} />
-    </div>
   );
 }

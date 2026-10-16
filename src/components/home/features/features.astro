@@ -3,6 +3,7 @@ import { icons as materialIcons } from "@iconify-json/material-symbols";
 import { getIconData, iconToSVG } from "@iconify/utils";
 import { m } from "@/paraglide/messages.js";
 import type { Locale } from "@/paraglide/runtime";
+import type { PreviewIcons, PreviewLabels } from "../client-preview/types";
 import FeatureSection, { type FeatureLabels } from "./feature-section";
 import { buildSchemes } from "./material-schemes";
 import "./features.css";
@@ -10,9 +11,11 @@ import "./features.css";
 interface Props {
   locale: Locale;
   base: string;
+  /** What the hero's client preview is built from; the Material You card reuses it as is. */
+  preview: { labels: PreviewLabels; icons: PreviewIcons };
 }
 
-const { locale, base } = Astro.props;
+const { locale, base, preview } = Astro.props;
 const opts = { locale };
 
 const glyph = (name: string) => {
@@ -204,36 +207,6 @@ const labels: FeatureLabels = {
     themeColor: t(m.home_demo_theme_color),
     themeMode: t(m.home_demo_theme_mode),
     modes: [t(m.home_demo_theme_dark), t(m.home_demo_theme_system), t(m.home_demo_theme_light)],
-    app: {
-      file: t(m.client_preview_file),
-      settings: t(m.client_preview_settings),
-      help: t(m.client_preview_help),
-      nav: [
-        t(m.client_preview_dashboard),
-        t(m.client_preview_proxies),
-        t(m.client_preview_profiles),
-        t(m.client_preview_connections),
-        t(m.client_preview_traffic),
-        t(m.client_preview_rules),
-        t(m.client_preview_logs),
-        t(m.client_preview_settings),
-        t(m.client_preview_providers),
-      ],
-      download: t(m.client_preview_download),
-      upload: t(m.client_preview_upload),
-      memory: t(m.client_preview_memory),
-      connections: t(m.client_preview_connections),
-      proxyStatus: t(m.client_preview_proxy_status),
-      systemProxy: t(m.client_preview_system_proxy),
-      tunMode: t(m.client_preview_tun_mode),
-      routingMode: t(m.home_demo_routing_mode),
-      rule: t(m.client_preview_rule),
-      global: t(m.client_preview_global),
-      direct: t(m.client_preview_direct),
-      coreStatus: t(m.client_preview_core_status),
-      running: t(m.client_preview_running),
-      byService: t(m.client_preview_running_by_service),
-    },
   },
   cores: {
     title: t(m.home_cores_title),
@@ -271,7 +244,7 @@ const labels: FeatureLabels = {
 };
 ---
 
-<FeatureSection client:visible labels={labels} icons={icons} schemes={buildSchemes()} base={base} />
+<FeatureSection client:visible labels={labels} icons={icons} schemes={buildSchemes()} base={base} preview={preview} />
 <noscript>
   <style>
     .m3f [style*="opacity"] {

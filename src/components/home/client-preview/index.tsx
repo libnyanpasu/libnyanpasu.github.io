@@ -11,6 +11,8 @@ export type ClientPreviewProps = {
   icons: PreviewIcons;
   metrics?: MetricPreviewData[];
   core?: CorePreviewData;
+  /** `material`: take every colour from the `--md-sys-color-*` roles in scope, not the site theme. */
+  scheme?: "material";
 };
 
 export function ClientPreview({
@@ -18,10 +20,11 @@ export function ClientPreview({
   icons,
   metrics = DEMO_METRICS,
   core = DEMO_CORE_PREVIEW_DATA,
+  scheme,
 }: ClientPreviewProps) {
   const state = usePreviewState();
   return (
-    <div className="client-preview" ref={state.rootRef}>
+    <div className="client-preview" data-scheme={scheme} ref={state.rootRef}>
       <WindowFrame labels={labels} icons={icons}>
         <Dashboard labels={labels} icons={icons} state={state} metrics={metrics} core={core} />
       </WindowFrame>

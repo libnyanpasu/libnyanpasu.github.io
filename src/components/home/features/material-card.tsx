@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
-import { Spark } from "./app-ui";
+import ClientPreview from "../client-preview";
+import type { PreviewIcons, PreviewLabels } from "../client-preview/types";
 import { Autoplay, useFramePlaying, type Cue } from "./frame";
 import FeatureCard from "./feature-card";
 import type { SchemePair } from "./material-schemes";
@@ -13,54 +14,25 @@ export interface MaterialLabels {
   themeMode: string;
   /** Same order as the client's picker. */
   modes: [dark: string, system: string, light: string];
-  app: {
-    file: string;
-    settings: string;
-    help: string;
-    nav: string[];
-    download: string;
-    upload: string;
-    memory: string;
-    connections: string;
-    proxyStatus: string;
-    systemProxy: string;
-    tunMode: string;
-    routingMode: string;
-    rule: string;
-    global: string;
-    direct: string;
-    coreStatus: string;
-    running: string;
-    byService: string;
-  };
 }
-
-const NAV_ICONS = [
-  "dashboard",
-  "proxies",
-  "grid",
-  "code",
-  "traffic",
-  "rule",
-  "terminal",
-  "settings",
-  "apps",
-];
 
 /**
  * Settings → User Interface → Theme Color, applied to the whole card: picking one of the
  * client's preset seeds regenerates the M3 scheme, and the card (controls, the client window
- * and the shader stage) moves to it the way the app does. Dark / System / Light mirrors the
+ * and the shader stage) moves to it the way the app does. The window is the hero's client
+ * preview itself, only recoloured from the card's scheme. Dark / System / Light mirrors the
  * picker's mode buttons, where System follows this page.
  */
 export default function MaterialCard({
   labels,
   icons,
   schemes,
+  preview,
 }: {
   labels: MaterialLabels;
   icons: Icons;
   schemes: Record<string, SchemePair>;
+  preview: { labels: PreviewLabels; icons: PreviewIcons };
 }) {
   const seeds = Object.keys(schemes);
   const [seed, setSeed] = useState(0);
@@ -185,8 +157,7 @@ export default function MaterialCard({
       }
     >
       <MaterialWindow
-        app={labels.app}
-        icons={icons}
+        preview={preview}
         onCycle={picked ? undefined : () => setSeed((index) => (index + 1) % seeds.length)}
       />
     </FeatureCard>
@@ -194,21 +165,18 @@ export default function MaterialCard({
 }
 
 /**
- * The client's dashboard in miniature, in whatever scheme the card is wearing. While it plays
- * itself the pretend mouse uses the routing and proxy tiles, and `onCycle` moves the card to the
- * next preset seed every few seconds.
+ * The hero's client preview in whatever scheme the card is wearing. While it plays itself the
+ * pretend mouse uses the proxy and routing tiles, and `onCycle` moves the card to the next preset
+ * seed every few seconds.
  */
 function MaterialWindow({
-  app,
-  icons,
+  preview,
   onCycle,
 }: {
-  app: MaterialLabels["app"];
-  icons: Icons;
+  preview: { labels: PreviewLabels; icons: PreviewIcons };
   onCycle?: () => void;
 }) {
-  const [proxy, setProxy] = useState([true, false]);
-  const [routing, setRouting] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
   const playing = useFramePlaying();
   const cycle = useRef(onCycle);
   cycle.current = onCycle;
@@ -220,130 +188,22 @@ function MaterialWindow({
     return () => window.clearInterval(timer);
   }, [playing, cycling]);
 
+  // The tiles are the preview's own buttons, so a cue just presses them.
+  const press = (selector: string) => () =>
+    root.current?.querySelector<HTMLElement>(selector)?.click();
+  const mode = (index: number) => `.cp-mode-card .cp-tile:nth-child(${index})`;
+  const toggle = (index: number) => `.cp-proxy-card .cp-tile:nth-child(${index})`;
   const script: Cue[] = [
-    { at: '[data-cue="routing-1"]', run: () => setRouting(1), hold: 2000 },
-    { at: '[data-cue="proxy-1"]', run: () => setProxy([true, true]), hold: 1800 },
-    { at: '[data-cue="routing-2"]', run: () => setRouting(2), hold: 2000 },
-    { at: '[data-cue="proxy-1"]', run: () => setProxy([true, false]), hold: 1400 },
-    { at: '[data-cue="routing-0"]', run: () => setRouting(0), hold: 2200 },
+    { at: mode(2), run: press(mode(2)), hold: 2000 },
+    { at: toggle(2), run: press(toggle(2)), hold: 1800 },
+    { at: mode(3), run: press(mode(3)), hold: 2000 },
+    { at: toggle(2), run: press(toggle(2)), hold: 1400 },
+    { at: mode(1), run: press(mode(1)), hold: 2200 },
   ];
 
   return (
-    <div className="mu-window">
-      <div className="mu-titlebar" aria-hidden="true">
-        <span className="mu-lights">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span className="mu-menus">
-          <span>{app.file}</span>
-          <span>{app.settings}</span>
-          <span>{app.help}</span>
-        </span>
-        <span className="mu-brand">
-          <img src="/images/logo.png" alt="" width="14" height="14" />
-          Clash Nyanpasu
-        </span>
-      </div>
-      <div className="mu-nav" aria-hidden="true">
-        {app.nav.map((name, index) => (
-          <span key={name} data-active={index === 0 || undefined}>
-            <Icon icon={icons[NAV_ICONS[index]]} />
-            {name}
-          </span>
-        ))}
-      </div>
-      <div className="mu-body">
-        <div className="mu-metric">
-          <span className="mu-head">
-            <Icon icon={icons.down} />
-            {app.download}
-          </span>
-          <b>18.7 MiB/s</b>
-          <Spark values={[3, 6, 4, 9, 7, 12, 9, 15, 11, 17]} className="mu-spark" />
-        </div>
-        <div className="mu-metric">
-          <span className="mu-head">
-            <Icon icon={icons.up} />
-            {app.upload}
-          </span>
-          <b>2.4 MiB/s</b>
-          <Spark values={[2, 3, 2, 4, 3, 3, 5, 4, 3, 4]} className="mu-spark" />
-        </div>
-        <div className="mu-metric">
-          <span className="mu-head">
-            <Icon icon={icons.memory} />
-            {app.memory}
-          </span>
-          <b>30.63 MiB</b>
-          <Spark values={[31, 30, 33, 32, 30, 31, 30, 31, 30, 30]} className="mu-spark" />
-        </div>
-        <div className="mu-metric">
-          <span className="mu-head">
-            <Icon icon={icons.code} />
-            {app.connections}
-          </span>
-          <b>128</b>
-        </div>
-
-        <div className="mu-panel mu-proxy">
-          <span className="mu-head">
-            <Icon icon={icons.code} />
-            {app.proxyStatus}
-          </span>
-          <span className="mu-tiles">
-            {[app.systemProxy, app.tunMode].map((name, index) => (
-              <button
-                key={name}
-                type="button"
-                aria-pressed={proxy[index]}
-                data-cue={`proxy-${index}`}
-                onClick={() => setProxy(proxy.map((v, i) => (i === index ? !v : v)))}
-              >
-                <Icon icon={index === 0 ? icons.desktop : icons.code} />
-                {name}
-              </button>
-            ))}
-          </span>
-        </div>
-        <div className="mu-panel mu-routing">
-          <span className="mu-head">
-            <Icon icon={icons.route} />
-            {app.routingMode}
-          </span>
-          <span className="mu-tiles" role="radiogroup" aria-label={app.routingMode}>
-            {[app.rule, app.global, app.direct].map((name, index) => (
-              <button
-                key={name}
-                type="button"
-                role="radio"
-                aria-checked={routing === index}
-                data-cue={`routing-${index}`}
-                onClick={() => setRouting(index)}
-              >
-                <Icon icon={[icons.route, icons.proxies, icons.outward][index]} />
-                {name}
-              </button>
-            ))}
-          </span>
-        </div>
-        <div className="mu-panel mu-core">
-          <span className="mu-head">
-            <Icon icon={icons.memory} />
-            {app.coreStatus}
-            <small>{app.byService}</small>
-          </span>
-          <span className="mu-core-row">
-            <img src="/images/core/mihomo-96.png" alt="" width="28" height="28" />
-            <span>
-              <b>Mihomo Alpha</b>
-              <small>alpha-94b13ae</small>
-            </span>
-            <em>{app.running}</em>
-          </span>
-        </div>
-      </div>
+    <div ref={root}>
+      <ClientPreview labels={preview.labels} icons={preview.icons} scheme="material" />
       <Autoplay script={script} />
     </div>
   );

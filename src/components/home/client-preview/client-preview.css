@@ -62,6 +62,43 @@
   --cp-chart: #272b37;
 }
 
+:root:root .client-preview[data-scheme="material"] {
+  --cp-window-title: color-mix(
+    in oklab,
+    var(--md-sys-color-primary) 34%,
+    var(--md-sys-color-primary-container)
+  );
+  --cp-title-ink: var(--md-sys-color-on-primary-container);
+  --cp-brand-ink: var(--md-sys-color-on-primary-container);
+  --cp-nav: var(--md-sys-color-primary-container);
+  --cp-nav-ink: var(--md-sys-color-on-primary-container);
+  --cp-nav-active: color-mix(
+    in oklab,
+    var(--md-sys-color-primary) 30%,
+    var(--md-sys-color-primary-container)
+  );
+  --cp-nav-active-ink: var(--md-sys-color-on-primary-container);
+  --cp-canvas: var(--md-sys-color-surface);
+  --cp-card: var(--md-sys-color-surface-container);
+  --cp-panel: var(--md-sys-color-surface-container-high);
+  --cp-tile: var(--md-sys-color-surface-container-highest);
+  --cp-ink: var(--md-sys-color-on-surface);
+  --cp-muted: var(--md-sys-color-on-surface-variant);
+  --cp-blue: var(--md-sys-color-primary);
+  --cp-active: var(--md-sys-color-primary-container);
+  --cp-tile-active: var(--md-sys-color-primary-container);
+  --cp-on-active: var(--md-sys-color-on-primary-container);
+  --cp-chip: var(--md-sys-color-surface-container-highest);
+  --cp-shape-ink: var(--md-sys-color-on-surface-variant);
+  --cp-shape-active-ink: var(--md-sys-color-on-primary-container);
+  --cp-mark-bg: var(--md-sys-color-surface-container-lowest);
+  --cp-drawer: var(--md-sys-color-surface-container-lowest);
+  --cp-drawer-ink: var(--md-sys-color-on-surface);
+  --cp-window-border: var(--md-sys-color-outline-variant);
+  --cp-outline: var(--md-sys-color-outline-variant);
+  --cp-chart: var(--md-sys-color-surface-container-high);
+}
+
 .client-preview {
   width: 100%;
   min-width: 0;

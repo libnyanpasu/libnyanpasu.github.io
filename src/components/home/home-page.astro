@@ -100,7 +100,7 @@ const platforms = [
       </div>
       <a class="hero-scroll home-text-link" href="#features">{m.home_scroll_hint(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a>
     </section>
-    <Features locale={locale} base={base} />
+    <Features locale={locale} base={base} preview={{ labels: previewLabels, icons: previewIcons }} />
     <section tabindex="-1" id="download" class="home-download" aria-labelledby="download-title">
       <div class="home-backdrop home-backdrop-download" aria-hidden="true"><ShaderBackdrop variant="download" seed={3} client:only="react" /></div>
       <div class="home-container">

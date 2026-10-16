@@ -8,6 +8,7 @@ import MaterialCard, { type MaterialLabels } from "./material-card";
 import type { SchemePair } from "./material-schemes";
 import ProfilesCard, { type ProfilesLabels } from "./profiles-card";
 import TrafficCard, { type TrafficLabels } from "./traffic-card";
+import type { PreviewIcons, PreviewLabels } from "../client-preview/types";
 import { Icon, type Icons } from "./ui";
 
 interface Copy {
@@ -51,11 +52,13 @@ export default function FeatureSection({
   icons,
   schemes,
   base,
+  preview,
 }: {
   labels: FeatureLabels;
   icons: Icons;
   schemes: Record<string, SchemePair>;
   base: string;
+  preview: { labels: PreviewLabels; icons: PreviewIcons };
 }) {
   const { traffic, profiles, dashboard, material, cores, logs } = labels;
 
@@ -147,7 +150,7 @@ export default function FeatureSection({
             <DashboardCard labels={dashboard.demo} icons={icons} />
           </FeatureCard>
 
-          <MaterialCard labels={material} icons={icons} schemes={schemes} />
+          <MaterialCard labels={material} icons={icons} schemes={schemes} preview={preview} />
 
           <FeatureCard
             name="cores"

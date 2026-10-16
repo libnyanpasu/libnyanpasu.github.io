@@ -29,7 +29,9 @@
   align-items: center;
   gap: 4px;
   min-inline-size: 0;
-  overflow: hidden;
+}
+.cm-item {
+  border-radius: 14px;
 }
 .cm-current {
   gap: 12px;
@@ -141,9 +143,9 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  border-radius: inherit;
   background: color-mix(in oklab, var(--md-sys-color-primary) 12%, transparent);
-  transform: scaleX(0);
-  transform-origin: left;
+  clip-path: inset(0 100% 0 0);
 }
 [data-busy] > .cm-progress {
   animation: cm-fill 1.1s var(--m3f-ease) forwards;

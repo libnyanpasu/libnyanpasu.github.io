@@ -62,17 +62,93 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Setup Pages
-        uses: actions/configure-pages@v6
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build with Astro
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.release_tag }}
+        run: pnpm build
+      - name: Upload site
+        uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: dist
+          retention-days: 1
+
+  # Animated WebPs of the home page demos for the client's README, at dist/readme/. Each demo
+  # records in real time and takes minutes to encode, so they run side by side, one per job.
+  capture:
+    name: Capture ${{ matrix.card }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The targets in scripts/capture-readme-cards.ts.
+        card: [hero, material-window, traffic, profiles, dashboard, material, cores, logs]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: latest
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
         run: |
-          pnpm build
-          touch dist/.nojekyll
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v6
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Chromium and img2webp
+        run: |
+          pnpm exec playwright install --with-deps --only-shell chromium
+          sudo apt-get install -y --no-install-recommends webp
+      - name: Download site
+        uses: actions/download-artifact@v8
+        with:
+          name: site
+          path: dist
+      - name: Capture
+        run: pnpm readme:cards --cards ${{ matrix.card }}
+      - name: Upload captures
+        uses: actions/upload-artifact@v7
+        with:
+          name: readme-${{ matrix.card }}
+          path: dist/readme
+          retention-days: 1
+
+  # The site and every capture, as the Pages artifact.
+  assemble:
+    name: Assemble
+    needs: [build, capture]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+      - name: Download site
+        uses: actions/download-artifact@v8
+        with:
+          name: site
+          path: dist
+      - name: Download captures
+        uses: actions/download-artifact@v8
+        with:
+          pattern: readme-*
+          merge-multiple: true
+          path: dist/readme
+      - run: touch dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
@@ -83,7 +159,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+    needs: assemble
     if: github.event.repository.fork == false
     runs-on: ubuntu-latest
     name: Deploy

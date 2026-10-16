@@ -3,6 +3,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type ReactNode,
@@ -31,6 +32,10 @@ export function Frame({ children }: { children: ReactNode }) {
   const [busy, setBusy] = useState(false);
   const reduced = useReducedMotion();
   const resume = useRef(0);
+  const playing = inView && !busy && !reduced;
+  // Kept stable while `playing` holds, so a host re-rendering (the Material You card restyles
+  // itself every few seconds) doesn't restart `Autoplay` from its current cue.
+  const state = useMemo(() => ({ inner, playing }), [playing]);
 
   useEffect(() => {
     const element = host.current;
@@ -69,9 +74,7 @@ export function Frame({ children }: { children: ReactNode }) {
       onBlur={() => release(2500)}
     >
       <div ref={inner} className="m3f-frame-inner">
-        <FrameContext.Provider value={{ inner, playing: inView && !busy && !reduced }}>
-          {children}
-        </FrameContext.Provider>
+        <FrameContext.Provider value={state}>{children}</FrameContext.Provider>
       </div>
     </div>
   );
@@ -103,10 +106,14 @@ function reveal(target: Element, frame: HTMLElement) {
     if (!/auto|scroll/.test(overflowY) || node.scrollHeight <= node.clientHeight) continue;
     const box = node.getBoundingClientRect();
     const rect = target.getBoundingClientRect();
+    // Rects are in viewport pixels, scrolling is in the node's own CSS pixels.
+    const k = node.offsetHeight / box.height || 1;
+    const top = (rect.top - box.top) * k;
+    const bottom = (rect.bottom - box.top) * k;
     const pad = 24;
     let delta = 0;
-    if (rect.top < box.top + pad) delta = rect.top - box.top - pad;
-    else if (rect.bottom > box.bottom - pad - 48) delta = rect.bottom - box.bottom + pad + 48;
+    if (top < pad) delta = top - pad;
+    else if (bottom > node.clientHeight - pad - 48) delta = bottom - node.clientHeight + pad + 48;
     if (delta) {
       node.scrollBy({ top: delta, behavior: "smooth" });
       moved = true;
@@ -148,7 +155,13 @@ export function Autoplay({ script, reset }: { script: Cue[]; reset?: () => void 
     const locate = (element: Element) => {
       const box = inner.getBoundingClientRect();
       const rect = element.getBoundingClientRect();
-      return { x: rect.left + rect.width / 2 - box.left, y: rect.top + rect.height / 2 - box.top };
+      // The cursor moves in the frame's own CSS pixels, which differ from the viewport's when the
+      // page is zoomed (scripts/capture-readme-cards.ts records at 2x) or an ancestor is scaled.
+      const k = inner.offsetWidth / box.width || 1;
+      return {
+        x: (rect.left + rect.width / 2 - box.left) * k,
+        y: (rect.top + rect.height / 2 - box.top) * k,
+      };
     };
 
     (async () => {
@@ -157,6 +170,8 @@ export function Autoplay({ script, reset }: { script: Cue[]; reset?: () => void 
       for (;;) {
         const { script: cues, reset: restart } = latest.current;
         if (step.current === 0) {
+          // Marks where each loop begins, so scripts/capture-readme-cards.ts can record one.
+          inner.dispatchEvent(new CustomEvent("m3f-loop", { bubbles: true }));
           restart?.();
           inner.querySelectorAll("*").forEach((node) => {
             if (node.scrollTop > 0) node.scrollTo({ top: 0, behavior: "smooth" });

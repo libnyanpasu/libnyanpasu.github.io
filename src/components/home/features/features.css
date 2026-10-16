@@ -238,7 +238,9 @@
 .m3f-demo {
   position: relative;
   z-index: 1;
+  display: flex;
   flex: 1;
+  flex-direction: column;
   container: m3f-demo / inline-size;
   min-inline-size: 0;
   overflow: hidden;
@@ -402,15 +404,17 @@
   font-size: 13px;
   line-height: 18px;
 }
-/* Every demo sits in a fixed-height frame (frame.tsx); its contents scroll inside it. */
+/* Every demo sits in a frame of at least --frame-h (frame.tsx); its contents scroll inside it.
+   The frame grows with the demo when the grid row is taller, so no empty strip shows below it. */
 .m3f-frame {
   --frame-h: 400px;
   position: relative;
-  block-size: var(--frame-h);
+  flex: 1 0 var(--frame-h);
+  min-block-size: 0;
 }
 .m3f-frame-inner {
-  position: relative;
-  block-size: 100%;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 .m3f-traffic .m3f-frame {
@@ -422,6 +426,9 @@
 }
 .m3f-material .m3f-frame,
 .m3f-material .m3f-frame-inner {
+  position: relative;
+  inset: auto;
+  flex: none;
   block-size: auto;
   overflow: visible;
 }

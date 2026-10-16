@@ -1,9 +1,6 @@
-/** Update this when a new release is published. Keep the visible channel explicit. */
-export const homeRelease = {
-  version: "2.0.0-rc.1",
-  href: "https://github.com/libnyanpasu/clash-nyanpasu/releases/tag/v2.0.0-rc.1",
-  channel: "rc",
-} as const;
+import release from "./release.generated.json";
+
+export const homeRelease = release;
 
 export const repositoryUrl = "https://github.com/libnyanpasu/clash-nyanpasu";
 

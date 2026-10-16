@@ -8,6 +8,17 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Published tag to validate before selecting the newest complete release
+        required: false
+        type: string
+
+  repository_dispatch:
+    types: [clash-nyanpasu-release]
+
+  schedule:
+    - cron: "23 3 * * *"
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -56,6 +67,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build with Astro
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.release_tag }}
         run: |
           pnpm build
           touch dist/.nojekyll

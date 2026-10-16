@@ -12,7 +12,17 @@ import { createMd3ThemeOptionsCss } from "starlight-theme-md3";
 export type Scheme = Record<string, string>;
 export type SchemePair = Record<"light" | "dark", Scheme>;
 
-export const SEEDS = ["#3e64a7", "#6750a4", "#00796b", "#c2185b", "#e65100", "#558b2f"];
+// The client's theme presets (theme-color-config.tsx); the first is the site's own seed.
+export const SEEDS = [
+  "#3e64a7",
+  "#066b9e",
+  "#fa89af",
+  "#d490ff",
+  "#33ccbb",
+  "#61cb93",
+  "#f3a81e",
+  "#ff9565",
+];
 
 function readBlock(block: string): Scheme {
   const scheme: Scheme = {};

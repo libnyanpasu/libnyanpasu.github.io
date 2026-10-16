@@ -761,6 +761,12 @@
   position: absolute;
   inset: 0;
   display: block;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.2, 0, 0, 1);
+}
+/* Shown only once the renderer has drawn its first frame (see useShaderGate). */
+.home-backdrop-host[data-shown] {
+  opacity: 1;
 }
 /* Download: the same tonal field, faded in and out at both edges. */
 .home-download {

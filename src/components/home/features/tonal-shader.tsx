@@ -1,6 +1,7 @@
 import { animate } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { FilmGrain, Flower, MeshGradient, Shader } from "shaders/react";
+import { readRoles, useReducedMotionQuery, useSchemeKey, useShaderGate } from "../use-shader-gate";
 
 /**
  * A `shaders` (WebGPU) mesh gradient painted with Material 3 colours.
@@ -9,8 +10,8 @@ import { FilmGrain, Flower, MeshGradient, Shader } from "shaders/react";
  * variables resolved from the page's M3 theme and re-read when Starlight flips `data-theme`.
  * The first five colours paint the mesh. With `shapes`, two more paint a pair of slowly turning
  * M3 Expressive shapes (a scalloped cookie and a clover) in opposite corners.
- * Colour changes are tweened with motion rather than snapped. Without WebGPU, or while the
- * host is far off-screen, no canvas exists and the CSS behind it shows instead.
+ * Colour changes are tweened rather than snapped; they only update uniforms, the renderer stays.
+ * See `useShaderGate` for when the canvas is created and shown.
  */
 
 interface Props {
@@ -21,63 +22,18 @@ interface Props {
   className?: string;
 }
 
-function toRgb(ctx: CanvasRenderingContext2D, value: string) {
-  ctx.fillStyle = "#000";
-  ctx.fillStyle = value || "#808080";
-  ctx.clearRect(0, 0, 1, 1);
-  ctx.fillRect(0, 0, 1, 1);
-  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-  return [r, g, b];
-}
-
 const hexToRgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const rgbToHex = (rgb: number[]) =>
   `#${rgb.map((c) => Math.round(c).toString(16).padStart(2, "0")).join("")}`;
 
-function readRoles(roles: string[]) {
-  const ctx = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
-  if (!ctx) return null;
-  ctx.canvas.width = ctx.canvas.height = 1;
-  const style = getComputedStyle(document.documentElement);
-  return roles.map((role) => rgbToHex(toRgb(ctx, style.getPropertyValue(role).trim())));
-}
-
 export default function TonalShader({ colors, roles, shapes = false, seed = 0, className }: Props) {
   const host = useRef<HTMLSpanElement>(null);
-  const [supported, setSupported] = useState(false);
-  const [near, setNear] = useState(false);
-  const [reduced, setReduced] = useState(false);
-  const [scheme, setScheme] = useState(0);
+  const { armed, shown: visible, onReady } = useShaderGate(host);
+  const reduced = useReducedMotionQuery();
+  const scheme = useSchemeKey();
   const [target, setTarget] = useState<string[] | null>(null);
   const [shown, setShown] = useState<string[] | null>(null);
   const shownRef = useRef<string[] | null>(null);
-
-  useEffect(() => {
-    setSupported("gpu" in navigator);
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(query.matches);
-    update();
-    query.addEventListener("change", update);
-    const observer = new MutationObserver(() => setScheme((v) => v + 1));
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-    return () => {
-      query.removeEventListener("change", update);
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const element = host.current;
-    if (!element) return;
-    const io = new IntersectionObserver(([entry]) => setNear(entry.isIntersecting), {
-      rootMargin: "240px 0px",
-    });
-    io.observe(element);
-    return () => io.disconnect();
-  }, []);
 
   const key = (colors ?? roles)?.join();
   useEffect(() => {
@@ -92,7 +48,8 @@ export default function TonalShader({ colors, roles, shapes = false, seed = 0, c
   useEffect(() => {
     if (!target) return;
     const from = shownRef.current;
-    if (!from || reduced || from.length !== target.length) {
+    // Nothing on screen yet: take the colours as they are.
+    if (!from || !visible || reduced || from.length !== target.length) {
       shownRef.current = target;
       setShown(target);
       return;
@@ -100,7 +57,7 @@ export default function TonalShader({ colors, roles, shapes = false, seed = 0, c
     const a = from.map(hexToRgb);
     const b = target.map(hexToRgb);
     const controls = animate(0, 1, {
-      duration: 0.7,
+      duration: 0.6,
       ease: [0.2, 0, 0, 1],
       onUpdate: (t) => {
         const next = a.map((rgb, i) => rgbToHex(rgb.map((c, k) => c + (b[i][k] - c) * t)));
@@ -109,9 +66,10 @@ export default function TonalShader({ colors, roles, shapes = false, seed = 0, c
       },
     });
     return () => controls.stop();
+    // `visible` only decides whether to tween; flipping it must not restart one.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, reduced]);
 
-  const canvas = supported && near && shown;
   const mesh = shown?.slice(0, 5) ?? [];
   // The runtime takes an auto-animate driver on any numeric prop, so the shapes turn on the GPU
   // without React renders; the generated typings only declare drivers on `center`.
@@ -124,10 +82,11 @@ export default function TonalShader({ colors, roles, shapes = false, seed = 0, c
     <span
       ref={host}
       className={className ? `m3f-shader ${className}` : "m3f-shader"}
+      data-shown={visible || undefined}
       aria-hidden="true"
     >
-      {canvas && (
-        <Shader className="m3f-shader-canvas">
+      {armed && shown && (
+        <Shader className="m3f-shader-canvas" disableTelemetry onReady={onReady}>
           <MeshGradient
             stops={mesh.map((color, index) => ({ color, position: index / (mesh.length - 1) }))}
             colorSpace="oklab"

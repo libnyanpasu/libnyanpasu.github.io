@@ -1,4 +1,5 @@
 import { CoreStatus, DEMO_CORE_PREVIEW_DATA, type CorePreviewData } from "./core-status";
+import { ActiveConnections, SubscriptionQuota } from "./extra-widgets";
 import { DEMO_METRICS, MetricCard, type MetricPreviewData } from "./metric-card";
 import { ProxyMode } from "./proxy-mode";
 import { ProxyStatus } from "./proxy-status";
@@ -52,6 +53,10 @@ export function Dashboard({
           reduceMotion={state.reduceMotion}
         />
         <CoreStatus labels={labels} icons={icons} core={core} />
+      </div>
+      <div className="cp-feature-grid">
+        <ActiveConnections labels={labels} icons={icons} frame={state.frame} />
+        <SubscriptionQuota labels={labels} icons={icons} />
       </div>
     </div>
   );

@@ -1,165 +1,264 @@
-import { AnimatePresence, LayoutGroup, MotionConfig, motion } from "motion/react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { useMemo, useState } from "react";
+import { Highlight, PillTabs, Rail } from "./app-ui";
+import { Autoplay, type Cue } from "./frame";
 import { Icon, type Icons } from "./ui";
 
+/**
+ * The client's Logs page (pages/(main)/main/logs): a rail of levels, records with time and a
+ * level badge over a monospace message, and a floating search field beside the Core / App /
+ * Service source tabs. Badge colours follow log-level-badge.tsx.
+ */
+
 export interface LogsLabels {
+  rail: string;
+  levels: [
+    all: string,
+    trace: string,
+    debug: string,
+    info: string,
+    warn: string,
+    error: string,
+    fatal: string,
+  ];
   search: string;
-  all: string;
-  info: string;
-  warn: string;
-  error: string;
+  sourceLabel: string;
+  sources: [core: string, app: string, service: string];
   empty: string;
+  clear: string;
 }
 
-type Level = "info" | "warn" | "error";
+type Level = "trace" | "debug" | "info" | "warn" | "error" | "fatal";
+const LEVELS: (Level | null)[] = [null, "trace", "debug", "info", "warn", "error", "fatal"];
 
-const RECORDS: { time: string; level: Level; target: string; message: string }[] = [
+interface LogRecord {
+  time: string;
+  level: Level;
+  target?: string;
+  message: string;
+}
+
+const CORE: LogRecord[] = [
+  { time: "08:23:31", level: "info", message: "Start initial configuration in progress" },
   {
-    time: "10:42:08",
+    time: "08:23:31",
     level: "info",
-    target: "core::tun",
-    message: "TUN device nyanpasu-tun is up",
+    message:
+      "[TCP] 127.0.0.1:51602 --> api.github.com:443 match RuleSet(developer) using Developer[JP IEPL 01]",
+  },
+  { time: "08:23:32", level: "trace", message: "[Sniffer] sniff TLS host api.github.com" },
+  {
+    time: "08:23:33",
+    level: "debug",
+    message: "[DNS] cache hit api.telegram.org --> 149.154.167.220",
   },
   {
-    time: "10:42:08",
-    level: "info",
-    target: "core::dns",
-    message: "fake-ip pool 198.18.0.0/16 ready",
-  },
-  {
-    time: "10:42:11",
-    level: "info",
-    target: "profile",
-    message: "Applied profile with 2 processing steps",
-  },
-  {
-    time: "10:42:19",
+    time: "08:23:36",
     level: "warn",
-    target: "provider",
-    message: "Subscription refresh took 4.2s, retrying",
+    message:
+      "[TCP] dial Selected (match Match/) 127.0.0.1:51626 --> www.svgrepo.com:443 error: hk02.example.net:10112 connect error: EOF",
   },
-  { time: "10:42:27", level: "info", target: "proxy", message: "Group Auto selected Tokyo 02" },
   {
-    time: "10:42:35",
+    time: "08:23:40",
+    level: "info",
+    message:
+      "[TCP] 127.0.0.1:51640 --> store.steampowered.com:443 match RuleSet(steam) using Steam[DIRECT]",
+  },
+  {
+    time: "08:23:41",
     level: "error",
-    target: "dial",
-    message: "dial tcp 203.0.113.9:443: i/o timeout",
-  },
-  { time: "10:42:36", level: "warn", target: "dns", message: "Fallback resolver answered first" },
-  {
-    time: "10:42:44",
-    level: "info",
-    target: "service",
-    message: "Service connected, core managed by service",
-  },
-  {
-    time: "10:42:52",
-    level: "info",
-    target: "log",
-    message: "Rotated nyanpasu.log, compressed 3 files",
+    message: "[Provider] steam pull error: context deadline exceeded",
   },
 ];
 
-function highlight(text: string, query: string) {
-  if (!query) return text;
-  const at = text.toLowerCase().indexOf(query.toLowerCase());
-  if (at < 0) return text;
-  return (
-    <>
-      {text.slice(0, at)}
-      <mark>{text.slice(at, at + query.length)}</mark>
-      {text.slice(at + query.length)}
-    </>
-  );
-}
+const APP: LogRecord[] = [
+  {
+    time: "08:23:29",
+    level: "info",
+    target: "nyanpasu::core::clash",
+    message: "core mihomo-alpha started by service",
+  },
+  {
+    time: "08:23:29",
+    level: "debug",
+    target: "nyanpasu::ipc",
+    message: "connected to core over IPC · Unix Socket",
+  },
+  {
+    time: "08:23:30",
+    level: "info",
+    target: "nyanpasu::config::runtime",
+    message: "runtime config generated, revision 8",
+  },
+  {
+    time: "08:23:30",
+    level: "warn",
+    target: "nyanpasu::profile",
+    message: "subscription refresh took 4.2 s, retrying once",
+  },
+  {
+    time: "08:23:35",
+    level: "info",
+    target: "nyanpasu::logging",
+    message: "rotated nyanpasu.log at 16 MiB, compressed with the built-in dictionary",
+  },
+];
+
+const SERVICE: LogRecord[] = [
+  {
+    time: "08:23:27",
+    level: "info",
+    target: "nyanpasu_service::server",
+    message: "listening on nyanpasu-service.sock",
+  },
+  {
+    time: "08:23:28",
+    level: "info",
+    target: "nyanpasu_service::core",
+    message: "spawned mihomo-alpha with config-9.yaml",
+  },
+  {
+    time: "08:23:28",
+    level: "debug",
+    target: "nyanpasu_service::core",
+    message: "health check ok in 3 ms",
+  },
+  {
+    time: "08:24:02",
+    level: "fatal",
+    target: "nyanpasu_service::core",
+    message: "core exited unexpectedly (signal 9), restarting",
+  },
+  {
+    time: "08:24:03",
+    level: "info",
+    target: "nyanpasu_service::core",
+    message: "core restarted, pid 87560",
+  },
+];
+
+const SOURCES = [CORE, APP, SERVICE];
 
 export default function LogsCard({ labels, icons }: { labels: LogsLabels; icons: Icons }) {
+  const [level, setLevel] = useState(0);
+  const [source, setSource] = useState(0);
   const [query, setQuery] = useState("");
-  const [level, setLevel] = useState<"all" | Level>("all");
-
-  const filters: { id: "all" | Level; label: string }[] = [
-    { id: "all", label: labels.all },
-    { id: "info", label: labels.info },
-    { id: "warn", label: labels.warn },
-    { id: "error", label: labels.error },
-  ];
 
   const rows = useMemo(() => {
+    const wanted = LEVELS[level];
     const q = query.trim().toLowerCase();
-    return RECORDS.filter(
+    return SOURCES[source].filter(
       (row) =>
-        (level === "all" || row.level === level) &&
-        (!q || `${row.target} ${row.message}`.toLowerCase().includes(q)),
+        (!wanted || row.level === wanted) &&
+        (!q ||
+          `${row.time} ${row.level} ${row.target ?? ""} ${row.message}`.toLowerCase().includes(q)),
     );
-  }, [query, level]);
+  }, [level, source, query]);
+
+  // The pretend mouse: narrow to warnings and errors, switch log sources, search, clear.
+  const script: Cue[] = [
+    { at: '[data-cue="rail-4"]', run: () => setLevel(4), hold: 1800 },
+    { at: '[data-cue="rail-5"]', run: () => setLevel(5), hold: 1600 },
+    { at: '[data-cue="rail-0"]', run: () => setLevel(0), hold: 900 },
+    { at: '[data-cue="source-1"]', run: () => setSource(1), hold: 1800 },
+    { at: '[data-cue="source-2"]', run: () => setSource(2), hold: 1800 },
+    { at: '[data-cue="search"]', type: { text: "core", set: setQuery }, hold: 2000 },
+    { at: '[data-cue="clear"]', run: () => setQuery(""), hold: 800 },
+    { at: '[data-cue="source-0"]', run: () => setSource(0), hold: 1600 },
+  ];
+  const reset = () => {
+    setLevel(0);
+    setSource(0);
+    setQuery("");
+  };
+
+  const rail = labels.levels.map((label, index) => ({
+    label,
+    icon: icons[["article", "search", "bug", "info", "warning", "error", "stop"][index]],
+  }));
 
   return (
-    <div className="m3f-logs-body">
-      <label className="m3f-field">
-        <Icon icon={icons.search} />
-        <input
-          type="text"
-          value={query}
-          placeholder={labels.search}
-          aria-label={labels.search}
-          onChange={(event) => setQuery(event.target.value)}
-          autoComplete="off"
-          spellCheck={false}
-        />
-        {query && (
-          <button
-            type="button"
-            className="m3f-icon-button"
-            aria-label="Clear"
-            onClick={() => setQuery("")}
-          >
-            <Icon icon={icons.close} />
-          </button>
-        )}
-      </label>
-      <div className="m3f-chip-row" role="group" aria-label={labels.search}>
-        {filters.map((filter) => (
-          <button
-            key={filter.id}
-            type="button"
-            className="m3f-chip m3f-chip-filter"
-            aria-pressed={level === filter.id}
-            onClick={() => setLevel(filter.id)}
-          >
-            <Icon icon={icons.check} className="m3f-chip-check" />
-            {filter.label}
-          </button>
-        ))}
-      </div>
-      <MotionConfig reducedMotion="user">
-        <motion.div layout className="m3f-log-list" role="log" aria-live="off">
-          <LayoutGroup>
+    <MotionConfig reducedMotion="user">
+      <div className="app-page lg">
+        <Rail label={labels.rail} items={rail} value={level} onChange={setLevel} compact />
+        <div className="app-page-main">
+          <div className="lg-list" role="log" aria-live="off">
             <AnimatePresence mode="popLayout" initial={false}>
               {rows.map((row) => (
                 <motion.div
-                  layout
-                  key={`${row.time}-${row.target}`}
-                  className="m3f-log-row"
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 16 }}
-                  transition={{ type: "spring", stiffness: 460, damping: 38 }}
+                  layout="position"
+                  key={`${source}-${row.time}-${row.message}`}
+                  className="lg-row"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 460, damping: 40 }}
                 >
-                  <time>{row.time}</time>
-                  <span className="m3f-level" data-level={row.level}>
-                    {row.level}
+                  <span className="lg-head">
+                    <time>
+                      <Highlight text={row.time} query={query} />
+                    </time>
+                    <span className="lg-badge" data-level={row.level}>
+                      <Highlight text={row.level} query={query} />
+                    </span>
+                    {row.target && (
+                      <code className="lg-target">
+                        <Highlight text={row.target} query={query} />
+                      </code>
+                    )}
                   </span>
-                  <code>
-                    <span className="m3f-log-target">{highlight(row.target, query.trim())}</span>{" "}
-                    {highlight(row.message, query.trim())}
+                  <code className="lg-message">
+                    <Highlight text={row.message} query={query} />
                   </code>
                 </motion.div>
               ))}
             </AnimatePresence>
-          </LayoutGroup>
-          {rows.length === 0 && <p className="m3f-empty">{labels.empty}</p>}
-        </motion.div>
-      </MotionConfig>
-    </div>
+            {rows.length === 0 && (
+              <div className="lg-empty">
+                <span>
+                  <Icon icon={icons.article} />
+                </span>
+                <p>{labels.empty}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="app-toolbar">
+            <label className="app-search">
+              <Icon icon={icons.search} />
+              <input
+                type="search"
+                data-cue="search"
+                value={query}
+                placeholder={labels.search}
+                aria-label={labels.search}
+                autoComplete="off"
+                spellCheck={false}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              {query && (
+                <button
+                  type="button"
+                  className="app-search-clear"
+                  data-cue="clear"
+                  aria-label={labels.clear}
+                  onClick={() => setQuery("")}
+                >
+                  <Icon icon={icons.close} />
+                </button>
+              )}
+            </label>
+            <PillTabs
+              cue="source"
+              label={labels.sourceLabel}
+              options={labels.sources}
+              value={source}
+              onChange={setSource}
+            />
+          </div>
+        </div>
+        <Autoplay script={script} reset={reset} />
+      </div>
+    </MotionConfig>
   );
 }

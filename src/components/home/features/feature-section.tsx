@@ -41,7 +41,7 @@ function Words({ text }: { text: string }) {
   return parts.map((part, index) => (
     <motion.span className="m3f-word" key={index} variants={word}>
       {part}
-      {index < parts.length - 1 ? " " : ""}
+      {index < parts.length - 1 ? " " : ""}
     </motion.span>
   ));
 }
@@ -98,7 +98,7 @@ export default function FeatureSection({
           <FeatureCard
             name="traffic"
             tone="primary"
-            icon={icons.traffic}
+            icon={icons.trafficBadge}
             shape={["cookie9", "burst"]}
             title={traffic.title}
             description={traffic.description}
@@ -113,16 +113,7 @@ export default function FeatureSection({
                 ))}
               </ul>
             }
-            stage={{
-              roles: [
-                "--md-sys-color-primary-container",
-                "--md-sys-color-tertiary-container",
-                "--md-sys-color-surface-container-high",
-                "--md-sys-color-secondary-container",
-                "--md-sys-color-surface-container",
-              ],
-              seed: 2,
-            }}
+            stage={{}}
           >
             <TrafficCard labels={traffic.demo} icons={icons} />
           </FeatureCard>
@@ -161,7 +152,7 @@ export default function FeatureSection({
           <FeatureCard
             name="cores"
             tone="secondary"
-            icon={icons.memory}
+            icon={icons.memoryBadge}
             shape={["cookie6", "flower8"]}
             title={cores.title}
             description={cores.description}

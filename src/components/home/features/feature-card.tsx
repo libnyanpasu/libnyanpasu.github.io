@@ -7,6 +7,7 @@ import {
   type Variants,
 } from "motion/react";
 import type { CSSProperties, PointerEvent, ReactNode } from "react";
+import { Frame } from "./frame";
 import { ShapeBadge, type ShapeName } from "./m3-shape";
 import TonalShader from "./tonal-shader";
 import type { IconData } from "./ui";
@@ -28,10 +29,11 @@ interface Props {
   shape: [rest: ShapeName, hover: ShapeName];
   title: string;
   description: string;
-  /** Full-width card: copy on the left, a shader-lit stage on the right. */
+  /** Full-width card: copy on the left, a raised demo on a tonal stage on the right. */
   wide?: boolean;
   /** Under the copy on wide cards, below the demo on regular ones. */
   extra?: ReactNode;
+  /** A tonal stage behind the demo; with `colors` or `roles` it is lit by a shader. */
   stage?: StageShader;
   /** Stagger within a row, in seconds. */
   delay?: number;
@@ -73,6 +75,7 @@ export default function FeatureCard({
     shown: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EMPHASIZED_DECELERATE } },
   };
   const titleId = `m3f-${name}-title`;
+  const lit = stage?.colors || stage?.roles ? stage : null;
 
   // Pointer feedback: a tonal spotlight that trails the cursor, and on wide cards the raised
   // demo leans towards it a few degrees.
@@ -138,17 +141,17 @@ export default function FeatureCard({
           shown: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EMPHASIZED_DECELERATE } },
         }}
       >
-        {stage && (
+        {lit && (
           <TonalShader
             className="m3f-stage-shader"
-            roles={stage.roles}
-            colors={stage.colors}
-            shapes={stage.shapes}
-            seed={stage.seed}
+            roles={lit.roles}
+            colors={lit.colors}
+            shapes={lit.shapes}
+            seed={lit.seed}
           />
         )}
         <motion.div className="m3f-demo" style={wide ? { rotateX, rotateY } : undefined}>
-          {children}
+          <Frame>{children}</Frame>
         </motion.div>
       </motion.div>
 

@@ -20,6 +20,9 @@ export type PreviewLabels = Record<string, string> & {
   upload: string;
   memory: string;
   activeConnections: string;
+  quotaTitle: string;
+  /** `{total}` */
+  quotaRemaining: string;
   total: string;
   proxyStatus: string;
   systemProxy: string;

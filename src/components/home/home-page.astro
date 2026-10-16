@@ -27,8 +27,8 @@ const navItems = [
   ...(posts.length ? [{ label: m.home_nav_blog(undefined, opts), href: `${base}/blog/` }] : []),
   { label: "GitHub", href: repositoryUrl, icon: githubIcon },
 ];
-const appIconNames: Record<string, string> = { "layout-dashboard":"dashboard-rounded", globe:"public", "layout-grid":"grid-view-outline-rounded", unplug:"settings-ethernet-rounded", wrench:"design-services-rounded", "square-terminal":"terminal-rounded", settings:"settings-rounded", grip:"apps", "arrow-down":"arrow-downward-rounded", "arrow-up":"arrow-upward-rounded", cpu:"memory-outline-rounded", network:"network-ping-rounded", traffic:"schema-rounded", mode:"route-rounded", rule:"route-rounded", global:"public-rounded", direct:"north-east-rounded", check:"check-rounded", chevron:"chevron-right-rounded", service:"desktop-windows-rounded", "system-proxy":"install-desktop-rounded" };
-const previewIcons = Object.fromEntries(["layout-dashboard","globe","layout-grid","unplug","wrench","square-terminal","settings","grip","pin","minus","square","x","arrow-down","arrow-up","cpu","network","traffic","mode","rule","global","direct","check","chevron","service","system-proxy"].map(name => { const svg = iconToSVG(getIconData(appIconNames[name] ? materialIcons : lucideIcons,appIconNames[name] || name)!); return [name, {body:svg.body,viewBox:svg.attributes.viewBox}]; }));
+const appIconNames: Record<string, string> = { "layout-dashboard":"dashboard-rounded", globe:"public", "layout-grid":"grid-view-outline-rounded", unplug:"settings-ethernet-rounded", wrench:"design-services-rounded", "square-terminal":"terminal-rounded", settings:"settings-rounded", grip:"apps", "arrow-down":"arrow-downward-rounded", "arrow-up":"arrow-upward-rounded", cpu:"memory-outline-rounded", network:"network-check-rounded", quota:"data-usage-rounded", traffic:"schema-rounded", mode:"route-rounded", rule:"route-rounded", global:"public-rounded", direct:"north-east-rounded", check:"check-rounded", chevron:"chevron-right-rounded", service:"desktop-windows-rounded", "system-proxy":"install-desktop-rounded" };
+const previewIcons = Object.fromEntries(["layout-dashboard","globe","layout-grid","unplug","wrench","square-terminal","settings","grip","pin","minus","square","x","arrow-down","arrow-up","cpu","network","quota","traffic","mode","rule","global","direct","check","chevron","service","system-proxy"].map(name => { const svg = iconToSVG(getIconData(appIconNames[name] ? materialIcons : lucideIcons,appIconNames[name] || name)!); return [name, {body:svg.body,viewBox:svg.attributes.viewBox}]; }));
 const previewLabels = {
   runningByService: m.client_preview_running_by_service(undefined,opts),
   runningByChildProcess: m.client_preview_running_by_child_process(undefined,opts),
@@ -39,6 +39,8 @@ const previewLabels = {
   profiles: m.client_preview_profiles(undefined,opts),
   connections: m.client_preview_connections(undefined,opts),
   activeConnections: m.client_preview_active_connections(undefined,opts),
+  quotaTitle: m.client_preview_quota_title(undefined,opts),
+  quotaRemaining: m.client_preview_quota_remaining({ total: "{total}" },opts),
   rules: m.client_preview_rules(undefined,opts),
   logs: m.client_preview_logs(undefined,opts),
   settings: m.client_preview_settings(undefined,opts),
@@ -100,7 +102,7 @@ const platforms = [
     </section>
     <Features locale={locale} base={base} />
     <section tabindex="-1" id="download" class="home-download" aria-labelledby="download-title">
-      <div class="home-backdrop home-backdrop-download" aria-hidden="true"><ShaderBackdrop variant="download" seed={3} lazy client:only="react" /></div>
+      <div class="home-backdrop home-backdrop-download" aria-hidden="true"><ShaderBackdrop variant="download" seed={3} client:only="react" /></div>
       <div class="home-container">
         <div class="download-heading">
           <div><h2 id="download-title">{m.home_download_title(undefined,opts)}</h2><p>{m.home_download_description(undefined,opts)}</p></div>

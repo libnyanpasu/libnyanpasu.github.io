@@ -9,6 +9,7 @@
     "release:sync": "node scripts/sync-home-release.ts",
     "test:release": "node --test scripts/sync-home-release.test.ts",
     "readme:cards": "node scripts/capture-readme-cards.ts",
+    "test:readme": "node --test scripts/readme-card-*.test.ts",
     "preview": "astro preview",
     "check": "astro sync && paraglide-js compile --project ./project.inlang --outdir ./src/paraglide --strategy url baseLocale && tsc --noEmit",
     "docs:dev": "astro dev",

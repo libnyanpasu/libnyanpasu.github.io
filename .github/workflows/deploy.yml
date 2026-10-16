@@ -76,8 +76,8 @@ jobs:
           path: dist
           retention-days: 1
 
-  # Animated WebPs of the home page demos for the client's README, at dist/readme/. Each demo
-  # records in real time and takes minutes to encode, so they run side by side, one per job.
+  # WebP, WebM and AVIF home page demos for the client's README, at dist/readme/. Each demo
+  # records in slow motion and takes minutes to encode, so they run side by side, one per job.
   capture:
     name: Capture ${{ matrix.card }}
     needs: build
@@ -111,10 +111,12 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Chromium and img2webp
+      - name: Install Chromium and media encoders
         run: |
           pnpm exec playwright install --with-deps --only-shell chromium
-          sudo apt-get install -y --no-install-recommends webp
+          sudo apt-get install -y --no-install-recommends webp ffmpeg
+      - name: Check capture timing and output formats
+        run: pnpm test:readme
       - name: Download site
         uses: actions/download-artifact@v8
         with:

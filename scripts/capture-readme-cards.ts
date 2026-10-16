@@ -1,16 +1,18 @@
 /**
- * Records the home page demos playing one loop each and saves them as animated WebPs for READMEs:
+ * Records the home page demos playing one loop each for READMEs:
  * the hero's client window (`hero`), the Material You card's recolouring one (`material-window`)
- * and every feature card, in light and dark, at each frame rate and quality, as
- * `dist/readme/<name>-<theme>@<fps>f-q<quality>.webp`, and for other locales under
- * `dist/readme/<locale>/`. Run it after `pnpm build`; it serves `dist` itself.
+ * and every feature card, in light and dark, as
+ * `dist/readme/<name>-<theme>@60f-q90.webp`, `...@60f.webm` and `...@60f.avif`.
+ * Other locales are saved under `dist/readme/<locale>/`. Run it after `pnpm build`;
+ * it serves `dist` itself. Requires Chromium, img2webp and FFmpeg with libvpx-vp9/libsvtav1.
  *
  *   node scripts/capture-readme-cards.ts [--cards hero,traffic] [--themes dark]
- *     [--locales en,zh-cn] [--fps 30,60] [--quality 50,75,90] [--scale 2]
+ *     [--locales en,zh-cn] [--formats webp,webm,avif] [--scale 2] [--speed 0.25]
  *
  * Frames come from Chrome's screencast, so the shader stages and the pretend mouse play exactly
  * as on the site. A loop is cut between two `m3f-loop` events from the demo's `Autoplay`, recorded
- * once at the highest rate and thinned out for the lower ones.
+ * in slow motion to give capture enough headroom, then sampled on a fixed output timeline.
+ * JS, shader and browser animation clocks are slowed together; outputs play at normal speed.
  *
  * The screencast only sends CSS pixels whatever the device pixel ratio, so `--scale` renders the
  * page with CSS `zoom` in a viewport that much larger: the same layout, at that many times the
@@ -24,6 +26,8 @@ import { parseArgs, promisify } from "node:util";
 import { preview } from "astro";
 import { chromium, type BrowserContext, type Page } from "playwright";
 import sharp from "sharp";
+import { installCaptureClock, sampleFrames } from "./readme-card-timing.ts";
+import { checkVideoEncoders, encodeVideos, VIDEO_FORMATS } from "./readme-card-video.ts";
 
 /** Where each demo's loops are announced (`root`), and the part of the page that is saved (`clip`). */
 const TARGETS: Record<string, { root: string; clip: string }> = {
@@ -51,9 +55,11 @@ const { values: args } = parseArgs({
     cards: { type: "string", default: Object.keys(TARGETS).join(",") },
     themes: { type: "string", default: THEMES.join(",") },
     locales: { type: "string", default: "en" },
-    fps: { type: "string", default: "30,60" },
-    quality: { type: "string", default: "50,75,90" },
+    fps: { type: "string", default: "60" },
+    quality: { type: "string", default: "90" },
+    formats: { type: "string", default: "webp,webm,avif" },
     scale: { type: "string", default: "2" },
+    speed: { type: "string", default: "0.25" },
     out: { type: "string", default: "dist/readme" },
   },
 });
@@ -71,38 +77,45 @@ const themes = list(args.themes) as (typeof THEMES)[number][];
 const locales = list(args.locales);
 const rates = numbers(args.fps);
 const qualities = numbers(args.quality);
+const formats = [...new Set(list(args.formats))];
+const videoFormats = VIDEO_FORMATS.filter((format) => formats.includes(format));
 const scale = Number(args.scale);
+const speed = Number(args.speed);
 const viewport = { width: LAYOUT.width * scale, height: LAYOUT.height * scale };
 
 for (const card of cards) if (!TARGETS[card]) throw new Error(`Unknown card: ${card}`);
+if (!formats.length) throw new Error("At least one format is required");
+for (const format of formats)
+  if (!["webp", ...VIDEO_FORMATS].includes(format)) throw new Error(`Unknown format: ${format}`);
 for (const theme of themes) if (!THEMES.includes(theme)) throw new Error(`Unknown theme: ${theme}`);
 for (const rate of rates)
   if (!(rate >= 2 && rate <= 60)) throw new Error(`Unsupported fps: ${rate}`);
 for (const quality of qualities)
   if (!(quality >= 1 && quality <= 100)) throw new Error(`Unsupported quality: ${quality}`);
 if (!(scale >= 1 && scale <= 3)) throw new Error(`Unsupported scale: ${scale}`);
+if (!(speed >= 0.05 && speed <= 1)) throw new Error(`Unsupported speed: ${speed}`);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 interface Frame {
   file: string;
-  /** Seconds, wall clock. */
+  /** Seconds on the slowed recording timeline. */
   time: number;
 }
 
-/** Resolves on the demo's next `m3f-loop` event with its wall-clock time in seconds. */
+/** Resolves on the demo's next `m3f-loop` event on the recording timeline. */
 function loops(page: Page) {
   const waiting = new Map<string, (time: number) => void>();
-  const ready = page.exposeFunction("__m3fLoop", (card: string) => {
-    waiting.get(card)?.(Date.now() / 1000);
+  const ready = page.exposeFunction("__m3fLoop", (card: string, time: number) => {
+    waiting.get(card)?.(time);
     waiting.delete(card);
   });
   return async (card: string) => {
     await ready;
     return new Promise<number>((resolve, reject) => {
       const timer = setTimeout(
-        () => reject(new Error(`${card}: no loop within ${LOOP_TIMEOUT} ms`)),
-        LOOP_TIMEOUT,
+        () => reject(new Error(`${card}: no loop within ${LOOP_TIMEOUT / speed} ms`)),
+        LOOP_TIMEOUT / speed,
       );
       waiting.set(card, (time) => {
         clearTimeout(timer);
@@ -145,12 +158,15 @@ async function record(
 ) {
   await page.$eval(
     TARGETS[card].root,
-    (element, name) => {
+    (element, { name, speed }) => {
       element.addEventListener("m3f-loop", () =>
-        (window as unknown as { __m3fLoop: (card: string) => void }).__m3fLoop(name),
+        (window as unknown as { __m3fLoop: (card: string, time: number) => void }).__m3fLoop(
+          name,
+          (performance.timeOrigin * speed + performance.now()) / 1000,
+        ),
       );
     },
-    card,
+    { name: card, speed },
   );
 
   // Bring the demo in from below so a card's entrance plays while less than half of its demo
@@ -160,7 +176,7 @@ async function record(
     (top) => scrollTo({ top, behavior: "instant" }),
     box.y - viewport.height + box.height * 0.35,
   );
-  await sleep(1800);
+  await sleep(1800 / speed);
 
   // Then centre it below the site header, where the demo starts playing.
   box = await measure(page, card);
@@ -177,25 +193,59 @@ async function record(
   const cdp = await context.newCDPSession(page);
   const frames: Frame[] = [];
   const writes: Promise<void>[] = [];
+  let collecting = false;
+  let start = 0;
+  let previousTime = 0;
+  let longest = 0;
+  let captured = 0;
+  const fps = Math.max(...rates);
+  let pending: { data: string; time: number; slot: number } | undefined;
+  const flush = () => {
+    if (!pending) return;
+    const file = join(dir, `raw-${String(frames.length).padStart(5, "0")}.jpg`);
+    frames.push({ file, time: pending.time });
+    writes.push(writeFile(file, Buffer.from(pending.data, "base64")));
+    pending = undefined;
+  };
   cdp.on("Page.screencastFrame", ({ data, metadata, sessionId }) => {
     cdp.send("Page.screencastFrameAck", { sessionId }).catch(() => undefined);
-    const file = join(dir, `raw-${String(frames.length).padStart(5, "0")}.jpg`);
-    frames.push({ file, time: metadata.timestamp ?? Date.now() / 1000 });
-    writes.push(writeFile(file, Buffer.from(data, "base64")));
+    if (!collecting) return;
+    const time = (metadata.timestamp ?? Date.now() / 1000) * speed;
+    longest = Math.max(longest, time - previousTime);
+    previousTime = time;
+    captured++;
+    // Slow capture supplies several candidates per output frame. Keep the nearest
+    // candidate in each slot, avoiding the disk/GC load of writing all of them.
+    const slot = Math.round((time - start) * fps);
+    if (pending && pending.slot !== slot) flush();
+    const target = start + slot / fps;
+    if (!pending || Math.abs(time - target) < Math.abs(pending.time - target))
+      pending = { data, time, slot };
   });
 
-  const start = await nextLoop(card);
+  // Warm up the capture stream before the loop boundary; its first frame can be late.
   await cdp.send("Page.startScreencast", {
     format: "jpeg",
     quality: 95,
     maxWidth: viewport.width,
     maxHeight: viewport.height,
   });
+  start = await nextLoop(card);
+  previousTime = start;
+  collecting = true;
   const end = await nextLoop(card);
+  collecting = false;
+  flush();
   await cdp.send("Page.stopScreencast");
   await cdp.detach();
   await Promise.all(writes);
   if (!frames.length) throw new Error(`${card}: no frames captured`);
+  longest = Math.max(longest, end - previousTime) * 1000;
+  console.log(
+    `  ${card}: ${captured} source frames, ${frames.length} retained, longest source gap ${longest.toFixed(1)} ms (animation time)`,
+  );
+  if (longest > 1500 / Math.max(...rates))
+    console.warn(`  ${card}: capture missed an output interval; retry with a lower --speed`);
   return { frames, start, end, clip };
 }
 
@@ -226,12 +276,12 @@ async function webp(
 }
 
 /**
- * Crops the frames to the demo with its rounded corners cut out, and joins them into one WebP per
- * frame rate and quality. Each frame is cropped once, however many outputs keep it.
+ * Crops each source once. WebP keeps transparent rounded corners; WebM/AVIF retain the
+ * captured page behind the corners and extend odd dimensions by one edge pixel for YUV420.
  */
 async function encode(
-  { frames, end, clip }: Awaited<ReturnType<typeof record>>,
-  output: (fps: number, quality: number) => string,
+  { frames, start, end, clip }: Awaited<ReturnType<typeof record>>,
+  output: (fps: number, format: string, quality?: number) => string,
 ) {
   const { width: frameWidth = viewport.width } = await sharp(frames[0].file).metadata();
   const ratio = frameWidth / viewport.width;
@@ -246,50 +296,94 @@ async function encode(
     `<svg xmlns="http://www.w3.org/2000/svg" width="${region.width}" height="${region.height}"><rect width="100%" height="100%" rx="${radius}" ry="${radius}"/></svg>`,
   );
 
-  const cropped = new Map<Frame, Promise<string>>();
+  const cropped = new Map<Frame, Promise<{ webp: string; video: string }>>();
   const crop = (frame: Frame) => {
     let file = cropped.get(frame);
     if (!file) {
       const path = frame.file.replace(/\.jpg$/, ".png");
-      file = sharp(frame.file)
-        .extract(region)
-        .ensureAlpha()
-        .composite([{ input: mask, blend: "dest-in" }])
-        .png({ compressionLevel: 1 })
-        .toFile(path)
-        .then(() => path);
+      const video = frame.file.replace(/\.jpg$/, ".video.png");
+      const source = sharp(frame.file).extract(region);
+      file = Promise.all([
+        formats.includes("webp")
+          ? source
+              .clone()
+              .ensureAlpha()
+              .composite([{ input: mask, blend: "dest-in" }])
+              .png({ compressionLevel: 1 })
+              .toFile(path)
+          : undefined,
+        videoFormats.length
+          ? source
+              .clone()
+              .extend({ right: region.width % 2, bottom: region.height % 2, extendWith: "copy" })
+              .png({ compressionLevel: 1 })
+              .toFile(video)
+          : undefined,
+      ]).then(() => ({ webp: path, video }));
       cropped.set(frame, file);
     }
     return file;
   };
 
-  // Each encode is single-threaded, so every rate and quality runs side by side.
-  const jobs = await Promise.all(
+  const results = await Promise.allSettled(
     rates.map(async (fps) => {
-      // Drop frames that come faster than the rate; each kept frame lasts until the next.
-      const interval = 1 / fps;
-      const kept = frames.reduce<Frame[]>((acc, frame) => {
-        if (!acc.length || frame.time - acc[acc.length - 1].time >= interval * 0.9) acc.push(frame);
-        return acc;
-      }, []);
-      const delays = kept.map((frame, index) =>
-        Math.max(16, Math.round(((kept[index + 1]?.time ?? end) - frame.time) * 1000)),
+      const { frames: kept, delays } = sampleFrames(frames, start, end, fps);
+      const croppedFiles = await Promise.all(kept.map(crop));
+      const webpFiles = croppedFiles.map((file) => file.webp);
+      const videoFiles = croppedFiles.map((file) => file.video);
+      const outputs = videoFormats.map((format) => ({ format, file: output(fps, format) }));
+      const jobs = [
+        ...qualities
+          .filter(() => formats.includes("webp"))
+          .map(async (quality) => {
+            const file = output(fps, "webp", quality);
+            await webp(webpFiles, delays, quality, fps, resolve(file));
+            return [
+              { file, width: region.width, seconds: delays.reduce((a, b) => a + b, 0) / 1000 },
+            ];
+          }),
+        (async () => {
+          await encodeVideos(
+            videoFiles,
+            fps,
+            Object.fromEntries(outputs.map(({ format, file }) => [format, file])),
+          );
+          return outputs.map(({ file }) => ({
+            file,
+            width: region.width + (region.width % 2),
+            seconds: kept.length / fps,
+          }));
+        })(),
+      ];
+      const encoded = await Promise.allSettled(jobs);
+      const failures = encoded.filter((result) => result.status === "rejected");
+      if (failures.length)
+        throw new AggregateError(
+          failures.map((result) => result.reason),
+          "Encoding failed",
+        );
+      return Promise.all(
+        encoded
+          .flatMap((result) => (result.status === "fulfilled" ? result.value : []))
+          .map(async (result) => ({
+            ...result,
+            frames: kept.length,
+            reused: kept.length - new Set(kept).size,
+            size: (await stat(result.file)).size,
+          })),
       );
-      const files = await Promise.all(kept.map(crop));
-      return qualities.map((quality) => ({ fps, quality, files, delays }));
     }),
   );
-  return Promise.all(
-    jobs.flat().map(async ({ fps, quality, files, delays }) => {
-      const file = output(fps, quality);
-      await webp(files, delays, quality, fps, resolve(file));
-      const { size } = await stat(file);
-      const seconds = delays.reduce((a, b) => a + b, 0) / 1000;
-      return { file, frames: files.length, seconds, size, width: region.width };
-    }),
-  );
+  const failures = results.filter((result) => result.status === "rejected");
+  if (failures.length)
+    throw new AggregateError(
+      failures.map((result) => result.reason),
+      "Encoding failed",
+    );
+  return results.flatMap((result) => (result.status === "fulfilled" ? result.value : []));
 }
 
+await checkVideoEncoders(videoFormats);
 const server = await preview({
   root: process.cwd(),
   logLevel: "warn",
@@ -328,6 +422,9 @@ try {
           );
       }, scale);
       const page = await context.newPage();
+      await page.addInitScript(installCaptureClock, speed);
+      const animation = await context.newCDPSession(page);
+      await animation.send("Animation.setPlaybackRate", { playbackRate: speed });
       const nextLoop = loops(page);
       await page.goto(`${origin}${locale === "en" ? "/" : `/${locale}/`}`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
@@ -338,23 +435,25 @@ try {
 
       for (const card of cards) {
         const dir = await mkdtemp(join(work, `${card}-`));
-        const output = (fps: number, quality: number) =>
-          join(outDir, `${card}-${theme}@${fps}f-q${quality}.webp`);
+        const output = (fps: number, format: string, quality?: number) =>
+          join(
+            outDir,
+            `${card}-${theme}@${fps}f${quality === undefined ? "" : `-q${quality}`}.${format}`,
+          );
         try {
           const started = Date.now();
           const recording = await record(context, page, nextLoop, card, dir);
           for (const result of await encode(recording, output)) {
             const kbps = (result.size * 8) / result.seconds / 1000;
-            // At 2x the screencast may not keep up with the higher rates; this is what it reached.
             const fps = result.frames / result.seconds;
             console.log(
-              `${result.file}: ${result.width}px, ${result.frames} frames (${fps.toFixed(0)} fps), ${result.seconds.toFixed(1)} s, ${(result.size / 1e6).toFixed(2)} MB, ${kbps.toFixed(0)} kbps`,
+              `${result.file}: ${result.width}px, ${result.frames} frames (${fps.toFixed(1)} fps, ${result.reused} reused samples), ${result.seconds.toFixed(1)} s, ${(result.size / 1e6).toFixed(2)} MB, ${kbps.toFixed(0)} kbps`,
             );
           }
           console.log(`  ${card}-${theme} took ${((Date.now() - started) / 1000).toFixed(0)} s`);
         } catch (error) {
           failed = true;
-          console.error(`${card}-${theme}: ${error instanceof Error ? error.message : error}`);
+          console.error(`${card}-${theme}:`, error);
         } finally {
           await rm(dir, { recursive: true, force: true });
         }

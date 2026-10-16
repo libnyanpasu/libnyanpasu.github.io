@@ -1,0 +1,67 @@
+/* Shader backdrop: a tonal Material 3 colour field behind the hero.
+   The CSS gradient is the fallback for browsers without WebGPU and the first paint. */
+#home-content {
+  position: relative;
+}
+.home-backdrop {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 0;
+  height: min(1040px, 130vh);
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 78% 30%, var(--md-sys-color-primary-container) 0%, transparent 70%),
+    radial-gradient(45% 50% at 12% 8%, var(--md-sys-color-tertiary-container) 0%, transparent 70%),
+    radial-gradient(50% 45% at 40% 85%, var(--md-sys-color-secondary-container) 0%, transparent 70%);
+  opacity: 0.8;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+.home-backdrop-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.home-hero {
+  position: relative;
+  z-index: 1;
+}
+.home-backdrop-host {
+  position: absolute;
+  inset: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.2, 0, 0, 1);
+}
+/* Shown only once the renderer has drawn its first frame (see useShaderGate). */
+.home-backdrop-host[data-shown] {
+  opacity: 1;
+}
+/* Download: the same tonal field, faded in and out at both edges. */
+.home-download {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.home-backdrop-download {
+  inset: 0;
+  height: auto;
+  opacity: 1;
+  background:
+    radial-gradient(55% 70% at 85% 20%, var(--md-sys-color-primary-container) 0%, transparent 70%),
+    radial-gradient(50% 60% at 10% 90%, var(--md-sys-color-secondary-container) 0%, transparent 70%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 28%,
+    #000 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%);
+}
+.home-download > .home-container {
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,125 @@
+/* ---- core status ---- */
+
+.cp-core-state {
+  max-width: 52%;
+  background: var(--cp-chip);
+  color: var(--cp-ink);
+}
+
+.cp-core-state[data-running="false"] {
+  color: var(--cp-muted);
+}
+
+.cp-core-panel {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) 3.5cqw;
+  align-items: center;
+  column-gap: 1.2cqw;
+  padding: 0.95cqw 1cqw 0;
+  border-radius: 1.65cqw;
+  background: var(--cp-panel);
+  color: inherit;
+  text-align: left;
+}
+
+.cp-core-mark {
+  display: grid;
+  width: 3.7cqw;
+  height: 3.7cqw;
+  place-items: center;
+  border-radius: 1.2cqw;
+  background: var(--cp-mark-bg);
+}
+
+.cp-core-mark img {
+  width: 3.1cqw;
+  height: 3.1cqw;
+  object-fit: contain;
+}
+
+.cp-core-info {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.15cqw;
+}
+
+.cp-core-info strong {
+  overflow: hidden;
+  font-size: 1.65cqw;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cp-core-info > span {
+  overflow: hidden;
+  color: var(--cp-muted);
+  font-size: 1.3cqw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cp-core-running {
+  display: flex;
+  height: 2.2cqw;
+  align-items: center;
+  gap: 0.6cqw;
+  padding-inline: 1cqw;
+  border-radius: 1.2cqw;
+  background: var(--cp-active);
+  color: var(--cp-on-active);
+  font-size: 1.3cqw;
+  white-space: nowrap;
+}
+
+.cp-core-running i {
+  width: 0.6cqw;
+  height: 0.6cqw;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cp-core-running[data-running="false"] {
+  background: var(--cp-tile);
+  color: var(--cp-muted);
+}
+
+.cp-core-channel {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 0.65cqw;
+  border-top: 1px solid var(--cp-outline);
+  color: var(--cp-ink);
+  font-size: 1.3cqw;
+}
+
+.cp-core-channel > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cp-core-channel strong {
+  margin-left: auto;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cp-core-channel svg {
+  width: 1.3cqw;
+  height: 1.3cqw;
+  flex: 0 0 auto;
+}
+
+.cp-tile:focus-visible {
+  outline: 2px solid var(--cp-blue);
+  outline-offset: 2px;
+}

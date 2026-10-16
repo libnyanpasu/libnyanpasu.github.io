@@ -1,0 +1,120 @@
+/* ---- third row: active connections, quota ---- */
+
+.cp-connections-card {
+  grid-column: span 8;
+}
+
+.cp-quota-card {
+  grid-column: span 4;
+  isolation: isolate;
+}
+
+.cp-count {
+  height: 2.1cqw;
+  padding-inline: 0.85cqw;
+  border-radius: 1.1cqw;
+  background: var(--cp-chip);
+  color: var(--cp-muted);
+  font-size: 1.25cqw;
+  line-height: 2.1cqw;
+  font-variant-numeric: tabular-nums;
+}
+
+.cp-connection-list {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.7cqw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cp-connection-list li {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 1cqw;
+  padding-inline: 1cqw;
+  border-radius: 1.4cqw;
+  background: var(--cp-panel);
+}
+
+.cp-connection-mark {
+  display: grid;
+  width: 2.6cqw;
+  height: 2.6cqw;
+  flex: none;
+  place-items: center;
+  border-radius: 0.9cqw;
+  background: var(--cp-tile);
+  color: var(--cp-muted);
+}
+
+.cp-connection-mark svg {
+  width: 1.6cqw;
+  height: 1.6cqw;
+}
+
+.cp-connection-text {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cp-connection-text strong {
+  overflow: hidden;
+  font-size: 1.35cqw;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cp-connection-text span,
+.cp-connection-rate {
+  color: var(--cp-muted);
+  font-size: 1.15cqw;
+  white-space: nowrap;
+}
+
+.cp-connection-rate {
+  display: flex;
+  gap: 1.4cqw;
+  font-variant-numeric: tabular-nums;
+}
+
+.cp-quota-wave {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.cp-quota-wave path {
+  fill: var(--cp-active);
+  opacity: 0.55;
+  animation: cp-wave 6s linear infinite;
+}
+
+.cp-quota-wave path + path {
+  opacity: 0.8;
+  animation-duration: 9s;
+  animation-direction: reverse;
+}
+
+.cp-quota-percent {
+  margin-top: auto;
+  font-size: 3.2cqw;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cp-quota-summary {
+  color: var(--cp-ink);
+  font-size: 1.3cqw;
+  white-space: nowrap;
+}

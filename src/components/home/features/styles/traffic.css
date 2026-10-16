@@ -1,0 +1,306 @@
+/* ── Traffic (topology page) ──────────────────────────────────────────────── */
+.tr-summary {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  block-size: 26px;
+  padding-inline: 10px 6px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.tr-filter .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.tr-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.tr-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+  padding: 8px;
+  border-radius: 16px;
+  background: var(--md-sys-color-surface-container);
+}
+.tr-stat[data-wide] {
+  grid-column: span 2;
+  background: color-mix(
+    in oklab,
+    var(--md-sys-color-primary-container) 70%,
+    var(--md-sys-color-surface-container)
+  );
+}
+.tr-stat-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 12px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.tr-stat-icon .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.tr-stat-text {
+  display: grid;
+  min-inline-size: 0;
+}
+.tr-stat-text small {
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-stat-figure {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  min-inline-size: 0;
+}
+.tr-stat-figure b {
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tr-stat-split {
+  display: grid;
+  font-size: 10px;
+  line-height: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-stat-split i,
+.tr-row-meta i {
+  margin-inline-end: 3px;
+  font-style: normal;
+  color: var(--md-sys-color-outline);
+}
+.tr-view {
+  min-block-size: 0;
+}
+.tr-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+.tr-rank {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border-radius: 20px;
+  background: var(--md-sys-color-surface-container);
+}
+.tr-rank header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-inline-size: 0;
+  padding-inline: 4px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-rank header .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.tr-rank h4 {
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--md-sys-color-on-surface);
+}
+.tr-count {
+  padding-inline: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--md-sys-color-on-surface) 8%, transparent);
+  font-size: 11px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.tr-view-all {
+  position: relative;
+  flex: none;
+  margin-inline-start: auto;
+  block-size: 26px;
+  padding-inline: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--md-sys-color-primary);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.tr-rows {
+  display: grid;
+  gap: 2px;
+}
+.tr-row {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  inline-size: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 0.2s var(--m3f-ease);
+}
+.tr-row[data-first] {
+  background: color-mix(in oklab, var(--md-sys-color-secondary-container) 60%, transparent);
+}
+.tr-row[aria-pressed="true"] {
+  background: var(--md-sys-color-secondary-container);
+}
+.tr-row-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  min-inline-size: 0;
+}
+.tr-row-name {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tr-row-name[data-mono] {
+  font-family: var(--m3f-mono);
+  font-size: 12px;
+}
+.tr-row-value {
+  flex: none;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.tr-row[data-first] .tr-row-value {
+  color: var(--md-sys-color-primary);
+  font-weight: 500;
+}
+.tr-row-meta {
+  display: flex;
+  gap: 10px;
+  min-inline-size: 0;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 14px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-others {
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-paths {
+  padding: 10px 12px 12px;
+  border-radius: 20px;
+  background: var(--md-sys-color-surface-container);
+}
+.tr-paths-head {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-primary);
+}
+.tr-paths-head span {
+  display: inline-flex;
+  align-items: center;
+}
+.tr-paths-head .m3f-svg {
+  color: var(--md-sys-color-on-surface-variant);
+}
+.tr-sankey svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  overflow: visible;
+}
+.tr-bands path {
+  fill: var(--md-sys-color-primary);
+  opacity: 0.22;
+  transition: opacity 0.25s var(--m3f-ease);
+}
+.tr-bands path[data-dim] {
+  opacity: 0.05;
+}
+.tr-node {
+  cursor: pointer;
+  outline: none;
+}
+.tr-node rect {
+  fill: var(--md-sys-color-primary);
+  transition: opacity 0.25s var(--m3f-ease);
+}
+.tr-node[data-col="1"] rect {
+  fill: var(--md-sys-color-tertiary);
+}
+.tr-node[data-col="2"] rect {
+  fill: var(--md-sys-color-secondary);
+}
+.tr-node text {
+  fill: var(--md-sys-color-on-surface);
+  font-size: 10.5px;
+  paint-order: stroke;
+  stroke: var(--md-sys-color-surface-container);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  transition: opacity 0.25s var(--m3f-ease);
+}
+.tr-node[data-dim] rect,
+.tr-node[data-dim] text {
+  opacity: 0.35;
+}
+.tr-node[data-active] text,
+.tr-node[aria-pressed="true"] text {
+  font-weight: 600;
+}
+.tr-node:focus-visible rect {
+  stroke: var(--md-sys-color-secondary);
+  stroke-width: 3;
+}
+.tr-caption {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 15px;
+  color: var(--md-sys-color-on-surface-variant);
+}

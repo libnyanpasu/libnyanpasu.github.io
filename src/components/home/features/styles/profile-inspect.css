@@ -1,0 +1,252 @@
+/* ── Profile Inspect ──────────────────────────────────────────────────────── */
+.pi {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  block-size: 100%;
+  padding: 16px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.pi-meta {
+  margin: 0;
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.pi-grid {
+  display: grid;
+  flex: 1;
+  gap: 12px;
+  min-block-size: 0;
+}
+.pi-steps,
+.pi-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-inline-size: 0;
+}
+.pi-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.pi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pi-step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: start;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.2s var(--m3f-ease);
+}
+.pi-step[aria-current="step"] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.pi-step-index {
+  flex: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.pi-step-label {
+  flex: 1;
+  min-inline-size: 0;
+}
+.pi-step-log {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.pi-chip-wrap {
+  white-space: nowrap;
+}
+.pi-chip {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 6px;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+  font-size: 11px;
+  line-height: 17px;
+}
+.pi-arrow {
+  margin-inline: 4px;
+}
+/* Chain view: the steps as boxes joined top to bottom, like chain-graph.tsx. */
+.pi-list[data-mode="chain"] {
+  align-items: center;
+  gap: 18px;
+  max-block-size: 252px;
+  padding: 12px;
+  overflow: auto;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-low);
+}
+.pi-list[data-mode="chain"] .pi-step {
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+  inline-size: min(170px, 100%);
+  padding: 8px 10px;
+  overflow: visible;
+  border-radius: 10px;
+  background: var(--md-sys-color-surface-container-highest);
+  text-align: center;
+}
+.pi-list[data-mode="chain"] .pi-step[aria-current="step"] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.pi-list[data-mode="chain"] .pi-step[data-quiet] {
+  opacity: 0.72;
+}
+.pi-list[data-mode="chain"] .pi-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset: 100% auto auto 50%;
+  inline-size: 1px;
+  block-size: 18px;
+  background: var(--md-sys-color-outline);
+}
+.pi-list[data-mode="chain"] .pi-step-index {
+  display: grid;
+  place-items: center;
+  inline-size: 18px;
+  block-size: 18px;
+  border-radius: 50%;
+  background: color-mix(in oklab, currentColor 12%, transparent);
+  font-size: 10px;
+}
+.pi-detail h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.pi-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.pi-fields code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--m3f-mono);
+  font-size: 11px;
+}
+.pi-more {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-size: 11px;
+}
+.pi-none {
+  color: var(--md-sys-color-on-surface);
+}
+.pi-output {
+  display: grid;
+  gap: 6px;
+}
+.pi-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.pi-code {
+  display: grid;
+  align-content: start;
+  max-block-size: 168px;
+  margin: 0;
+  padding: 6px 0;
+  overflow: auto;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container);
+  font-family: var(--m3f-mono);
+  font-size: 11px;
+  line-height: 18px;
+}
+.pi-code > span {
+  display: block;
+  padding-inline: 10px;
+  white-space: pre;
+}
+.pi-code i {
+  display: inline-block;
+  inline-size: 2.4em;
+  margin-inline-end: 8px;
+  font-style: normal;
+  text-align: end;
+  color: var(--md-sys-color-outline);
+  user-select: none;
+}
+.pi-diff i {
+  inline-size: 2.6em;
+  margin-inline-end: 4px;
+}
+.pi-hunk {
+  color: var(--md-sys-color-on-surface-variant);
+  background: color-mix(in oklab, var(--md-sys-color-primary) 10%, transparent);
+}
+.pi-diff span[data-mark="add"] {
+  background: color-mix(in oklab, #2e9d55 22%, transparent);
+}
+.pi-diff span[data-mark="del"] {
+  background: color-mix(in oklab, var(--md-sys-color-error) 20%, transparent);
+}
+.pi-logs span {
+  white-space: pre-wrap;
+}
+/* Side by side, each column scrolls on its own, as on the client's wide layout. */
+@container m3f-demo (min-width: 460px) {
+  .pi {
+    overflow: hidden;
+  }
+  .pi-grid {
+    grid-template-columns: minmax(0, 176px) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .pi-steps,
+  .pi-detail {
+    min-block-size: 0;
+  }
+  .pi-list {
+    flex: 1;
+    min-block-size: 0;
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+  .pi-list[data-mode="chain"] {
+    max-block-size: none;
+  }
+  .pi-output {
+    flex: 1;
+    min-block-size: 0;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .pi-code {
+    max-block-size: none;
+  }
+}

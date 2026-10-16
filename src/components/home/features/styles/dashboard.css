@@ -1,0 +1,375 @@
+/* ── Dashboard (edit mode) ────────────────────────────────────────────────── */
+.db {
+  position: relative;
+  block-size: 100%;
+}
+.db-grid {
+  display: grid;
+  block-size: 100%;
+  padding: 14px;
+  overflow: auto;
+  scrollbar-width: none;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-auto-rows: 38px;
+  grid-auto-flow: dense;
+  gap: 8px;
+  padding-bottom: 64px;
+}
+.db-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-inline-size: 0;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: var(--md-sys-color-surface-container);
+}
+.db[data-editing] .db-tile {
+  outline: 1px dashed color-mix(in oklab, var(--md-sys-color-outline) 60%, transparent);
+  outline-offset: 2px;
+}
+.db-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-inline-size: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+.db-title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-title .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.db-metric {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.db-meta {
+  font-size: 10px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.db-spark {
+  position: absolute;
+  inset: auto 0 0;
+  block-size: 46%;
+  color: var(--md-sys-color-primary);
+  pointer-events: none;
+}
+.db-tile[data-visual="rate"] .db-spark,
+.db-tile[data-visual="spark"] .db-spark {
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+}
+.db-toggles {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 6px;
+  flex: 1;
+  margin-top: 4px;
+}
+.db-tile .db-toggles button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-inline-size: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface-variant);
+  font: inherit;
+  font-size: 10px;
+  line-height: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--m3f-ease),
+    color 0.25s var(--m3f-ease);
+}
+.db-tile .db-toggles button .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.db-tile .db-toggles button[aria-pressed="true"],
+.db-tile .db-toggles button[aria-checked="true"] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.db-core {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-highest);
+}
+.db-core img {
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 8px;
+}
+.db-core > span:nth-child(2) {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+}
+.db-core b {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-core small {
+  font-size: 10px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.db-running {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-size: 10px;
+}
+.db-quota {
+  display: block;
+  block-size: 6px;
+  margin-top: auto;
+  border-radius: 999px;
+  background: var(--md-sys-color-secondary-container);
+  overflow: hidden;
+}
+.db-quota i {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--md-sys-color-primary);
+}
+.db-bars {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  gap: 3px;
+  margin-top: 4px;
+}
+.db-bars i {
+  flex: 1;
+  border-radius: 3px 3px 1px 1px;
+  background: var(--md-sys-color-primary);
+  opacity: 0.75;
+}
+.db-rows {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  margin-top: 4px;
+  font-size: 11px;
+}
+.db-rows > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 8px;
+}
+.db-rows > span:first-child {
+  background: color-mix(in oklab, var(--md-sys-color-secondary-container) 60%, transparent);
+}
+.db-rows span span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-rows b {
+  flex: none;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.db-close {
+  position: absolute;
+  inset: -6px -6px auto auto;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  inline-size: 26px;
+  block-size: 26px;
+  padding: 0;
+  border: 1px solid color-mix(in oklab, var(--md-sys-color-outline) 30%, transparent);
+  border-radius: 50%;
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  box-shadow: var(--m3f-elevation-2);
+}
+.db-close .m3f-svg {
+  inline-size: 14px;
+  block-size: 14px;
+}
+.db-pill {
+  position: absolute;
+  inset: auto auto 14px 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  block-size: 48px;
+  padding-inline: 8px;
+  border: 1px solid color-mix(in oklab, var(--md-sys-color-surface-variant) 50%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--md-sys-color-surface-variant) 55%, transparent);
+  translate: -50% 0;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  white-space: nowrap;
+}
+.db-pill button,
+.db-pill-edit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  block-size: 32px;
+  padding-inline: 12px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  cursor: pointer;
+}
+.db-pill .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.db-pill-raised {
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+  box-shadow: var(--m3f-elevation-2);
+}
+.db-pill-flat {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.db-pill.db-pill-edit {
+  gap: 6px;
+  block-size: 40px;
+  padding-inline: 16px;
+  color: var(--md-sys-color-on-surface);
+}
+.db-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: flex-end;
+  background: color-mix(in oklab, var(--md-sys-color-scrim, #000) 32%, transparent);
+}
+.db-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  inline-size: 100%;
+  max-block-size: 86%;
+  padding: 6px 14px 14px;
+  border-radius: 24px 24px 0 0;
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+}
+.db-handle {
+  align-self: center;
+  inline-size: 32px;
+  block-size: 4px;
+  margin-block: 4px 2px;
+  border-radius: 999px;
+  background: var(--md-sys-color-outline-variant);
+}
+.db-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+}
+.db-sheet .app-search {
+  flex: none;
+  box-shadow: none;
+}
+.db-icon {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+  overflow: hidden;
+  cursor: pointer;
+}
+.db-icon .m3f-svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+.db-library {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 6px;
+  min-block-size: 0;
+  overflow: auto;
+}
+.db-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+  padding: 6px 6px 6px 10px;
+  border-radius: 14px;
+  background: var(--md-sys-color-surface-container-high);
+  font-size: 12px;
+}
+.db-entry > .m3f-svg {
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.db-entry > span {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-entry small {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 10px;
+}
+.db-add:disabled {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  cursor: default;
+}
+.db-empty {
+  grid-column: 1 / -1;
+  margin: 16px 0;
+  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
+}

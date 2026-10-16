@@ -1,0 +1,374 @@
+/* ── Client pieces (app-ui.tsx) ───────────────────────────────────────────── */
+.m3f-demo {
+  font-size: 13px;
+  line-height: 18px;
+}
+/* Every demo sits in a frame of at least --frame-h (frame.tsx); its contents scroll inside it.
+   The frame grows with the demo when the grid row is taller, so no empty strip shows below it. */
+.m3f-frame {
+  --frame-h: 400px;
+  position: relative;
+  flex: 1 0 var(--frame-h);
+  min-block-size: 0;
+}
+.m3f-frame-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.m3f-traffic .m3f-frame {
+  --frame-h: 430px;
+}
+.m3f-profiles .m3f-frame,
+.m3f-dashboard .m3f-frame {
+  --frame-h: 440px;
+}
+.m3f-material .m3f-frame,
+.m3f-material .m3f-frame-inner,
+.hero-showcase .m3f-frame,
+.hero-showcase .m3f-frame-inner {
+  position: relative;
+  inset: auto;
+  flex: none;
+  block-size: auto;
+  overflow: visible;
+}
+.m3f-cores .m3f-frame,
+.m3f-logs .m3f-frame {
+  --frame-h: 420px;
+}
+.m3f-cursor {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 20;
+  inline-size: 0;
+  block-size: 0;
+  pointer-events: none;
+}
+.m3f-cursor svg {
+  position: absolute;
+  inset: -3px auto auto -5px;
+  inline-size: 22px;
+  block-size: 22px;
+  overflow: visible;
+  transform-origin: 5px 3px;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 35%));
+}
+.m3f-cursor path {
+  fill: #fff;
+  stroke: #111;
+  stroke-width: 1.4px;
+  stroke-linejoin: round;
+}
+.m3f-cursor-ring {
+  position: absolute;
+  inset: -18px auto auto -18px;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  background: var(--md-sys-color-primary);
+}
+
+.app-page {
+  display: flex;
+  block-size: 100%;
+  min-block-size: 0;
+}
+.app-page-main {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+.app-page-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 32px;
+  padding: 14px 16px 6px;
+}
+.app-page-head h4 {
+  margin: 0;
+  margin-inline-end: auto;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.app-page-scroll {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-block-size: 0;
+  padding: 4px 16px 72px;
+}
+
+.app-rail {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 4px;
+  inline-size: 72px;
+  padding: 12px 4px;
+  background: var(--md-sys-color-surface-container-low);
+}
+.app-rail[data-compact] {
+  inline-size: 56px;
+  gap: 6px;
+}
+.app-rail button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font: inherit;
+  font-size: 11px;
+  line-height: 14px;
+  cursor: pointer;
+}
+.app-rail button::before {
+  inset: 4px 8px auto;
+  block-size: 32px;
+  border-radius: 999px;
+}
+.app-rail button[aria-selected="true"] {
+  color: var(--md-sys-color-on-surface);
+}
+.app-rail-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 48px;
+  block-size: 32px;
+  border-radius: 999px;
+}
+.app-rail[data-compact] .app-rail-icon {
+  inline-size: 40px;
+}
+.app-rail-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--md-sys-color-secondary-container);
+}
+.app-rail button[aria-selected="true"] .app-rail-icon {
+  color: var(--md-sys-color-on-secondary-container);
+}
+.app-rail-icon .m3f-svg {
+  position: relative;
+  inline-size: 20px;
+  block-size: 20px;
+}
+.app-rail-label {
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The floating controls at the foot of a data page. */
+.app-toolbar {
+  position: absolute;
+  inset: auto 12px 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.app-pills,
+.app-toolbar-group {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--md-sys-color-shadow, #000) 14%, transparent);
+}
+.pi .app-pills,
+.pi-detail .app-pills {
+  box-shadow: none;
+  align-self: stretch;
+}
+.app-pills button {
+  position: relative;
+  flex: 1;
+  block-size: 30px;
+  padding-inline: 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.app-pills button[aria-checked="true"] {
+  color: var(--md-sys-color-on-secondary-container);
+}
+.app-pills-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--md-sys-color-secondary-container);
+}
+.app-pills-label {
+  position: relative;
+}
+.app-toolbar-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  block-size: 30px;
+  padding-inline: 12px 6px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--md-sys-color-primary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+span.app-toolbar-select {
+  cursor: default;
+}
+.app-toolbar-select .m3f-svg {
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.app-search {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+  block-size: 38px;
+  padding-inline: 14px 6px;
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--md-sys-color-shadow, #000) 14%, transparent);
+}
+.app-search input {
+  flex: 1;
+  min-inline-size: 0;
+  border: 0;
+  background: none;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 12px;
+  outline: 0;
+}
+.app-search input::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.8;
+}
+.app-search input::-webkit-search-cancel-button {
+  display: none;
+}
+.app-search:focus-within {
+  outline: 2px solid var(--md-sys-color-primary);
+}
+.app-search-clear {
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.app-switch {
+  position: relative;
+  flex: none;
+  inline-size: 44px;
+  block-size: 26px;
+  padding: 0;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-container-highest);
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--m3f-ease),
+    border-color 0.25s var(--m3f-ease);
+}
+.app-switch-handle {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 4px;
+  display: grid;
+  place-items: center;
+  inline-size: 14px;
+  block-size: 14px;
+  border-radius: 50%;
+  background: var(--md-sys-color-outline);
+  transform: translateY(-50%);
+  transition:
+    inline-size 0.3s var(--m3f-ease),
+    block-size 0.3s var(--m3f-ease),
+    inset-inline-start 0.3s var(--m3f-ease),
+    background-color 0.25s var(--m3f-ease);
+}
+.app-switch .m3f-svg {
+  inline-size: 14px;
+  block-size: 14px;
+  opacity: 0;
+  color: var(--md-sys-color-primary);
+  transition: opacity 0.2s var(--m3f-ease);
+}
+.app-switch[aria-checked="true"] {
+  border-color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary);
+}
+.app-switch[aria-checked="true"] .app-switch-handle {
+  inline-size: 20px;
+  block-size: 20px;
+  inset-inline-start: 18px;
+  background: var(--md-sys-color-on-primary);
+}
+.app-switch[aria-checked="true"] .m3f-svg {
+  opacity: 1;
+}
+
+.app-spark {
+  display: block;
+  inline-size: 100%;
+  overflow: visible;
+}
+.app-spark-fill {
+  fill: currentColor;
+  opacity: 0.16;
+}
+.app-spark-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.m3f mark {
+  border-radius: 3px;
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}

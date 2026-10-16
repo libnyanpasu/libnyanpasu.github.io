@@ -1,0 +1,96 @@
+/* ── Logs ─────────────────────────────────────────────────────────────────── */
+.lg-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-block-size: 0;
+  padding: 6px 0 64px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.lg-row {
+  display: grid;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid color-mix(in oklab, var(--md-sys-color-outline-variant) 60%, transparent);
+}
+.lg-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+}
+.lg-head time {
+  font-family: var(--m3f-mono);
+  font-size: 11px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+/* Same mapping as the client's LogLevelBadge. */
+.lg-badge {
+  flex: none;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--md-sys-color-surface-variant) 50%, transparent);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lg-badge[data-level="info"] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.lg-badge[data-level="warn"] {
+  background: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+.lg-badge[data-level="error"],
+.lg-badge[data-level="fatal"] {
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+.lg-target {
+  overflow: hidden;
+  font-family: var(--m3f-mono);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.lg-message {
+  font-family: var(--m3f-mono);
+  font-size: 12px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+.lg-empty {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin: auto;
+  padding: 24px;
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.lg-empty span {
+  display: grid;
+  place-items: center;
+  inline-size: 56px;
+  block-size: 56px;
+  border-radius: 18px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.lg-empty .m3f-svg {
+  inline-size: 28px;
+  block-size: 28px;
+}
+.lg .app-toolbar {
+  gap: 6px;
+}
+.lg .app-pills button {
+  padding-inline: 10px;
+}

@@ -3,6 +3,10 @@ import { useState } from "react";
 import { PillTabs, Switch } from "./app-ui";
 import { Autoplay, type Cue } from "./frame";
 import { Icon, type Icons } from "./ui";
+import { STEPS, changed } from "./profiles/steps";
+import type { ProfilesLabels, Step } from "./profiles/types";
+
+export type { ProfilesLabels } from "./profiles/types";
 
 /**
  * The client's Profile Inspect page (pages/(main)/main/profiles/inspect): every step of the
@@ -10,166 +14,6 @@ import { Icon, type Icons } from "./ui";
  * output as YAML, as a diff against the step before, or as the step's logs.
  * The steps and what they change follow the backend executor (nyanpasu-config runtime).
  */
-
-export interface ProfilesLabels {
-  /** `{core}`, `{revision}` */
-  applied: string;
-  stepsLabel: string;
-  list: string;
-  chain: string;
-  showAll: string;
-  changedFields: string;
-  noBaseline: string;
-  noChanges: string;
-  yaml: string;
-  diff: string;
-  logs: string;
-  noLogs: string;
-  /** `{step}` */
-  relative: string;
-  independent: string;
-  steps: {
-    file: string;
-    scoped: string;
-    filter: string;
-    overrides: string;
-    includeAll: string;
-    builtin: string;
-    finalize: string;
-    core: string;
-  };
-  profile: string;
-}
-
-type Kind = keyof ProfilesLabels["steps"];
-type DiffLine = [old: number | null, next: number | null, text: string];
-
-interface Step {
-  kind: Kind;
-  /** Profile chips after the label: the script, then the profile it is scoped to. */
-  chips?: string[];
-  fields: string[];
-  more?: number;
-  yaml: string[];
-  hunk?: string;
-  diff?: DiffLine[];
-  logs?: string[];
-}
-
-const STEPS: Step[] = [
-  {
-    kind: "file",
-    chips: ["profile"],
-    fields: [],
-    yaml: [
-      "mixed-port: 7890",
-      "allow-lan: true",
-      "mode: rule",
-      "log-level: debug",
-      "external-controller: 127.0.0.1:9090",
-      "proxy-groups:",
-      "  - name: Proxies",
-      "    type: select",
-    ],
-  },
-  {
-    kind: "scoped",
-    chips: ["useself", "profile"],
-    fields: [
-      "proxy-groups.0.name",
-      "proxy-groups.0.proxies.0",
-      "proxy-groups.0.proxies.1",
-      "proxy-groups.0.proxies.2",
-    ],
-    more: 2012,
-    yaml: [
-      "proxy-groups:",
-      "  - name: Selected",
-      "    type: select",
-      "    proxies:",
-      "      - Auto",
-      "      - HK IEPL 01",
-      "      - JP IEPL 01",
-    ],
-    hunk: "@@ -847,9 +847,8 @@",
-    diff: [
-      [847, 847, "   udp: true"],
-      [848, 848, " proxy-groups:"],
-      [849, null, "-  - name: Proxies"],
-      [null, 849, "+  - name: Selected"],
-      [850, 850, "     type: select"],
-      [851, 851, "     proxies:"],
-      [852, null, "-      - HK"],
-      [853, null, "-      - JP"],
-      [null, 852, "+      - Auto"],
-      [null, 853, "+      - HK IEPL 01"],
-    ],
-    logs: [
-      "[log] renamed group Proxies -> Selected",
-      "[log] 2014 nodes regrouped by region",
-      "[info] script finished in 18 ms",
-    ],
-  },
-  {
-    kind: "filter",
-    fields: ["external-controller-tls", "experimental"],
-    yaml: ["mixed-port: 7890", "allow-lan: true", "mode: rule", "log-level: debug"],
-    hunk: "@@ -4,7 +4,4 @@",
-    diff: [
-      [4, 4, " log-level: debug"],
-      [5, 5, " external-controller: 127.0.0.1:9090"],
-      [6, null, "-external-controller-tls: 127.0.0.1:9443"],
-      [7, null, "-experimental:"],
-      [8, null, "-  quic-go-disable-gso: true"],
-      [9, 6, " proxies:"],
-    ],
-  },
-  {
-    kind: "overrides",
-    fields: ["allow-lan", "log-level", "external-controller"],
-    yaml: ["mixed-port: 7890", "allow-lan: false", "mode: rule", "log-level: info"],
-    hunk: "@@ -1,5 +1,5 @@",
-    diff: [
-      [1, 1, " mixed-port: 7890"],
-      [2, null, "-allow-lan: true"],
-      [null, 2, "+allow-lan: false"],
-      [3, 3, " mode: rule"],
-      [4, null, "-log-level: debug"],
-      [null, 4, "+log-level: info"],
-      [5, null, "-external-controller: 127.0.0.1:9090"],
-      [null, 5, "+external-controller: 127.0.0.1:17650"],
-    ],
-  },
-  { kind: "includeAll", fields: [], yaml: [] },
-  { kind: "builtin", fields: [], yaml: [] },
-  { kind: "builtin", fields: [], yaml: [] },
-  { kind: "builtin", fields: [], yaml: [] },
-  {
-    kind: "finalize",
-    fields: ["profile", "profile.store-selected", "profile.store-fake-ip"],
-    yaml: ["profile:", "  store-selected: true", "  store-fake-ip: false"],
-    hunk: "@@ -2291,3 +2291,6 @@",
-    diff: [
-      [2291, 2291, "   - GEOIP,CN,DIRECT"],
-      [2292, 2292, "   - MATCH,Selected"],
-      [null, 2293, "+profile:"],
-      [null, 2294, "+  store-selected: true"],
-      [null, 2295, "+  store-fake-ip: false"],
-    ],
-  },
-  {
-    kind: "core",
-    fields: ["external-controller-unix"],
-    yaml: ["external-controller-unix: mihomo.sock"],
-    hunk: "@@ -5,1 +5,2 @@",
-    diff: [
-      [5, 5, " external-controller: 127.0.0.1:17650"],
-      [null, 6, "+external-controller-unix: mihomo.sock"],
-    ],
-  },
-];
-
-const changed = (step: Step) => step.fields.length > 0 || !!step.logs;
 
 function Chips({ step, labels }: { step: Step; labels: ProfilesLabels }) {
   if (!step.chips) return null;

@@ -1,0 +1,22 @@
+/* Features: Material 3 Expressive bento. Filled cards on one surface tone, accent colour only in
+   the expressive shapes, emphasized easing. Reveal and shape morphs are driven by motion/react;
+   the demos rebuild pieces of the desktop client, the Material You stage is lit by `shaders`. */
+.m3f {
+  --m3f-ease: cubic-bezier(0.2, 0, 0, 1);
+  --m3f-ease-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --m3f-shape-xl: 28px;
+  --m3f-shape-l: 16px;
+  --m3f-shape-m: 12px;
+  --m3f-shape-s: 8px;
+  --m3f-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --m3f-elevation-2:
+    0 1px 2px color-mix(in oklab, var(--md-sys-color-shadow, #000) 30%, transparent),
+    0 2px 6px 2px color-mix(in oklab, var(--md-sys-color-shadow, #000) 15%, transparent);
+  --m3f-elevation-3:
+    0 1px 3px color-mix(in oklab, var(--md-sys-color-shadow, #000) 30%, transparent),
+    0 4px 8px 3px color-mix(in oklab, var(--md-sys-color-shadow, #000) 15%, transparent);
+  position: relative;
+  z-index: 1;
+  padding-block: 56px 32px;
+  scroll-margin-top: 96px;
+}

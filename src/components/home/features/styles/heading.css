@@ -1,0 +1,52 @@
+/* ── Section heading: display / body-large, split across two columns ─────── */
+.m3f-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 20px 64px;
+  margin-bottom: 48px;
+}
+.m3f-heading h2 {
+  font-size: clamp(40px, 4.8vw, 64px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.m3f-word {
+  display: inline-block;
+  will-change: transform;
+}
+/* Morphing sticker that closes the heading. */
+.m3f-morph {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 0.92em;
+  block-size: 0.92em;
+  margin-inline-start: 0.12em;
+  vertical-align: -0.1em;
+  color: var(--md-sys-color-on-primary);
+}
+.m3f-morph svg:first-child {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  fill: var(--md-sys-color-primary);
+}
+.m3f-morph .m3f-svg {
+  position: relative;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+}
+.m3f-heading p {
+  justify-self: end;
+  max-width: 44ch;
+  padding-bottom: 6px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-wrap: pretty;
+}

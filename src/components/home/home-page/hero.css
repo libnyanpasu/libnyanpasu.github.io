@@ -1,0 +1,122 @@
+/* Large cards stay readable on a laptop-height viewport. */
+@keyframes home-arrive {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-heading-row {
+    animation: home-arrive 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+/* Keep the hero copy together, with the product preview alongside it. */
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: 32px 64px;
+  padding-top: 96px;
+  padding-bottom: 48px;
+}
+.hero-heading-row {
+  display: block;
+  min-width: 0;
+}
+.home-hero h1 {
+  font-size: clamp(56px, 5.6vw, 84px);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.hero-intro {
+  margin-top: 32px;
+  max-width: 440px;
+  padding: 0;
+}
+.hero-positioning {
+  font-size: clamp(20px, 1.7vw, 24px);
+}
+.hero-description {
+  margin-top: 14px !important;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.hero-intro .home-button {
+  margin: 0;
+}
+.hero-docs {
+  width: auto;
+}
+.home-button-secondary {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--md-sys-color-outline);
+  color: var(--home-accent) !important;
+}
+.hero-showcase {
+  padding: 0;
+  min-width: 0;
+}
+
+.hero-scroll {
+  grid-column: 1 / -1;
+  margin-top: 16px;
+}
+@media (max-width: 1199px) {
+  .home-hero {
+    gap: 32px;
+    padding-top: 80px;
+  }
+  .home-hero h1 {
+    font-size: clamp(54px, 6vw, 72px);
+  }
+}
+@media (max-width: 959px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    padding-top: 56px;
+    gap: 44px;
+  }
+  .hero-heading-row {
+    max-width: 620px;
+  }
+  .home-hero h1 {
+    font-size: clamp(52px, 8vw, 72px);
+  }
+  .hero-intro {
+    max-width: 520px;
+    margin-top: 26px;
+  }
+  .hero-scroll {
+    margin-top: 0;
+  }
+}
+@media (max-width: 639px) {
+  .home-hero {
+    padding-top: 44px;
+    padding-bottom: 44px;
+    gap: 36px;
+  }
+  .home-hero h1 {
+    font-size: clamp(48px, 12vw, 66px);
+  }
+  .hero-positioning {
+    font-size: 20px;
+  }
+  .hero-intro .home-button {
+    min-height: 48px;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+  .hero-docs {
+    margin-left: 0;
+    display: inline-flex;
+  }
+}

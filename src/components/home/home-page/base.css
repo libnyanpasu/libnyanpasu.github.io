@@ -1,0 +1,140 @@
+/* Homepage only: document styles and Starlight remain independent. */
+.home-site {
+  /* Material You roles; the seed palette comes from createMd3ThemeOptionsCss. */
+  --home-bg: var(--md-sys-color-surface);
+  --home-ink: var(--md-sys-color-on-surface);
+  --home-muted: var(--md-sys-color-on-surface-variant);
+  --home-accent: var(--md-sys-color-primary);
+  --home-accent-ink: var(--md-sys-color-on-primary);
+  --home-line: var(--md-sys-color-outline-variant);
+  --home-panel: var(--md-sys-color-primary-container);
+  --home-panel-ink: var(--md-sys-color-on-primary-container);
+  --home-surface-low: var(--md-sys-color-surface-container-low);
+  --home-surface: var(--md-sys-color-surface-container);
+  --home-surface-high: var(--md-sys-color-surface-container-high);
+  --home-secondary: var(--md-sys-color-secondary-container);
+  --home-secondary-ink: var(--md-sys-color-on-secondary-container);
+  --home-tertiary: var(--md-sys-color-tertiary-container);
+  --home-tertiary-ink: var(--md-sys-color-on-tertiary-container);
+  --home-radius-xl: 28px;
+  --home-radius-l: 20px;
+  --home-radius-m: 16px;
+  color: var(--home-ink);
+  background: var(--home-bg);
+  font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.home-site *,
+.home-site *::before,
+.home-site *::after {
+  box-sizing: border-box;
+}
+.home-site h1,
+.home-site h2,
+.home-site h3,
+.home-site p,
+.home-site figure {
+  margin: 0;
+}
+.home-site a {
+  color: inherit;
+  text-decoration: none;
+}
+.home-site button {
+  font: inherit;
+}
+.home-site a:focus-visible,
+.home-site button:focus-visible,
+.home-site select:focus-visible {
+  outline: 3px solid var(--home-accent);
+  outline-offset: 5px;
+}
+.home-container {
+  width: min(1320px, calc(100% - 112px));
+  margin-inline: auto;
+}
+.home-site section[id],
+#home-content {
+  scroll-margin-top: 110px;
+}
+.home-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--home-bg);
+  border: 1px solid var(--home-accent);
+  border-radius: 12px;
+  transform: translateY(-200%);
+}
+.home-skip-link:focus {
+  transform: none;
+}
+.home-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 24px;
+  border-radius: 28px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+  transition:
+    border-radius 0.35s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1),
+    background-color 0.25s;
+}
+.home-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.home-button:hover::before {
+  opacity: 0.08;
+}
+.home-button:focus-visible::before,
+.home-button:active::before {
+  opacity: 0.12;
+}
+/* M3 Expressive: the pill squares off while pressed. */
+.home-button:active {
+  border-radius: 14px;
+}
+.home-button-primary {
+  background: var(--home-accent);
+  color: var(--home-accent-ink) !important;
+}
+.home-button-primary:hover {
+  box-shadow: 0 1px 3px 1px color-mix(in srgb, #000 12%, transparent);
+}
+.home-button-tonal {
+  background: var(--home-secondary);
+  color: var(--home-secondary-ink) !important;
+}
+.home-button span {
+  display: inline-flex;
+  font-size: 20px;
+}
+.home-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-weight: 500;
+}
+.home-text-link > span {
+  transition: transform 0.25s ease;
+}
+.home-text-link:hover > span {
+  transform: translate(3px, -3px);
+}

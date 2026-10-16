@@ -1,0 +1,119 @@
+/* ── Material You (theme colour + client window) ──────────────────────────── */
+.mu-controls {
+  display: grid;
+  gap: 10px;
+  max-inline-size: 360px;
+}
+.mu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mu-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+.mu-hex {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--m3f-mono);
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.mu-hex i {
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 50%;
+}
+.mu-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 36px);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.mu-swatches button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--swatch);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    border-radius 0.3s var(--m3f-ease),
+    transform 0.2s var(--m3f-ease);
+}
+.mu-swatches button .m3f-svg {
+  opacity: 0;
+  transform: scale(0.5);
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 35%));
+  transition:
+    opacity 0.2s var(--m3f-ease),
+    transform 0.3s var(--m3f-ease);
+}
+.mu-swatches button[aria-checked="true"] {
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 3px var(--md-sys-color-surface-container),
+    0 0 0 5px var(--md-sys-color-on-surface);
+}
+.mu-swatches button[aria-checked="true"] .m3f-svg {
+  opacity: 1;
+  transform: none;
+}
+.mu-swatches button:hover {
+  transform: scale(1.08);
+}
+.mu-modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.mu-modes button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  block-size: 40px;
+  padding-inline: 8px;
+  border: 0;
+  border-inline-start: 1px solid var(--md-sys-color-outline);
+  background: none;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.mu-modes button:first-child {
+  border-inline-start: 0;
+}
+.mu-modes button[aria-checked="true"] {
+  color: var(--md-sys-color-on-secondary-container);
+}
+.mu-modes-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--md-sys-color-secondary-container);
+}
+.mu-modes .m3f-svg,
+.mu-modes span:not(.mu-modes-pill) {
+  position: relative;
+}
+
+.m3f-material .m3f-stage[data-shader] .m3f-demo {
+  overflow: visible;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}

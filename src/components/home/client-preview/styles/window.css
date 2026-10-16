@@ -1,0 +1,285 @@
+/* Replica of the desktop client (light/dark follow the site theme), sized in cqw so it scales as one
+   image. The window keeps the client's 5:3 proportions. */
+.client-preview {
+  --cp-window-title: #a9c5f8;
+  --cp-title-ink: #1c355d;
+  --cp-brand-ink: #18191d;
+  --cp-nav: #d0defb;
+  --cp-nav-ink: #1c355d;
+  --cp-nav-active: #aec7f7;
+  --cp-nav-active-ink: #18191d;
+  --cp-canvas: #fbf9ff;
+  --cp-card: #fbf9ff;
+  --cp-card-shadow: 0 0.15cqw 0.9cqw rgb(24 40 80 / 10%);
+  --cp-panel: #f3f2f8;
+  --cp-tile: #f1f0f6;
+  --cp-ink: #18191d;
+  --cp-muted: #626a79;
+  --cp-blue: #2b59a8;
+  --cp-active: #d9e5fb;
+  --cp-tile-active: #d9e5fb;
+  --cp-on-active: #2b59a8;
+  --cp-chip: #eceaf4;
+  --cp-shape-ink: #4a5162;
+  --cp-shape-active-ink: #f4f7ff;
+  --cp-mark-bg: #fbf9ff;
+  --cp-drawer: #0b0b0d;
+  --cp-drawer-ink: #fff;
+  --cp-window-border: rgb(24 25 29 / 10%);
+  --cp-window-shadow: 0 3cqw 6cqw -1.5cqw rgb(21 35 60 / 35%);
+  --cp-outline: rgb(24 25 29 / 10%);
+  --cp-chart: #e6e9f6;
+}
+
+:root[data-theme="dark"] .client-preview {
+  --cp-window-title: #1c4487;
+  --cp-title-ink: #dfe8fa;
+  --cp-brand-ink: #fff;
+  --cp-nav: #1a3b78;
+  --cp-nav-ink: #c9d6f2;
+  --cp-nav-active: #2a58a8;
+  --cp-nav-active-ink: #fff;
+  --cp-canvas: #0f1012;
+  --cp-card: #1b1c21;
+  --cp-card-shadow: none;
+  --cp-panel: #25262c;
+  --cp-tile: #2b2c32;
+  --cp-ink: #f2f3f7;
+  --cp-muted: #a9acb7;
+  --cp-blue: #a7bdf3;
+  --cp-active: #1e468f;
+  --cp-tile-active: #1e468f;
+  --cp-on-active: #d3e0fc;
+  --cp-chip: #2b2c32;
+  --cp-shape-ink: #e8edf8;
+  --cp-shape-active-ink: #17315f;
+  --cp-mark-bg: #17181c;
+  --cp-drawer: #09090a;
+  --cp-drawer-ink: #f2f3f7;
+  --cp-window-border: rgb(255 255 255 / 12%);
+  --cp-window-shadow: 0 3cqw 6cqw -1.5cqw rgb(0 0 0 / 45%);
+  --cp-outline: rgb(255 255 255 / 7%);
+  --cp-chart: #272b37;
+}
+
+:root:root .client-preview[data-scheme="material"] {
+  --cp-window-title: color-mix(
+    in oklab,
+    var(--md-sys-color-primary) 34%,
+    var(--md-sys-color-primary-container)
+  );
+  --cp-title-ink: var(--md-sys-color-on-primary-container);
+  --cp-brand-ink: var(--md-sys-color-on-primary-container);
+  --cp-nav: var(--md-sys-color-primary-container);
+  --cp-nav-ink: var(--md-sys-color-on-primary-container);
+  --cp-nav-active: color-mix(
+    in oklab,
+    var(--md-sys-color-primary) 30%,
+    var(--md-sys-color-primary-container)
+  );
+  --cp-nav-active-ink: var(--md-sys-color-on-primary-container);
+  --cp-canvas: var(--md-sys-color-surface);
+  --cp-card: var(--md-sys-color-surface-container);
+  --cp-panel: var(--md-sys-color-surface-container-high);
+  --cp-tile: var(--md-sys-color-surface-container-highest);
+  --cp-ink: var(--md-sys-color-on-surface);
+  --cp-muted: var(--md-sys-color-on-surface-variant);
+  --cp-blue: var(--md-sys-color-primary);
+  --cp-active: var(--md-sys-color-primary-container);
+  --cp-tile-active: var(--md-sys-color-primary-container);
+  --cp-on-active: var(--md-sys-color-on-primary-container);
+  --cp-chip: var(--md-sys-color-surface-container-highest);
+  --cp-shape-ink: var(--md-sys-color-on-surface-variant);
+  --cp-shape-active-ink: var(--md-sys-color-on-primary-container);
+  --cp-mark-bg: var(--md-sys-color-surface-container-lowest);
+  --cp-drawer: var(--md-sys-color-surface-container-lowest);
+  --cp-drawer-ink: var(--md-sys-color-on-surface);
+  --cp-window-border: var(--md-sys-color-outline-variant);
+  --cp-outline: var(--md-sys-color-outline-variant);
+  --cp-chart: var(--md-sys-color-surface-container-high);
+}
+
+.client-preview {
+  width: 100%;
+  min-width: 0;
+  container-type: inline-size;
+  color: var(--cp-ink);
+  font-family: Inter, system-ui, "PingFang SC", sans-serif;
+  font-size: 1.4cqw;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.cp-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  border: 1px solid var(--cp-window-border);
+  border-radius: 2.5cqw;
+  background: var(--cp-canvas);
+  box-shadow: var(--cp-window-shadow);
+}
+
+.cp-titlebar {
+  flex: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 3.9cqw;
+  padding-inline: 2.4cqw;
+  background: var(--cp-window-title);
+  color: var(--cp-title-ink);
+  font-size: 1.45cqw;
+}
+
+.cp-traffic-lights {
+  display: flex;
+  gap: 0.85cqw;
+  margin-right: 3.3cqw;
+}
+
+.cp-traffic-lights i {
+  width: 1.35cqw;
+  height: 1.35cqw;
+  border-radius: 50%;
+}
+
+.cp-traffic-lights i[data-color="close"] {
+  background: #ff5f57;
+}
+
+.cp-traffic-lights i[data-color="minimize"] {
+  background: #febc2e;
+}
+
+.cp-traffic-lights i[data-color="zoom"] {
+  background: #28c840;
+}
+
+.cp-menus {
+  display: flex;
+  align-items: center;
+  gap: 2.6cqw;
+}
+
+.cp-brand {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.75cqw;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.cp-brand img {
+  width: 1.8cqw;
+  height: 2cqw;
+  object-fit: contain;
+}
+
+.cp-brand strong {
+  color: var(--cp-brand-ink);
+  font-size: 1.6cqw;
+  font-weight: 700;
+}
+
+.cp-nav {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 4.5cqw;
+  padding-inline: 1.15cqw;
+  background: var(--cp-nav);
+}
+
+.cp-nav-item {
+  display: flex;
+  min-width: 0;
+  height: 3.45cqw;
+  align-items: center;
+  gap: 0.9cqw;
+  padding-inline: 1.65cqw;
+  border: 0;
+  border-radius: 2cqw;
+  background: transparent;
+  color: var(--cp-nav-ink);
+  font: inherit;
+  font-size: 1.5cqw;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.client-preview .cp-nav-item,
+.client-preview .cp-tile {
+  font: inherit;
+}
+
+.client-preview .cp-nav-item {
+  font-size: 1.5cqw;
+  font-weight: 500;
+}
+
+.cp-nav-item:disabled {
+  cursor: default;
+}
+
+.cp-nav-item[data-active="true"] {
+  background: var(--cp-nav-active);
+  color: var(--cp-nav-active-ink);
+}
+
+.cp-nav-item svg {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  flex: 0 0 auto;
+}
+
+.cp-drawer-tab {
+  position: absolute;
+  right: 0;
+  bottom: 2.3cqw;
+  display: grid;
+  width: 1.8cqw;
+  height: 4.5cqw;
+  place-items: center;
+  border-radius: 1cqw 0 0 1cqw;
+  background: var(--cp-drawer);
+  color: var(--cp-drawer-ink);
+}
+
+.cp-drawer-tab svg {
+  width: 1.2cqw;
+  height: 1.2cqw;
+  transform: rotate(180deg);
+}
+
+.cp-dashboard {
+  box-sizing: border-box;
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  align-content: start;
+  grid-template-rows: 15cqw 15cqw minmax(0, 1fr);
+  gap: 1.55cqw;
+  padding: 1.55cqw;
+}
+
+.cp-metrics-grid,
+.cp-feature-grid {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.55cqw;
+}
+
+.cp-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 2.8cqw;
+  background: var(--cp-card);
+  box-shadow: var(--cp-card-shadow);
+}

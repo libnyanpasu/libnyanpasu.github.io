@@ -1,0 +1,83 @@
+.home-blog {
+  padding-block: 120px;
+}
+.blog-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+.blog-heading p {
+  margin-top: 24px;
+  color: var(--home-muted);
+}
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 50px;
+}
+.blog-list img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--home-radius-l);
+  margin-bottom: 24px;
+}
+.blog-list time {
+  font-size: 12px;
+  color: var(--home-muted);
+}
+.blog-list h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+.blog-list p {
+  color: var(--home-muted);
+  font-size: 15px;
+  margin-top: 12px;
+}
+.home-footer {
+  padding-top: 76px;
+  padding-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.home-footer p {
+  font-size: 13px;
+  color: var(--home-muted);
+  margin-top: 16px;
+}
+.home-footer nav {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: flex-end;
+  font-size: 13px;
+  padding-top: 8px;
+}
+.home-footer nav a:hover,
+.platform-guide:hover {
+  color: var(--home-accent) !important;
+}
+.footer-bottom {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 1px solid var(--home-line);
+  padding-top: 26px;
+  font-size: 11px;
+  color: var(--home-muted);
+}

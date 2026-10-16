@@ -1,0 +1,93 @@
+/* ── Shared controls ──────────────────────────────────────────────────────── */
+.m3f button:focus-visible,
+.m3f [role="radio"]:focus-visible,
+.m3f [role="button"]:focus-visible,
+.m3f a:focus-visible,
+.m3f input:focus-visible {
+  outline: 3px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+}
+.m3f-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  block-size: 40px;
+  padding-inline: 24px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.m3f-button-text {
+  padding-inline: 12px;
+  background: transparent;
+  color: var(--md-sys-color-primary);
+}
+
+/* One state layer for every interactive piece of the demos (hover 8%, focus/press 12%). */
+.m3f-button::before,
+.app-rail button::before,
+.app-pills button::before,
+.tr-row::before,
+.tr-view-all::before,
+.app-toolbar-select::before,
+.pi-step::before,
+.db-tile button::before,
+.db-pill button::before,
+.db-pill-edit::before,
+.db-icon::before,
+.cm-item-main::before,
+.cm-icon::before,
+.cm-check::before,
+.mu-tiles button::before,
+.mu-modes button::before,
+.mu-swatches button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--m3f-ease);
+}
+.m3f-button:hover::before,
+.app-rail button:hover::before,
+.app-pills button:hover::before,
+.tr-row:hover::before,
+.tr-view-all:hover::before,
+.app-toolbar-select:hover::before,
+.pi-step:hover::before,
+.db-tile button:hover::before,
+.db-pill button:hover::before,
+.db-pill-edit:hover::before,
+.db-icon:hover::before,
+.cm-item-main:hover::before,
+.cm-icon:hover::before,
+.cm-check:hover::before,
+.mu-tiles button:hover::before,
+.mu-modes button:hover::before {
+  opacity: 0.08;
+}
+.m3f-button:active::before,
+.app-rail button:active::before,
+.app-pills button:active::before,
+.tr-row:active::before,
+.app-toolbar-select:active::before,
+.pi-step:active::before,
+.db-tile button:active::before,
+.db-pill button:active::before,
+.db-icon:active::before,
+.cm-item-main:active::before,
+.cm-icon:active::before,
+.cm-check:active::before,
+.mu-tiles button:active::before,
+.mu-modes button:active::before {
+  opacity: 0.12;
+}

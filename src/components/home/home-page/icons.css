@@ -1,0 +1,25 @@
+.platform-symbol svg[data-icon] {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+.platform-symbol [data-icon="logos:apple"] path {
+  fill: var(--home-ink);
+}
+
+.home-site svg[data-icon] {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.home-site [data-icon="logos:github-icon"] path {
+  fill: currentColor;
+}
+.home-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.source-code-icon {
+  font-size: 18px;
+}

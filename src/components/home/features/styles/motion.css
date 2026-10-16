@@ -1,0 +1,41 @@
+/* ── Motion ───────────────────────────────────────────────────────────────── */
+.m3f-shader {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s var(--m3f-ease);
+}
+/* Shown only once the renderer has drawn its first frame (see useShaderGate). */
+.m3f-shader[data-shown] {
+  opacity: 1;
+}
+.m3f-shader-canvas {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+.m3f-spin {
+  animation: m3f-rotate 0.9s linear infinite;
+}
+@keyframes m3f-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes cm-fill {
+  to {
+    clip-path: inset(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .m3f *,
+  .m3f *::before {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

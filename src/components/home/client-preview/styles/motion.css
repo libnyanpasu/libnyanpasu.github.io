@@ -1,0 +1,21 @@
+@keyframes cp-wave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 639px) {
+  .cp-window {
+    border-radius: 3cqw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .client-preview *,
+  .client-preview *::before,
+  .client-preview *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

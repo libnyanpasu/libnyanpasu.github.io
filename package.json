@@ -33,6 +33,7 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-use": "^17.6.1",
+    "shaders": "^4.0.4",
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {

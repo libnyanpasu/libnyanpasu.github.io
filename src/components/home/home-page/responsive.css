@@ -1,0 +1,134 @@
+@media (max-width: 1199px) {
+  .home-container {
+    width: calc(100% - 80px);
+  }
+}
+@media (max-width: 959px) {
+  .home-container {
+    width: calc(100% - 56px);
+  }
+
+  .preview-widget {
+    padding: 18px;
+  }
+  .platform-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 639px) {
+  .home-container {
+    width: calc(100% - 40px);
+  }
+  .section-heading {
+    margin-bottom: 32px;
+  }
+  .section-heading h2,
+  .download-heading h2 {
+    font-size: 38px;
+  }
+  .section-heading p {
+    font-size: 18px;
+    margin-top: 18px;
+  }
+  .visual-caption {
+    padding-bottom: 20px;
+    font-size: 10px;
+  }
+  .home-download {
+    padding-block: 70px 44px;
+  }
+  .download-heading {
+    display: block;
+  }
+  .download-heading h2 {
+    font-size: 38px;
+  }
+  .download-heading p {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+  .download-version {
+    margin-top: 24px;
+  }
+  .platform-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .platform-item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: center;
+    padding: 20px;
+    border-radius: 24px;
+  }
+  .platform-symbol {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+  .platform-item h3 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .platform-actions {
+    grid-column: 1 / -1;
+    padding-top: 20px;
+  }
+  .download-notes {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 12px;
+  }
+  .home-footer {
+    display: block;
+    padding-top: 48px;
+  }
+  .home-footer nav {
+    justify-content: flex-start;
+    padding-block: 28px;
+    gap: 24px;
+    font-size: 12px;
+  }
+  .footer-brand {
+    font-size: 18px;
+  }
+  .footer-bottom {
+    font-size: 10px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 20px;
+  }
+  .footer-bottom > span:nth-child(2) {
+    display: none;
+  }
+  .home-blog {
+    padding-block: 70px;
+  }
+  .blog-heading {
+    display: block;
+  }
+  .blog-heading .home-text-link {
+    margin-top: 24px;
+  }
+  .blog-list {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-site *,
+  .home-site *::before,
+  .home-site *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .home-button:active,
+  .home-text-link:hover > span {
+    transform: none;
+  }
+}

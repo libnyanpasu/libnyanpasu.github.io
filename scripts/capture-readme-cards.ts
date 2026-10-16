@@ -241,8 +241,11 @@ async function record(
   await Promise.all(writes);
   if (!frames.length) throw new Error(`${card}: no frames captured`);
   longest = Math.max(longest, end - previousTime) * 1000;
+  const reordered = frames.filter(
+    (frame, index) => index > 0 && frame.time < frames[index - 1].time,
+  ).length;
   console.log(
-    `  ${card}: ${captured} source frames, ${frames.length} retained, longest source gap ${longest.toFixed(1)} ms (animation time)`,
+    `  ${card}: ${captured} source frames, ${frames.length} retained, ${reordered} timestamp regressions, longest source gap ${longest.toFixed(1)} ms (animation time)`,
   );
   if (longest > 1500 / Math.max(...rates))
     console.warn(`  ${card}: capture missed an output interval; retry with a lower --speed`);

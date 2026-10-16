@@ -28,6 +28,9 @@ export function sampleFrames<T extends { time: number }>(
   fps: number,
 ) {
   if (!frames.length || end <= start) throw new Error("Cannot sample an empty recording");
+  // Screencast delivery order can differ from presentation time. The nearest-frame
+  // walk requires chronological input or one late frame can trap it for the loop tail.
+  const ordered = frames.toSorted((a, b) => a.time - b.time);
   const duration = Math.round((end - start) * 1000);
   const count = Math.ceil((duration * fps) / 1000);
   const sampled: T[] = [];
@@ -38,11 +41,11 @@ export function sampleFrames<T extends { time: number }>(
     // Nearest source sample; never discard a useful frame just because capture jitter
     // placed it a little less than one nominal interval after the previous one.
     while (
-      source + 1 < frames.length &&
-      Math.abs(frames[source + 1].time - time) <= Math.abs(frames[source].time - time)
+      source + 1 < ordered.length &&
+      Math.abs(ordered[source + 1].time - time) <= Math.abs(ordered[source].time - time)
     )
       source++;
-    sampled.push(frames[source]);
+    sampled.push(ordered[source]);
     delays.push(
       Math.min(duration, Math.round(((index + 1) * 1000) / fps)) - Math.round((index * 1000) / fps),
     );

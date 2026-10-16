@@ -33,6 +33,19 @@ test("jittered capture is sampled on the output grid instead of greedily droppin
   }
 });
 
+test("out-of-order screencast timestamps cannot trap sampling on an early frame", () => {
+  const ordered = Array.from({ length: 240 }, (_, index) => ({ time: 1000 + index / 240 }));
+  const source = [...ordered];
+  // A late compositor frame can arrive behind a newer timestamp.
+  [source[15], source[16]] = [source[16], source[15]];
+  const original = [...source];
+
+  const result = sampleFrames(source, 1000, 1001, 60);
+  assert.deepEqual(result, sampleFrames(ordered, 1000, 1001, 60));
+  assert.equal(new Set(result.frames).size, 60);
+  assert.deepEqual(source, original, "sampling must not reorder the caller's recording");
+});
+
 test("the loop tail cannot produce a short frame that browsers clamp", () => {
   const result = sampleFrames([{ time: 0 }, { time: 0.5 }], 0, 1.004, 60);
   assert.equal(

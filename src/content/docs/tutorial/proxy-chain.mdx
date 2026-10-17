@@ -4,7 +4,7 @@ sidebar:
   order: 5
 ---
 
-import { Badge, Steps, TabItem, Tabs } from '@astrojs/starlight/components';
+import { Badge, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 Clash Nyanpasu 2.0 builds a runtime configuration from a configuration profile and its transforms. The older “proxy chain” wording refers to this profile transformation workflow. A transform reads the result produced so far and passes its output to the next step; it does not rewrite the source profile.
 
@@ -53,12 +53,12 @@ YAML overlay keys run in document order, and transform profiles run in their dis
 
 The YAML source must have a mapping at its top level. Ordinary mapping keys merge recursively: nested mappings keep unspecified values, while scalars and sequences replace the matching value. A new key is added. This serves the same broad purpose as OpenClash's merge-style configuration editing; the rules below describe Nyanpasu 2.0. Overlay directives operate on dotted paths and run in the order they appear in the YAML document.
 
-| Key | Effect |
-| --- | --- |
-| `append__path` / `append-path` | Add a sequence to the end of an existing sequence. |
-| `prepend__path` / `prepend-path` | Add a sequence to the beginning of an existing sequence. |
-| `override__path` | Replace the value at an existing dotted path. |
-| `filter__path` | Filter or transform items in an existing sequence with Lua expressions. |
+| Key                              | Effect                                                                  |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| `append__path` / `append-path`   | Add a sequence to the end of an existing sequence.                      |
+| `prepend__path` / `prepend-path` | Add a sequence to the beginning of an existing sequence.                |
+| `override__path`                 | Replace the value at an existing dotted path.                           |
+| `filter__path`                   | Filter or transform items in an existing sequence with Lua expressions. |
 
 Append and prepend require a sequence as the directive value and an existing destination sequence. If the directive value is not a sequence, the path is missing, or the target is not a sequence, the operation is skipped with a warning. `override__path` also skips a missing path with a warning; it does not create one. These skipped-path warnings do not by themselves fail the candidate configuration.
 
@@ -203,10 +203,7 @@ This preserves the original two-rule example while checking that `rules` is an a
 
 ```javascript
 export default function main(config) {
-  const rules = [
-    "DOMAIN-SUFFIX,google.com,PROXY",
-    "DOMAIN,example.org,PROXY",
-  ];
+  const rules = ["DOMAIN-SUFFIX,google.com,PROXY", "DOMAIN,example.org,PROXY"];
   if (Array.isArray(config.rules)) {
     config.rules.push(...rules);
   } else {

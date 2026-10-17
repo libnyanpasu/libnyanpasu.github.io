@@ -4,15 +4,15 @@ sidebar:
   order: 4
 ---
 
-import { Aside, Badge, Steps, Tabs, TabItem } from '@astrojs/starlight/components'
+import { Aside, Badge, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 
 Clash Nyanpasu has two ways to deliver device traffic to the selected core. A separate routing mode controls what the core does with traffic it receives.
 
-| Setting | Role |
-| --- | --- |
-| **System Proxy** <Badge text="OS proxy settings" variant="note" /> | Sets the operating system's proxy. Only applications that honor those settings use it. |
-| **TUN Mode** <Badge text="Virtual interface" variant="caution" /> | Writes the TUN setting to the active core configuration so the core can create a virtual interface and route device traffic. It can cover applications that ignore the system proxy, subject to core support and network permissions. |
-| **Routing Mode** <Badge text="Core policy" variant="tip" /> | Selects how the core routes captured traffic. It does not turn System Proxy or TUN on. |
+| Setting                                                            | Role                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **System Proxy** <Badge text="OS proxy settings" variant="note" /> | Sets the operating system's proxy. Only applications that honor those settings use it.                                                                                                                                                |
+| **TUN Mode** <Badge text="Virtual interface" variant="caution" />  | Writes the TUN setting to the active core configuration so the core can create a virtual interface and route device traffic. It can cover applications that ignore the system proxy, subject to core support and network permissions. |
+| **Routing Mode** <Badge text="Core policy" variant="tip" />        | Selects how the core routes captured traffic. It does not turn System Proxy or TUN on.                                                                                                                                                |
 
 ```mermaid
 flowchart LR
@@ -36,24 +36,28 @@ Use **TUN Mode** when you need to capture traffic from applications that ignore 
 Both switches and the routing selector are in **Settings → System Settings**. The **Current System Proxy** section on that page shows the proxy settings reported by the operating system. It is a useful check of the OS setting, but does not prove that a particular app uses it.
 
 <Aside type="note" title="System Proxy Guard">
-  If another application keeps changing the OS proxy, enable **System Proxy Guard** in **Settings → System Settings**. It monitors the setting and reapplies Nyanpasu's proxy configuration when it changes.
+  If another application keeps changing the OS proxy, enable **System Proxy Guard** in **Settings →
+  System Settings**. It monitors the setting and reapplies Nyanpasu's proxy configuration when it
+  changes.
 </Aside>
 
 ## Rule, Global, and Direct
 
 These modes apply to traffic handled by the core, regardless of whether it arrived through System Proxy or TUN:
 
-| Mode | What it does |
-| --- | --- |
-| **Rule** | Applies the profile's rules to choose an outbound, such as a proxy group or a direct connection. This is the usual starting mode. |
-| **Global** | Sends handled traffic through the core's global proxy choice. Select a usable proxy or proxy group in the profile. |
-| **Direct** | Sends handled traffic directly, without using a proxy outbound. |
+| Mode       | What it does                                                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Rule**   | Applies the profile's rules to choose an outbound, such as a proxy group or a direct connection. This is the usual starting mode. |
+| **Global** | Sends handled traffic through the core's global proxy choice. Select a usable proxy or proxy group in the profile.                |
+| **Direct** | Sends handled traffic directly, without using a proxy outbound.                                                                   |
 
 With **Clash Premium**, the selector may also offer **Script** mode. Other cores may not provide this mode; see [core compatibility](./cores-and-compatibility).
 
 ## Enable TUN with the system service
 
-<Badge text="Core-dependent" variant="caution" /> TUN requires the selected core to support the configuration and TUN stack your setup uses. If the option is unavailable or the core rejects the configuration, check [core compatibility](./cores-and-compatibility).
+<Badge text="Core-dependent" variant="caution" /> TUN requires the selected core to support the
+configuration and TUN stack your setup uses. If the option is unavailable or the core rejects the
+configuration, check [core compatibility](./cores-and-compatibility).
 
 <Steps>
 
@@ -84,7 +88,11 @@ Installing or starting the service uses the app's elevated service helper. Packa
 </Tabs>
 
 <Aside type="caution" title="Service Mode can fall back to local execution">
-  If the service is missing, stopped, incompatible, or unable to run the core, Nyanpasu falls back to a locally running core. The Service Mode switch can remain enabled while this happens. The local core only has the permissions of its launch environment, so TUN may fail. Check the warning beside **Service Mode** and the status in **System Service**; an enabled TUN switch alone does not confirm elevated execution.
+  If the service is missing, stopped, incompatible, or unable to run the core, Nyanpasu falls back
+  to a locally running core. The Service Mode switch can remain enabled while this happens. The
+  local core only has the permissions of its launch environment, so TUN may fail. Check the warning
+  beside **Service Mode** and the status in **System Service**; an enabled TUN switch alone does not
+  confirm elevated execution.
 </Aside>
 
 The service is designed to give the core the privileges needed for system-level features while keeping the desktop app at the user's normal permission level. **TUN Stack** under **Settings → Clash Settings** offers **System**, **gVisor**, and **Mixed** where supported by the selected core. **Mixed** is not offered with Clash Premium. Do not assume every stack or optional TUN field works across all cores.

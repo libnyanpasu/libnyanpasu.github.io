@@ -15,7 +15,10 @@ Clash Nyanpasu supports Windows 10 and later, macOS 12.6 and later, and Linux wi
 
 :::note[Architecture names]
 
-<code>x64</code>, <code>amd64</code>, and <code>x86_64</code> refer to 64-bit Intel/AMD builds. <code>ARM64</code> and <code>aarch64</code> refer to 64-bit Arm builds, including Apple silicon and supported Windows or Linux devices. Only these 64-bit architectures are supported; 32-bit and older Arm targets are unavailable.
+<code>x64</code>, <code>amd64</code>, and <code>x86_64</code> refer to 64-bit Intel/AMD builds.
+<code>ARM64</code> and <code>aarch64</code> refer to 64-bit Arm builds, including Apple silicon and
+supported Windows or Linux devices. Only these 64-bit architectures are supported; 32-bit and older
+Arm targets are unavailable.
 
 :::
 
@@ -159,7 +162,7 @@ The built-in login setting is under **Settings → System → Startup Settings �
 
 Set <code>APPIMAGE_PATH</code> to the absolute path of your AppImage. This example uses the standard hicolor icon directory:
 
-~~~bash
+```bash
 APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
 ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
 APP_DIR="$HOME/.local/share/applications"
@@ -180,11 +183,11 @@ Categories=Network;
 EOF
 
 update-desktop-database "$APP_DIR"
-~~~
+```
 
 For automatic login, create a separate entry in the user autostart directory:
 
-~~~bash
+```bash
 APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
 AUTOSTART_DIR="$HOME/.config/autostart"
 mkdir -p "$AUTOSTART_DIR"
@@ -196,14 +199,14 @@ Name=Clash Nyanpasu
 Exec="$APPIMAGE_PATH"
 Terminal=false
 EOF
-~~~
+```
 
   </TabItem>
   <TabItem label="System directories">
 
 Place the AppImage at a fixed path readable by all users, such as <code>/opt/clash-nyanpasu/</code>, and replace <code>VERSION</code> with its actual filename. The first command copies it from Downloads; change that source path if needed.
 
-~~~bash
+```bash
 APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
 ICON_DIR="/usr/share/icons/hicolor/256x256/apps"
 APP_DIR="/usr/share/applications"
@@ -225,11 +228,11 @@ Categories=Network;
 EOF
 
 sudo update-desktop-database "$APP_DIR"
-~~~
+```
 
 To start it automatically for all users, add a separate entry under <code>/etc/xdg/autostart</code>:
 
-~~~bash
+```bash
 APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
 sudo tee /etc/xdg/autostart/clash-nyanpasu.desktop >/dev/null <<EOF
 [Desktop Entry]
@@ -238,7 +241,7 @@ Name=Clash Nyanpasu
 Exec="$APPIMAGE_PATH"
 Terminal=false
 EOF
-~~~
+```
 
   </TabItem>
 </Tabs>
@@ -278,22 +281,22 @@ Package: [clash-nyanpasu-bin](https://aur.archlinux.org/packages/clash-nyanpasu-
 
 The AUR record reports <code>2.0.0rc.2-1</code>, which corresponds to upstream <code>2.0.0-rc.2</code>. Although the AUR package is the prebuilt stable variant, its current upstream version is a release candidate.
 
-~~~bash
+```bash
 paru -Syu clash-nyanpasu-bin
 # or
 yay -Syu clash-nyanpasu-bin
-~~~
+```
 
   </TabItem>
   <TabItem label="Development · source build">
 
 Package: [clash-nyanpasu-git](https://aur.archlinux.org/packages/clash-nyanpasu-git). This variant builds from the source revision tracked by its AUR recipe. The RPC record reports <code>2.0.0.r6931.f6538a47-3</code> (revision <code>f6538a47</code>); development builds can change frequently and may include bugs.
 
-~~~bash
+```bash
 paru -Syu clash-nyanpasu-git
 # or
 yay -Syu clash-nyanpasu-git
-~~~
+```
 
   </TabItem>
 </Tabs>

@@ -4,7 +4,7 @@ sidebar:
   order: 8
 ---
 
-import { Aside, Badge, Steps } from '@astrojs/starlight/components'
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
 
 Clash Nyanpasu 原生管理多个兼容 Clash 的内核。配置采用 Clash 风格的 YAML，并不代表每个内核都支持其中的所有字段或拥有相同的运行行为。
 
@@ -18,7 +18,8 @@ Clash Nyanpasu 原生管理多个兼容 Clash 的内核。配置采用 Clash 风
 优先使用配置服务商建议的内核。Alpha 是滚动发布版本，更新频率和行为变化通常更快。非 Alpha 版本属于常规发布线，更新节奏通常更缓。不要假设一个内核支持另一个内核的所有字段或功能。
 
 <Aside type="caution" title="配置支持因内核而异">
-  一个内核接受的字段，其他内核可能无法识别；可选功能的运行行为也可能不同。切换内核前，请查看服务商说明以及 [Clash 字段参考](../others/field)中的支持备注。
+  一个内核接受的字段，其他内核可能无法识别；可选功能的运行行为也可能不同。切换内核前，请查看服务商说明以及
+  [Clash 字段参考](../others/field)中的支持备注。
 </Aside>
 
 ## 选择或更新内核
@@ -38,7 +39,8 @@ Clash Nyanpasu 原生管理多个兼容 Clash 的内核。配置采用 Clash 风
 根据配置中使用的字段和服务商说明选择内核。[Clash 字段参考](../others/field)会列出 `script`、`ebpf` 等字段的内核差异。
 
 <Aside type="note" title="Nyanpasu 的 include-all 设置">
-  在**Clash 设置**中，**展开「include-all」字段**会按 Mihomo 语义预处理代理组。关闭后，Nyanpasu 会将这些字段原样传给所选内核。该设置与当前选择的内核相互独立。
+  在**Clash 设置**中，**展开「include-all」字段**会按 Mihomo 语义预处理代理组。关闭后，Nyanpasu
+  会将这些字段原样传给所选内核。该设置与当前选择的内核相互独立。
 </Aside>
 
 切换内核或应用配置时，运行时会使用所选内核检查暂存的配置，通过后才会接受配置。如果检查报告未知或不受支持的选项，请记录内核名称和完整错误，并询问配置服务商支持哪些内核及配置版本。配置检查通过也不代表所有可选功能在不同内核中的行为完全相同。

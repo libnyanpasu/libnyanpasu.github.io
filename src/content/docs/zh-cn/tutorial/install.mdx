@@ -15,7 +15,9 @@ Clash Nyanpasu 支持 Windows 10 及更高版本、macOS 12.6 及更高版本，
 
 :::note[处理器架构名称]
 
-<code>x64</code>、<code>amd64</code> 和 <code>x86_64</code> 表示 64 位 Intel/AMD 架构；<code>ARM64</code> 和 <code>aarch64</code> 表示 64 位 Arm 架构，包括 Apple 芯片及受支持的 Windows 或 Linux 设备。目前仅支持这些 64 位架构，不支持 32 位或较旧的 Arm 设备。
+<code>x64</code>、<code>amd64</code> 和 <code>x86_64</code> 表示 64 位 Intel/AMD 架构；
+<code>ARM64</code> 和 <code>aarch64</code> 表示 64 位 Arm 架构，包括 Apple 芯片及受支持的 Windows 或
+Linux 设备。目前仅支持这些 64 位架构，不支持 32 位或较旧的 Arm 设备。
 
 :::
 
@@ -159,7 +161,7 @@ TUN 取决于所选内核，并需要相应的网络权限。请通过**系统�
 
 将 <code>APPIMAGE_PATH</code> 设置为 AppImage 的绝对路径。以下示例使用标准 hicolor 图标目录：
 
-~~~bash
+```bash
 APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
 ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
 APP_DIR="$HOME/.local/share/applications"
@@ -180,11 +182,11 @@ Categories=Network;
 EOF
 
 update-desktop-database "$APP_DIR"
-~~~
+```
 
 如果还需要登录时自动启动，请在用户自启动目录创建单独的条目：
 
-~~~bash
+```bash
 APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
 AUTOSTART_DIR="$HOME/.config/autostart"
 mkdir -p "$AUTOSTART_DIR"
@@ -196,14 +198,14 @@ Name=Clash Nyanpasu
 Exec="$APPIMAGE_PATH"
 Terminal=false
 EOF
-~~~
+```
 
   </TabItem>
   <TabItem label="系统目录">
 
 将 AppImage 放在所有用户都可以读取的固定路径，例如 <code>/opt/clash-nyanpasu/</code>，并将 <code>VERSION</code> 替换为实际文件名。第一条命令会从“下载”目录复制；如有需要请修改源路径。
 
-~~~bash
+```bash
 APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
 ICON_DIR="/usr/share/icons/hicolor/256x256/apps"
 APP_DIR="/usr/share/applications"
@@ -225,11 +227,11 @@ Categories=Network;
 EOF
 
 sudo update-desktop-database "$APP_DIR"
-~~~
+```
 
 如需为所有用户设置登录自启动，请在 <code>/etc/xdg/autostart</code> 下另建一个条目：
 
-~~~bash
+```bash
 APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
 sudo tee /etc/xdg/autostart/clash-nyanpasu.desktop >/dev/null <<EOF
 [Desktop Entry]
@@ -238,7 +240,7 @@ Name=Clash Nyanpasu
 Exec="$APPIMAGE_PATH"
 Terminal=false
 EOF
-~~~
+```
 
   </TabItem>
 </Tabs>
@@ -278,22 +280,22 @@ AUR 记录显示版本为 <code>1.6.1-1</code>，并标记为过期。该版本�
 
 AUR 记录显示版本为 <code>2.0.0rc.2-1</code>，对应上游 <code>2.0.0-rc.2</code>。虽然这是 AUR 中的预编译稳定版包型，但当前上游版本仍是候选版本。
 
-~~~bash
+```bash
 paru -Syu clash-nyanpasu-bin
 # 或
 yay -Syu clash-nyanpasu-bin
-~~~
+```
 
   </TabItem>
   <TabItem label="开发版 · 源码构建">
 
 包名：[clash-nyanpasu-git](https://aur.archlinux.org/packages/clash-nyanpasu-git)。此包根据 AUR 配方跟踪的源码修订版本构建。RPC 记录显示版本为 <code>2.0.0.r6931.f6538a47-3</code>（修订 <code>f6538a47</code>）；开发版本变化频繁，也可能包含问题。
 
-~~~bash
+```bash
 paru -Syu clash-nyanpasu-git
 # 或
 yay -Syu clash-nyanpasu-git
-~~~
+```
 
   </TabItem>
 </Tabs>

@@ -4,7 +4,7 @@ sidebar:
   order: 8
 ---
 
-import { Aside, Badge, Steps } from '@astrojs/starlight/components'
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
 
 Clash Nyanpasu natively manages several Clash-compatible cores. A profile using Clash-style YAML is not guaranteed to work with every core: supported fields and runtime behavior can differ.
 
@@ -18,7 +18,9 @@ The built-in **Core Manager** lists these choices:
 Follow the core recommended by your profile provider. Alpha builds are rolling releases, so versions and behavior can change more frequently. Choose a non-Alpha option for the regular release line, which usually changes less frequently. Do not assume that one core supports every field or feature available in another.
 
 <Aside type="caution" title="Core-specific configuration">
-  A field accepted by one core may be unknown to another, and optional features may behave differently. Before changing cores, check the provider's instructions and the support notes in the [Clash field reference](../others/field).
+  A field accepted by one core may be unknown to another, and optional features may behave
+  differently. Before changing cores, check the provider's instructions and the support notes in the
+  [Clash field reference](../others/field).
 </Aside>
 
 ## Select or update a core
@@ -38,7 +40,9 @@ The current core version is displayed even when it is up to date. An update cont
 Choose a core that matches the fields your profile uses and the provider's instructions. The [Clash field reference](../others/field) documents core-specific cases such as `script` and `ebpf`.
 
 <Aside type="note" title="Nyanpasu's include-all setting">
-  Under **Clash Settings**, **Expand “include-all” fields** preprocesses proxy groups using Mihomo semantics. When disabled, Nyanpasu passes those fields to the selected core as written. This setting is separate from the core you select.
+  Under **Clash Settings**, **Expand “include-all” fields** preprocesses proxy groups using Mihomo
+  semantics. When disabled, Nyanpasu passes those fields to the selected core as written. This
+  setting is separate from the core you select.
 </Aside>
 
 When you switch cores or apply a profile, the runtime checks the staged configuration with the selected core before accepting it. If validation reports an unknown or unsupported option, record the core name and full error, then ask the profile provider which core and configuration variant they support. A successful configuration check does not guarantee that every optional feature behaves identically across cores.

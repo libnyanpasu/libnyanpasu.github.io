@@ -4,7 +4,7 @@ sidebar:
   order: 5
 ---
 
-import { Badge, Steps, TabItem, Tabs } from '@astrojs/starlight/components';
+import { Badge, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
 
 Clash Nyanpasu 2.0 根据配置 Profile 及其转换生成运行时配置。旧称“代理链”指的就是这套 Profile 转换流程。每个转换都会读取当前结果，并将输出传给下一步；它不会改写配置 Profile 的源文件。
 
@@ -53,12 +53,12 @@ YAML Overlay 中的键按文档顺序执行，转换 Profile 按界面中的顺�
 
 YAML 源文件的顶层必须是映射。普通映射键会递归合并：嵌套映射中未指定的值会保留，标量和序列会替换对应值；原本不存在的键会新增。这与 OpenClash 的配置合并编辑有相似用途；下文说明的是 Nyanpasu 2.0 的具体行为。Overlay 指令可以操作点分路径，并按 YAML 文档中的顺序执行。
 
-| 键 | 作用 |
-| --- | --- |
-| `append__path` / `append-path` | 将序列追加到已存在序列的末尾。 |
-| `prepend__path` / `prepend-path` | 将序列添加到已存在序列的开头。 |
-| `override__path` | 替换已存在的点分路径。 |
-| `filter__path` | 使用 Lua 表达式筛选或转换已存在序列中的项目。 |
+| 键                               | 作用                                          |
+| -------------------------------- | --------------------------------------------- |
+| `append__path` / `append-path`   | 将序列追加到已存在序列的末尾。                |
+| `prepend__path` / `prepend-path` | 将序列添加到已存在序列的开头。                |
+| `override__path`                 | 替换已存在的点分路径。                        |
+| `filter__path`                   | 使用 Lua 表达式筛选或转换已存在序列中的项目。 |
 
 追加和前置操作要求指令值为序列，并且目标字段已经存在且为序列。如果指令值不是序列、路径缺失或目标字段不是序列，该操作会记录警告并跳过。`override__path` 遇到缺失路径时也会记录警告并跳过，不会新建路径。这些路径跳过警告本身不会导致候选配置构建失败。
 
@@ -203,10 +203,7 @@ JavaScript 执行器使用 Boa，并调用默认导出的函数，传入当前�
 
 ```javascript
 export default function main(config) {
-  const rules = [
-    "DOMAIN-SUFFIX,google.com,PROXY",
-    "DOMAIN,example.org,PROXY",
-  ];
+  const rules = ["DOMAIN-SUFFIX,google.com,PROXY", "DOMAIN,example.org,PROXY"];
   if (Array.isArray(config.rules)) {
     config.rules.push(...rules);
   } else {

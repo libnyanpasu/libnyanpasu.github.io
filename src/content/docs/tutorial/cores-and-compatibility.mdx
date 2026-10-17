@@ -1,0 +1,48 @@
+---
+title: "Cores and configuration compatibility"
+sidebar:
+  order: 8
+---
+
+import { Aside, Badge, Steps } from "@astrojs/starlight/components";
+
+Clash Nyanpasu natively manages several Clash-compatible cores. A profile using Clash-style YAML is not guaranteed to work with every core: supported fields and runtime behavior can differ.
+
+## Choose a core
+
+The built-in **Core Manager** lists these choices:
+
+- <Badge text="Stable" variant="success" /> Clash Premium, Mihomo, Clash Rust, and Meow.
+- <Badge text="Alpha" variant="caution" /> Mihomo Alpha, Clash Rust Alpha, and Meow Alpha.
+
+Follow the core recommended by your profile provider. Alpha builds are rolling releases, so versions and behavior can change more frequently. Choose a non-Alpha option for the regular release line, which usually changes less frequently. Do not assume that one core supports every field or feature available in another.
+
+<Aside type="caution" title="Core-specific configuration">
+  A field accepted by one core may be unknown to another, and optional features may behave
+  differently. Before changing cores, check the provider's instructions and the support notes in the
+  [Clash field reference](../others/field).
+</Aside>
+
+## Select or update a core
+
+<Steps>
+
+1. Open **Settings → Clash Settings** and locate **Core Manager**. The selected core and its version appear at the top; the other cards show the available core choices and their detected versions.
+2. Select **Check Updates** to fetch the latest available versions. If an update is available, the core card shows the current and newer versions; select the update icon whose tooltip says **Click to update**. If the installed version cannot be read, the action is **Reinstall core**.
+3. Select a core card to switch to it. Switching closes the current core connections; applications may need to reconnect.
+
+</Steps>
+
+The current core version is displayed even when it is up to date. An update control appears only when the app can identify an update or offer a reinstall. Wait for the download and restart to finish before relying on the new version.
+
+## Check configuration compatibility
+
+Choose a core that matches the fields your profile uses and the provider's instructions. The [Clash field reference](../others/field) documents core-specific cases such as `script` and `ebpf`.
+
+<Aside type="note" title="Nyanpasu's include-all setting">
+  Under **Clash Settings**, **Expand “include-all” fields** preprocesses proxy groups using Mihomo
+  semantics. When disabled, Nyanpasu passes those fields to the selected core as written. This
+  setting is separate from the core you select.
+</Aside>
+
+When you switch cores or apply a profile, the runtime checks the staged configuration with the selected core before accepting it. If validation reports an unknown or unsupported option, record the core name and full error, then ask the profile provider which core and configuration variant they support. A successful configuration check does not guarantee that every optional feature behaves identically across cores.

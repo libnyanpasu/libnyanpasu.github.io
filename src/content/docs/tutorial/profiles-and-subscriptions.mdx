@@ -1,0 +1,77 @@
+---
+title: "Profiles and subscriptions"
+sidebar:
+  order: 3
+---
+
+import { Badge, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+
+A profile supplies the Clash-compatible configuration that Clash Nyanpasu prepares for the selected core. The app natively supports multiple cores, and each core can differ in the fields and extensions it accepts.
+
+## Choose a profile source <Badge text="3 source types" variant="note" />
+
+<Tabs>
+<TabItem label="Remote">
+
+Use a remote profile when your provider gives you a subscription URL. Clash Nyanpasu downloads and stores the profile, and can refresh it manually or on a schedule. The provider may also return usage and expiry information.
+
+The import form has optional user-agent, connection, and update-interval settings. Leave the interval empty to use a provider-suggested value when available; otherwise the app uses its 120-minute default.
+
+</TabItem>
+<TabItem label="Local">
+
+Use a local profile when you have a `.yaml` or `.yml` configuration file. Importing it copies the file content into the app-managed profile. Changes you later make to the original file are not synced automatically.
+
+</TabItem>
+<TabItem label="Linked file">
+
+Use a linked file when another app or editor owns the source file and you want Nyanpasu to follow it. Choose **Mirror** to keep an app-side copy synchronized with the source, or **Symlink** to reference the source path directly.
+
+:::caution[Linked-file requirements]
+Keep the source at a stable, readable absolute path. On Windows, creating a symlink requires Developer Mode or administrator rights. If the source is moved or becomes unreadable, the profile cannot be loaded.
+:::
+
+</TabItem>
+</Tabs>
+
+:::caution[Subscription privacy]
+A subscription URL may contain account credentials. Do not include the full URL in screenshots, public issues, shared examples, or logs. If it is exposed, ask your provider how to rotate it.
+:::
+
+If you do not have a profile or subscription yet, contact your provider; Clash Nyanpasu does not provide proxy subscriptions.
+
+## Import a profile
+
+<Steps>
+
+1. Open **Profiles** and choose **Profile** in its sidebar.
+2. Select **New config**, then choose **Single**.
+3. Choose **Remote**, **Local**, or **Linked file** and provide the URL or file path described above.
+4. Set a name and optional update interval, then choose **Submit**.
+5. Select the new profile and use **Activate Profile** if it is not already active.
+
+</Steps>
+
+For the complete first-run flow, see [Make your first connection](./first-connection).
+
+## Update a subscription <Badge text="Remote profiles" variant="tip" />
+
+<Steps>
+
+1. Open the remote profile's details and choose **Update** to fetch its current URL.
+2. Choose **Update Opts** to enable or disable **Auto Update** and set the interval in minutes.
+3. Check the profile's **Updated** time after a refresh. A configured interval is only a schedule; it does not confirm that a refresh succeeded.
+
+</Steps>
+
+Leaving the update interval empty uses the 120-minute default in the update-options editor. Changing the subscription URL and saving it triggers an immediate fetch from the new URL. Updating a profile does not renew or extend the provider's subscription.
+
+If an update fails, check that the URL is current, the provider allows requests from this app, and the configured user agent or connection options match the provider's instructions. Do not share the URL when asking for help; the [troubleshooting guide](./troubleshooting) explains what information is safe to provide.
+
+## Profiles and transformations
+
+The profile is the input; a transformation changes that input while the app builds the runtime configuration. Keeping your own transformations separate from a provider's remote profile makes subscription updates easier to review. See [Profile transformations](./proxy-chain) for the 2.0 workflow and inspection tools.
+
+After switching cores, check the profile and transformation fields against the newly selected core. A field accepted by one core may be unsupported or behave differently in another; see [Choose and manage a core](./cores-and-compatibility).
+
+If the core starts but traffic does not use the expected profile, confirm which profile is active, then review the selected proxy group and [proxy mode](./system-proxy-tun).

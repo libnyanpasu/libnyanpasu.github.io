@@ -1,103 +1,69 @@
 ---
-title: "Frequently Asked Questions"
+title: "Frequently asked questions"
 sidebar:
   order: 1
 ---
 
-This post contains frequently asked questions about **Clash Nyanpasu**.
-Please check here first if you have any questions.
+import { Badge } from "@astrojs/starlight/components";
+
+Start with [your first connection](../tutorial/first-connection) if you are new. For network problems, follow the [troubleshooting guide](../tutorial/troubleshooting).
 
 ## Application
 
-### 1. macOS prompts that "Clash Nyanpasu" is damaged and can't be opened
+### macOS says “Clash Nyanpasu is damaged and can’t be opened”
 
-Open **Terminal** and execute:
+First confirm that you downloaded the app from the [official releases](https://github.com/libnyanpasu/clash-nyanpasu/releases), then download the package again in case it was incomplete. A “damaged” warning can have causes that are not fixed by removing the quarantine attribute; older `xattr` instructions are not a universal fix. If the warning persists, report the exact macOS and app versions in a [GitHub issue](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose).
 
-```bash
-sudo xattr -r -d com.apple.quarantine /Applications/Clash\ Nyanpasu.app
-```
+For an **unidentified developer** warning, try to open the app once, then go to **System Settings → Privacy & Security** and choose **Open Anyway** for this app. See [Apple's instructions](https://support.apple.com/en-ie/102445).
 
-### 2. Where is the Clash Nyanpasu config/logs directory?
+### 1.6.x and earlier versions
 
-There are currently two ways to open it directly:
+<Badge text="Archived and unsupported" variant="caution" />
 
-- Right click on the tray icon and select **Open Dir - Config Dir**. You can open the configuration directory.
+The Clash Nyanpasu 1.6.x release line and all earlier versions have been fully archived and are no longer supported. They do not receive updates, fixes, or support.
 
-- In the main program interface, navigate to the **Settings page**, find the **Config Dir** and click the button to open the configuration directory.
+### Where are the configuration and log folders?
 
-> The same can be done for the log directory.
+Open **Settings** and use the folder buttons for the configuration or data directory. The tray menu also provides directory shortcuts. Logs are stored in the `logs` folder under the data directory. If the app cannot open, enter one of the platform paths below in your file manager.
 
-:::note[Tips]
+#### Default directory locations
 
-In case you cannot access the tray and cannot get to the main program interface, we can open it by entering the path directly.
+- Windows: configuration under `%APPDATA%/Clash Nyanpasu/config`; data under `%LOCALAPPDATA%/Clash Nyanpasu/data`.
+- macOS: `~/Library/Application Support/Clash Nyanpasu`.
+- Linux: configuration under `$XDG_CONFIG_HOME/clash-nyanpasu` or `$HOME/.config/clash-nyanpasu`; data under `$XDG_DATA_HOME/clash-nyanpasu` or `$HOME/.local/share/clash-nyanpasu`.
 
-Starting with v1.6.0, Clash Nyanpasu split the installation directory into configuration and data directories, the log directory was moved to the data directory, and Windows users can choose to migrate the configuration directory.
+Since v1.6.0, configuration and data are stored separately; the log directory is inside the data directory. On Windows, the configuration directory can be customized or migrated. Custom directory settings take precedence over these defaults.
 
-- For Windows, the default configuration directory is located at `%APPDATA%/Clash Nyanpasu/config` and the data directory is located at `%LOCALAPPDATA%/Clash Nyanpasu/data`.
-  - If you customize the configuration directory, the configuration directory is whichever you specify.
+For the Windows portable package, the configuration and data directories are `.config/clash-nyanpasu` and `.data/clash-nyanpasu` beside the executable. See [installation](../tutorial/install) for package differences.
 
-- For macOS, both the configuration directory and the data directory are located at `~/Library/Application Support/Clash Nyanpasu`.
+### How do I change the application log level?
 
-- For Linux:
-  - The configuration directory is located at `$XDG_CONFIG_HOME/clash-nyanpasu` or `$HOME/.config/clash-nyanpasu`.
-  - The data directory is located at `$XDG_DATA_HOME/clash-nyanpasu` or `$HOME/.local/share/clash-nyanpasu`.
+Open **Settings → Nyanpasu Settings** and change **Application Log Level**. The change takes effect as soon as it is saved. Available levels are `trace`, `debug`, `info`, `warn`, `error`, and `silent` (no application log output).
 
-:::
+Older instructions that edit `nyanpasu-config.yaml` refer to the legacy settings file. For the current app, change the log level in Settings.
 
-If you need to get the logs yourself, you can navigate to the **data directory** and find the `logs` directory, which contains the log files of the current program.
+### How do I enable TUN?
 
-### 3. How to edit the log level?
+Follow [System Proxy and TUN](../tutorial/system-proxy-tun). The required steps depend on your platform and release package. Do not apply old manual permission commands from version 1.x to a 2.0 installation.
 
-- In the **Nyanpasu Setting** option on the **Settings page**, you can find **App Log Level** to edit the log level, which takes effect immediately after saving.
-- Find `nyanpasu-config.yaml` in the **Config Dir**, find the `app_log_level` field and edit the log level, and restart the app after saving.
+### Why does my subscription return no usable proxy nodes?
 
-> The applicable log levels are `trace`, `debug`, `info`, `warn`, `error`, and `silent`(no logging).
+Some providers select the response based on the request's User-Agent. By default, Clash Nyanpasu sends `clash-nyanpasu/v{version}`, where `{version}` is the app version. Ask your provider to allow this value, or change the profile's **User Agent** to a value the provider accepts, such as `clash-meta`. You can set it while importing a subscription or edit it in the profile's update options. Do not share your full subscription URL in a public issue.
 
-### 4. How to enable TUN mode?
+### What are the application and core directories?
 
-:::note[Note]
-TUN mode requires certain permissions.
+The application/core directory contains bundled resources and core files. Open it from the tray menu or **Settings**. The app also provides system-service installation and management under **Settings → System Service**; follow that flow instead of manually installing service binaries. Most users do not need to edit files in the application directory.
 
-- For Windows, run Clash Nyanpasu as an administrator to enable TUN mode.
-- For macOS, click the **Settings icon** next to **Clash Core** on the **Settings page**, open core settings, click the **small lock icon** on the core side, enter the password for authorization, and restart the core.
-- For Linux, similar to macOS, you can run with sudo to achieve authorization.
-  :::
+## Using the app
 
-- In the **Settings Page - System Settings** option, enable **TUN Mode**.
+### Which mode should I use?
 
-#### Manual authorization on macOS
+Start with [System Proxy and Rule mode](../tutorial/system-proxy-tun). Use TUN when you need to include applications that do not follow the operating system's proxy setting, and review its permission requirements first.
 
-- If authorization is not successful, you can manually execute the following command. After authorization, a restart is still required.
+### How do I choose or update a core?
 
-```bash
-# clash core
-sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
-sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash
+Open **Settings → Clash Settings** and use **Core Manager**. For the available engines and compatibility notes, see [Choose and manage a core](../tutorial/cores-and-compatibility).
 
-# mihomo core
-sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
-sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo
+### Where do I begin?
 
-# mihomo alpha core
-sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
-sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/mihomo-alpha
-
-# clash rust core
-sudo chown root:admin /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
-sudo chmod +sx /Applications/Clash\ Nyanpasu.app/Contents/MacOS/clash-rs
-```
-
-### 5. Missing subscription node types
-
-Some subscription types recognize the User Agent (UA) of the request and deliver the corresponding configuration file based on the UA. The default UA for Nyanpasu is `clash-nyanpasu/vx.y.z`, where `x.y.z` represents the app version. If you are unable to retrieve certain types of nodes, it is likely because the subscription provider has not added the Nyanpasu UA for recognition.
-
-#### Solutions
-
-1. Contact the subscription provider and request support for the Nyanpasu UA;
-2. Edit the UA to a type supported by the subscription provider, such as `clash-meta`, etc.
-
-### 6. What are program directories and core directories? What are their roles?
-
-In the current version, we refer to the program installation directory as the `Application Directory` or the `Core Directory`, which contains all current core and embedded resource files. You can open it by right-clicking the tray or finding the corresponding directory in the settings page.
-
-When you need to manually install Nyanpasu service, you can find the service binaries in this way.
+See [Profiles and subscriptions](../tutorial/profiles-and-subscriptions) to import or update a configuration, then [Dashboard and traffic analysis](../tutorial/dashboard-and-traffic) to explore runtime data.

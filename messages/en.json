@@ -207,7 +207,7 @@
   "client_preview_tun_mode": "TUN Mode",
   "client_preview_proxy_disabled": "Disabled",
   "client_preview_proxy_occupied": "Used by Other Programs",
-  "client_preview_proxy_mode": "Proxy mode",
+  "client_preview_routing_mode": "Routing mode",
   "client_preview_rule": "Rule",
   "client_preview_global": "Global",
   "client_preview_direct": "Direct",

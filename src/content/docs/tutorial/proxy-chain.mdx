@@ -1,82 +1,117 @@
 ---
-title: "Proxy Chain"
+title: "Profile Transforms"
 sidebar:
-  order: 2
+  order: 5
 ---
 
-`Clash Nyanpasu` inherits the proxy chain feature from `Clash Verge` and can implement a proxy chain through two types of chains: `Script` or `Merge`. The content of this section is adapted from `Clash Verge` documentation[^1].
+import { Badge, Steps, TabItem, Tabs } from '@astrojs/starlight/components';
 
-## What is a Proxy Chain?
+Clash Nyanpasu 2.0 builds a runtime configuration from a configuration profile and its transforms. The older “proxy chain” wording refers to this profile transformation workflow. A transform reads the result produced so far and passes its output to the next step; it does not rewrite the source profile.
 
-A proxy chain refers to the post-processing chain of a `Profile`. A profile can go through nodes such as `A`, `B`, `C`, or even more chain processing nodes, where the configuration is modified using scripts or expressions to generate a final proxy configuration. Multiple nodes are processed sequentially, forming a chain structure. You can customize the chain to enable certain nodes for different profiles or globally, thereby creating your own proxy chain.
+## Concepts
 
-The following diagram shows the current chain processing structure.
+A **configuration profile** is a file profile or a composition profile that can be selected for use. A **transform profile** is a reusable operation and cannot be activated on its own.
+
+Clash Nyanpasu provides three transform types <Badge text="3 transform types" variant="note" />:
+
+- **YAML overlay** (shown as **Merge** on some existing profiles) applies declarative merge rules.
+- **JavaScript** runs a script against the current configuration object.
+- **Lua** runs a script against the current configuration table.
+
+:::note[The older pipeline proposal]
+The previously proposed standalone `pipeline` transform is not a separate transform type in 2.0. Build a pipeline by ordering scoped and global YAML, JavaScript, or Lua transforms.
+:::
+
+## Configure a transform chain
+
+<Steps>
+
+1. In **Profiles**, create a transform by choosing **Merge (YAML)**, **JavaScript**, or **Lua**. A transform can use a local file or another supported profile source.
+2. Open a file or composition profile. In **Profile transforms**, move transforms from **Available** to **Enabled**.
+3. Drag enabled transforms into the order you want, then apply the change.
+4. To add transforms shared by the active configuration, use **Global transforms** in **Profiles** and set their order there.
+
+</Steps>
+
+A newly created transform is not enabled automatically. Scoped transforms run from top to bottom before global transforms, which also run from top to bottom.
+
+For a composition profile, the app processes the optional base profile and each contributor with that file's scoped transforms. It appends contributor proxies in the order listed, then runs the composition profile's scoped transforms, followed by global transforms.
 
 ```mermaid
 flowchart TD
-    A(Start)-->B["Load Profiles"]-->profile_chain-->global_chain-->G["Merge Protected Fields"]-->internal_chain-->J{"Enable Field Filtering?"}-->|Yes|K["Filter Fields"]-->L["Misc: Handle Tun, Sorting"]
-    J-->|No|L
-    L-->M[Generate Configuration]-->N(End)
-    subgraph profile_chain [Profile Chain]
-        C["..."]-->D["Processing Node n"]
-    end
-    subgraph global_chain [Global Chain]
-        E["..."]-->F["Processing Node n"]
-    end
-    subgraph internal_chain ["Internal Chain (For Compatible Scripts)"]
-        H["..."]-->I["Processing Node n"]
-    end
+    A[Selected file or composition] --> B[Scoped transforms in list order]
+    B --> C[Global transforms in list order]
+    C --> D[Application and core post-processing]
+    D --> E[Generated runtime configuration]
 ```
 
-{/*  */}
-
-## Merge Processing
-
-:::tip[Note]
-Starting from version `1.6.0`, we have enabled custom keywords to support the `.` object access operator and perform recursive merging by default, avoiding direct overwriting of existing configurations. If you need to override, use `override__x.y.z` to apply the old behavior.
-Additionally, we plan to introduce a new `pipeline` node for pipeline expression operations, simplifying GUI-based configuration.
+:::caution[Order and Clash Fields]
+YAML overlay keys run in document order, and transform profiles run in their displayed order. The **Clash Field Filter** setting can remove optional fields after transforms: allow fields such as `dns` or `tun` there if they need to remain in the generated configuration. Application-managed listener fields may also override profile values.
 :::
 
-This processing node provides configuration merging functionality similar to `OpenClash`. It achieves this by defining the following rules for overwriting configurations.
+## YAML overlay <Badge text="YAML" variant="tip" />
 
-:::caution[Note]
-When using other fields like `dns`, `tun`, etc., you need to select the corresponding fields in the **_Clash Fields_** section on the settings page. Fields that are not selected will be ignored.
-Moreover, Merge rules are executed in **top-down order**.
+The YAML source must have a mapping at its top level. Ordinary mapping keys merge recursively: nested mappings keep unspecified values, while scalars and sequences replace the matching value. A new key is added. This serves the same broad purpose as OpenClash's merge-style configuration editing; the rules below describe Nyanpasu 2.0. Overlay directives operate on dotted paths and run in the order they appear in the YAML document.
+
+| Key | Effect |
+| --- | --- |
+| `append__path` / `append-path` | Add a sequence to the end of an existing sequence. |
+| `prepend__path` / `prepend-path` | Add a sequence to the beginning of an existing sequence. |
+| `override__path` | Replace the value at an existing dotted path. |
+| `filter__path` | Filter or transform items in an existing sequence with Lua expressions. |
+
+Append and prepend require a sequence as the directive value and an existing destination sequence. If the directive value is not a sequence, the path is missing, or the target is not a sequence, the operation is skipped with a warning. `override__path` also skips a missing path with a warning; it does not create one. These skipped-path warnings do not by themselves fail the candidate configuration.
+
+<Tabs>
+<TabItem label="Append a rule">
+
+This appends one rule and keeps the existing `rules` entries. The `rules` field must already be a sequence.
+
+```yaml
+append__rules:
+  - DOMAIN-SUFFIX,example.org,DIRECT
+```
+
+</TabItem>
+<TabItem label="Prepend and add a group">
+
+This adds a selectable group and places its domain rule before existing rules. Both `proxy-groups` and `rules` must already be sequences. Replace `DIRECT` with a proxy or group that exists in your configuration if the group should route through a proxy.
+
+```yaml
+append__proxy-groups:
+  - name: Docs-Example
+    type: select
+    proxies:
+      - DIRECT
+prepend__rules:
+  - DOMAIN-SUFFIX,example.org,Docs-Example
+```
+
+</TabItem>
+</Tabs>
+
+### Filter predicates and actions
+
+`filter__path` requires an existing sequence. A string value is a Lua predicate evaluated once for each `item`: `true` keeps that item and `false` removes it. A filter mapping uses a `when` predicate and one action. A list of filters runs sequentially, with each operation receiving the previous operation's output.
+
+:::caution[Filter errors]
+A string predicate error logs a warning, removes the item that caused the error, and marks the transform as failed. A mapping's `when` error is treated as false, so the item is kept; an `expr` error also keeps the item. Both errors mark the transform as failed, so the candidate configuration is rejected. Missing paths, wrong sequence types, invalid filter shapes, and a `merge` target that is not a mapping are logged and skipped without marking the transform failed.
 :::
 
-### Merge Rules
+<Tabs>
+<TabItem label="Predicate">
 
-- `append__x.y.z` - Appends the content of the `x.y.z` field to the end of the original `x.y.z` list. If `x.y.z` does not exist or is not an array, it will be ignored, and a log warning will be triggered.
-- `prepend__x.y.z` - Adds the content of the `x.y.z` field to the beginning of the original `x.y.z` list. If `x.y.z` does not exist or is not an array, it will be ignored, and a log warning will be triggered.
-- `override__x.y.z` - Directly overrides the content of the `x.y.z` field. If `x.y.z` does not exist, it will be ignored, and a log warning will be triggered.
-- `filter__x.y.z` - Filters or modifies the content of the `x.y.z` field. For supported types, refer to [`filter` Supported Operations](#filter-supported-operations).
-- Other fields - Fields are recursively merged and will not directly overwrite the original configuration.
-
-> More examples can be found in the [Merge Unit Test Cases](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/tauri/src/enhance/merge.rs#L320).
-
-#### `filter` Supported Operations
-
-##### Filtering Lists
-
-The `filter__x.y.z: string` operation filters a list using a Lua expression where `item` represents the current element. The expression must return a `bool`. If the expression encounters an error, a log warning will be triggered.
-Here is an example of removing `trojan` proxies:
+Keep every proxy except Trojan proxies. The expression must return a boolean.
 
 ```yaml
 filter__proxies: |
   item.type ~= 'trojan'
 ```
 
-##### Modifying Lists Using Expressions
+</TabItem>
+<TabItem label="expr">
 
-This operation is similar to the `map` operation in other languages. It modifies matched items using the `expr` expression. The syntax is as follows:
-
-```yaml
-filter__x.y.z:
-  when: string # Lua expression, where item is the current element, returns a boolean value
-  expr: string # Lua expression, where item is the current element, returns the modified item
-```
-
-Here’s an example of modifying the `port` of `trojan` proxies to `443`:
+Use `when` to match items, then return the changed item from the Lua `expr`.
 
 ```yaml
 filter__proxies:
@@ -87,17 +122,10 @@ filter__proxies:
     return item
 ```
 
-##### Merging Fields
+</TabItem>
+<TabItem label="merge">
 
-This operation is similar to the `map` operation in other languages, merging matched items using the `merge` table. The syntax is as follows:
-
-```yaml
-filter__x.y.z:
-  when: string # Lua expression, where item is the current element, returns a boolean value
-  merge: object # Object to be merged recursively, future support for arrays might be considered
-```
-
-Here is an example of adding the `icon` field to the `Spotify` proxy group:
+Recursively merge the supplied mapping into each matching item. An `icon` extension is core-dependent; check that the selected core supports it.
 
 ```yaml
 filter__proxy-groups:
@@ -107,17 +135,10 @@ filter__proxy-groups:
     icon: "https://example.com/spotify.png"
 ```
 
-##### Directly Overwriting Fields
+</TabItem>
+<TabItem label="override">
 
-This operation is similar to the `map` operation in other languages but directly overwrites the matched item. The syntax is as follows:
-
-```yaml
-filter__x.y.z:
-  when: string # Lua expression, where item is the current element, returns a boolean value
-  override: any # Value to override
-```
-
-Here is an example of forcibly overriding the `Spotify` proxy group:
+Replace the entire matching item with the supplied value.
 
 ```yaml
 filter__proxy-groups:
@@ -136,17 +157,10 @@ filter__proxy-groups:
       - US
 ```
 
-##### Removing Fields
+</TabItem>
+<TabItem label="remove">
 
-This operation is similar to the `map` operation in other languages but removes keys from the matched item using the `remove` field. The syntax is as follows:
-
-```yaml
-filter__x.y.z:
-  when: string # Lua expression, where item is the current element, returns a boolean value
-  remove: Array<string | int> # List of keys to remove. Keys are strings for objects and numbers for arrays.
-```
-
-Here’s an example of removing the first proxy from the `proxies` field of the `Spotify` proxy group:
+The remove list accepts dotted string paths and integer indices. Remove a dotted path from each matching mapping item; `proxies.0` addresses the first entry in that item's `proxies` sequence.
 
 ```yaml
 filter__proxy-groups:
@@ -156,11 +170,10 @@ filter__proxy-groups:
     - proxies.0
 ```
 
-##### Chained Operations
+</TabItem>
+<TabItem label="Chained filters">
 
-The `filter` operation supports list types, where each element is a `filter` operation. This allows for chained processing of multiple operations.
-
-Here’s an example that adds the `icon` field to both the `Spotify` and `Netflix` proxy groups:
+Each list entry runs in order; this example adds an icon to two different groups.
 
 ```yaml
 filter__proxy-groups:
@@ -174,44 +187,68 @@ filter__proxy-groups:
       icon: "https://example.com/netflix.png"
 ```
 
-## Script Processing
+</TabItem>
+</Tabs>
 
-:::note[Note]
+For more cases, see the [current overlay executor examples](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/nyanpasu-config/src/runtime/executor/tests/overlay.rs).
 
-We plan to introduce the `unstable_get` method in version `1.6.2`, allowing HTTP GET requests to fetch remote content for processing.
+## JavaScript <Badge text="Boa" variant="note" />
 
-**For more examples, please refer to the next section.**
-:::
+The JavaScript runner uses Boa and calls a default-exported function with the current configuration object. Its contract is `main(config: ClashConfig): ClashConfig`: `ClashConfig` describes the input and returned configuration; write executable JavaScript without TypeScript annotations. Like CFW Mixins or preprocessing, a transform edits a configuration and returns the result; the analogy does not imply script compatibility. The default export must return a mapping-compatible configuration, and a returned promise is awaited. If a promise remains pending for the runner's short wait window (about two seconds), the transform fails. `console.log`, `console.info`, `console.warn`, and `console.error` are captured in the step logs.
 
-### JavaScript Node
+<Tabs>
+<TabItem label="Append two rules">
 
-This processing node currently provides JavaScript processing based on `BoaJS`, similar to the `Mixins` or preprocessing feature in CFW.
-
-The script accepts a function with the signature `export default function main(config: ClashConfig): ClashConfig`, where `ClashConfig` is the Clash configuration type. The return value of the script will be used as the final configuration.
-
-Here’s an example of adding `rules` through a script:
+This preserves the original two-rule example while checking that `rules` is an array before appending.
 
 ```javascript
 export default function main(config) {
-  const rules = ["DOMAIN-SUFFIX,google.com,PROXY", "DOMAIN,example.org,PROXY"];
-  config.rules = [...config.rules, ...rules];
+  const rules = [
+    "DOMAIN-SUFFIX,google.com,PROXY",
+    "DOMAIN,example.org,PROXY",
+  ];
+  if (Array.isArray(config.rules)) {
+    config.rules.push(...rules);
+  } else {
+    config.rules = rules;
+  }
   return config;
 }
 ```
 
-### Lua Processing Node
+</TabItem>
+<TabItem label="Append one rule">
 
-This processing node provides Lua scripting functionality based on `mlua`, compatible with `Lua 5.4` syntax, and includes a [secure standard library preset](https://docs.rs/mlua/latest/mlua/struct.StdLib.html#associatedconstant.ALL_SAFE).
+```javascript
+export default function main(config) {
+  if (Array.isArray(config.rules)) {
+    config.rules.push("DOMAIN-SUFFIX,example.org,DIRECT");
+  }
+  return config;
+}
+```
 
-The processing module exposes a `config` variable that contains the current Clash configuration. Users can modify the `config` variable, and the result will be used as the final configuration.
+</TabItem>
+</Tabs>
 
-Here’s an example of adding `rules` through a Lua script:
+The runner exposes selected pure Web APIs, but no general `fetch()` API. It can resolve local modules and HTTP(S) ES-module imports; downloaded modules are cached for up to 30 days. Only import remote modules you trust. See the [JavaScript runner source](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/nyanpasu-platform/src/enhance/script/js.rs).
+
+## Lua <Badge text="Lua 5.4" variant="note" />
+
+The Lua runner uses Lua 5.4 syntax and the `mlua` `ALL_SAFE` standard-library preset. It exposes the current configuration as the global `config`; the script must return a table containing a mapping. Console output is captured in the step logs.
+
+<Tabs>
+<TabItem label="Append two rules">
 
 ```lua
 local rules = {
   'DOMAIN-SUFFIX,google.com,PROXY',
   'DOMAIN,example.org,PROXY',
 }
+
+if type(config.rules) ~= "table" then
+  config.rules = {}
+end
 
 for _, rule in ipairs(rules) do
   table.insert(config.rules, rule)
@@ -220,6 +257,34 @@ end
 return config
 ```
 
-## References
+</TabItem>
+<TabItem label="Append one rule">
 
-[^1]: [Clash Verge - Proxy Chain](https://github.com/zzzgydi/clash-verge/wiki/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
+```lua
+if type(config.rules) == "table" then
+  table.insert(config.rules, "DOMAIN-SUFFIX,example.org,DIRECT")
+end
+
+return config
+```
+
+</TabItem>
+</Tabs>
+
+See the [Lua runner source](https://github.com/libnyanpasu/clash-nyanpasu/blob/main/backend/nyanpasu-platform/src/enhance/script/lua/mod.rs). For examples that add rule sets or proxy-group icons, see [profile transform examples](./chains/loyalsoldier-rules) and [the icon example](./chains/proxy-group-icons); some fields in these examples depend on the selected core.
+
+## Inspect and recover
+
+<Steps>
+
+1. Open **Profile Inspect** from **Profiles**.
+2. Switch between **Generated configuration** and **Last applied snapshot**.
+3. Choose list or graph view, then select a step to inspect its YAML output, diff from its parent, changed fields, and logs.
+
+</Steps>
+
+:::caution[Failure and snapshot behavior]
+A transform error rejects the candidate configuration, leaving the last applied runtime in place; ordinary skipped-path warnings do not fail the build. The last-applied view is what the core reported as running. A generated snapshot belongs to one pipeline build and is not edit history; the inspector does not provide rollback.
+:::
+
+To discard unsaved source edits, use **Reset** in the profile editor or choose **Cancel** and confirm discarding changes. To disable a transform, move it from **Enabled** to **Available** in the scoped or global transform editor and apply the change. To undo saved content, restore the desired transform source and save it.

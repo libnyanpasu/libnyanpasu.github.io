@@ -1,44 +1,76 @@
 ---
-title: "简介"
+title: "关于 Clash Nyanpasu"
 sidebar:
   order: 1
 ---
 
-在这里了解 **Clash Nyanpasu** 的介绍、起源以及特点。
+import { Badge, CardGrid, LinkCard } from "@astrojs/starlight/components";
 
-## 什么是 Clash Nyanpasu？
+Clash Nyanpasu 是一款基于 Tauri 的跨平台桌面客户端，可在 Windows、macOS 和 Linux 上管理 Clash 兼容代理配置及其运行状态。2.0 系列重新设计了配置管理流程，并加入流量分析和可定制仪表盘。
 
-**Clash Nyanpasu** 是基于 Tauri 的 Clash GUI 软件实现，利用 Tauri 的特性实现了跨平台的支持。
-它能在 Windows、Linux 和 macOS 系统上提供代理服务，并支持 TUN 网卡模式。
+## 选择一篇指南
 
-Clash Nyanpasu 原生支持多种内核，包括 Clash Premium、Mihomo 和 Clash Rust，用户可以根据个人喜好选择使用。
-此外，该软件内置强大的脚本处理功能，为用户提供了更灵活的使用体验。
-设计上，Clash Nyanpasu 完全符合 Google Material You 的设计理念，为用户带来视觉上的愉悦感受。
+<CardGrid>
+  <LinkCard
+    title="完成首次连接"
+    href="/zh-cn/tutorial/first-connection/"
+    description="导入配置、选择代理，并确认流量已正常转发。"
+  />
+  <LinkCard
+    title="管理配置与订阅"
+    href="/zh-cn/tutorial/profiles-and-subscriptions/"
+    description="导入远程或本地配置，并保持订阅及时更新。"
+  />
+  <LinkCard
+    title="选择和管理内核"
+    href="/zh-cn/tutorial/cores-and-compatibility/"
+    description="了解内置内核，并检查配置兼容性。"
+  />
+  <LinkCard
+    title="选择系统代理或 TUN"
+    href="/zh-cn/tutorial/system-proxy-tun/"
+    description="了解流量如何进入内核，以及路由模式的区别。"
+  />
+  <LinkCard
+    title="仪表盘与流量分析"
+    href="/zh-cn/tutorial/dashboard-and-traffic/"
+    description="调整小组件，并按进程、目标和路由查看流量。"
+  />
+  <LinkCard
+    title="排查连接问题"
+    href="/zh-cn/tutorial/troubleshooting/"
+    description="逐步检查启动、配置、代理和权限问题。"
+  />
+</CardGrid>
 
-## Clash Nyanpasu 的起源
+## 可以用它做什么
 
-Clash Nyanpasu 最初是从 Clash Verge 1.3.7 分支而来，是在 Clash Verge 1.3.7 的基础上进行二次开发而成的。
-在开发过程中，我们特别注重了代码质量和用户界面操作体验。因此，Clash Nyanpasu 成为了一款站在巨人肩膀上的优秀软件。
+- 导入远程订阅和本地配置文件，并选择当前启用的配置。
+- 为配置添加 YAML、JavaScript 或 Lua 转换，并检查生成配置的变化。
+- 选择代理节点、查看延迟结果，以及检查连接、规则、日志和流量报告。
+- 将流量、连接、代理状态、内核状态和订阅信息等小组件排列到仪表盘。
 
-我们要感谢开源社区，因为 Clash Nyanpasu 的诞生离不开广大开发者和用户的支持与贡献。
+具体功能可能受所选内核、操作系统和安装包影响。平台信息请参阅[安装指南](./tutorial/install)和 [GitHub 当前发布版本](https://github.com/libnyanpasu/clash-nyanpasu/releases)。
 
-## 关于名字和图标的故事
+## 平台与内核支持
 
-Clash Nyanpasu 的名字和图标都有着特殊的来源和含义。在这个名称中，“Nyanpasu” 来自于 Nyanpasu AOSP。最初，我们采用了 Nyanpasu AOSP 的图标，因此我们将软件命名为 “Clash Nyanpasu”。
+<Badge text="Windows" variant="success" /> <Badge text="macOS" variant="success" /> <Badge text="Linux" variant="success" />
 
-_需要特别说明的是，我们获得了 Nyanpasu AOSP 所有者的授权，才能够使用其名称和标志。_
+应用内置多个代理内核，各自支持的配置字段和功能有所不同。当前可选内核包括 Clash Premium、Mihomo 与 Mihomo Alpha、Clash Rust 与 Clash Rust Alpha，以及 Meow 与 Meow Alpha。选择内核前，请先阅读[内核兼容性说明](./tutorial/cores-and-compatibility)。
 
-## 别名和简称
+## 功能
 
-除了官方的名称 “Clash Nyanpasu”，中文用户可以使用简称 “喵帕斯” 来代替，以便沟通和交流。
+- 从托盘菜单选择代理节点并切换路由模式。
+- 在应用内管理和更新多个 Stable 与 Alpha 内核版本。
+- 使用 YAML、JavaScript 或 Lua 转换配置，并管理远程提供者。
+- 使用采用 Material You 设计的界面和动效。
+- 配置混合代理端口，也可以自动选择可用端口。
+- 在同一桌面应用中查看连接、规则、日志、订阅和流量。
 
-## 特色功能
+## 名称与图标
 
-- 托盘节点选择
-- 内置多 Clash 内核支持
-- 内置 Clash 内核更新管理器
-- 完整的脚本支持
-- Material You 设计语言
-- 自定义运行路径
-- 随机 Mixed Proxy 端口
-- 还有更多...
+名称中的 _Nyanpasu_ 来自 Nyanpasu AOSP。项目早期沿用了 Nyanpasu AOSP 的图标，并获得其所有者授权使用名称和标志。项目也感谢开源社区，以及为内核和桌面应用提供基础的各个项目。
+
+中文交流中也常用 _喵帕斯_ 作为 Clash Nyanpasu 的简称。
+
+本项目是自由开源软件，欢迎通过 [GitHub](https://github.com/libnyanpasu/clash-nyanpasu) 参与贡献或反馈问题。

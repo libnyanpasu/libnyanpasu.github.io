@@ -1,196 +1,305 @@
 ---
-title: "Installation"
+title: Installation
 sidebar:
   order: 1
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Badge, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 
-Clash Nyanpasu currently supports:
+<Badge text="Windows · x64 / ARM64" />
+<Badge text="macOS · Intel / Apple silicon" />
+<Badge text="Linux · DEB / RPM / AppImage" />
+<Badge text="Native multi-core support" variant="success" />
 
-- Windows 10 and later
-- macOS 12.6 and later
-- Linux (`glibc` >= 2.39)
+Clash Nyanpasu supports Windows 10 and later, macOS 12.6 and later, and Linux with `glibc >= 2.39`. Choose the package for your device from the official [releases](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page; package types and architectures vary by release.
 
-:::note[Tips]
+:::note[Architecture names]
 
-Some explanations of terms included in the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page:
+<code>x64</code>, <code>amd64</code>, and <code>x86_64</code> refer to 64-bit Intel/AMD builds. <code>ARM64</code> and <code>aarch64</code> refer to 64-bit Arm builds, including Apple silicon and supported Windows or Linux devices. Only these 64-bit architectures are supported; 32-bit and older Arm targets are unavailable.
 
-- `amd64` / `x86_64` / `x64`: For popular 64-bit Intel/AMD processor devices.
-- `aarch64` / `arm64`: For modern 64-bit Arm architecture devices (e.g., Apple Silicon chips, modern Arm-based Windows or Linux devices).
+:::
 
-Currently, we only support the 64-bit architectures listed above; 32-bit and legacy Arm devices are not supported.
+:::caution[Archived and unsupported versions]
+
+Clash Nyanpasu 1.6.x and earlier are fully archived and unsupported. They receive no maintenance or fixes; do not use them for new installations.
+
+:::
+
+## Choose the right package
+
+```mermaid
+flowchart TD
+  A[Check your operating system and CPU architecture] --> B{Operating system}
+  B -->|Windows| C{CPU}
+  C -->|Intel or AMD| D[x64 setup installer]
+  C -->|ARM-based Windows| E[ARM64 setup installer]
+  B -->|macOS| F{CPU}
+  F -->|Intel| G[x64 DMG]
+  F -->|Apple silicon| H[aarch64 DMG]
+  B -->|Linux| I{Distribution or package type}
+  I -->|Debian or Ubuntu| J[DEB · amd64 or arm64]
+  I -->|Fedora or RPM-based| K[RPM · x86_64 or aarch64]
+  I -->|Arch Linux| L[AUR · community packages]
+  I -->|AppImage| M[AppImage · x86_64]
+```
+
+<Steps>
+
+1. **Check your CPU architecture.** On Windows, open **Settings → System → About** and read **System type**. On macOS, open **Apple menu → About This Mac**. On Linux, run `uname -m` in a terminal.
+2. **Match the asset name.** `x64`, `amd64`, and `x86_64` refer to 64-bit Intel/AMD builds. `ARM64` and `aarch64` refer to 64-bit Arm builds. The release page may not offer every package type for every architecture.
+3. **Install the package and continue to [your first connection](./first-connection).** If you are using a Linux package, also read the notes for that package below.
+
+</Steps>
+
+:::note[Built-in proxy cores]
+
+Clash Nyanpasu natively supports the Clash Premium, Mihomo, Clash Rust, and Meow core families, with stable and Alpha choices where available. Official release packages bundle the supported core programs. A configuration may use features that are not implemented by every core; see [Core selection and compatibility](./cores-and-compatibility).
 
 :::
 
 ## Windows
 
-First, please make sure that the WebView2 runtime is installed on your system. If your system does not have the WebView2 runtime installed, you can download and install it from the [Microsoft official site](https://developer.microsoft.com/en-us/microsoft-edge/webview2).
+<Badge text="Windows 10 or later" />
+<Badge text="x64" />
+<Badge text="ARM64" />
 
-### Installer
+Download the installer ending in `_x64-setup.exe` for most Intel/AMD PCs or `_arm64-setup.exe` for Windows on ARM.
 
-Please download the latest version of `Clash.Nyanpasu_x.y.z_x64-setup.exe` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) and install it.
+:::note[WebView2 prerequisite]
 
-### Portable
+The standard installer uses the Microsoft WebView2 bootstrapper. If the WebView2 Runtime is missing, the installer can set it up; this may require an internet connection. You can also install the [WebView2 Runtime from Microsoft](https://developer.microsoft.com/en-us/microsoft-edge/webview2) first.
 
-:::caution[Note]
-Please note that Tauri does not officially **support** the portable variant. The portable[^1] variant provided by Clash Nyanpasu is generated through an automated packaging process and explicitly ignores WebView2 detection, so some problems may be encountered. We plan to stick to the principle that the portable variant does not modify the registry in the future. As a result, some features may **not** work properly:
-
-- **System Services**: We are planning to **remove** `nyanpasu-service` from the portable variant because it does service registration and modifies the registry, which is against the principles of the portable variant.
-- **Notifications**: System notifications are not available on Windows 10/11 with the portable variant, so some of the actions that trigger notifications on the backend will not be visible.
-- **Shortcut Import** (Custom Schema): This feature will be **removed** as the portable variant cannot modify the registry.
+If you need the runtime included with the app, choose the larger installer containing `fixed-webview` in its name, such as `_fixed-webview-x64-setup.exe` or `_fixed-webview-arm64-setup.exe`.
 
 :::
 
-Download the latest version of `Clash.Nyanpasu_x.y.z_x64_portable.zip` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page, extract and run it.
+### Portable archive
+
+Windows releases also provide `_x86_64_portable.zip` and `_aarch64_portable.zip`. Extract the archive and run the app executable. Fixed-WebView portable archives are also available and include the WebView2 runtime.
+
+:::caution[Portable package notes]
+
+The standard portable archive does not contain WebView2, so the runtime must already be installed. Portable settings and data are stored under `.config/` and `.data/` beside the extracted app; keep that folder writable and together when moving or backing up the app.
+
+The archive includes <code>nyanpasu-service.exe</code>; installing or starting the service requests elevated authorization and registers a Windows service. When the app starts, its deep-link handler also registers the <code>clash:</code> and <code>clash-nyanpasu:</code> URL schemes for the current user, so portable mode can still make these system changes. Windows system notifications are shown as app dialogs in portable mode. Portable packages do not receive the app's in-app application updates, so install a newer portable archive manually when you update.
+
+:::
 
 ## macOS
 
-Download the latest version of `Clash.Nyanpasu_x64.app.tar.gz` (Intel CPU) or `Clash.Nyanpasu.aarch64.app.tar.gz` (M-series CPUs) and install it.
+<Badge text="macOS 12.6 or later" />
+<Badge text="Intel · x64" />
+<Badge text="Apple silicon · aarch64" />
 
-If you encounter any installation problems, please refer to the [FAQ](../others/faq).
+Download the `.dmg` ending in `_x64.dmg` for an Intel Mac or `_aarch64.dmg` for an Apple-silicon Mac. Open the disk image and drag Clash Nyanpasu to **Applications**. If installation fails, see the [FAQ](../others/faq).
 
 ## Linux
 
-For Linux, due to the limitations of AppImage, we recommend using **Package Manager** to install or compile the app yourself.
-
-Tauri 2 is currently in beta, and when it is released, we will introduce more package support and potentially Flatpak support[^2].
-
-:::caution[Note]
-The following features are currently not supported for installation via package manager:
-
-- In-app updates
-- Core updates
-
-Note: AppImage variant supports in-app updates.
-:::
-
-### Debian/Ubuntu
-
-Download the latest version of the DEB package using a _third-party PPA source_ or from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
-
-#### Installation via DEB package
-
-Download the latest version of `clash-nyanpasu_x.y.z_amd64.deb` from the [GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page.
-
-Then execute it in the terminal:
-
-```bash
-sudo apt install -y ./clash-nyanpasu_x.y.z_amd64.deb
-```
-
-### ArchLinux
-
-AUR packages are currently provided by enthusiasts: [Stable (need to compile)](https://aur.archlinux.org/packages/clash-nyanpasu) / [Stable (binaries)](https://aur.archlinux.org/packages/clash-nyanpasu-bin) or [Development (need to compile)](https://aur.archlinux.org/packages/clash-nyanpasu-git).
-
-The following is a demonstration of installing AUR packages using `paru`:
+Official Linux package availability depends on the release. Current package families include DEB for `amd64` and `arm64`, RPM for `x86_64` and `aarch64`, and an `amd64` AppImage. The AppImage is not currently published for ARM64.
 
 <Tabs>
-  <TabItem label="Stable (need to compile)">
+  <TabItem label="Debian / Ubuntu · DEB">
+
+Download the `.deb` ending in `_amd64.deb` or `_arm64.deb`, then install it from the download directory:
 
 ```bash
-paru -Syu clash-nyanpasu
+sudo apt install ./Clash.Nyanpasu_*_amd64.deb
 ```
+
+For an ARM64 system, use:
+
+```bash
+sudo apt install ./Clash.Nyanpasu_*_arm64.deb
+```
+
+The wildcard assumes that only one matching release package is in the current directory.
 
   </TabItem>
-  <TabItem label="Stable (binaries)">
+  <TabItem label="Fedora · RPM">
+
+Download the `.rpm` ending in `.x86_64.rpm` or `.aarch64.rpm`, then install it with DNF:
 
 ```bash
-paru -Syu clash-nyanpasu-bin
+sudo dnf install ./Clash.Nyanpasu-*.x86_64.rpm
 ```
+
+For an ARM64 system, use:
+
+```bash
+sudo dnf install ./Clash.Nyanpasu-*.aarch64.rpm
+```
+
+The wildcard assumes that only one matching release package is in the current directory.
 
   </TabItem>
-  <TabItem label="Development (need to compile)">
+  <TabItem label="AppImage">
+
+Download the `.AppImage` ending in `_amd64.AppImage`. After making it executable, you can double-click it in your file manager or launch it from a terminal. In the directory containing the download, run:
 
 ```bash
-paru -Syu clash-nyanpasu-git
+chmod +x ./Clash.Nyanpasu_*_amd64.AppImage
+./Clash.Nyanpasu_*_amd64.AppImage
 ```
+
+The wildcard assumes that only one matching AppImage is in the current directory. To enable launch at login, open **Settings → System → Startup Settings → Start on system startup**.
+
+TUN depends on the selected core and needs suitable network privileges. Use **System Service** to install and start the service with elevated authorization, enable **Service Mode**, then enable TUN; keep the desktop app running as your normal user instead of launching the whole AppImage with <code>sudo</code>. Follow [System Proxy and TUN](./system-proxy-tun) for the steps.
 
   </TabItem>
 </Tabs>
 
-### AppImage
+If you encounter another AppImage issue, include your Linux distribution, architecture, app version, and package type when [reporting it](https://github.com/LibNyanpasu/clash-nyanpasu/issues/new).
 
-:::caution[Tip]
-The following known bugs exist with the AppImage variant:
+### Optional AppImage launcher and autostart entry
 
-- TUN authorization is not supported. If you need to use TUN mode, start the AppImage variant with `sudo`.
-- Clash Rust is temporarily unavailable and is being [investigated](https://github.com/libnyanpasu/clash-nyanpasu/issues/1448).
-- Service mode is not supported at this time.
-- Core updates are not supported at this time.
-
-**If you encounter any other problems while using it, feel free to submit a new issue for feedback!**
-:::
-
-Download the latest version of `clash-nyanpasu_x.y.z_amd64.AppImage` from [the GitHub Releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page, then double-click to run it.
-
-If you want to run it in a terminal, you can execute the following command:
-
-```bash
-chmod +x ./clash-nyanpasu_x.y.z_amd64.AppImage
-./clash-nyanpasu_x.y.z_amd64.AppImage
-
-```
-
-If you need to autostart, you may need to write a `.desktop` file.
-The following is a sample `.desktop` file that you can place in the `/usr/share/applications` or `~/.local/share/applications/` directory.
-First, let's download the icon for Clash Nyanpasu:
+The built-in login setting is under **Settings → System → Startup Settings → Start on system startup**. If you create a desktop entry manually, keep the AppImage at a fixed absolute path and replace <code>VERSION</code> with its actual filename. A launcher belongs in an <code>applications</code> directory; automatic login uses a separate <code>autostart</code> directory. <code>Autostart=true</code> is not a standard desktop-entry key, and <code>update-desktop-database</code> refreshes the applications directory only. Use either the built-in setting or the manual autostart entry to avoid launching the app twice.
 
 <Tabs>
-  <TabItem label="User Directory">
+  <TabItem label="User directories">
 
-```bash
-mkdir -p ~/.local/share/icons/clash-nyanpasu
-wget -O ~/.local/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-```
+Set <code>APPIMAGE_PATH</code> to the absolute path of your AppImage. This example uses the standard hicolor icon directory:
 
-  </TabItem>
-  <TabItem label="System Directory">
+~~~bash
+APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
+ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
+APP_DIR="$HOME/.local/share/applications"
 
-```bash
-sudo mkdir -p /usr/share/icons/clash-nyanpasu
-sudo wget -O /usr/share/icons/clash-nyanpasu/clash-nyanpasu.png https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png
-```
+chmod +x "$APPIMAGE_PATH"
+mkdir -p "$ICON_DIR" "$APP_DIR"
+curl -fL "https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png" -o "$ICON_DIR/clash-nyanpasu.png"
 
-  </TabItem>
-</Tabs>
-
-Then we write the `.desktop` file:
-
-```ini
+cat > "$APP_DIR/clash-nyanpasu.desktop" <<EOF
 [Desktop Entry]
-Categories=Development;
-Comment=A Clash GUI based on Tauri.
-Exec=/path/to/clash-nyanpasu_x.y.z_amd64.AppImage %U # Please change to your AppImage path.
-Icon=/path/to/clash-nyanpasu.png # Please replace with the path of the icon you downloaded.
-GenericName=Clash Nyanpasu
-Name=Clash Nyanpasu
-Terminal=false
 Type=Application
-Autostart=true # Whether to autostart or not.
-```
+Name=Clash Nyanpasu
+Comment=Clash proxy client
+Exec="$APPIMAGE_PATH" %U
+Icon=clash-nyanpasu
+Terminal=false
+Categories=Network;
+EOF
 
-Update the database:
+update-desktop-database "$APP_DIR"
+~~~
 
-<Tabs>
-  <TabItem label="User Directory">
+For automatic login, create a separate entry in the user autostart directory:
 
-```bash
-update-desktop-database ~/.local/share/applications
-```
+~~~bash
+APPIMAGE_PATH="$HOME/Applications/Clash.Nyanpasu_VERSION_amd64.AppImage"
+AUTOSTART_DIR="$HOME/.config/autostart"
+mkdir -p "$AUTOSTART_DIR"
+
+cat > "$AUTOSTART_DIR/clash-nyanpasu.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=Clash Nyanpasu
+Exec="$APPIMAGE_PATH"
+Terminal=false
+EOF
+~~~
 
   </TabItem>
-  <TabItem label="System Directory">
+  <TabItem label="System directories">
 
-```bash
-sudo update-desktop-database /usr/share/applications
-```
+Place the AppImage at a fixed path readable by all users, such as <code>/opt/clash-nyanpasu/</code>, and replace <code>VERSION</code> with its actual filename. The first command copies it from Downloads; change that source path if needed.
+
+~~~bash
+APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
+ICON_DIR="/usr/share/icons/hicolor/256x256/apps"
+APP_DIR="/usr/share/applications"
+
+sudo install -D -m 0755 "$HOME/Downloads/Clash.Nyanpasu_VERSION_amd64.AppImage" "$APPIMAGE_PATH"
+sudo install -d "$ICON_DIR" "$APP_DIR"
+curl -fL "https://raw.githubusercontent.com/libnyanpasu/clash-nyanpasu/main/frontend/nyanpasu/src/assets/image/logo-box.png" -o /tmp/clash-nyanpasu.png
+sudo install -m 0644 /tmp/clash-nyanpasu.png "$ICON_DIR/clash-nyanpasu.png"
+
+sudo tee "$APP_DIR/clash-nyanpasu.desktop" >/dev/null <<EOF
+[Desktop Entry]
+Type=Application
+Name=Clash Nyanpasu
+Comment=Clash proxy client
+Exec="$APPIMAGE_PATH" %U
+Icon=clash-nyanpasu
+Terminal=false
+Categories=Network;
+EOF
+
+sudo update-desktop-database "$APP_DIR"
+~~~
+
+To start it automatically for all users, add a separate entry under <code>/etc/xdg/autostart</code>:
+
+~~~bash
+APPIMAGE_PATH="/opt/clash-nyanpasu/Clash.Nyanpasu_VERSION_amd64.AppImage"
+sudo tee /etc/xdg/autostart/clash-nyanpasu.desktop >/dev/null <<EOF
+[Desktop Entry]
+Type=Application
+Name=Clash Nyanpasu
+Exec="$APPIMAGE_PATH"
+Terminal=false
+EOF
+~~~
 
   </TabItem>
 </Tabs>
 
-## Reference
+If <code>update-desktop-database</code> is unavailable, install your distribution's <code>desktop-file-utils</code> package.
 
-[^1]: Portable definition: [Portable application - Wikipedia](https://en.wikipedia.org/wiki/Portable_application)
+:::note[Application and core updates]
 
-[^2]: Flatpak support is not yet complete: https://github.com/tauri-apps/tauri/issues/3619
+The in-app **application** updater is available for standard Windows installers, macOS packages, and AppImage. Windows portable builds and Linux DEB/RPM/AUR packages do not use that updater: download a newer portable archive or update the installed package with its package manager or AUR helper.
+
+Supported proxy cores can be checked and updated separately through core management. Core updates are independent of the desktop-app updater; availability can depend on the core and, for AUR packages, the recipe's dependencies. See [Core selection and compatibility](./cores-and-compatibility).
+
+:::
+
+### Arch Linux · AUR
+
+<Badge text="Community-maintained" variant="caution" />
+<Badge text="Choose one package" />
+
+AUR packages are maintained by community contributors, not by the Clash Nyanpasu project. These package variants conflict with one another; install only one. The versions below are from AUR RPC records checked on 17 October 2026; verify the current record before installation.
+
+<Tabs>
+  <TabItem label="Stable · source build">
+
+Package: [clash-nyanpasu](https://aur.archlinux.org/packages/clash-nyanpasu). This variant builds the app from source.
+
+:::caution[Out of date; not a supported 2.0 install]
+
+The AUR record reports <code>1.6.1-1</code> and marks this package out of date. That version belongs to the archived, unsupported 1.6.x line, so this package is not a supported way to install 2.0. The install command is omitted until the AUR recipe is updated.
+
+:::
+
+  </TabItem>
+  <TabItem label="Stable · prebuilt binary">
+
+Package: [clash-nyanpasu-bin](https://aur.archlinux.org/packages/clash-nyanpasu-bin). This variant installs a prebuilt app instead of compiling it locally.
+
+The AUR record reports <code>2.0.0rc.2-1</code>, which corresponds to upstream <code>2.0.0-rc.2</code>. Although the AUR package is the prebuilt stable variant, its current upstream version is a release candidate.
+
+~~~bash
+paru -Syu clash-nyanpasu-bin
+# or
+yay -Syu clash-nyanpasu-bin
+~~~
+
+  </TabItem>
+  <TabItem label="Development · source build">
+
+Package: [clash-nyanpasu-git](https://aur.archlinux.org/packages/clash-nyanpasu-git). This variant builds from the source revision tracked by its AUR recipe. The RPC record reports <code>2.0.0.r6931.f6538a47-3</code> (revision <code>f6538a47</code>); development builds can change frequently and may include bugs.
+
+~~~bash
+paru -Syu clash-nyanpasu-git
+# or
+yay -Syu clash-nyanpasu-git
+~~~
+
+  </TabItem>
+</Tabs>
+
+:::note[AUR dependencies and core availability]
+
+AUR recipes are maintained separately from the official release bundles and can use system core packages. The current <code>clash-nyanpasu-bin</code> recipe lists Mihomo as a dependency and Clash Rust as optional. Check the dependency list for the package you choose, then see [Core selection and compatibility](./cores-and-compatibility) for the app's core options.
+
+:::

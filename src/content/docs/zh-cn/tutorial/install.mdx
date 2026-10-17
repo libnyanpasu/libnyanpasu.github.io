@@ -11,7 +11,7 @@ import { Badge, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 <Badge text="Linux · DEB / RPM / AppImage" />
 <Badge text="原生多内核支持" variant="success" />
 
-Clash Nyanpasu 支持 Windows 10 及更高版本、macOS 12.6 及更高版本，以及 `glibc >= 2.39` 的 Linux。请从官方 [releases](https://github.com/LibNyanpasu/clash-nyanpasu/releases) 页面选择适用于设备的安装包；各版本提供的包型和处理器架构可能不同。
+Clash Nyanpasu 支持 Windows 10 及更高版本、macOS 12.6 及更高版本，以及 `glibc >= 2.39` 的 Linux。请从官方 [releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) 页面选择适用于设备的安装包；各版本提供的包型和处理器架构可能不同。
 
 :::note[处理器架构名称]
 
@@ -49,13 +49,13 @@ flowchart TD
 
 1. **确认处理器架构。** Windows 用户打开**设置 → 系统 → 关于**，查看“系统类型”；macOS 用户打开**苹果菜单 → 关于本机**；Linux 用户可在终端运行 `uname -m`。
 2. **根据文件名后缀选择安装包。** `x64`、`amd64` 和 `x86_64` 表示 64 位 Intel/AMD 架构；`ARM64` 和 `aarch64` 表示 64 位 Arm 架构。发布页不一定为每种架构提供所有包型。
-3. **安装并继续完成[首次连接](./first-connection)。** Linux 用户还应阅读下方对应包型的说明。
+3. **安装并继续完成[首次连接](../first-connection)。** Linux 用户还应阅读下方对应包型的说明。
 
 </Steps>
 
 :::note[内置代理内核]
 
-Clash Nyanpasu 原生支持 Clash Premium、Mihomo、Clash Rust 和 Meow 内核系列，并在可用时提供稳定版与 Alpha 选项。官方发布包会附带受支持的内核程序。配置中使用的功能未必被所有内核实现，请参阅[内核选择与兼容性](./cores-and-compatibility)。
+Clash Nyanpasu 原生支持 Clash Premium、Mihomo、Clash Rust 和 Meow 内核系列，并在可用时提供稳定版与 Alpha 选项。官方发布包会附带受支持的内核程序。配置中使用的功能未必被所有内核实现，请参阅[内核选择与兼容性](../cores-and-compatibility)。
 
 :::
 
@@ -93,7 +93,7 @@ Windows 版本还提供 `_x86_64_portable.zip` 和 `_aarch64_portable.zip`。解
 <Badge text="Intel · x64" />
 <Badge text="Apple 芯片 · aarch64" />
 
-Intel Mac 下载文件名以 `_x64.dmg` 结尾的磁盘映像；Apple 芯片 Mac 下载 `_aarch64.dmg`。打开磁盘映像后，将 Clash Nyanpasu 拖到“应用程序”目录。如果安装失败，请参阅[常见问题](../others/faq)。
+Intel Mac 下载文件名以 `_x64.dmg` 结尾的磁盘映像；Apple 芯片 Mac 下载 `_aarch64.dmg`。打开磁盘映像后，将 Clash Nyanpasu 拖到“应用程序”目录。如果安装失败，请参阅[常见问题](../../others/faq)。
 
 ## Linux
 
@@ -145,12 +145,12 @@ chmod +x ./Clash.Nyanpasu_*_amd64.AppImage
 
 以上通配符要求当前目录中只有一个符合条件的 AppImage。若要设置登录时自动启动，请打开**设置 → 系统 → 启动设置 → 随系统启动**。
 
-TUN 取决于所选内核，并需要相应的网络权限。请通过**系统服务**以提升权限安装并启动服务，再开启**服务模式**和 TUN；桌面应用应以普通用户运行，不要使用 <code>sudo</code> 启动整个 AppImage。具体步骤请参阅[系统代理与 TUN](./system-proxy-tun)。
+TUN 取决于所选内核，并需要相应的网络权限。请通过**系统服务**以提升权限安装并启动服务，再开启**服务模式**和 TUN；桌面应用应以普通用户运行，不要使用 <code>sudo</code> 启动整个 AppImage。具体步骤请参阅[系统代理与 TUN](../system-proxy-tun)。
 
   </TabItem>
 </Tabs>
 
-如果遇到其他 AppImage 问题，请在[提交问题](https://github.com/LibNyanpasu/clash-nyanpasu/issues/new)时注明 Linux 发行版、处理器架构、应用版本和安装包类型。
+如果遇到其他 AppImage 问题，请在[提交问题](https://github.com/libnyanpasu/clash-nyanpasu/issues/new)时注明 Linux 发行版、处理器架构、应用版本和安装包类型。
 
 ### 可选：创建 AppImage 启动器和登录自启动项
 
@@ -251,7 +251,7 @@ EOF
 
 标准 Windows 安装包、macOS 安装包和 AppImage 支持应用内的**应用更新**。Windows 便携版和 Linux DEB/RPM/AUR 包不使用该更新器：请手动下载较新的便携包，或通过系统包管理器、AUR 助手更新已安装的软件包。
 
-受支持的代理内核可在内核管理功能中单独检查和更新。内核更新独立于桌面应用更新；具体可用性取决于所选内核，AUR 包还取决于配方声明的依赖。详见[内核选择与兼容性](./cores-and-compatibility)。
+受支持的代理内核可在内核管理功能中单独检查和更新。内核更新独立于桌面应用更新；具体可用性取决于所选内核，AUR 包还取决于配方声明的依赖。详见[内核选择与兼容性](../cores-and-compatibility)。
 
 :::
 
@@ -302,6 +302,6 @@ yay -Syu clash-nyanpasu-git
 
 :::note[AUR 依赖和内核可用性]
 
-AUR 配方由社区单独维护，可能使用系统内核包，与官方发布包的内核捆绑方式不同。当前 <code>clash-nyanpasu-bin</code> 配方将 Mihomo 列为依赖，并将 Clash Rust 列为可选依赖。请查看所选包的依赖列表，并参阅[内核选择与兼容性](./cores-and-compatibility)了解应用支持的内核。
+AUR 配方由社区单独维护，可能使用系统内核包，与官方发布包的内核捆绑方式不同。当前 <code>clash-nyanpasu-bin</code> 配方将 Mihomo 列为依赖，并将 Clash Rust 列为可选依赖。请查看所选包的依赖列表，并参阅[内核选择与兼容性](../cores-and-compatibility)了解应用支持的内核。
 
 :::

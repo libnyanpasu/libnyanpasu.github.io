@@ -52,7 +52,7 @@ If you do not have a profile or subscription yet, contact your provider; Clash N
 
 </Steps>
 
-For the complete first-run flow, see [Make your first connection](./first-connection).
+For the complete first-run flow, see [Make your first connection](../first-connection).
 
 ## Update a subscription <Badge text="Remote profiles" variant="tip" />
 
@@ -66,12 +66,12 @@ For the complete first-run flow, see [Make your first connection](./first-connec
 
 Leaving the update interval empty uses the 120-minute default in the update-options editor. Changing the subscription URL and saving it triggers an immediate fetch from the new URL. Updating a profile does not renew or extend the provider's subscription.
 
-If an update fails, check that the URL is current, the provider allows requests from this app, and the configured user agent or connection options match the provider's instructions. Do not share the URL when asking for help; the [troubleshooting guide](./troubleshooting) explains what information is safe to provide.
+If an update fails, check that the URL is current, the provider allows requests from this app, and the configured user agent or connection options match the provider's instructions. Do not share the URL when asking for help; the [troubleshooting guide](../troubleshooting) explains what information is safe to provide.
 
 ## Profiles and transformations
 
-The profile is the input; a transformation changes that input while the app builds the runtime configuration. Keeping your own transformations separate from a provider's remote profile makes subscription updates easier to review. See [Profile transformations](./proxy-chain) for the 2.0 workflow and inspection tools.
+The profile is the input; a transformation changes that input while the app builds the runtime configuration. Keeping your own transformations separate from a provider's remote profile makes subscription updates easier to review. See [Profile transformations](../proxy-chain) for the 2.0 workflow and inspection tools.
 
-After switching cores, check the profile and transformation fields against the newly selected core. A field accepted by one core may be unsupported or behave differently in another; see [Choose and manage a core](./cores-and-compatibility).
+After switching cores, check the profile and transformation fields against the newly selected core. A field accepted by one core may be unsupported or behave differently in another; see [Choose and manage a core](../cores-and-compatibility).
 
-If the core starts but traffic does not use the expected profile, confirm which profile is active, then review the selected proxy group and [proxy mode](./system-proxy-tun).
+If the core starts but traffic does not use the expected profile, confirm which profile is active, then review the selected proxy group and [proxy mode](../system-proxy-tun).

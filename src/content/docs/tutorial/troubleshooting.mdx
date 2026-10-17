@@ -9,20 +9,20 @@ Work through these checks in order. After each change, retry the same app or web
 ## The core does not start
 
 1. Open the dashboard and check the core status.
-2. Confirm that a configuration is active. If you just imported one, open [Profiles and subscriptions](./profiles-and-subscriptions).
+2. Confirm that a configuration is active. If you just imported one, open [Profiles and subscriptions](../profiles-and-subscriptions).
 3. Open **Logs** and look for the first core or configuration error around the time it failed.
-4. If the message names a missing field or unsupported option, check that the configuration matches the selected core. See [Choose and manage a core](./cores-and-compatibility), then ask the profile provider or author about compatibility.
+4. If the message names a missing field or unsupported option, check that the configuration matches the selected core. See [Choose and manage a core](../cores-and-compatibility), then ask the profile provider or author about compatibility.
 
 ## The core runs, but there is no connection
 
 1. Open **Proxies**, select the group used by your configuration, and choose an available node. Run the group's delay test if one is available.
-2. Check that the [proxy mode](./system-proxy-tun) is not **Direct** if you expect traffic to use a proxy.
+2. Check that the [proxy mode](../system-proxy-tun) is not **Direct** if you expect traffic to use a proxy.
 3. Check the **Connections** and **Rules** pages while retrying the request. They can show whether the request reached the core and which rule handled it.
 4. If the request is missing from both pages, confirm that System Proxy or TUN is enabled for the traffic you are testing.
 
 ## Only one app bypasses the proxy
 
-Some applications ignore the operating system's system proxy setting or use their own proxy configuration. See [System Proxy and TUN](./system-proxy-tun) to choose a mode that covers the application. Check the app's own proxy settings before changing the global routing mode.
+Some applications ignore the operating system's system proxy setting or use their own proxy configuration. See [System Proxy and TUN](../system-proxy-tun) to choose a mode that covers the application. Check the app's own proxy settings before changing the global routing mode.
 
 ## A profile will not import or update
 
@@ -30,10 +30,10 @@ Check that the local file is a supported configuration, or that the remote URL i
 
 ## TUN or permissions fail
 
-Follow the platform-specific steps in [System Proxy and TUN](./system-proxy-tun). If the app reports that a service is missing or incompatible, open **Settings** and review the service status before reinstalling anything. Avoid changing core file ownership or permissions manually unless a current official guide specifically instructs you to do so.
+Follow the platform-specific steps in [System Proxy and TUN](../system-proxy-tun). If the app reports that a service is missing or incompatible, open **Settings** and review the service status before reinstalling anything. Avoid changing core file ownership or permissions manually unless a current official guide specifically instructs you to do so.
 
 ## Share a useful report
 
 Use **Help → Collect Logs** to gather diagnostics. Before sharing them, check for private domains, addresses, subscription URLs, tokens, or other account details and redact anything sensitive. Include your app version, operating system, selected core, the steps that reproduce the problem, and the first relevant error message.
 
-If the checks above do not resolve the issue, search existing [GitHub issues](https://github.com/libnyanpasu/clash-nyanpasu/issues) before [opening a new report](../others/issues).
+If the checks above do not resolve the issue, search existing [GitHub issues](https://github.com/libnyanpasu/clash-nyanpasu/issues) before [opening a new report](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose).

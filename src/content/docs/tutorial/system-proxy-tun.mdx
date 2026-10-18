@@ -51,13 +51,13 @@ These modes apply to traffic handled by the core, regardless of whether it arriv
 | **Global** | Sends handled traffic through the core's global proxy choice. Select a usable proxy or proxy group in the profile.                |
 | **Direct** | Sends handled traffic directly, without using a proxy outbound.                                                                   |
 
-With **Clash Premium**, the selector may also offer **Script** mode. Other cores may not provide this mode; see [core compatibility](./cores-and-compatibility).
+With **Clash Premium**, the selector may also offer **Script** mode. Other cores may not provide this mode; see [core compatibility](../cores-and-compatibility).
 
 ## Enable TUN with the system service
 
 <Badge text="Core-dependent" variant="caution" /> TUN requires the selected core to support the
 configuration and TUN stack your setup uses. If the option is unavailable or the core rejects the
-configuration, check [core compatibility](./cores-and-compatibility).
+configuration, check [core compatibility](../cores-and-compatibility).
 
 <Steps>
 
@@ -82,7 +82,7 @@ Installing or starting the service requests administrator authorization through 
 </TabItem>
 <TabItem label="Linux">
 
-Installing or starting the service uses the app's elevated service helper. Package and architecture availability varies; see the [installation guide](./install).
+Installing or starting the service uses the app's elevated service helper. Package and architecture availability varies; see the [installation guide](../install).
 
 </TabItem>
 </Tabs>
@@ -113,4 +113,4 @@ An enabled switch shows the requested setting; it does not prove that every appl
 - Turn **TUN Mode** off to apply a core configuration with TUN disabled. Service Mode can stay enabled independently.
 - Select **Rule** to return the core to profile-based routing after using Global, Direct, or Script mode.
 
-See the [installation guide](./install) for platform and package information, the [core guide](./cores-and-compatibility) for core-specific behavior, and the [FAQ](../others/faq) for troubleshooting.
+See the [installation guide](../install) for platform and package information, the [core guide](../cores-and-compatibility) for core-specific behavior, and the [FAQ](../../others/faq) for troubleshooting.

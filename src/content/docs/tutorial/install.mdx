@@ -11,7 +11,7 @@ import { Badge, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 <Badge text="Linux · DEB / RPM / AppImage" />
 <Badge text="Native multi-core support" variant="success" />
 
-Clash Nyanpasu supports Windows 10 and later, macOS 12.6 and later, and Linux with `glibc >= 2.39`. Choose the package for your device from the official [releases](https://github.com/LibNyanpasu/clash-nyanpasu/releases) page; package types and architectures vary by release.
+Clash Nyanpasu supports Windows 10 and later, macOS 12.6 and later, and Linux with `glibc >= 2.39`. Choose the package for your device from the official [releases](https://github.com/libnyanpasu/clash-nyanpasu/releases) page; package types and architectures vary by release.
 
 :::note[Architecture names]
 
@@ -50,7 +50,7 @@ flowchart TD
 
 1. **Check your CPU architecture.** On Windows, open **Settings → System → About** and read **System type**. On macOS, open **Apple menu → About This Mac**. On Linux, run `uname -m` in a terminal.
 2. **Match the asset name.** `x64`, `amd64`, and `x86_64` refer to 64-bit Intel/AMD builds. `ARM64` and `aarch64` refer to 64-bit Arm builds. The release page may not offer every package type for every architecture.
-3. **Install the package and continue to [your first connection](./first-connection).** If you are using a Linux package, also read the notes for that package below.
+3. **Install the package and continue to [your first connection](../first-connection).** If you are using a Linux package, also read the notes for that package below.
 
 </Steps>
 
@@ -94,7 +94,7 @@ The archive includes <code>nyanpasu-service.exe</code>; installing or starting t
 <Badge text="Intel · x64" />
 <Badge text="Apple silicon · aarch64" />
 
-Download the `.dmg` ending in `_x64.dmg` for an Intel Mac or `_aarch64.dmg` for an Apple-silicon Mac. Open the disk image and drag Clash Nyanpasu to **Applications**. If installation fails, see the [FAQ](../others/faq).
+Download the `.dmg` ending in `_x64.dmg` for an Intel Mac or `_aarch64.dmg` for an Apple-silicon Mac. Open the disk image and drag Clash Nyanpasu to **Applications**. If installation fails, see the [FAQ](../../others/faq).
 
 ## Linux
 
@@ -146,12 +146,12 @@ chmod +x ./Clash.Nyanpasu_*_amd64.AppImage
 
 The wildcard assumes that only one matching AppImage is in the current directory. To enable launch at login, open **Settings → System → Startup Settings → Start on system startup**.
 
-TUN depends on the selected core and needs suitable network privileges. Use **System Service** to install and start the service with elevated authorization, enable **Service Mode**, then enable TUN; keep the desktop app running as your normal user instead of launching the whole AppImage with <code>sudo</code>. Follow [System Proxy and TUN](./system-proxy-tun) for the steps.
+TUN depends on the selected core and needs suitable network privileges. Use **System Service** to install and start the service with elevated authorization, enable **Service Mode**, then enable TUN; keep the desktop app running as your normal user instead of launching the whole AppImage with <code>sudo</code>. Follow [System Proxy and TUN](../system-proxy-tun) for the steps.
 
   </TabItem>
 </Tabs>
 
-If you encounter another AppImage issue, include your Linux distribution, architecture, app version, and package type when [reporting it](https://github.com/LibNyanpasu/clash-nyanpasu/issues/new).
+If you encounter another AppImage issue, include your Linux distribution, architecture, app version, and package type when [reporting it](https://github.com/libnyanpasu/clash-nyanpasu/issues/new).
 
 ### Optional AppImage launcher and autostart entry
 
@@ -252,7 +252,7 @@ If <code>update-desktop-database</code> is unavailable, install your distributio
 
 The in-app **application** updater is available for standard Windows installers, macOS packages, and AppImage. Windows portable builds and Linux DEB/RPM/AUR packages do not use that updater: download a newer portable archive or update the installed package with its package manager or AUR helper.
 
-Supported proxy cores can be checked and updated separately through core management. Core updates are independent of the desktop-app updater; availability can depend on the core and, for AUR packages, the recipe's dependencies. See [Core selection and compatibility](./cores-and-compatibility).
+Supported proxy cores can be checked and updated separately through core management. Core updates are independent of the desktop-app updater; availability can depend on the core and, for AUR packages, the recipe's dependencies. See [Core selection and compatibility](../cores-and-compatibility).
 
 :::
 
@@ -303,6 +303,6 @@ yay -Syu clash-nyanpasu-git
 
 :::note[AUR dependencies and core availability]
 
-AUR recipes are maintained separately from the official release bundles and can use system core packages. The current <code>clash-nyanpasu-bin</code> recipe lists Mihomo as a dependency and Clash Rust as optional. Check the dependency list for the package you choose, then see [Core selection and compatibility](./cores-and-compatibility) for the app's core options.
+AUR recipes are maintained separately from the official release bundles and can use system core packages. The current <code>clash-nyanpasu-bin</code> recipe lists Mihomo as a dependency and Clash Rust as optional. Check the dependency list for the package you choose, then see [Core selection and compatibility](../cores-and-compatibility) for the app's core options.
 
 :::

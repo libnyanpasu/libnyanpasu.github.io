@@ -48,12 +48,12 @@ flowchart LR
 | **全局** | 将已接收的流量交给内核的全局代理选择。请在配置文件中选择可用的代理或代理组。 |
 | **直连** | 将已接收的流量直接发送，不使用代理出站。                                     |
 
-选择 **Clash Premium** 内核时，选择器还可能显示**脚本**模式；其他内核可能不提供该模式。详情请查看[内核兼容性](./cores-and-compatibility)。
+选择 **Clash Premium** 内核时，选择器还可能显示**脚本**模式；其他内核可能不提供该模式。详情请查看[内核兼容性](../cores-and-compatibility)。
 
 ## 通过系统服务启用 TUN
 
 <Badge text="依赖所选内核" variant="caution" /> TUN 要求所选内核支持当前配置和所用 TUN
-堆栈。如果选项不可用或内核拒绝配置，请查看[内核兼容性](./cores-and-compatibility)。
+堆栈。如果选项不可用或内核拒绝配置，请查看[内核兼容性](../cores-and-compatibility)。
 
 <Steps>
 
@@ -78,7 +78,7 @@ flowchart LR
 </TabItem>
 <TabItem label="Linux">
 
-安装或启动服务时会调用应用的提权辅助程序。不同安装包支持的平台和架构可能不同，请查看[安装指南](./install)。
+安装或启动服务时会调用应用的提权辅助程序。不同安装包支持的平台和架构可能不同，请查看[安装指南](../install)。
 
 </TabItem>
 </Tabs>
@@ -106,4 +106,4 @@ flowchart LR
 - 关闭 **TUN 模式**即可应用 TUN 已禁用的内核配置。服务模式可以独立保持开启。
 - 使用全局、直连或脚本模式后，选择**规则**即可恢复按配置文件规则路由。
 
-平台和安装包信息请查看[安装指南](./install)，内核相关行为请查看[内核兼容性](./cores-and-compatibility)，其他问题请查看[常见问题](../others/faq)。
+平台和安装包信息请查看[安装指南](../install)，内核相关行为请查看[内核兼容性](../cores-and-compatibility)，其他问题请查看[常见问题](../../others/faq)。

@@ -18,7 +18,9 @@
     "lint": "oxlint --ignore-path .gitignore --ignore-pattern '.astro/**' .",
     "fmt": "oxfmt --ignore-path .gitignore --ignore-path .oxfmtignore --write .",
     "fmt:check": "oxfmt --ignore-path .gitignore --ignore-path .oxfmtignore --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:download": "node --test scripts/download-*.test.ts",
+    "test:download:browser": "node --test scripts/download-page.browser.ts"
   },
   "dependencies": {
     "@iconify-json/flat-color-icons": "^1.2.3",

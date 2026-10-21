@@ -108,7 +108,9 @@ export default function HomeHeader({
     navItems.map((item) => (
       <a
         className={className}
-        data-download={String(item.href === "#download")}
+        data-download={String(
+          item.href === "#download" || item.href.split("?")[0].endsWith("/download/"),
+        )}
         href={item.href}
         key={item.href}
         onClick={closeOnClick ? closeAfterNavigation : undefined}

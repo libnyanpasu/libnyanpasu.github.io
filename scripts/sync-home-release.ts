@@ -1,18 +1,21 @@
 import { writeFile, rename } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { buildDownloadCatalog, type ReleaseAsset } from "./download-catalog.ts";
 
 const repository = "libnyanpasu/clash-nyanpasu";
 export interface GitHubRelease {
   tag_name: string;
   draft: boolean;
   prerelease?: boolean;
-  assets: { name: string; state: string; size: number }[];
+  assets: ReleaseAsset[];
+  published_at?: string;
 }
 
 interface SyncOptions {
   tag?: string;
   token?: string;
   output?: string | URL;
+  catalogOutput?: string | URL;
 }
 const tagPattern =
   /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-(alpha|beta|rc)\.(0|[1-9]\d*))?$/;
@@ -85,6 +88,7 @@ export async function syncHomeRelease({
   tag = "",
   token = "",
   output = new URL("../src/data/release.generated.json", import.meta.url),
+  catalogOutput = new URL("../src/data/downloads.generated.json", import.meta.url),
 }: SyncOptions = {}) {
   const releases: GitHubRelease[] = [];
   // An explicit notification must refer to a complete release. Fail the build
@@ -110,9 +114,39 @@ export async function syncHomeRelease({
   const release = releases.filter(isCompleteRelease).sort(compareReleases)[0];
   if (!release) throw new Error("No complete versioned release found");
   const snapshot = releaseSnapshot(release);
-  const temporary = `${output instanceof URL ? fileURLToPath(output) : output}.tmp`;
-  await writeFile(temporary, `${JSON.stringify(snapshot, null, 2)}\n`);
-  await rename(temporary, output);
+  const catalog = await buildDownloadCatalog(release, {
+    fetchMetadata: async (asset) => {
+      if (!asset.id) throw new Error(`Release asset ${asset.name} has no GitHub asset id`);
+      const response = await fetch(
+        `https://api.github.com/repos/${repository}/releases/assets/${asset.id}`,
+        {
+          headers: {
+            Accept: "application/octet-stream",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          signal: AbortSignal.timeout(30_000),
+        },
+      );
+      if (!response.ok)
+        throw new Error(`GitHub release asset ${asset.name}: HTTP ${response.status}`);
+      return response.json();
+    },
+  });
+  const outputs = [
+    [output, snapshot],
+    [catalogOutput, catalog],
+  ] as const;
+  const temporaryPaths: string[] = [];
+  for (const [target, data] of outputs) {
+    const targetPath = target instanceof URL ? fileURLToPath(target) : target;
+    const temporaryPath = `${targetPath}.tmp`;
+    await writeFile(temporaryPath, `${JSON.stringify(data, null, 2)}\n`);
+    temporaryPaths.push(temporaryPath);
+  }
+  for (let index = 0; index < outputs.length; index++) {
+    const target = outputs[index][0];
+    await rename(temporaryPaths[index], target instanceof URL ? fileURLToPath(target) : target);
+  }
   console.log(`Homepage release: ${snapshot.version} (${snapshot.channel})`);
   return snapshot;
 }

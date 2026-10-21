@@ -1,0 +1,256 @@
+{
+  "version": "2.0.0-rc.2",
+  "tag": "v2.0.0-rc.2",
+  "channel": "rc",
+  "releaseUrl": "https://github.com/libnyanpasu/clash-nyanpasu/releases/tag/v2.0.0-rc.2",
+  "publishedAt": "2026-10-14T19:17:20Z",
+  "sources": [
+    {
+      "id": "nyanpasu",
+      "label": "Nyanpasu"
+    },
+    {
+      "id": "sourceforge",
+      "label": "SourceForge"
+    },
+    {
+      "id": "ghfast",
+      "label": "GHFast"
+    },
+    {
+      "id": "github",
+      "label": "GitHub"
+    }
+  ],
+  "assets": [
+    {
+      "id": "Clash.Nyanpasu-2.0.0-0.rc.2.x86_64.rpm",
+      "name": "Clash.Nyanpasu-2.0.0-0.rc.2.x86_64.rpm",
+      "os": "linux",
+      "arch": "x64",
+      "format": "rpm",
+      "size": 139484297,
+      "sha256": "7c4454f6ee12b8b2fa08ecdc5a13a98d648a9e73dfcbe98865158bf59fd55928",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.x86_64.rpm",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.x86_64.rpm",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.x86_64.rpm",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu-2.0.0-0.rc.2.x86_64.rpm"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_aarch64.dmg",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_aarch64.dmg",
+      "os": "macos",
+      "arch": "arm64",
+      "format": "dmg",
+      "size": 118740233,
+      "sha256": "bf6398d37980cbe2efbe20755c0a22fdf4feccda5da49eeb5bc309e037300cd5",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64.dmg",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64.dmg",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64.dmg",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_aarch64.dmg"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip",
+      "os": "windows",
+      "arch": "arm64",
+      "format": "zip",
+      "size": 108006257,
+      "sha256": "84dd04730ca2545e4ce956e7e5f88b54e8e17e84145fd16d27088fb4a17c92a6",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_portable.zip"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip",
+      "os": "windows",
+      "arch": "arm64",
+      "format": "zip",
+      "variant": "fixed-webview",
+      "size": 363279868,
+      "sha256": "17433d979b545393572f410d09a3400b55c8b97af46df9fca22ee68650f865b2",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_aarch64_fixed-webview_portable.zip"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_x64-setup.exe",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_x64-setup.exe",
+      "os": "windows",
+      "arch": "x64",
+      "format": "exe",
+      "size": 94612383,
+      "sha256": "4cc364d92694c39525203ba2ee095afa6037a1b9a3d708f37e4cd8cdd91c8c24",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64-setup.exe",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64-setup.exe",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64-setup.exe",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_x64-setup.exe"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu-2.0.0-0.rc.2.aarch64.rpm",
+      "name": "Clash.Nyanpasu-2.0.0-0.rc.2.aarch64.rpm",
+      "os": "linux",
+      "arch": "arm64",
+      "format": "rpm",
+      "size": 130507970,
+      "sha256": "7450171cf6d39c9e45044093d251cc3b61dd57f439ca37254e865dd1a0844ab2",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.aarch64.rpm",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.aarch64.rpm",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu-2.0.0-0.rc.2.aarch64.rpm",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu-2.0.0-0.rc.2.aarch64.rpm"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_amd64.AppImage",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_amd64.AppImage",
+      "os": "linux",
+      "arch": "x64",
+      "format": "appimage",
+      "size": 207489528,
+      "sha256": "60aef85e59427c1a911b246708de0fcd77ee4fce91f0431c1394480bfe77e168",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.AppImage",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.AppImage",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.AppImage",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_amd64.AppImage"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip",
+      "os": "windows",
+      "arch": "x64",
+      "format": "zip",
+      "variant": "fixed-webview",
+      "size": 376922004,
+      "sha256": "0fa366bc110bf1fefc6fe21657acba827470416b5dfe989c7885469a211721d0",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_fixed-webview_portable.zip"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_arm64.deb",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_arm64.deb",
+      "os": "linux",
+      "arch": "arm64",
+      "format": "deb",
+      "size": 130503878,
+      "sha256": "d6d34ce055fcd17275259197c74fddcbed4830915433baee719a939e27275b2d",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64.deb",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64.deb",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64.deb",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_arm64.deb"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_amd64.deb",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_amd64.deb",
+      "os": "linux",
+      "arch": "x64",
+      "format": "deb",
+      "size": 139495938,
+      "sha256": "8198a15e46e8f02ec486fded764efb3808c74d6bc2a7445bc15419254e0134e5",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.deb",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.deb",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_amd64.deb",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_amd64.deb"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip",
+      "os": "windows",
+      "arch": "x64",
+      "format": "zip",
+      "size": 120004695,
+      "sha256": "62125261153fca49115d920a07b26c0d6dd6a1d20b4b7a58771b143e942e7c70",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x86_64_portable.zip"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_arm64-setup.exe",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_arm64-setup.exe",
+      "os": "windows",
+      "arch": "arm64",
+      "format": "exe",
+      "size": 80903256,
+      "sha256": "7c6ff14b9cc9a0749372a1023dd3e5a16ecb66d76cfc8239762c51feb35e4aa4",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64-setup.exe",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64-setup.exe",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_arm64-setup.exe",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_arm64-setup.exe"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe",
+      "os": "windows",
+      "arch": "x64",
+      "format": "exe",
+      "variant": "fixed-webview",
+      "size": 279925795,
+      "sha256": "2c6856f048e2c905e5f8f821f4abfd931c9f0822ca50a24fe1eafe46ea1f665d",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_fixed-webview-x64-setup.exe"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_x64.dmg",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_x64.dmg",
+      "os": "macos",
+      "arch": "x64",
+      "format": "dmg",
+      "size": 126643854,
+      "sha256": "dbe8e59b74c6cffceb3e9eb452813dca7f35b79ef2db2982f22da8a6fcadd9bd",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64.dmg",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64.dmg",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_x64.dmg",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_x64.dmg"
+      }
+    },
+    {
+      "id": "Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe",
+      "name": "Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe",
+      "os": "windows",
+      "arch": "arm64",
+      "format": "exe",
+      "variant": "fixed-webview",
+      "size": 255706355,
+      "sha256": "c727ffa77b25fecfa843e835b06560bece7d26f7105e0c3e38f40e4f1ce448b3",
+      "urls": {
+        "nyanpasu": "https://nyanpasu-script.majokeiko.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe",
+        "ghfast": "https://ghfast.top/https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe",
+        "github": "https://github.com/libnyanpasu/clash-nyanpasu/releases/download/v2.0.0-rc.2/Clash.Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe",
+        "sourceforge": "https://downloads.sourceforge.net/project/clash-nyanpasu/releases/v2.0.0-rc.2/Clash%20Nyanpasu_2.0.0-rc.2_fixed-webview-arm64-setup.exe"
+      }
+    }
+  ]
+}

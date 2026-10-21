@@ -1,0 +1,90 @@
+---
+import { createMd3ThemeOptionsCss } from "starlight-theme-md3";
+import { icons as materialIcons } from "@iconify-json/material-symbols";
+import { getIconData, iconToSVG } from "@iconify/utils";
+import { m } from "@/paraglide/messages.js";
+import type { Locale } from "@/paraglide/runtime";
+import type { DownloadCatalog } from "@/lib/downloads/types";
+import catalogJson from "@/data/downloads.generated.json";
+import HomeHeader from "../home/home-header";
+import HomeHeaderControls from "../home/home-header-controls.astro";
+import DownloadPanel from "./download-panel";
+import PageMotion from "../page-motion.astro";
+import "@/styles/tailwind.css";
+import "../home/home-page/base.css";
+import "./download-page.css";
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const opts = { locale };
+const base = locale === "zh-cn" ? "/zh-cn" : "";
+const catalog = catalogJson as DownloadCatalog;
+const themeCss = createMd3ThemeOptionsCss({ seed: "#3e64a7" });
+const iconNames = {
+  download: "download-rounded",
+  device: "devices-rounded",
+  source: "network-check-rounded",
+  chevron: "chevron-right-rounded",
+  check: "check-rounded",
+  windows: "desktop-windows-rounded",
+  macos: "computer-rounded",
+  linux: "computer-rounded",
+};
+const icons = Object.fromEntries(Object.entries(iconNames).map(([name, iconName]) => {
+  const data = getIconData(materialIcons, iconName);
+  if (!data) throw new Error(`Missing download icon: ${iconName}`);
+  const svg = iconToSVG(data);
+  return [name, { body: svg.body, viewBox: svg.attributes.viewBox! }];
+}));
+const navItems = [
+  { label: m.nav_home(undefined, opts), href: base || "/" },
+  { label: m.home_nav_docs(undefined, opts), href: `${base}/introduction/` },
+  { label: "GitHub", href: "https://github.com/libnyanpasu/clash-nyanpasu" },
+];
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <PageMotion />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={m.download_meta_description(undefined, opts)} />
+    <title>{m.download_title(undefined, opts)} · Clash Nyanpasu</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={`https://libnyanpasu.github.io${base}/download/`} />
+    <link rel="alternate" hreflang="en" href="https://libnyanpasu.github.io/download/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://libnyanpasu.github.io/zh-cn/download/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <style is:global set:html={themeCss} />
+  </head>
+  <body class="home-site download-site">
+    <a class="home-skip-link" href="#download-content">{m.home_skip_content(undefined, opts)}</a>
+    <HomeHeader logoHref={base || "/"} navItems={navItems} locale={locale} client:load>
+      <HomeHeaderControls locale={locale} />
+    </HomeHeader>
+    <main class="download-page" id="download-content" tabindex="-1">
+      <h1>{m.download_title(undefined, opts)}</h1>
+      <div class="download-page__version">
+        <span>{catalog.version}</span>
+        <span class="download-page__channel">{catalog.channel === "stable" ? m.download_stable(undefined, opts) : m.download_prerelease(undefined, opts)}</span>
+      </div>
+      <DownloadPanel catalog={catalog} locale={locale} icons={icons} client:load />
+      <noscript>
+        <style>.download-panel { display: none; }</style>
+        <p class="download-panel__hint">{m.download_no_script(undefined, opts)}</p>
+        <div class="download-panel__options">
+          {catalog.assets.map(asset => (
+            <details class="download-page__fallback">
+              <summary>{asset.name}</summary>
+              <nav aria-label={m.download_alternatives(undefined, opts)}>
+                {catalog.sources.filter(source => asset.urls[source.id]).map(source => <a href={asset.urls[source.id]}>{source.label}</a>)}
+              </nav>
+            </details>
+          ))}
+        </div>
+      </noscript>
+    </main>
+  </body>
+</html>

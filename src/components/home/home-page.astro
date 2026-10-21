@@ -28,7 +28,7 @@ const posts = homeBlogPosts.filter((post) => post.locale === locale);
 const githubIcon = { body: logoIcons.icons["github-icon"].body.replace(/#161614/g, "currentColor"), viewBox: `0 0 ${logoIcons.icons["github-icon"].width || logoIcons.width || 16} ${logoIcons.icons["github-icon"].height || logoIcons.height || 16}` };
 const navItems = [
   { label: m.home_nav_features(undefined, opts), href: "#features" },
-  { label: m.home_nav_download(undefined, opts), href: "#download" },
+  { label: m.home_nav_download(undefined, opts), href: `${base}/download/` },
   { label: m.home_nav_docs(undefined, opts), href: `${base}/introduction/` },
   ...(posts.length ? [{ label: m.home_nav_blog(undefined, opts), href: `${base}/blog/` }] : []),
   { label: "GitHub", href: repositoryUrl, icon: githubIcon },
@@ -99,7 +99,7 @@ const platforms = [
     <section class="home-hero home-container" aria-labelledby="hero-title">
       <div class="hero-heading-row">
         <h1 id="hero-title"><span>Clash</span><span class="hero-name">Nyanpasu<span class="hero-period">.</span></span></h1>
-        <div class="hero-intro"><p class="hero-positioning">{m.home_positioning(undefined, opts)}</p><p class="hero-description">{m.home_description(undefined, opts)}</p><div class="hero-actions"><a class="home-button home-button-primary" href="#download">{m.home_download_action(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a><a class="home-button home-button-secondary hero-docs" href={`${base}/introduction/`}>{m.home_read_docs(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></div></div>
+        <div class="hero-intro"><p class="hero-positioning">{m.home_positioning(undefined, opts)}</p><p class="hero-description">{m.home_description(undefined, opts)}</p><div class="hero-actions"><a class="home-button home-button-primary" href={`${base}/download/`}>{m.home_download_action(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-down" /></span></a><a class="home-button home-button-secondary hero-docs" href={`${base}/introduction/`}>{m.home_read_docs(undefined, opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></div></div>
       </div>
       <div class="hero-showcase">
         <HeroPreview labels={previewLabels} icons={previewIcons} client:load />
@@ -120,7 +120,7 @@ const platforms = [
               <span class="platform-symbol"><svg class="platform-shape" viewBox="0 0 100 100" aria-hidden="true"><path d={shapePath(platform.shape)} /></svg><IconifyIcon name={platform.icon} /></span>
               <h3>{platform.name}</h3>
               <div class="platform-actions">
-                <a class="home-button home-button-tonal platform-action" href={homeRelease.href}>{m.home_platform_download({platform:platform.name},opts)}<span aria-hidden="true"><IconifyIcon name="lucide:download" /></span></a>
+                <a class="home-button home-button-tonal platform-action" href={`${base}/download/?os=${platform.anchor}`}>{m.home_platform_download({platform:platform.name},opts)}<span aria-hidden="true"><IconifyIcon name="lucide:download" /></span></a>
                 <a class="home-button platform-guide" href={`${base}/tutorial/install/#${platform.anchor}`}>{m.home_install_guide(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-right" /></span></a>
               </div>
             </article>
@@ -140,5 +140,5 @@ const platforms = [
     </section>
     {posts.length > 0 && <section class="home-blog home-container" aria-labelledby="blog-title"><div class="blog-heading"><div><h2 id="blog-title">{m.home_nav_blog(undefined,opts)}</h2><p>{m.home_blog_description(undefined,opts)}</p></div><a class="home-text-link" href={`${base}/blog/`}>{m.home_blog_all(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></div><div class="blog-list">{posts.slice(0,3).map((post)=>(<article><a href={post.href}>{post.cover && <img src={post.cover} alt={post.coverAlt || ""} loading="lazy" width="640" height="360"/>}<time datetime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString(locale === "zh-cn" ? "zh-CN":"en",{year:"numeric",month:"short",day:"numeric",timeZone:"UTC"})}</time><h3>{post.title}</h3><p>{post.description}</p></a></article>))}</div></section>}
   </main>
-  <footer class="home-footer home-container"><div><a class="footer-brand" href={base || "/"}><img src="/images/logo.png" width="28" height="28" alt=""/>Clash Nyanpasu</a><p>{m.home_footer_description(undefined,opts)}</p></div><nav aria-label={locale === "zh-cn" ? "页脚导航":"Footer"}><a href="#download">{m.home_nav_download(undefined,opts)}</a><a href={`${base}/introduction/`}>{m.home_nav_docs(undefined,opts)}</a><a href={`${base}/others/faq/`}>{m.home_nav_faq(undefined,opts)}</a>{posts.length > 0 && <a href={`${base}/blog/`}>{m.home_nav_blog(undefined,opts)}</a>}<a href={repositoryUrl}><IconifyIcon name="logos:github-icon" class="source-code-icon" />{m.home_source_code(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></nav><div class="footer-bottom"><span>© {new Date().getFullYear()} LibNyanpasu</span><span>(∠・ω&lt; )⌒☆</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></footer>
+  <footer class="home-footer home-container"><div><a class="footer-brand" href={base || "/"}><img src="/images/logo.png" width="28" height="28" alt=""/>Clash Nyanpasu</a><p>{m.home_footer_description(undefined,opts)}</p></div><nav aria-label={locale === "zh-cn" ? "页脚导航":"Footer"}><a href={`${base}/download/`}>{m.home_nav_download(undefined,opts)}</a><a href={`${base}/introduction/`}>{m.home_nav_docs(undefined,opts)}</a><a href={`${base}/others/faq/`}>{m.home_nav_faq(undefined,opts)}</a>{posts.length > 0 && <a href={`${base}/blog/`}>{m.home_nav_blog(undefined,opts)}</a>}<a href={repositoryUrl}><IconifyIcon name="logos:github-icon" class="source-code-icon" />{m.home_source_code(undefined,opts)}<span aria-hidden="true"><IconifyIcon name="lucide:arrow-up-right" /></span></a></nav><div class="footer-bottom"><span>© {new Date().getFullYear()} LibNyanpasu</span><span>(∠・ω&lt; )⌒☆</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></footer>
 </div>

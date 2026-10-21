@@ -1,0 +1,109 @@
+<!--
+  Page-to-page motion, shared by the home, download and Starlight pages.
+
+  One rule: the header stays put, the old page steps aside, the new page settles
+  in from slightly below. Only the incoming page moves, and only by a few pixels.
+
+  Between two docs pages the sidebar and chrome are identical, so only the
+  article (`main`) takes part; anywhere else the whole page does.
+-->
+<style is:global>
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
+  :root {
+    --page-ease-in: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --page-ease-out: cubic-bezier(0.05, 0.7, 0.1, 1);
+  }
+
+  .home-header,
+  header.header {
+    view-transition-name: site-header;
+  }
+  html:active-view-transition-type(docs) main {
+    view-transition-name: page-content;
+  }
+
+  /* The header never travels: it swaps in place, so the two page layouts can differ. */
+  ::view-transition-group(site-header) {
+    animation-name: none;
+    animation-duration: 160ms;
+  }
+
+  /* A solid floor, so the gap between leaving and arriving shows the page colour. */
+  ::view-transition-group(root) {
+    background: var(--md-sys-color-surface);
+  }
+  ::view-transition-old(root),
+  ::view-transition-old(page-content) {
+    animation: page-leave 110ms var(--page-ease-in) both;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-new(root),
+  ::view-transition-new(page-content) {
+    animation: page-arrive 300ms var(--page-ease-out) 70ms both;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-group(page-content) {
+    animation-name: none;
+  }
+
+  /* Docs to docs: the surrounding chrome is unchanged, so it must not blink. */
+  html:active-view-transition-type(docs)::view-transition-group(root) {
+    background: none;
+  }
+  html:active-view-transition-type(docs)::view-transition-old(root) {
+    animation: none;
+  }
+  html:active-view-transition-type(docs)::view-transition-new(root) {
+    animation: page-fade 160ms linear both;
+  }
+
+  @keyframes page-leave {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes page-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes page-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  /* The page already arrives by transition; its own entrance would move twice. */
+  html[data-page-arrival] .hero-heading-row {
+    animation: none;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const landing = /^\/(zh-cn\/)?(download\/)?(index\.html)?$/;
+    const isDocs = (url) => !landing.test(new URL(url, location.href).pathname);
+
+    addEventListener("pageswap", (event) => {
+      const target = event.activation && event.activation.entry;
+      if (event.viewTransition && target && isDocs(location.href) && isDocs(target.url)) {
+        event.viewTransition.types.add("docs");
+      }
+    });
+
+    addEventListener("pagereveal", (event) => {
+      if (!event.viewTransition) return;
+      document.documentElement.dataset.pageArrival = "";
+      const origin = navigation.activation && navigation.activation.from;
+      if (origin && isDocs(origin.url) && isDocs(location.href)) {
+        event.viewTransition.types.add("docs");
+      }
+    });
+  })();
+</script>

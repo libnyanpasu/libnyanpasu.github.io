@@ -41,3 +41,9 @@ jobs:
         run: pnpm check
       - name: Test release selection
         run: pnpm test:release
+      - name: Test download catalog and device selection
+        run: pnpm test:download
+      - name: Install Chromium for download page checks
+        run: pnpm exec playwright install --with-deps --only-shell chromium
+      - name: Test download page in Chromium
+        run: pnpm test:download:browser

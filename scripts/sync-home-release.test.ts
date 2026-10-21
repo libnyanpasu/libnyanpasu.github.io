@@ -71,6 +71,7 @@ test("a delayed notification selects the newest complete release and renders mat
   const directory = await mkdtemp(join(tmpdir(), "home-release-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const output = join(directory, "release.json");
+  const catalogOutput = join(directory, "downloads.json");
   const old = release("v2.0.0-rc.1");
   const latest = release("v2.0.0-rc.2");
   const incomplete = release("v2.0.0", { assets: [] });
@@ -84,7 +85,7 @@ test("a delayed notification selects the newest complete release and renders mat
         ),
       ),
   );
-  const snapshot = await syncHomeRelease({ tag: old.tag_name, output });
+  const snapshot = await syncHomeRelease({ tag: old.tag_name, output, catalogOutput });
   assert.equal(snapshot.version, "2.0.0-rc.2");
   assert.equal(
     snapshot.href,
@@ -97,16 +98,23 @@ test("API and explicit-tag failures preserve the existing snapshot", async (t) =
   const directory = await mkdtemp(join(tmpdir(), "home-release-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const output = join(directory, "release.json");
+  const catalogOutput = join(directory, "downloads.json");
   await writeFile(output, "previous snapshot");
   const mock = t.mock.method(globalThis, "fetch", async () => new Response("", { status: 503 }));
-  await assert.rejects(syncHomeRelease({ output }), /HTTP 503/);
+  await assert.rejects(syncHomeRelease({ output, catalogOutput }), /HTTP 503/);
   mock.mock.mockImplementation(async () => new Response("", { status: 404 }));
-  await assert.rejects(syncHomeRelease({ tag: "v9.0.0", output }), /HTTP 404/);
+  await assert.rejects(syncHomeRelease({ tag: "v9.0.0", output, catalogOutput }), /HTTP 404/);
   mock.mock.mockImplementation(
     async () => new Response(JSON.stringify(release("v9.0.0", { assets: [] }))),
   );
-  await assert.rejects(syncHomeRelease({ tag: "v9.0.0", output }), /missing platform packages/);
-  await assert.rejects(syncHomeRelease({ tag: "pre-release", output }), /Unsupported release tag/);
+  await assert.rejects(
+    syncHomeRelease({ tag: "v9.0.0", output, catalogOutput }),
+    /missing platform packages/,
+  );
+  await assert.rejects(
+    syncHomeRelease({ tag: "pre-release", output, catalogOutput }),
+    /Unsupported release tag/,
+  );
   assert.equal(await readFile(output, "utf8"), "previous snapshot");
 });
 
@@ -124,6 +132,7 @@ test("uses the completed notified release when the release list has not caught u
   const snapshot = await syncHomeRelease({
     tag: "v2.0.0-rc.2",
     output: join(directory, "release.json"),
+    catalogOutput: join(directory, "downloads.json"),
   });
   assert.equal(snapshot.version, "2.0.0-rc.2");
 });
@@ -142,7 +151,29 @@ test("paginates releases rather than assuming the first page contains a version"
       ),
     );
   });
-  const result = await syncHomeRelease({ output: join(directory, "release.json") });
+  const result = await syncHomeRelease({
+    output: join(directory, "release.json"),
+    catalogOutput: join(directory, "downloads.json"),
+  });
   assert.equal(pages.length, 2);
   assert.equal(result.version, "2.0.0-rc.2");
+});
+
+test("invalid optional metadata preserves both generated snapshots", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "home-release-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const output = join(directory, "release.json");
+  const catalogOutput = join(directory, "downloads.json");
+  await writeFile(output, "previous release");
+  await writeFile(catalogOutput, "previous catalog");
+  const invalid = release("v2.0.0-rc.2", {
+    assets: [
+      ...release("v2.0.0-rc.2").assets,
+      { name: "download-sources.json", state: "uploaded", size: 10 },
+    ],
+  });
+  t.mock.method(globalThis, "fetch", async () => new Response(JSON.stringify([invalid])));
+  await assert.rejects(syncHomeRelease({ output, catalogOutput }), /no GitHub asset id/);
+  assert.equal(await readFile(output, "utf8"), "previous release");
+  assert.equal(await readFile(catalogOutput, "utf8"), "previous catalog");
 });

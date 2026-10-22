@@ -30,7 +30,7 @@
     "@iconify-json/lucide": "^1.2.141",
     "@iconify-json/material-symbols": "^1.2.94",
     "@iconify/utils": "^3.1.7",
-    "@paper-design/shaders-react": "^0.0.81",
+    "@paper-design/shaders-react": "^0.0.82",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "d3-array": "^3.2.4",

@@ -41,3 +41,5 @@ jobs:
         run: pnpm check
       - name: Test release selection
         run: pnpm test:release
+      - name: Test README badges
+        run: pnpm test:badges

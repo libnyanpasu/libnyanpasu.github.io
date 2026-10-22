@@ -47,3 +47,5 @@ jobs:
         run: pnpm exec playwright install --with-deps --only-shell chromium
       - name: Test download page in Chromium
         run: pnpm test:download:browser
+      - name: Test README badges
+        run: pnpm test:badges

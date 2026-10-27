@@ -274,9 +274,11 @@ See the [Lua runner source](https://github.com/libnyanpasu/clash-nyanpasu/blob/m
 
 <Steps>
 
-1. Open **Profile Inspect** from **Profiles**.
-2. Switch between **Generated configuration** and **Last applied snapshot**.
-3. Choose list or graph view, then select a step to inspect its YAML output, diff from its parent, changed fields, and logs.
+1. Open **Inspect** from the **Profiles** sidebar.
+2. Switch between **Latest build** and **Applied to core**. The chip beside the switch shows the core and revision that was applied.
+3. Choose the list or graph view. The list draws the build as a branch line and groups the steps by stage: Source, Profile transforms, Global transforms, Nyanpasu, and Result. Turn on **Only steps that changed something** to hide the steps that left the configuration as it was.
+4. Select a step. **Final configuration** opens in **Output**; every other step opens in **Changes**, which shows its diff from the previous step. **Output** shows the YAML the step produced, and **Logs** shows what it logged. **Core effective configuration** is what the core reported back.
+5. Search for a field name, such as `dns.nameserver`, to find the steps that touched it.
 
 </Steps>
 

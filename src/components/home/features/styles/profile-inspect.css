@@ -2,16 +2,98 @@
 .pi {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   block-size: 100%;
-  padding: 16px;
+  padding: 14px 16px 16px;
   overflow: auto;
   scrollbar-width: thin;
 }
-.pi-meta {
+/* The toolbar: snapshot, view, status and the field search. */
+.pi-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.pi-seg {
+  display: inline-flex;
+  flex: none;
+  block-size: 32px;
+  overflow: hidden;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 999px;
+}
+.pi-seg button {
+  flex: none;
+  padding-inline: 14px;
+  border: 0;
+  background: none;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s var(--m3f-ease);
+}
+.pi-seg button + button {
+  border-inline-start: 1px solid var(--md-sys-color-outline);
+}
+.pi-seg button[aria-checked="true"] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.pi-seg button:has(.pi-view) {
+  padding-inline: 12px;
+}
+.pi-view {
+  inline-size: 16px;
+  block-size: 16px;
+  vertical-align: middle;
+}
+.pi-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin: 0;
-  font-size: 12px;
+  padding-inline: 10px;
+  block-size: 28px;
+  border-radius: 8px;
+  background: var(--md-sys-color-surface-variant);
   color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pi-status-check {
+  inline-size: 16px;
+  block-size: 16px;
+  color: #2e9d55;
+}
+.pi-search {
+  display: flex;
+  flex: 1 1 160px;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+  block-size: 32px;
+  padding-inline: 12px;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 999px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.pi-search input {
+  flex: 1;
+  min-inline-size: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 12px;
+}
+.pi-search:focus-within {
+  border-color: var(--md-sys-color-primary);
 }
 .pi-grid {
   display: grid;
@@ -36,61 +118,169 @@
 .pi-list {
   display: flex;
   flex-direction: column;
+}
+/* A stage: a small uppercase label over a group of rows, 2px apart, 4px corners inside and 24px
+   at the two ends, as StepGroup does. */
+.pi-stage {
+  margin: 0;
+  padding: 18px 16px 8px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.pi-stage:first-child {
+  padding-block-start: 0;
+}
+.pi-group {
+  display: flex;
+  flex-direction: column;
   gap: 2px;
+  min-inline-size: 0;
 }
 .pi-step {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 5px 10px;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  min-block-size: 52px;
+  padding: 6px 12px 6px 16px;
   border: 0;
-  border-radius: 10px;
-  background: none;
-  color: inherit;
+  border-radius: 4px;
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
   font: inherit;
-  font-size: 12px;
-  line-height: 18px;
   text-align: start;
-  overflow: hidden;
   cursor: pointer;
-  transition: background-color 0.2s var(--m3f-ease);
+  transition:
+    background-color 0.2s var(--m3f-ease),
+    border-radius 0.2s var(--m3f-ease),
+    opacity 0.2s var(--m3f-ease);
+}
+.pi-group > .pi-step:first-child {
+  border-start-start-radius: 24px;
+  border-start-end-radius: 24px;
+}
+.pi-group > .pi-step:last-child {
+  border-end-start-radius: 24px;
+  border-end-end-radius: 24px;
 }
 .pi-step[aria-current="step"] {
+  border-radius: 16px;
   background: var(--md-sys-color-secondary-container);
   color: var(--md-sys-color-on-secondary-container);
 }
-.pi-step-index {
+.pi-step[data-dimmed] {
+  opacity: 0.4;
+}
+.pi-status {
   flex: none;
+  inline-size: 20px;
+  block-size: 20px;
+  color: #2e9d55;
+}
+.pi-step[data-status="unchanged"] .pi-status {
   color: var(--md-sys-color-on-surface-variant);
-  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
 }
 .pi-step-label {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: 1px;
   min-inline-size: 0;
 }
-.pi-step-log {
-  inline-size: 16px;
-  block-size: 16px;
-  color: var(--md-sys-color-on-surface-variant);
-}
-.pi-chip-wrap {
+.pi-step-label strong,
+.pi-step-label small {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
-.pi-chip {
-  display: inline-block;
-  padding: 0 6px;
-  border-radius: 6px;
-  background: var(--md-sys-color-tertiary-container);
-  color: var(--md-sys-color-on-tertiary-container);
-  font-size: 11px;
-  line-height: 17px;
+.pi-step-label strong {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
 }
-.pi-arrow {
-  margin-inline: 4px;
+.pi-step-label small {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  line-height: 16px;
 }
-/* Chain view: the steps as boxes joined top to bottom, like chain-graph.tsx. */
-.pi-list[data-mode="chain"] {
+.pi-step[aria-current="step"] small,
+.pi-step[aria-current="step"] .pi-step-meta {
+  color: inherit;
+  opacity: 0.8;
+}
+.pi-step-meta {
+  flex: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  white-space: nowrap;
+}
+/* The branch gutter (lane-gutter.tsx): one main lane, 14px wide, hanging 4px left of the rows.
+   The line runs through every row, stage label and the gap between stages; a step is a small
+   dot, the first one a hollow start, the selected one ringed. */
+.pi-list[data-mode="list"] {
+  padding-inline-start: 18px;
+}
+.pi-list[data-mode="list"] .pi-stage {
+  position: relative;
+}
+.pi-list[data-mode="list"] .pi-stage:not(:first-child)::before,
+.pi-list[data-mode="list"] .pi-step::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: -12px;
+  inline-size: 2px;
+  background: var(--md-sys-color-outline);
+}
+/* Bridge the 2px between rows, and stop at the dot where nothing arrives or leaves. */
+.pi-list[data-mode="list"] .pi-step::before {
+  inset-block-end: -2px;
+}
+.pi-list[data-mode="list"] .pi-step[data-first]::before {
+  inset-block-start: 50%;
+}
+.pi-list[data-mode="list"] .pi-step[data-last]::before {
+  inset-block-end: 50%;
+}
+.pi-list[data-mode="list"] .pi-step[data-first][data-last]::before {
+  display: none;
+}
+.pi-list[data-mode="list"] .pi-step::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: -11px;
+  box-sizing: border-box;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--md-sys-color-outline);
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 0.2s var(--m3f-ease),
+    box-shadow 0.2s var(--m3f-ease);
+}
+.pi-list[data-mode="list"] .pi-step[data-first]::after {
+  inline-size: 10px;
+  block-size: 10px;
+  border: 2px solid var(--md-sys-color-outline);
+  background: var(--md-sys-color-surface-container-low, var(--md-sys-color-surface));
+}
+.pi-list[data-mode="list"] .pi-step[aria-current="step"]::after {
+  background: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--md-sys-color-primary) 20%, transparent);
+}
+.pi-list[data-mode="list"] .pi-step[data-first][aria-current="step"]::after {
+  border-color: var(--md-sys-color-primary);
+}
+/* Graph view: the steps as boxes joined top to bottom. */
+.pi-list[data-mode="graph"] {
   align-items: center;
   gap: 18px;
   max-block-size: 252px;
@@ -99,25 +289,20 @@
   border-radius: 12px;
   background: var(--md-sys-color-surface-container-low);
 }
-.pi-list[data-mode="chain"] .pi-step {
+.pi-list[data-mode="graph"] .pi-step {
   flex-direction: column;
-  align-items: center;
-  flex: none;
   inline-size: min(170px, 100%);
+  min-block-size: 0;
   padding: 8px 10px;
-  overflow: visible;
   border-radius: 10px;
   background: var(--md-sys-color-surface-container-highest);
   text-align: center;
 }
-.pi-list[data-mode="chain"] .pi-step[aria-current="step"] {
+.pi-list[data-mode="graph"] .pi-step[aria-current="step"] {
   background: var(--md-sys-color-primary-container);
   color: var(--md-sys-color-on-primary-container);
 }
-.pi-list[data-mode="chain"] .pi-step[data-quiet] {
-  opacity: 0.72;
-}
-.pi-list[data-mode="chain"] .pi-step:not(:last-child)::after {
+.pi-list[data-mode="graph"] .pi-step:not(:last-child)::after {
   content: "";
   position: absolute;
   inset: 100% auto auto 50%;
@@ -125,7 +310,7 @@
   block-size: 18px;
   background: var(--md-sys-color-outline);
 }
-.pi-list[data-mode="chain"] .pi-step-index {
+.pi-step-index {
   display: grid;
   place-items: center;
   inline-size: 18px;
@@ -134,56 +319,91 @@
   background: color-mix(in oklab, currentColor 12%, transparent);
   font-size: 10px;
 }
+/* The step: a head with its position, title, tabs and changed fields, then the panel. */
+.pi-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-block-end: 10px;
+  box-shadow: inset 0 -1px 0 var(--md-sys-color-outline-variant);
+}
+.pi-eyebrow {
+  margin: 0;
+  color: var(--md-sys-color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 .pi-detail h4 {
   margin: 0;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
+  overflow: hidden;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.pi-tabs .app-pills {
+  align-self: auto;
+  box-shadow: none;
+}
+.pi-summary {
+  min-inline-size: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 13px;
 }
 .pi-fields {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px 6px;
-  font-size: 12px;
-  color: var(--md-sys-color-on-surface-variant);
+  gap: 6px;
+  max-block-size: 64px;
+  overflow: auto;
 }
-.pi-fields code {
-  padding: 2px 6px;
-  border-radius: 6px;
-  background: var(--md-sys-color-surface-container-high);
-  color: var(--md-sys-color-on-surface);
+.pi-fields code,
+.pi-more {
+  display: inline-flex;
+  align-items: center;
+  block-size: 26px;
+  padding-inline: 9px;
+  border-radius: 8px;
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
   font-family: var(--m3f-mono);
-  font-size: 11px;
+  font-size: 11.5px;
 }
 .pi-more {
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-size: 11px;
+  color: var(--md-sys-color-primary);
 }
-.pi-none {
-  color: var(--md-sys-color-on-surface);
-}
-.pi-output {
-  display: grid;
-  gap: 6px;
+.pi-panel {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container);
 }
 .pi-note {
   margin: 0;
+  padding: 10px 14px;
   font-size: 12px;
   color: var(--md-sys-color-on-surface-variant);
 }
 .pi-code {
   display: grid;
+  flex: 1;
   align-content: start;
   max-block-size: 168px;
   margin: 0;
   padding: 6px 0;
   overflow: auto;
-  border-radius: 12px;
-  background: var(--md-sys-color-surface-container);
   font-family: var(--m3f-mono);
   font-size: 11px;
   line-height: 18px;
@@ -216,7 +436,43 @@
 .pi-diff span[data-mark="del"] {
   background: color-mix(in oklab, var(--md-sys-color-error) 20%, transparent);
 }
+/* Logs: one card per entry with its level, as step-detail.tsx lists them. */
+.pi-logs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  list-style: none;
+}
+.pi-logs li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--md-sys-color-surface-container-high);
+  font-size: 12px;
+  line-height: 18px;
+}
+.pi-logs b {
+  flex: none;
+  padding-inline: 7px;
+  border-radius: 6px;
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 11px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+.pi-logs b[data-level="info"] {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
 .pi-logs span {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
 /* Side by side, each column scrolls on its own, as on the client's wide layout. */
@@ -225,7 +481,7 @@
     overflow: hidden;
   }
   .pi-grid {
-    grid-template-columns: minmax(0, 176px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 232px) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
   }
   .pi-steps,
@@ -238,15 +494,14 @@
     overflow: auto;
     scrollbar-width: thin;
   }
-  .pi-list[data-mode="chain"] {
+  .pi-list[data-mode="graph"] {
     max-block-size: none;
   }
-  .pi-output {
+  .pi-panel {
     flex: 1;
-    min-block-size: 0;
-    grid-template-rows: auto minmax(0, 1fr);
   }
   .pi-code {
+    min-block-size: 0;
     max-block-size: none;
   }
 }

@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { PreviewIcon } from "./icon";
+import { revealMotion } from "./reveal";
 import { ShapeIcon } from "./shape-icon";
 import type { PreviewIcons, PreviewLabels } from "./types";
 
@@ -11,15 +12,20 @@ export function ProxyMode({
   value,
   onChange,
   reduceMotion = false,
+  revealIndex = 0,
 }: {
   labels: PreviewLabels;
   icons: PreviewIcons;
   value: "rule" | "global" | "direct";
   onChange: (mode: "rule" | "global" | "direct") => void;
   reduceMotion?: boolean;
+  revealIndex?: number;
 }) {
   return (
-    <section className="cp-card cp-feature-card cp-mode-card">
+    <motion.section
+      className="cp-card cp-feature-card cp-mode-card"
+      {...revealMotion(revealIndex, reduceMotion)}
+    >
       <div className="cp-feature-heading">
         <h2>
           <PreviewIcon icons={icons} name="mode" />
@@ -43,6 +49,6 @@ export function ProxyMode({
           </motion.button>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

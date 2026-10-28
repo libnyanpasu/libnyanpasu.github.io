@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { PreviewIcon } from "./icon";
+import { revealMotion } from "./reveal";
 import { getFrameSeries, Sparkline } from "./sparkline";
 import type { PreviewIcons } from "./types";
 
@@ -89,12 +90,7 @@ export function MetricCard({
   const value =
     metric.valueFormat && latest !== undefined ? formatMetricValue(metric, latest) : metric.value;
   return (
-    <motion.article
-      className="cp-card cp-metric-card"
-      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: reduceMotion ? 0 : 0.35, delay: index * 0.035 }}
-    >
+    <motion.article className="cp-card cp-metric-card" {...revealMotion(index, reduceMotion)}>
       <Sparkline series={metric.series ?? []} frame={frame} paused={reduceMotion} />
       <div className="cp-metric-heading">
         <PreviewIcon icons={icons} name={metric.icon} />

@@ -1,4 +1,6 @@
+import { motion } from "motion/react";
 import { PreviewIcon } from "./icon";
+import { revealMotion } from "./reveal";
 import type { PreviewIcons, PreviewLabels } from "./types";
 
 export type CorePreviewData = {
@@ -25,15 +27,22 @@ export function CoreStatus({
   labels,
   icons,
   core = DEMO_CORE_PREVIEW_DATA,
+  reduceMotion = false,
+  revealIndex = 0,
 }: {
   labels: PreviewLabels;
   icons: PreviewIcons;
   core?: CorePreviewData;
+  reduceMotion?: boolean;
+  revealIndex?: number;
 }) {
   const executionLabel =
     core.execution === "service" ? labels.serviceShort : labels.childProcessShort;
   return (
-    <section className="cp-card cp-feature-card cp-core-card">
+    <motion.section
+      className="cp-card cp-feature-card cp-core-card"
+      {...revealMotion(revealIndex, reduceMotion)}
+    >
       <div className="cp-feature-heading">
         <h2>
           <PreviewIcon icons={icons} name="cpu" />
@@ -64,6 +73,6 @@ export function CoreStatus({
           <PreviewIcon icons={icons} name="chevron" />
         </span>
       </article>
-    </section>
+    </motion.section>
   );
 }

@@ -1,4 +1,6 @@
+import { motion } from "motion/react";
 import { PreviewIcon } from "./icon";
+import { revealMotion } from "./reveal";
 import type { PreviewIcons, PreviewLabels } from "./types";
 
 /**
@@ -20,13 +22,20 @@ export function ActiveConnections({
   labels,
   icons,
   frame,
+  reduceMotion = false,
+  revealIndex = 0,
 }: {
   labels: PreviewLabels;
   icons: PreviewIcons;
   frame: number;
+  reduceMotion?: boolean;
+  revealIndex?: number;
 }) {
   return (
-    <section className="cp-card cp-feature-card cp-connections-card">
+    <motion.section
+      className="cp-card cp-feature-card cp-connections-card"
+      {...revealMotion(revealIndex, reduceMotion)}
+    >
       <div className="cp-feature-heading">
         <h2>
           <PreviewIcon icons={icons} name="network" />
@@ -54,19 +63,26 @@ export function ActiveConnections({
           );
         })}
       </ul>
-    </section>
+    </motion.section>
   );
 }
 
 export function SubscriptionQuota({
   labels,
   icons,
+  reduceMotion = false,
+  revealIndex = 0,
 }: {
   labels: PreviewLabels;
   icons: PreviewIcons;
+  reduceMotion?: boolean;
+  revealIndex?: number;
 }) {
   return (
-    <section className="cp-card cp-feature-card cp-quota-card">
+    <motion.section
+      className="cp-card cp-feature-card cp-quota-card"
+      {...revealMotion(revealIndex, reduceMotion)}
+    >
       <svg
         className="cp-quota-wave"
         viewBox="0 0 200 100"
@@ -86,6 +102,6 @@ export function SubscriptionQuota({
       <span className="cp-quota-summary">
         240.28 GiB {labels.quotaRemaining.replace("{total}", "400 GiB")}
       </span>
-    </section>
+    </motion.section>
   );
 }

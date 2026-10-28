@@ -44,6 +44,7 @@ export function Dashboard({
           onSystemProxyChange={state.setSystemProxy}
           onTunModeChange={state.setTunMode}
           reduceMotion={state.reduceMotion}
+          revealIndex={metrics.length}
         />
         <ProxyMode
           labels={labels}
@@ -51,12 +52,30 @@ export function Dashboard({
           value={state.proxyMode}
           onChange={state.setProxyMode}
           reduceMotion={state.reduceMotion}
+          revealIndex={metrics.length + 1}
         />
-        <CoreStatus labels={labels} icons={icons} core={core} />
+        <CoreStatus
+          labels={labels}
+          icons={icons}
+          core={core}
+          reduceMotion={state.reduceMotion}
+          revealIndex={metrics.length + 2}
+        />
       </div>
       <div className="cp-feature-grid">
-        <ActiveConnections labels={labels} icons={icons} frame={state.frame} />
-        <SubscriptionQuota labels={labels} icons={icons} />
+        <ActiveConnections
+          labels={labels}
+          icons={icons}
+          frame={state.frame}
+          reduceMotion={state.reduceMotion}
+          revealIndex={metrics.length + 3}
+        />
+        <SubscriptionQuota
+          labels={labels}
+          icons={icons}
+          reduceMotion={state.reduceMotion}
+          revealIndex={metrics.length + 4}
+        />
       </div>
     </div>
   );

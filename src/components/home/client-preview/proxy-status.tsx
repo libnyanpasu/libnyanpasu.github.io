@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { PreviewIcon } from "./icon";
+import { revealMotion } from "./reveal";
 import { ShapeIcon } from "./shape-icon";
 import type { PreviewIcons, PreviewLabels } from "./types";
 
@@ -11,6 +12,7 @@ export function ProxyStatus({
   onSystemProxyChange,
   onTunModeChange,
   reduceMotion = false,
+  revealIndex = 0,
 }: {
   labels: PreviewLabels;
   icons: PreviewIcons;
@@ -19,6 +21,7 @@ export function ProxyStatus({
   onSystemProxyChange: (enabled: boolean) => void;
   onTunModeChange: (enabled: boolean) => void;
   reduceMotion?: boolean;
+  revealIndex?: number;
 }) {
   const status = tunMode
     ? labels.tunMode
@@ -45,7 +48,10 @@ export function ProxyStatus({
   ];
 
   return (
-    <section className="cp-card cp-feature-card cp-proxy-card">
+    <motion.section
+      className="cp-card cp-feature-card cp-proxy-card"
+      {...revealMotion(revealIndex, reduceMotion)}
+    >
       <div className="cp-feature-heading">
         <h2>
           <PreviewIcon icons={icons} name="unplug" />
@@ -76,6 +82,6 @@ export function ProxyStatus({
           </motion.button>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

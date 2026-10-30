@@ -54,7 +54,7 @@
     "@types/d3-array": "^3.2.2",
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.2.0",
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.3.8",
@@ -73,5 +73,5 @@
   "engines": {
     "node": ">=26"
   },
-  "packageManager": "pnpm@12.11.2"
+  "packageManager": "pnpm@12.16.1"
 }

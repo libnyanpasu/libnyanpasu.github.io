@@ -1,20 +1,36 @@
 app-header {
-  background-color: color-mix(in oklab, var(--color-surface-variant) 30%, transparent);
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 30%,
+    transparent
+  );
 }
 
 .dark app-header {
-  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
 }
 
 app-content-container {
   padding-top: 8px;
   flex-direction: row;
   align-items: stretch;
-  background-color: color-mix(in oklab, var(--color-surface-variant) 30%, transparent);
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 30%,
+    transparent
+  );
 }
 
 .dark app-content-container {
-  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
 }
 
 app-content {
@@ -25,33 +41,43 @@ app-content {
 
 app-navbar {
   height: auto;
-  flex-direction: column;
-  flex-shrink: 0;
-  gap: 8px;
-  padding: 0px 12px 8px 12px;
   background-color: transparent;
 }
 
-navbar-button {
-  width: 54px;
-  height: 54px !important;
-  border-radius: 20px;
+animated-tabs-container {
+  height: 100%;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 8px;
 }
 
-navbar-button[data-active="true"] {
-  background-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+animated-tabs-item {
+  border-radius: 24px !important;
 }
 
-navbar-button:hover {
-  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
+animated-tabs-item:hover {
+  background-color: color-mix(
+    in oklab,
+    var(--color-surface-variant) 15%,
+    transparent
+  );
 }
 
-navbar-button-icon,
-navbar-button-icon svg {
+navbar-label {
+  display: none;
+}
+
+animated-tabs-item {
+  width: 64px;
+  height: 64px !important;
+}
+
+animated-tabs-indicator {
+  border-radius: 24px !important;
+}
+
+animated-tabs-item-label,
+animated-tabs-item-label svg {
   width: 24px;
   height: 24px;
-}
-
-navbar-button-label {
-  display: none;
 }

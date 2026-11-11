@@ -234,8 +234,8 @@ importers:
         specifier: 21.2.4
         version: 21.2.4
       '@inlang/paraglide-js':
-        specifier: ^2.26.0
-        version: 2.29.2(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^3.0.0
+        version: 3.2.1(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))
@@ -916,17 +916,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inlang/paraglide-js@2.29.2':
-    resolution: {integrity: sha512-fbgYu7DT6b9m4dY5mAVEGipGE3yUOk1KTF+1964N9eg+vQ3qNGNa5Gy2HwqoX88B9ai97rvsqC2X/l+mEI9tuQ==}
+  '@inlang/paraglide-js@3.2.1':
+    resolution: {integrity: sha512-TxTaxvjEMjDoPlH2iIuTz8gPHPyJUuYl9IgubyyF25qBhPHJtZq019bzoYcgWKyyj4MVuLLiVZK6jOunkVrEfQ==}
     hasBin: true
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
-      typescript: '>=5.6'
       vite: '>=5.0.0'
     peerDependenciesMeta:
       eslint:
-        optional: true
-      typescript:
         optional: true
       vite:
         optional: true
@@ -934,8 +931,8 @@ packages:
   '@inlang/recommend-sherlock@0.2.1':
     resolution: {integrity: sha512-ckv8HvHy/iTqaVAEKrr+gnl+p3XFNwe5D2+6w6wJk2ORV2XkcRkKOJ/XsTUJbPSiyi4PI+p+T3bqbmNx/rDUlg==}
 
-  '@inlang/sdk@4.0.4':
-    resolution: {integrity: sha512-OJhVSGJa/Ak52WncgqIPHr9TyVJ1DuoublcmtNo9H8apoVn4Dr1DJNxUxawCCc01QmMSg8qoY8GrTV8SVIu1lg==}
+  '@inlang/sdk@4.2.0':
+    resolution: {integrity: sha512-Cmaqvn34wsxiF27318Zw2rg+017HHNJWV5MH8rfyVKVANZNpzlztxzRbFienE/gASMLD8oluYHHolIb/p6Egrw==}
     engines: {node: '>=20.0.0'}
 
   '@jridgewell/gen-mapping@0.3.13':
@@ -5096,27 +5093,28 @@ snapshots:
   '@img/sharp-win32-x64@0.35.5':
     optional: true
 
-  '@inlang/paraglide-js@2.29.2(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))':
+  '@inlang/paraglide-js@3.2.1(typescript@7.0.2)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@inlang/recommend-sherlock': 0.2.1
-      '@inlang/sdk': 4.0.4
+      '@inlang/sdk': 4.2.0
       commander: 11.1.0
       consola: 3.4.0
       jiti: 2.7.0
       json5: 2.2.3
-      jsonc-parser: 3.3.1
+      magic-string: 0.30.21
       unplugin: 2.3.11
       urlpattern-polyfill: 10.1.0
       valibot: 1.5.0(typescript@7.0.2)
     optionalDependencies:
-      typescript: 7.0.2
       vite: 8.3.4(@types/node@26.6.5)(jiti@2.7.0)(yaml@2.9.1)
+    transitivePeerDependencies:
+      - typescript
 
   '@inlang/recommend-sherlock@0.2.1':
     dependencies:
       comment-json: 4.6.2
 
-  '@inlang/sdk@4.0.4':
+  '@inlang/sdk@4.2.0':
     dependencies:
       '@lix-js/sdk': 0.20.1
       '@sinclair/typebox': 0.31.30

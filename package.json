@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@astrojs/react": "^7.0.1",
-    "@astrojs/starlight": "^0.42.6",
+    "@astrojs/starlight": "^0.43.0",
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
     "@inlang/paraglide-js": "^2.26.0",

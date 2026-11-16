@@ -2,18 +2,20 @@
 // oxlint-disable-next-line no-unused-vars
 import Default from "@astrojs/starlight/components/Head.astro";
 import PageMotion from "../page-motion.astro";
+import ThemeProviderCompat from "../theme-provider-compat.astro";
 ---
 
 <PageMotion />
-<Default {...Astro.props}>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-    rel="stylesheet"
-  />
-  <slot />
-</Default>
+<Default {...Astro.props} />
+{/* Starlight's Head does not render a slot, so extra head content goes beside it. */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+  rel="stylesheet"
+/>
+<ThemeProviderCompat />
+<slot />
 
 <script is:inline>
   // Redirect legacy .html URLs (from old website) to clean URLs

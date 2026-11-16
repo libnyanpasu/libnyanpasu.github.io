@@ -1,0 +1,27 @@
+---
+/*
+ * Starlight 0.43 no longer defines the global `StarlightThemeProvider`, but
+ * starlight-theme-md3 (<= 0.2.3) still calls `StarlightThemeProvider.updatePickers()`
+ * from its ThemeSelect. Without it the theme picker throws before applying the
+ * selected theme. Render this before any ThemeSelect, and remove it once the
+ * theme stops relying on the global.
+ */
+---
+
+<script is:inline>
+  window.StarlightThemeProvider ??= {
+    updatePickers(theme) {
+      let value = theme;
+      if (!value) {
+        try {
+          value = localStorage.getItem("starlight-theme") || "auto";
+        } catch {
+          value = "auto";
+        }
+      }
+      document.querySelectorAll("starlight-theme-select select").forEach((select) => {
+        select.value = value;
+      });
+    },
+  };
+</script>

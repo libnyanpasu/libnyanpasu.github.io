@@ -49,7 +49,7 @@
     "@astrojs/starlight": "^0.42.6",
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
-    "@inlang/paraglide-js": "^2.26.0",
+    "@inlang/paraglide-js": "^3.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/d3-array": "^3.2.2",
     "@types/d3-scale": "^4.0.9",

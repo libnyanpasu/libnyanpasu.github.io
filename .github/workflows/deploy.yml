@@ -38,6 +38,8 @@ jobs:
     name: Build
     if: github.event.repository.fork == false
     runs-on: ubuntu-latest
+    outputs:
+      capture-key: ${{ steps.capture-key.outputs.key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -69,6 +71,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.release_tag }}
         run: pnpm build
+      # Everything the README captures can depend on, hashed after the build so the release data
+      # it regenerates (src/data/*.generated.json) is included. Docs pages are left out: the
+      # captures only record the home page. When this hash is unchanged, the capture jobs reuse
+      # their cached recordings instead of recording and encoding them again.
+      - name: Hash README capture inputs
+        id: capture-key
+        run: >-
+          echo "key=${{ hashFiles(
+          'src/**', '!src/content/docs/**', 'public/**', 'messages/**', 'project.inlang/settings.json',
+          'astro.config.mjs', 'package.json', 'pnpm-lock.yaml',
+          'scripts/capture-readme-cards.ts', 'scripts/readme-card-timing.ts', 'scripts/readme-card-video.ts',
+          '.github/workflows/deploy.yml'
+          ) }}" >> "$GITHUB_OUTPUT"
       - name: Upload site
         uses: actions/upload-artifact@v7
         with:
@@ -77,32 +92,49 @@ jobs:
           retention-days: 1
 
   # WebP, WebM and AVIF home page demos for the client's README, at dist/readme/. Each demo
-  # records in slow motion and takes minutes to encode, so they run side by side, one per job.
+  # records in slow motion and takes minutes to encode, so every card and theme runs side by side,
+  # one per job. Recordings are cached by the build's capture-key, so a deploy whose capture inputs
+  # did not change (docs edits, scheduled rebuilds) restores them instead of recording again.
   capture:
-    name: Capture ${{ matrix.card }}
+    name: Capture ${{ matrix.card }} (${{ matrix.theme }})
     needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        # The targets in scripts/capture-readme-cards.ts.
+        # The targets and themes in scripts/capture-readme-cards.ts.
         card: [hero, material-window, traffic, profiles, dashboard, material, cores, logs]
+        theme: [light, dark]
+    env:
+      # Kept apart from dist/readme, which also holds the build's badges.
+      CAPTURE_DIR: readme-captures
     steps:
+      - name: Restore cached captures
+        id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: ${{ env.CAPTURE_DIR }}
+          key: readme-capture-${{ matrix.card }}-${{ matrix.theme }}-${{ needs.build.outputs.capture-key }}
       - name: Checkout
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v7
       - name: Setup Node
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v7
         with:
           node-version: latest
-      - uses: pnpm/action-setup@v6
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: pnpm/action-setup@v6
         with:
           run_install: false
       - name: Get pnpm store directory
+        if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - uses: actions/cache@v6
+        if: steps.cache.outputs.cache-hit != 'true'
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -110,25 +142,39 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install --frozen-lockfile
       - name: Install Chromium and media encoders
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           pnpm exec playwright install --with-deps --only-shell chromium
           sudo apt-get install -y --no-install-recommends webp ffmpeg
       - name: Check capture timing and output formats
+        if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm test:readme
       - name: Download site
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/download-artifact@v8
         with:
           name: site
           path: dist
       - name: Capture
-        run: pnpm readme:cards --cards ${{ matrix.card }}
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: >-
+          pnpm readme:cards --cards ${{ matrix.card }} --themes ${{ matrix.theme }}
+          --out ${{ env.CAPTURE_DIR }}
+      - name: Save captures to cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: ${{ env.CAPTURE_DIR }}
+          key: ${{ steps.cache.outputs.cache-primary-key }}
       - name: Upload captures
         uses: actions/upload-artifact@v7
         with:
-          name: readme-${{ matrix.card }}
-          path: dist/readme
+          name: readme-${{ matrix.card }}-${{ matrix.theme }}
+          path: ${{ env.CAPTURE_DIR }}
+          if-no-files-found: error
           retention-days: 1
 
   # The site and every capture, as the Pages artifact.

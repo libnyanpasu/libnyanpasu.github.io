@@ -1,36 +1,20 @@
 app-header {
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface-variant) 30%,
-    transparent
-  );
+  background-color: color-mix(in oklab, var(--color-surface-variant) 30%, transparent);
 }
 
 .dark app-header {
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface-variant) 15%,
-    transparent
-  );
+  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
 }
 
 app-content-container {
   padding-top: 8px;
   flex-direction: row;
   align-items: stretch;
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface-variant) 30%,
-    transparent
-  );
+  background-color: color-mix(in oklab, var(--color-surface-variant) 30%, transparent);
 }
 
 .dark app-content-container {
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface-variant) 15%,
-    transparent
-  );
+  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
 }
 
 app-content {
@@ -56,11 +40,7 @@ animated-tabs-item {
 }
 
 animated-tabs-item:hover {
-  background-color: color-mix(
-    in oklab,
-    var(--color-surface-variant) 15%,
-    transparent
-  );
+  background-color: color-mix(in oklab, var(--color-surface-variant) 15%, transparent);
 }
 
 navbar-label {

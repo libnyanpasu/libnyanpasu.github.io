@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-import { Badge } from "@astrojs/starlight/components";
+import { Aside, Badge } from "@astrojs/starlight/components";
 
 首次使用请从[完成首次连接](../../tutorial/first-connection)开始；遇到网络问题时请按[故障排查指南](../../tutorial/troubleshooting)检查。
 
@@ -12,9 +12,50 @@ import { Badge } from "@astrojs/starlight/components";
 
 ### macOS 提示“Clash Nyanpasu 已损坏，无法打开”
 
-请先确认应用来自[官方发布页](https://github.com/libnyanpasu/clash-nyanpasu/releases)，然后重新下载安装包，以排除下载不完整的情况。“已损坏”提示可能并非清除隔离属性就能解决；旧版 `xattr` 指令不是通用修复方法。如果问题仍然存在，请在[GitHub 问题](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose)中提供具体的 macOS 和应用版本。
+这个提示通常不代表文件真的损坏，而是 macOS 的 Gatekeeper 拦截了没有经过 Apple 公证的应用。
 
-如果提示无法确认开发者，请先尝试打开应用，再前往**系统设置 → 隐私与安全性**，对该应用选择**仍要打开**。具体步骤请参阅 [Apple 的说明](https://support.apple.com/en-ie/102445)。
+#### 为什么会被拦截
+
+按照 Apple 的政策，在 App Store 之外分发的应用，必须使用 Developer ID 证书签名并通过 Apple 公证，下载后才能直接打开。取得这张证书需要加入 Apple Developer Program：
+
+- **年费**：每年 99 美元，停止续费后无法再签发新的安装包。
+- **身份**：必须以个人的真实法律身份，或已注册的法人实体通过 Apple 的身份验证，证书上的开发者名称会随每个安装包公开。
+
+Clash Nyanpasu 是由志愿者维护的开源项目，没有法人实体，也无法要求某位维护者以个人实名和年费为项目担保。因此官方安装包只带自签名（ad-hoc 签名），没有经过 Apple 公证。对这类应用，macOS 会在首次打开时显示“已损坏，无法打开”或“无法验证开发者”，必须由你手动放行后才能运行。
+
+#### 如何放行
+
+1. 确认安装包来自[官方发布页](https://github.com/libnyanpasu/clash-nyanpasu/releases)。如果怀疑下载不完整，请重新下载。
+2. 将 Clash Nyanpasu 拖到“应用程序”目录后，在终端中清除隔离属性：
+
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/Clash Nyanpasu.app"
+   ```
+
+3. 也可以不使用终端：先尝试打开一次应用，再前往**系统设置 → 隐私与安全性**，对该应用选择**仍要打开**。具体步骤请参阅 [Apple 的说明](https://support.apple.com/zh-cn/102445)。如果该页面没有出现**仍要打开**按钮（提示“已损坏”时较常见），请使用上面的 `xattr` 命令。
+
+通过浏览器重新下载安装包后，需要再次放行。
+
+<Aside type="caution" title="只放行来源可信的安装包">
+  放行意味着跳过 Gatekeeper 对这个应用的检查，请只对官方发布页下载的安装包执行。不要用 `sudo spctl
+  --master-disable` 全局关闭 Gatekeeper，那会让所有应用都不再受检查。
+</Aside>
+
+#### 服务模式也可能被拦截
+
+安装系统服务时，应用会把服务程序复制到应用包之外的目录，再交给 launchd 运行。这份副本同样没有 Developer ID 签名，放行应用本身并不会一并放行它，macOS 可能单独拦截。常见表现是服务已安装却无法启动，或**服务模式**回退为本地运行、TUN 无法开启。此时需要手动放行服务程序：
+
+- 前往**系统设置 → 隐私与安全性**，如果出现服务程序被阻止的提示，选择**仍要允许**。
+- 前往**系统设置 → 通用 → 登录项与扩展**，确认 Clash Nyanpasu 相关的后台项目没有被关闭。
+- 如果仍被拦截，对被拦截的服务程序清除隔离属性，路径以系统提示中显示的为准：
+
+  ```bash
+  sudo xattr -dr com.apple.quarantine "<服务程序路径>"
+  ```
+
+完成后回到**设置 → 系统服务**重新启动服务。服务模式的完整流程请参阅[系统代理与 TUN](../../tutorial/system-proxy-tun)。
+
+如果放行后问题仍然存在，请在 [GitHub 问题](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose)中提供具体的 macOS 版本、应用版本和完整的提示内容。
 
 ### 1.6.x 及更早版本
 

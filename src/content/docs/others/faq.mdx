@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-import { Badge } from "@astrojs/starlight/components";
+import { Aside, Badge } from "@astrojs/starlight/components";
 
 Start with [your first connection](../../tutorial/first-connection) if you are new. For network problems, follow the [troubleshooting guide](../../tutorial/troubleshooting).
 
@@ -12,9 +12,51 @@ Start with [your first connection](../../tutorial/first-connection) if you are n
 
 ### macOS says “Clash Nyanpasu is damaged and can’t be opened”
 
-First confirm that you downloaded the app from the [official releases](https://github.com/libnyanpasu/clash-nyanpasu/releases), then download the package again in case it was incomplete. A “damaged” warning can have causes that are not fixed by removing the quarantine attribute; older `xattr` instructions are not a universal fix. If the warning persists, report the exact macOS and app versions in a [GitHub issue](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose).
+This warning usually does not mean the file is corrupted. It means macOS Gatekeeper blocked an app that has not been notarized by Apple.
 
-For an **unidentified developer** warning, try to open the app once, then go to **System Settings → Privacy & Security** and choose **Open Anyway** for this app. See [Apple's instructions](https://support.apple.com/en-ie/102445).
+#### Why the app is blocked
+
+Under Apple's policy, an app distributed outside the App Store must be signed with a Developer ID certificate and notarized by Apple before it can be opened directly after download. Getting that certificate requires joining the Apple Developer Program:
+
+- **Annual fee**: USD 99 per year. Once the membership lapses, no new packages can be signed.
+- **Identity**: enrollment requires Apple to verify either an individual's real legal identity or a registered legal entity, and the developer name on the certificate is published with every package.
+
+Clash Nyanpasu is an open-source project maintained by volunteers. It has no legal entity, and it cannot ask a maintainer to back the project with their personal legal identity and the annual fee. The official packages are therefore self-signed (ad-hoc signed) and not notarized by Apple. For such apps, macOS shows “is damaged and can’t be opened” or “cannot verify the developer” on first launch, and the app runs only after you allow it manually.
+
+#### How to allow the app
+
+1. Confirm that the package comes from the [official releases](https://github.com/libnyanpasu/clash-nyanpasu/releases). Download it again if you suspect it was incomplete.
+2. After dragging Clash Nyanpasu to the Applications folder, remove the quarantine attribute in Terminal:
+
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/Clash Nyanpasu.app"
+   ```
+
+3. To avoid Terminal, try to open the app once, then go to **System Settings → Privacy & Security** and choose **Open Anyway** for this app. See [Apple's instructions](https://support.apple.com/en-ie/102445). If no **Open Anyway** button appears there (common with the “damaged” warning), use the `xattr` command above.
+
+A package downloaded again through a browser has to be allowed again.
+
+<Aside type="caution" title="Only allow packages from a trusted source">
+  Allowing the app skips Gatekeeper's check for it, so do this only for packages downloaded from the
+  official releases page. Do not turn Gatekeeper off globally with `sudo spctl --master-disable`;
+  that removes the check for every app.
+</Aside>
+
+#### Service Mode can be blocked too
+
+When you install the system service, the app copies the service binary to a directory outside the app bundle and hands it to launchd. That copy has no Developer ID signature either, and allowing the app does not allow the copy, so macOS can block it separately. Typical symptoms are a service that is installed but does not start, or **Service Mode** falling back to local execution so that TUN cannot be enabled. Allow the service binary manually:
+
+- Go to **System Settings → Privacy & Security** and choose **Allow Anyway** if a notice says the service binary was blocked.
+- Go to **System Settings → General → Login Items & Extensions** and confirm that the background item for Clash Nyanpasu is not turned off.
+- If it is still blocked, remove the quarantine attribute from the blocked service binary, using the path shown in the system notice:
+
+  ```bash
+  sudo xattr -dr com.apple.quarantine "<path to the service binary>"
+  ```
+
+Then return to **Settings → System Service** and restart the service. For the full Service Mode flow, see [System Proxy and TUN](../../tutorial/system-proxy-tun).
+
+If the problem persists after allowing the app, open a [GitHub issue](https://github.com/libnyanpasu/clash-nyanpasu/issues/new/choose) with the exact macOS version, app version, and the full warning text.
 
 ### 1.6.x and earlier versions
 

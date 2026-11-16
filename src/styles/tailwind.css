@@ -105,6 +105,57 @@
   --color-mixed-background: color-mix(in srgb, var(--color-background) 50%, black 50%);
 }
 
+/*
+ * Desktop table of contents. Unlayered so it overrides starlight-theme-md3 (md3.layout).
+ * - Space between entries is larger than the line gap inside a wrapped entry,
+ *   so a long title that wraps still reads as one item.
+ * - Top-level headings are emphasized over nested ones.
+ * - The current entry is bold.
+ */
+starlight-toc nav ul,
+starlight-toc nav li {
+  display: grid;
+  gap: 0.375rem;
+}
+
+starlight-toc nav a {
+  --toc-link-weight: 500;
+  padding-block: 0.25rem;
+  color: var(--md-sys-color-on-surface);
+  font-weight: var(--toc-link-weight);
+  line-height: 1.35;
+}
+
+starlight-toc nav ul ul a {
+  --toc-link-weight: 400;
+  color: var(--md3-comp-toc-link-label-color);
+}
+
+starlight-toc nav a:hover {
+  color: var(--md3-comp-toc-link-hover-label-color);
+}
+
+starlight-toc nav a[aria-current="true"],
+starlight-toc nav a.md3-toc-navigation-target {
+  color: var(--md3-comp-toc-link-active-label-color);
+  font-weight: 700;
+}
+
+starlight-toc
+  nav[data-md3-toc-navigation-lock="true"]
+  a[aria-current="true"]:not(.md3-toc-navigation-target) {
+  color: var(--md-sys-color-on-surface);
+  font-weight: var(--toc-link-weight);
+}
+
+starlight-toc
+  nav[data-md3-toc-navigation-lock="true"]
+  ul
+  ul
+  a[aria-current="true"]:not(.md3-toc-navigation-target) {
+  color: var(--md3-comp-toc-link-label-color);
+}
+
 @utility text-shadow-* {
   /* prettier-ignore */
   text-shadow: --value(--custom-text-shadow-*);
